@@ -5,8 +5,8 @@ build: cmd/*/main.go
 	go build cmd/server/main.go && mv server build/bin
 	go build cmd/client/main.go && mv client build/bin
 
-codegen:
+codegen: api/echo.proto
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger
-	protoc -I.. -I. --go_out=plugins=grpc,paths=source_relative:api/gen/go/ api/echo.proto
-	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go api/echo.proto
-	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger api/echo.proto
+	protoc -I.. -I. --go_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
+	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
+	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package echo;
+
+option go_package = "github.com/hatlonely/go-rpc/account/api/echo";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+//import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message SignInReq {
+  string username = 1;
+  string password = 2;
+}
+
+message SignUpReq {
+  string email = 1;
+  string phone = 2;
+  string name = 3;
+  string birthday = 4;
+  string gender = 5;
+  string avatar = 6;
+}
+
+//    ID        int      `form:"id" json:"id,omitempty"`
+//    Email     string   `form:"email" json:"email,omitempty"`
+//    Phone     string   `form:"phone" json:"phone,omitempty"`
+//    FirstName string   `form:"firstName" json:"firstName,omitempty"`
+//    LastName  string   `form:"lastName" json:"lastName,omitempty"`
+//    Birthday  string   `form:"birthday" json:"birthday,omitempty"`
+//    Password  string   `form:"password" json:"password,omitempty"`
+//    Gender    c.Gender `form:"gender" json:"gender"`
+//    Avatar    string   `form:"avatar" json:"avatar"`
+
+service SignInService {
+  rpc SignIn(SignInReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/account/signin",
+      body: "*"
+    };
+  }
+}
+
+
