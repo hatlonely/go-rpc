@@ -18,7 +18,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/echoSignInRes"
             }
           },
           "default": {
@@ -42,6 +42,70 @@
           "SignInService"
         ]
       }
+    },
+    "/v1/account/signout": {
+      "post": {
+        "operationId": "SignInService_SignOut",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/echoSignOutReq"
+            }
+          }
+        ],
+        "tags": [
+          "SignInService"
+        ]
+      }
+    },
+    "/v1/account/signup": {
+      "post": {
+        "operationId": "SignInService_SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/echoSignUpReq"
+            }
+          }
+        ],
+        "tags": [
+          "SignInService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -52,6 +116,48 @@
           "type": "string"
         },
         "password": {
+          "type": "string"
+        }
+      }
+    },
+    "echoSignInRes": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "echoSignOutReq": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "echoSignUpReq": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "verify": {
           "type": "string"
         }
       }

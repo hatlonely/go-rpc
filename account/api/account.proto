@@ -6,36 +6,49 @@ option go_package = "github.com/hatlonely/go-rpc/account/api/echo";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
-//import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "gogoproto/gogo.proto";
 
 message SignInReq {
-  string username = 1;
-  string password = 2;
+  string username = 1 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
+  string password = 2 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
+}
+
+message SignInRes {
+  string token = 1;
 }
 
 message SignUpReq {
-  string email = 1;
-  string phone = 2;
-  string name = 3;
+  string email = 1 [(gogoproto.moretags) = "rule:\"isEmail(x)\""];
+  string phone = 2 [(gogoproto.moretags) = "rule:\"\"isPhone(x)"];
+  string name = 3 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
   string birthday = 4;
-  string gender = 5;
+  string gender = 5 [(gogoproto.moretags) = "rule:\"x in ('male', 'female')\""];
   string avatar = 6;
+  string verify = 7 [(gogoproto.moretags) = "rule:\"x match '[0-9]{6}'\""];
 }
 
-//    ID        int      `form:"id" json:"id,omitempty"`
-//    Email     string   `form:"email" json:"email,omitempty"`
-//    Phone     string   `form:"phone" json:"phone,omitempty"`
-//    FirstName string   `form:"firstName" json:"firstName,omitempty"`
-//    LastName  string   `form:"lastName" json:"lastName,omitempty"`
-//    Birthday  string   `form:"birthday" json:"birthday,omitempty"`
-//    Password  string   `form:"password" json:"password,omitempty"`
-//    Gender    c.Gender `form:"gender" json:"gender"`
-//    Avatar    string   `form:"avatar" json:"avatar"`
+message SignOutReq {
+  string token = 1;
+}
 
 service SignInService {
-  rpc SignIn(SignInReq) returns (google.protobuf.Empty) {
+  rpc SignIn(SignInReq) returns (SignInRes) {
     option (google.api.http) = {
       post: "/v1/account/signin",
+      body: "*"
+    };
+  }
+
+  rpc SignUp(SignUpReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/account/signup",
+      body: "*"
+    };
+  }
+
+  rpc SignOut(SignOutReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/account/signout",
       body: "*"
     };
   }
