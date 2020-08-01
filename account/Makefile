@@ -1,8 +1,10 @@
+binary=account
 export GOPROXY=https://goproxy.io
 
+.PHONY: build
 build: cmd/*/main.go
 	mkdir -p build/bin
-	go build cmd/server/main.go && mv server build/bin
+	go build -ldflags "-X 'main.Version=`sh ../scripts/version.sh`'" cmd/main.go && mv main build/bin/${binary} && cp -r config build/
 
 codegen: api/account.proto
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger
