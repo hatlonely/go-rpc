@@ -6,6 +6,7 @@ require (
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
+	github.com/hatlonely/go-kit v0.0.0-20200801162809-1b86bf09da4a
 	google.golang.org/genproto v0.0.0-20200729003335-053ba62fc06f
 	google.golang.org/grpc v1.30.0
 	google.golang.org/protobuf v1.25.0
