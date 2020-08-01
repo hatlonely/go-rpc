@@ -46,7 +46,6 @@ func main() {
 	if err := binding.Bind(&options, flag.Instance(), conf); err != nil {
 		panic(err)
 	}
-	fmt.Println(options.Port)
 
 	mux := runtime.NewServeMux()
 	ctx := context.Background()
