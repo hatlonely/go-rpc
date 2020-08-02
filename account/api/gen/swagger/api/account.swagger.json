@@ -13,7 +13,7 @@
   "paths": {
     "/v1/account/signin": {
       "post": {
-        "operationId": "SignInService_SignIn",
+        "operationId": "AccountService_SignIn",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -39,13 +39,13 @@
           }
         ],
         "tags": [
-          "SignInService"
+          "AccountService"
         ]
       }
     },
     "/v1/account/signout": {
       "post": {
-        "operationId": "SignInService_SignOut",
+        "operationId": "AccountService_SignOut",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -71,13 +71,13 @@
           }
         ],
         "tags": [
-          "SignInService"
+          "AccountService"
         ]
       }
     },
     "/v1/account/signup": {
       "post": {
-        "operationId": "SignInService_SignUp",
+        "operationId": "AccountService_SignUp",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -103,7 +103,7 @@
           }
         ],
         "tags": [
-          "SignInService"
+          "AccountService"
         ]
       }
     }

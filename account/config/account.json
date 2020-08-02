@@ -1,5 +1,10 @@
 {
-  "port": 80,
+  "http": {
+    "port": 80
+  },
+  "grpc": {
+    "port": 6080
+  },
   "redis": {
     "addr": "127.0.0.1:6379",
     "dialTimeout": "200ms",
@@ -10,8 +15,8 @@
     "db": 0
   },
   "mysql": {
-    "username": "hatlonely",
-    "password": "keaiduo1",
+    "username": "root",
+    "password": "",
     "database": "account",
     "host": "127.0.0.1",
     "port": 3306,

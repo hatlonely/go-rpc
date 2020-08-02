@@ -31,7 +31,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = descriptor.ForMessage
 
-func request_SignInService_SignIn_0(ctx context.Context, marshaler runtime.Marshaler, client SignInServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AccountService_SignIn_0(ctx context.Context, marshaler runtime.Marshaler, client AccountServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignInReq
 	var metadata runtime.ServerMetadata
 
@@ -48,7 +48,7 @@ func request_SignInService_SignIn_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func local_request_SignInService_SignIn_0(ctx context.Context, marshaler runtime.Marshaler, server SignInServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AccountService_SignIn_0(ctx context.Context, marshaler runtime.Marshaler, server AccountServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignInReq
 	var metadata runtime.ServerMetadata
 
@@ -65,7 +65,7 @@ func local_request_SignInService_SignIn_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_SignInService_SignUp_0(ctx context.Context, marshaler runtime.Marshaler, client SignInServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AccountService_SignUp_0(ctx context.Context, marshaler runtime.Marshaler, client AccountServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignUpReq
 	var metadata runtime.ServerMetadata
 
@@ -82,7 +82,7 @@ func request_SignInService_SignUp_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func local_request_SignInService_SignUp_0(ctx context.Context, marshaler runtime.Marshaler, server SignInServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AccountService_SignUp_0(ctx context.Context, marshaler runtime.Marshaler, server AccountServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignUpReq
 	var metadata runtime.ServerMetadata
 
@@ -99,7 +99,7 @@ func local_request_SignInService_SignUp_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_SignInService_SignOut_0(ctx context.Context, marshaler runtime.Marshaler, client SignInServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AccountService_SignOut_0(ctx context.Context, marshaler runtime.Marshaler, client AccountServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignOutReq
 	var metadata runtime.ServerMetadata
 
@@ -116,7 +116,7 @@ func request_SignInService_SignOut_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_SignInService_SignOut_0(ctx context.Context, marshaler runtime.Marshaler, server SignInServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AccountService_SignOut_0(ctx context.Context, marshaler runtime.Marshaler, server AccountServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SignOutReq
 	var metadata runtime.ServerMetadata
 
@@ -133,12 +133,12 @@ func local_request_SignInService_SignOut_0(ctx context.Context, marshaler runtim
 
 }
 
-// RegisterSignInServiceHandlerServer registers the http handlers for service SignInService to "mux".
-// UnaryRPC     :call SignInServiceServer directly.
+// RegisterAccountServiceHandlerServer registers the http handlers for service AccountService to "mux".
+// UnaryRPC     :call AccountServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-func RegisterSignInServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server SignInServiceServer) error {
+func RegisterAccountServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AccountServiceServer) error {
 
-	mux.Handle("POST", pattern_SignInService_SignIn_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignIn_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -147,18 +147,18 @@ func RegisterSignInServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SignInService_SignIn_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AccountService_SignIn_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignIn_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignIn_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_SignInService_SignUp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignUp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -167,18 +167,18 @@ func RegisterSignInServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SignInService_SignUp_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AccountService_SignUp_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignUp_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignUp_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_SignInService_SignOut_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignOut_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -187,23 +187,23 @@ func RegisterSignInServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SignInService_SignOut_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AccountService_SignOut_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignOut_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignOut_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterSignInServiceHandlerFromEndpoint is same as RegisterSignInServiceHandler but
+// RegisterAccountServiceHandlerFromEndpoint is same as RegisterAccountServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterSignInServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterAccountServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -223,23 +223,23 @@ func RegisterSignInServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.
 		}()
 	}()
 
-	return RegisterSignInServiceHandler(ctx, mux, conn)
+	return RegisterAccountServiceHandler(ctx, mux, conn)
 }
 
-// RegisterSignInServiceHandler registers the http handlers for service SignInService to "mux".
+// RegisterAccountServiceHandler registers the http handlers for service AccountService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterSignInServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterSignInServiceHandlerClient(ctx, mux, NewSignInServiceClient(conn))
+func RegisterAccountServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterAccountServiceHandlerClient(ctx, mux, NewAccountServiceClient(conn))
 }
 
-// RegisterSignInServiceHandlerClient registers the http handlers for service SignInService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "SignInServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "SignInServiceClient"
+// RegisterAccountServiceHandlerClient registers the http handlers for service AccountService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "AccountServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "AccountServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "SignInServiceClient" to call the correct interceptors.
-func RegisterSignInServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client SignInServiceClient) error {
+// "AccountServiceClient" to call the correct interceptors.
+func RegisterAccountServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AccountServiceClient) error {
 
-	mux.Handle("POST", pattern_SignInService_SignIn_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignIn_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -248,18 +248,18 @@ func RegisterSignInServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SignInService_SignIn_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AccountService_SignIn_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignIn_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignIn_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_SignInService_SignUp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignUp_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -268,18 +268,18 @@ func RegisterSignInServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SignInService_SignUp_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AccountService_SignUp_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignUp_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignUp_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_SignInService_SignOut_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AccountService_SignOut_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -288,14 +288,14 @@ func RegisterSignInServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SignInService_SignOut_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AccountService_SignOut_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SignInService_SignOut_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AccountService_SignOut_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -303,17 +303,17 @@ func RegisterSignInServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_SignInService_SignIn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signin"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_AccountService_SignIn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signin"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_SignInService_SignUp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signup"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_AccountService_SignUp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signup"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_SignInService_SignOut_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signout"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_AccountService_SignOut_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "signout"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
-	forward_SignInService_SignIn_0 = runtime.ForwardResponseMessage
+	forward_AccountService_SignIn_0 = runtime.ForwardResponseMessage
 
-	forward_SignInService_SignUp_0 = runtime.ForwardResponseMessage
+	forward_AccountService_SignUp_0 = runtime.ForwardResponseMessage
 
-	forward_SignInService_SignOut_0 = runtime.ForwardResponseMessage
+	forward_AccountService_SignOut_0 = runtime.ForwardResponseMessage
 )

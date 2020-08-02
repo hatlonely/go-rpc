@@ -8,6 +8,6 @@ build: cmd/*/main.go
 
 codegen: api/account.proto
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger
-	protoc -I.. -I. -I=${GOPATH}/src --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
-	protoc -I.. -I. -I=${GOPATH}/src --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
-	protoc -I.. -I. -I=${GOPATH}/src --swagger_out=logtostderr=true:api/gen/swagger $<
+	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
+	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
+	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
