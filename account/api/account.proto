@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package echo;
+package account;
 
-option go_package = "github.com/hatlonely/go-rpc/account/api/echo";
+option go_package = "github.com/hatlonely/go-rpc/account/api/account";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";

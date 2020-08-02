@@ -26,7 +26,7 @@
   },
   "logger": {
     "access": {
-      "level": "info",
+      "level": "Info",
       "writers": [{
         "type": "RotateFile",
         "filename": "log/account.access",
@@ -34,7 +34,7 @@
       }]
     },
     "warn": {
-      "level": "warn",
+      "level": "Warn",
       "writers": [{
         "type": "RotateFile",
         "filename": "log/account.err",
@@ -42,7 +42,7 @@
       }]
     },
     "info": {
-      "level": "info",
+      "level": "Info",
       "writers": [{
         "type": "RotateFile",
         "filename": "log/account.log",

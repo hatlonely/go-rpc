@@ -18,7 +18,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/echoSignInRes"
+              "$ref": "#/definitions/accountSignInRes"
             }
           },
           "default": {
@@ -34,7 +34,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/echoSignInReq"
+              "$ref": "#/definitions/accountSignInReq"
             }
           }
         ],
@@ -66,7 +66,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/echoSignOutReq"
+              "$ref": "#/definitions/accountSignOutReq"
             }
           }
         ],
@@ -98,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/echoSignUpReq"
+              "$ref": "#/definitions/accountSignUpReq"
             }
           }
         ],
@@ -109,7 +109,7 @@
     }
   },
   "definitions": {
-    "echoSignInReq": {
+    "accountSignInReq": {
       "type": "object",
       "properties": {
         "username": {
@@ -120,7 +120,7 @@
         }
       }
     },
-    "echoSignInRes": {
+    "accountSignInRes": {
       "type": "object",
       "properties": {
         "token": {
@@ -128,7 +128,7 @@
         }
       }
     },
-    "echoSignOutReq": {
+    "accountSignOutReq": {
       "type": "object",
       "properties": {
         "token": {
@@ -136,7 +136,7 @@
         }
       }
     },
-    "echoSignUpReq": {
+    "accountSignUpReq": {
       "type": "object",
       "properties": {
         "email": {

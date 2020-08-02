@@ -90,6 +90,8 @@ github.com/hatlonely/go-kit v0.0.0-20200802112111-6f2a520d119a h1:lcHI//0H8r2KBm
 github.com/hatlonely/go-kit v0.0.0-20200802112111-6f2a520d119a/go.mod h1:FiWtKxmSnsBR8cUFv0kB8Titthg9iOW3cgTdyOpNAtE=
 github.com/hatlonely/go-kit v0.0.0-20200802121031-667b4aa21356 h1:kqPAavUWHvW6cCKkKKTlFFjZRE1toELyjIlZDKVaowQ=
 github.com/hatlonely/go-kit v0.0.0-20200802121031-667b4aa21356/go.mod h1:z442XbvIMQ4KgAm3S1FuvIdvoDgQBfchWVgA8ftx46w=
+github.com/hatlonely/go-kit v0.0.0-20200802142745-75c5208f4144 h1:/+E64DNKojnFFbH8QsPpMAQxtqBbAnO+w62kc8wuU0A=
+github.com/hatlonely/go-kit v0.0.0-20200802142745-75c5208f4144/go.mod h1:z442XbvIMQ4KgAm3S1FuvIdvoDgQBfchWVgA8ftx46w=
 github.com/hpcloud/tail v1.0.0 h1:nfCOvKYfkgYP8hkirhJocXT2+zOD8yUNjXaWfTlyFKI=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869/go.mod h1:cJ6Cj7dQo+O6GJNiMx+Pa94qKj+TG8ONdKHgMNIyyag=

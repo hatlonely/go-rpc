@@ -2,11 +2,11 @@
 // source: api/account.proto
 
 /*
-Package echo is a reverse proxy.
+Package account is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package echo
+package account
 
 import (
 	"context"
