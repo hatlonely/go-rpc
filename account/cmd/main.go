@@ -70,10 +70,14 @@ func main() {
 		panic(err)
 	}
 
-	accessLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.access"))
+	grpcLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.grpc"))
 	if err != nil {
 		panic(err)
 	}
+	//httpLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.http"))
+	//if err != nil {
+	//	panic(err)
+	//}
 	infoLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.info"))
 	if err != nil {
 		panic(err)
@@ -102,7 +106,7 @@ func main() {
 				if ok && p != nil {
 					clientIP = p.Addr.String()
 				}
-				accessLog.Info(map[string]interface{}{
+				grpcLog.Info(map[string]interface{}{
 					"client":    clientIP,
 					"url":       info.FullMethod,
 					"req":       req,

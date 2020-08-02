@@ -25,11 +25,11 @@
     "maxOpenConns": 20
   },
   "logger": {
-    "access": {
+    "grpc": {
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "log/account.access",
+        "filename": "log/account.grpc",
         "maxAge": "24h"
       }]
     },
