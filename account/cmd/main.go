@@ -19,8 +19,10 @@ import (
 	"github.com/hatlonely/go-kit/validator"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/status"
 
 	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/account/internal/service"
@@ -39,8 +41,8 @@ type Options struct {
 		Port int
 	}
 
-	Redis cli.RedisOptions `bind:"redis"`
-	Mysql cli.MySQLOptions `bind:"mysql"`
+	Redis cli.RedisOptions
+	Mysql cli.MySQLOptions
 }
 
 func main() {
@@ -111,7 +113,7 @@ func main() {
 			}()
 
 			if err = validator.Validate(req); err != nil {
-				return nil, err
+				return nil, status.Error(codes.InvalidArgument, err.Error())
 			}
 
 			return handler(ctx, req)
