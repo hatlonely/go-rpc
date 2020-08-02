@@ -1,9 +1,48 @@
 {
   "port": 80,
   "redis": {
-
+    "addr": "127.0.0.1:6379",
+    "dialTimeout": "200ms",
+    "readTimeout": "200ms",
+    "writeTimeout": "200ms",
+    "maxRetries": 3,
+    "poolSize": 20,
+    "db": 0
   },
   "mysql": {
-
+    "username": "hatlonely",
+    "password": "keaiduo1",
+    "database": "account",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "connMaxLifeTime": "60s",
+    "maxIdleConns": 10,
+    "maxOpenConns": 20
+  },
+  "logger": {
+    "access": {
+      "level": "info",
+      "writers": [{
+        "type": "RotateFile",
+        "filename": "account.access",
+        "maxAge": "24h"
+      }]
+    },
+    "warn": {
+      "level": "warn",
+      "writers": [{
+        "type": "RotateFile",
+        "filename": "account.err",
+        "maxAge": "24h"
+      }]
+    },
+    "info": {
+      "level": "info",
+      "writers": [{
+        "type": "RotateFile",
+        "filename": "account.log",
+        "maxAge": "24h"
+      }]
+    }
   }
 }
