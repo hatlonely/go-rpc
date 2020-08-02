@@ -24,7 +24,7 @@
       "level": "info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "account.access",
+        "filename": "log/account.access",
         "maxAge": "24h"
       }]
     },
@@ -32,7 +32,7 @@
       "level": "warn",
       "writers": [{
         "type": "RotateFile",
-        "filename": "account.err",
+        "filename": "log/account.err",
         "maxAge": "24h"
       }]
     },
@@ -40,7 +40,7 @@
       "level": "info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "account.log",
+        "filename": "log/account.log",
         "maxAge": "24h"
       }]
     }
