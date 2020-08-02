@@ -11,18 +11,16 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-
-	"github.com/pkg/errors"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/peer"
-
 	"github.com/hatlonely/go-kit/binding"
 	"github.com/hatlonely/go-kit/cli"
 	"github.com/hatlonely/go-kit/config"
 	"github.com/hatlonely/go-kit/flag"
 	"github.com/hatlonely/go-kit/logger"
 	"github.com/hatlonely/go-kit/validator"
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/peer"
 
 	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/account/internal/service"
