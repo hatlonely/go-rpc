@@ -6,18 +6,23 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"runtime/debug"
 	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/peer"
+
 	"github.com/hatlonely/go-kit/binding"
 	"github.com/hatlonely/go-kit/cli"
 	"github.com/hatlonely/go-kit/config"
 	"github.com/hatlonely/go-kit/flag"
 	"github.com/hatlonely/go-kit/logger"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/peer"
+	"github.com/hatlonely/go-kit/validator"
 
 	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/account/internal/service"
@@ -65,7 +70,11 @@ func main() {
 		panic(err)
 	}
 
-	access, err := logger.NewLoggerWithConfig(conf.Sub("logger.access"))
+	accessLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.access"))
+	if err != nil {
+		panic(err)
+	}
+	infoLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.info"))
 	if err != nil {
 		panic(err)
 	}
@@ -84,21 +93,30 @@ func main() {
 	server := grpc.NewServer(
 		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (res interface{}, err error) {
 			ts := time.Now()
-			p, ok := peer.FromContext(ctx)
-			clientIP := ""
-			if ok && p != nil {
-				clientIP = p.Addr.String()
+			defer func() {
+				if perr := recover(); perr != nil {
+					err = errors.Wrap(fmt.Errorf("%v\n%v", string(debug.Stack()), perr), "panic")
+				}
+				p, ok := peer.FromContext(ctx)
+				clientIP := ""
+				if ok && p != nil {
+					clientIP = p.Addr.String()
+				}
+				accessLog.Info(map[string]interface{}{
+					"client":    clientIP,
+					"url":       info.FullMethod,
+					"req":       req,
+					"res":       res,
+					"err":       err,
+					"resTimeNs": time.Now().Sub(ts).Nanoseconds(),
+				})
+			}()
+
+			if err = validator.Validate(req); err != nil {
+				return nil, err
 			}
-			res, err = handler(ctx, req)
-			access.Info(map[string]interface{}{
-				"client":    clientIP,
-				"url":       info.FullMethod,
-				"req":       req,
-				"res":       res,
-				"err":       err,
-				"resTimeNs": time.Now().Sub(ts).Nanoseconds(),
-			})
-			return res, err
+
+			return handler(ctx, req)
 		}),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
@@ -132,6 +150,9 @@ func main() {
 	); err != nil {
 		panic(err)
 	}
+
+	infoLog.Info(options)
+
 	if err := http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, mux)); err != nil {
 		panic(err)
 	}
