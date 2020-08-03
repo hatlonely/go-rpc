@@ -19,16 +19,21 @@ message SignInRes {
 
 message SignUpReq {
   string email = 1 [(gogoproto.moretags) = "rule:\"isEmail(x)\""];
-  string phone = 2 [(gogoproto.moretags) = "rule:\"\"isPhone(x)"];
+  string phone = 2 [(gogoproto.moretags) = "rule:\"isPhone(x)\""];
   string name = 3 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
   string birthday = 4;
   string gender = 5 [(gogoproto.moretags) = "rule:\"x in ('male', 'female')\""];
   string avatar = 6;
-  string verify = 7 [(gogoproto.moretags) = "rule:\"x match '[0-9]{6}'\""];
+  string captcha = 7 [(gogoproto.moretags) = "rule:\"x match '[0-9]{6}'\""];
 }
 
 message SignOutReq {
   string token = 1;
+}
+
+message GetCaptchaReq {
+  string email = 1;
+  string name = 2;
 }
 
 service AccountService {
@@ -50,6 +55,12 @@ service AccountService {
     option (google.api.http) = {
       post: "/v1/account/signout",
       body: "*"
+    };
+  }
+
+  rpc GetCaptcha(GetCaptchaReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/account/getcaptcha"
     };
   }
 }
