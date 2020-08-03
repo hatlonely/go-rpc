@@ -43,3 +43,7 @@ func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*e
 func (s *AccountService) SignOut(ctx context.Context, req *account.SignOutReq) (*empty.Empty, error) {
 	return &empty.Empty{}, nil
 }
+
+func (s *AccountService) GetCaptcha(context.Context, *account.GetCaptchaReq) (*empty.Empty, error) {
+	return &empty.Empty{}, nil
+}
