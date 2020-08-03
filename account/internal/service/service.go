@@ -8,6 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/account/internal/model"
 )
 
 type AccountService struct {
@@ -15,11 +16,17 @@ type AccountService struct {
 	redis *redis.Client
 }
 
-func NewAccountService(mysql *gorm.DB, redis *redis.Client) *AccountService {
+func NewAccountService(mysql *gorm.DB, redis *redis.Client) (*AccountService, error) {
+	if !mysql.HasTable(&model.Account{}) {
+		if err := mysql.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&model.Account{}).Error; err != nil {
+			return nil, err
+		}
+	}
+
 	return &AccountService{
 		mysql: mysql,
 		redis: redis,
-	}
+	}, nil
 }
 
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
@@ -29,6 +36,7 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 }
 
 func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*empty.Empty, error) {
+
 	return &empty.Empty{}, nil
 }
 

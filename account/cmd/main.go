@@ -92,7 +92,10 @@ func main() {
 		panic(err)
 	}
 
-	service := service.NewAccountService(mysql, redis)
+	service, err := service.NewAccountService(mysql, redis)
+	if err != nil {
+		panic(err)
+	}
 
 	server := grpc.NewServer(
 		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (res interface{}, err error) {
