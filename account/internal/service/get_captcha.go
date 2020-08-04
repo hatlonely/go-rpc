@@ -18,7 +18,7 @@ func (s *AccountService) GetCaptcha(ctx context.Context, req *account.GetCaptcha
 		return nil, err
 	}
 
-	if err := s.email.Send(req.Email, "验证码", buf.String()); err != nil {
+	if err := s.emailCli.Send(req.Email, "验证码", buf.String()); err != nil {
 		return nil, err
 	}
 

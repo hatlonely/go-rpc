@@ -14,16 +14,16 @@ import (
 )
 
 type AccountService struct {
-	mysql *gorm.DB
-	redis *redis.Client
-	email *cli.EmailCli
+	mysqlCli *gorm.DB
+	redisCli *redis.Client
+	emailCli *cli.EmailCli
 
 	captchaEmailTpl *template.Template
 }
 
-func NewAccountService(mysql *gorm.DB, redis *redis.Client, email *cli.EmailCli) (*AccountService, error) {
-	if !mysql.HasTable(&model.Account{}) {
-		if err := mysql.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&model.Account{}).Error; err != nil {
+func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.EmailCli) (*AccountService, error) {
+	if !mysqlCli.HasTable(&model.Account{}) {
+		if err := mysqlCli.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&model.Account{}).Error; err != nil {
 			return nil, err
 		}
 	}
@@ -34,9 +34,9 @@ func NewAccountService(mysql *gorm.DB, redis *redis.Client, email *cli.EmailCli)
 	}
 
 	return &AccountService{
-		mysql:           mysql,
-		redis:           redis,
-		email:           email,
+		mysqlCli:        mysqlCli,
+		redisCli:        redisCli,
+		emailCli:        emailCli,
 		captchaEmailTpl: captchaEmailTpl,
 	}, nil
 }
