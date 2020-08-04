@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"strings"
 
 	"github.com/go-redis/redis"
@@ -24,7 +23,7 @@ func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*e
 		return nil, status.Errorf(codes.InvalidArgument, "captcha is not exists")
 	}
 	if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf("redis get key [%v] failed", key))
+		return nil, errors.Wrapf(err, "redis get key [%v] failed", key)
 	}
 	if req.Captcha != val {
 		return nil, status.Errorf(codes.InvalidArgument, "captcha is not match")

@@ -26,10 +26,10 @@ func (s *AccountService) GetCaptcha(ctx context.Context, req *account.GetCaptcha
 	if val, err := s.redisCli.Get(key).Result(); err == redis.Nil {
 		captcha = GenerateCaptcha()
 		if err := s.redisCli.Set(key, captcha, s.captchaExpiration).Err(); err != nil {
-			return nil, errors.Wrap(err, fmt.Sprintf("redis set key [%v] failed", key))
+			return nil, errors.Wrapf(err, "redis set key [%v] failed", key)
 		}
 	} else if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf("redis get key [%v] failed", key))
+		return nil, errors.Wrapf(err, "redis get key [%v] failed", key)
 	} else {
 		captcha = val
 	}
@@ -43,7 +43,7 @@ func (s *AccountService) GetCaptcha(ctx context.Context, req *account.GetCaptcha
 	}
 
 	if err := s.emailCli.Send(req.Email, "验证码", buf.String()); err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf("email [%v] send failed", req.Email))
+		return nil, errors.Wrapf(err, "email [%v] send failed", req.Email)
 	}
 
 	return &empty.Empty{}, nil

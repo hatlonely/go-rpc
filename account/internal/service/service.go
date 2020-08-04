@@ -53,12 +53,6 @@ func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.
 	}, nil
 }
 
-func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
-	return &account.SignInRes{
-		Token: "hello world",
-	}, nil
-}
-
 func (s *AccountService) SignOut(ctx context.Context, req *account.SignOutReq) (*empty.Empty, error) {
 	return &empty.Empty{}, nil
 }
