@@ -22,6 +22,8 @@ func (s *AccountService) GetCaptcha(ctx context.Context, req *account.GetCaptcha
 		return nil, err
 	}
 
+	//s.redisCli.Set("captcha_" + req.Email)
+
 	return &empty.Empty{}, nil
 }
 

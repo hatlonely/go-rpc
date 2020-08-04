@@ -41,8 +41,10 @@ type Options struct {
 		Port int
 	}
 
-	Redis cli.RedisOptions
-	Mysql cli.MySQLOptions
+	Redis   cli.RedisOptions
+	Mysql   cli.MySQLOptions
+	Email   cli.EmailOptions
+	Account service.AccountServiceOptions
 }
 
 func main() {
@@ -83,16 +85,21 @@ func main() {
 		panic(err)
 	}
 
-	redis, err := cli.NewRedisWithOptions(&options.Redis)
+	redisCli, err := cli.NewRedisWithOptions(&options.Redis)
 	if err != nil {
 		panic(err)
 	}
-	mysql, err := cli.NewMysqlWithOptions(&options.Mysql)
+	mysqlCli, err := cli.NewMysqlWithOptions(&options.Mysql)
 	if err != nil {
 		panic(err)
 	}
+	emailCli := cli.NewEmailWithOption(&options.Email)
 
-	service, err := service.NewAccountService(mysql, redis)
+	service, err := service.NewAccountService(
+		mysqlCli, redisCli, emailCli,
+		service.WithAccountExpiration(options.Account.AccountExpiration),
+		service.WithCaptchaExpiration(options.Account.CaptchaExpiration),
+	)
 	if err != nil {
 		panic(err)
 	}
