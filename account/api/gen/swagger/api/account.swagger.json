@@ -131,6 +131,15 @@
     }
   },
   "definitions": {
+    "accountGender": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Male",
+        "Female"
+      ],
+      "default": "Unknown"
+    },
     "accountSignInReq": {
       "type": "object",
       "properties": {
@@ -170,11 +179,14 @@
         "name": {
           "type": "string"
         },
+        "password": {
+          "type": "string"
+        },
         "birthday": {
           "type": "string"
         },
         "gender": {
-          "type": "string"
+          "$ref": "#/definitions/accountGender"
         },
         "avatar": {
           "type": "string"

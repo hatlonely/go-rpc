@@ -11,9 +11,10 @@ import (
 
 func TestAccountService_GetCaptcha(t *testing.T) {
 	Convey("TestAccountService_GetCaptcha", t, func() {
-		service.GetCaptcha(context.Background(), &account.GetCaptchaReq{
+		_, err := service.GetCaptcha(context.Background(), &account.GetCaptchaReq{
 			Email: "hatlonely@foxmail.com",
 			Name:  "hatlonely",
 		})
+		So(err, ShouldBeNil)
 	})
 }

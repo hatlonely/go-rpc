@@ -59,11 +59,6 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 	}, nil
 }
 
-func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*empty.Empty, error) {
-
-	return &empty.Empty{}, nil
-}
-
 func (s *AccountService) SignOut(ctx context.Context, req *account.SignOutReq) (*empty.Empty, error) {
 	return &empty.Empty{}, nil
 }
