@@ -93,7 +93,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	emailCli := cli.NewEmailWithOption(&options.Email)
+	emailCli := cli.NewEmailWithOptions(&options.Email)
 
 	service, err := service.NewAccountService(
 		mysqlCli, redisCli, emailCli,

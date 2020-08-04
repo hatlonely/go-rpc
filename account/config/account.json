@@ -5,6 +5,10 @@
   "grpc": {
     "port": 6080
   },
+  "account": {
+    "accountExpiration": "5m",
+    "captchaExpiration": "30m"
+  },
   "redis": {
     "addr": "127.0.0.1:6379",
     "dialTimeout": "200ms",
@@ -23,6 +27,12 @@
     "connMaxLifeTime": "60s",
     "maxIdleConns": 10,
     "maxOpenConns": 20
+  },
+  "email": {
+    "from": "hatlonely@foxmail.com",
+    "password": "xuckndegounrbfhf",
+    "server": "smtp.qq.com",
+    "port": 25
   },
   "logger": {
     "grpc": {

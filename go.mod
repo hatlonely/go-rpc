@@ -8,7 +8,7 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/gorilla/handlers v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
-	github.com/hatlonely/go-kit v0.0.0-20200803170112-5017c0b602dc
+	github.com/hatlonely/go-kit v0.0.0-20200804142942-555004afa8c8
 	github.com/jinzhu/gorm v1.9.15
 	github.com/pkg/errors v0.9.1
 	github.com/smartystreets/goconvey v1.6.4
