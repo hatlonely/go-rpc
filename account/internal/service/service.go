@@ -1,17 +1,14 @@
 package service
 
 import (
-	"context"
 	"html/template"
 	"time"
 
 	"github.com/go-redis/redis"
-	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/hatlonely/go-kit/cli"
 	"github.com/hatlonely/go-kit/kv"
 	"github.com/jinzhu/gorm"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/account/internal/model"
 )
 
@@ -60,10 +57,6 @@ func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.
 		captchaExpiration: options.CaptchaExpiration,
 		accountExpiration: options.AccountExpiration,
 	}, nil
-}
-
-func (s *AccountService) SignOut(ctx context.Context, req *account.SignOutReq) (*empty.Empty, error) {
-	return &empty.Empty{}, nil
 }
 
 type AccountServiceOptions struct {

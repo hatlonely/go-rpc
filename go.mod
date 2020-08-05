@@ -9,7 +9,7 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/gorilla/handlers v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
-	github.com/hatlonely/go-kit v0.0.0-20200805142857-97c7fbe937e5
+	github.com/hatlonely/go-kit v0.0.0-20200805153426-21b216d914bc
 	github.com/jinzhu/gorm v1.9.15
 	github.com/pkg/errors v0.9.1
 	github.com/satori/go.uuid v1.2.0
