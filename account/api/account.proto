@@ -15,8 +15,8 @@ enum Gender {
 }
 
 message SignInReq {
-  string username = 1 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
-  string password = 2 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
+  string username = 1 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) >= 8\""];
+  string password = 2 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) >= 8\""];
 }
 
 message SignInRes {
@@ -26,7 +26,7 @@ message SignInRes {
 message SignUpReq {
   string email = 1 [(gogoproto.moretags) = "rule:\"isEmail(x)\""];
   string phone = 2 [(gogoproto.moretags) = "rule:\"isPhone(x)\""];
-  string name = 3 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) > 8\""];
+  string name = 3 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) >= 8\""];
   string password = 4;
   string birthday = 5;
   Gender gender = 6 [(gogoproto.moretags) = "rule:\"x in ('male', 'female')\""];

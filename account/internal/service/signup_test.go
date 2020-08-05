@@ -20,7 +20,7 @@ func TestAccountService_SignUp(t *testing.T) {
 			Email:    "hatlonely@foxmail.com",
 			Phone:    "13810242048",
 			Name:     "hatlonely",
-			Password: "123456",
+			Password: "12345678",
 			Birthday: "1992-01-01",
 			Gender:   account.Gender_Male,
 			Avatar:   "http://avatar/hatlonlely.png",

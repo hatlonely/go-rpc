@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 
 	"github.com/hatlonely/go-kit/strex"
+	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -26,10 +27,16 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 	a := &model.Account{}
 	if strex.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return nil, status.Errorf(codes.PermissionDenied, "user [%v] not exist", req.Username)
+			}
 			return nil, err
 		}
 	} else if strex.ReEmail.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("email=?", req.Username).First(a).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return nil, status.Errorf(codes.PermissionDenied, "user [%v] not exist", req.Username)
+			}
 			return nil, err
 		}
 	} else {
