@@ -8,6 +8,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/hatlonely/go-kit/cli"
+	"github.com/hatlonely/go-kit/kv"
 	"github.com/jinzhu/gorm"
 
 	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
@@ -18,6 +19,7 @@ type AccountService struct {
 	mysqlCli *gorm.DB
 	redisCli *redis.Client
 	emailCli *cli.EmailCli
+	kv       *kv.KV
 
 	captchaExpiration time.Duration
 	accountExpiration time.Duration
@@ -42,11 +44,18 @@ func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.
 		return nil, err
 	}
 
+	store, err := kv.NewRedisStore(redisCli, kv.WithRedisExpiration(options.AccountExpiration))
+	if err != nil {
+		return nil, err
+	}
+	kv := kv.NewKV(store, kv.WithStringKey())
+
 	return &AccountService{
 		mysqlCli:        mysqlCli,
 		redisCli:        redisCli,
 		emailCli:        emailCli,
 		captchaEmailTpl: captchaEmailTpl,
+		kv:              kv,
 
 		captchaExpiration: options.CaptchaExpiration,
 		accountExpiration: options.AccountExpiration,

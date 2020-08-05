@@ -2,12 +2,12 @@ package service
 
 import (
 	"context"
-	"crypto/rand"
 	"encoding/hex"
 
 	"github.com/hatlonely/go-kit/strex"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
+	uuid "github.com/satori/go.uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
@@ -16,11 +16,7 @@ import (
 )
 
 func GenerateToken() string {
-	buf := make([]byte, 32)
-	_, _ = rand.Read(buf)
-	token := make([]byte, 16)
-	hex.Encode(buf, token)
-	return string(buf)
+	return hex.EncodeToString(uuid.NewV4().Bytes())
 }
 
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
@@ -49,7 +45,7 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 
 	token := GenerateToken()
 
-	if err := s.redisCli.Set(token, a, s.accountExpiration).Err(); err != nil {
+	if err := s.kv.Set(token, a); err != nil {
 		return nil, errors.Wrapf(err, "redis set token [%v] failed", token)
 	}
 
