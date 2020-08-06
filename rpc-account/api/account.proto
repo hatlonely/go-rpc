@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package account;
 
-option go_package = "github.com/hatlonely/go-rpc/account/api/account";
+option go_package = "github.com/hatlonely/go-rpc/rpc-account/api/account";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";

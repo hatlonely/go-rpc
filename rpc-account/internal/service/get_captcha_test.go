@@ -6,7 +6,7 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
+	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 )
 
 func TestAccountService_GetCaptcha(t *testing.T) {

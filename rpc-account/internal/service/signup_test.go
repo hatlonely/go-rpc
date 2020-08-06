@@ -7,8 +7,8 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/account/internal/model"
+	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
 )
 
 func TestAccountService_SignUp(t *testing.T) {

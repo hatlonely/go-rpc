@@ -24,8 +24,8 @@ import (
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/account/internal/service"
+	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/service"
 )
 
 var Version string

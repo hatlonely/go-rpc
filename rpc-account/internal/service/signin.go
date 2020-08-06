@@ -11,8 +11,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/account/internal/model"
+	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
 )
 
 func GenerateToken() string {

@@ -6,7 +6,7 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
 
-	account "github.com/hatlonely/go-rpc/account/api/gen/go/api"
+	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 )
 
 func (s *AccountService) SignOut(ctx context.Context, req *account.SignOutReq) (*empty.Empty, error) {
