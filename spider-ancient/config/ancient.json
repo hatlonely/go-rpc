@@ -1,0 +1,5 @@
+{
+  "directory": "data",
+  "parallel": 100,
+  "delay": "1ms"
+}
