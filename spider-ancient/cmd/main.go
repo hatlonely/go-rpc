@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"regexp"
 	"time"
 
 	"github.com/gocolly/colly/v2"
@@ -71,9 +70,9 @@ func main() {
 		if os.IsExist(err) {
 			return
 		}
-		if ok, _ := regexp.MatchString(`.*/book/.*`, href); !ok {
-			return
-		}
+		//if ok, _ := regexp.MatchString(`.*/book/.*`, href); !ok {
+		//	return
+		//}
 		if err := e.Request.Visit(href); err == colly.ErrMaxDepth || err == colly.ErrAlreadyVisited || err == colly.ErrForbiddenDomain {
 		} else if err != nil {
 			fmt.Println(err)
