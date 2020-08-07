@@ -15,9 +15,12 @@ import (
 var Version string
 
 type Options struct {
-	Directory string
-	Parallel  int
-	Delay     time.Duration
+	Directory    string `dft:"data"`
+	Parallel     int    `dft:"100"`
+	MaxDepth     int    `dft:"4"`
+	Delay        time.Duration
+	AllowDomains []string
+	UserAgent    string
 }
 
 func main() {
@@ -53,9 +56,9 @@ func main() {
 
 	c := colly.NewCollector(
 		//colly.Async(),
-		colly.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"),
-		colly.MaxDepth(4),
-		colly.AllowedDomains("www.shicimingju.com"),
+		colly.UserAgent(options.UserAgent),
+		colly.MaxDepth(options.MaxDepth),
+		colly.AllowedDomains(options.AllowDomains...),
 	)
 
 	c.Limit(&colly.LimitRule{
@@ -70,9 +73,6 @@ func main() {
 		if os.IsExist(err) {
 			return
 		}
-		//if ok, _ := regexp.MatchString(`.*/book/.*`, href); !ok {
-		//	return
-		//}
 		if err := e.Request.Visit(href); err == colly.ErrMaxDepth || err == colly.ErrAlreadyVisited || err == colly.ErrForbiddenDomain {
 		} else if err != nil {
 			fmt.Println(err)
