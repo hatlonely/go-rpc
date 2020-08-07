@@ -21,6 +21,7 @@ type Options struct {
 	Delay        time.Duration
 	AllowDomains []string
 	UserAgent    string
+	StartPage    string
 }
 
 func main() {
@@ -107,7 +108,7 @@ func main() {
 		_ = fp.Close()
 	})
 
-	c.Visit("https://www.shicimingju.com/book/index.html")
+	c.Visit(options.StartPage)
 	//c.Visit("https://www.shicimingju.com/book/sanguoyanyi.html")
 	//c.Visit("https://www.shicimingju.com/book/sanguoyanyi/1.html")
 
