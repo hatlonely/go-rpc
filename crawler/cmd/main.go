@@ -28,7 +28,7 @@ func main() {
 	var options Options
 	help := flag.Bool("help", false, "show help info")
 	version := flag.Bool("version", false, "show version")
-	configPath := flag.String("configPath", "config/ancient.json", "config path")
+	configPath := flag.String("configPath", "config/crrawler.json", "config path")
 	if *help {
 		fmt.Println(flag.Usage())
 		return
