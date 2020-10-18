@@ -63,7 +63,6 @@ func (e *Error) Format(s fmt.State, verb rune) {
 	case 'v':
 		if s.Flag('+') {
 			_, _ = fmt.Fprintf(s, "%+v\n", e.Err)
-			_, _ = io.WriteString(s, e.Error())
 			return
 		}
 		fallthrough

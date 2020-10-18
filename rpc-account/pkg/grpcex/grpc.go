@@ -65,7 +65,7 @@ func WithGrpcLogger(log *logger.Logger) grpc.ServerOption {
 				"req":       req,
 				"ctx":       c,
 				"res":       res,
-				"err":       err.Error(),
+				"err":       err,
 				"errStack":  fmt.Sprintf("%+v", err),
 				"resTimeMs": time.Now().Sub(ts).Milliseconds(),
 			})
@@ -80,10 +80,13 @@ func WithGrpcLogger(log *logger.Logger) grpc.ServerOption {
 			res, err = handler(ctx, req)
 		}
 
-		switch e := err.(type) {
-		case *Error:
-			return res, e.ToStatus().Err()
+		if err != nil {
+			switch e := err.(type) {
+			case *Error:
+				return res, e.ToStatus().Err()
+			}
+			return res, NewInternalError(err, requestID).ToStatus().Err()
 		}
-		return res, NewInternalError(err, requestID).ToStatus().Err()
+		return res, nil
 	})
 }
