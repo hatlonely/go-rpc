@@ -100,7 +100,9 @@ func main() {
 	}
 
 	server := grpc.NewServer(
-		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (res interface{}, err error) {
+		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+			var res interface{}
+			var err error
 			ts := time.Now()
 			defer func() {
 				if perr := recover(); perr != nil {
@@ -116,16 +118,18 @@ func main() {
 					"url":       info.FullMethod,
 					"req":       req,
 					"res":       res,
-					"err":       err,
-					"resTimeNs": time.Now().Sub(ts).Nanoseconds(),
+					"err":       fmt.Sprintf("%+v", err),
+					"resTimeMs": time.Now().Sub(ts).Milliseconds(),
 				})
 			}()
 
 			if err = validator.Validate(req); err != nil {
-				return nil, status.Error(codes.InvalidArgument, err.Error())
+				err = status.Error(codes.InvalidArgument, err.Error())
+				return nil, err
 			}
 
-			return handler(ctx, req)
+			res, err = handler(ctx, req)
+			return res, err
 		}),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
