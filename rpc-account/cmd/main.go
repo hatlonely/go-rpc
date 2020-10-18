@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net"
 	"net/http"
 	"os"
 	"runtime/debug"
+	"strings"
 	"time"
 
 	"github.com/gorilla/handlers"
@@ -18,14 +20,17 @@ import (
 	"github.com/hatlonely/go-kit/logger"
 	"github.com/hatlonely/go-kit/validator"
 	"github.com/pkg/errors"
+	uuid "github.com/satori/go.uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/service"
+	"github.com/hatlonely/go-rpc/rpc-account/pkg/grpcex"
 )
 
 var Version string
@@ -101,6 +106,20 @@ func main() {
 
 	server := grpc.NewServer(
 		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+			var requestID, remoteIP string
+			if md, ok := metadata.FromIncomingContext(ctx); ok {
+				if vals, ok := md["x-request-id"]; ok {
+					requestID = strings.Join(vals, ",")
+				}
+				if requestID == "" {
+					requestID = uuid.NewV4().String()
+					md.Set("x-request-id", requestID)
+				}
+				if vals, ok := md["x-remote-addr"]; ok {
+					remoteIP = strings.Split(strings.Join(vals, ","), ":")[0]
+				}
+			}
+
 			var res interface{}
 			var err error
 			ts := time.Now()
@@ -113,23 +132,36 @@ func main() {
 				if ok && p != nil {
 					clientIP = p.Addr.String()
 				}
+				md, _ := metadata.FromIncomingContext(ctx)
+				c, _ := md["ctx"]
 				grpcLog.Info(map[string]interface{}{
-					"client":    clientIP,
-					"url":       info.FullMethod,
+					"requestID": requestID,
+					"remoteIP":  remoteIP,
+					"clientIP":  clientIP,
+					"method":    info.FullMethod,
 					"req":       req,
+					"ctx":       c,
 					"res":       res,
-					"err":       fmt.Sprintf("%+v", err),
+					"err":       err.Error(),
+					"errStack":  fmt.Sprintf("%+v", err),
 					"resTimeMs": time.Now().Sub(ts).Milliseconds(),
 				})
+				_ = grpc.SendHeader(ctx, metadata.New(map[string]string{
+					"x-request-id": requestID,
+				}))
 			}()
 
 			if err = validator.Validate(req); err != nil {
-				err = status.Error(codes.InvalidArgument, err.Error())
-				return nil, err
+				err = grpcex.NewError(err, codes.InvalidArgument, requestID, "InvalidArgument", err.Error())
+			} else {
+				res, err = handler(ctx, req)
 			}
 
-			res, err = handler(ctx, req)
-			return res, err
+			switch e := err.(type) {
+			case *grpcex.Error:
+				return res, e.ToStatus().Err()
+			}
+			return res, grpcex.NewInternalError(err, requestID).ToStatus().Err()
 		}),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
@@ -155,7 +187,51 @@ func main() {
 		}
 	}()
 
-	mux := runtime.NewServeMux()
+	mux := runtime.NewServeMux(
+		runtime.WithMetadata(func(ctx context.Context, req *http.Request) metadata.MD {
+			requestID := req.Header.Get("X-Request-Id")
+			if requestID == "" {
+				return metadata.Pairs("x-remote-addr", req.RemoteAddr, "x-request-id", requestID)
+			} else {
+				return metadata.Pairs("x-remote-addr", req.RemoteAddr)
+			}
+		}),
+		runtime.WithIncomingHeaderMatcher(func(key string) (string, bool) {
+			switch key {
+			case "X-Request-Id":
+				return "x-request-id", true
+			default:
+				return runtime.DefaultHeaderMatcher(key)
+			}
+		}),
+		runtime.WithOutgoingHeaderMatcher(func(key string) (string, bool) {
+			switch key {
+			case "X-Request-Id", "x-request-id":
+				return "x-request-id", true
+			default:
+				return runtime.DefaultHeaderMatcher(key)
+			}
+		}),
+		runtime.WithProtoErrorHandler(func(ctx context.Context, mux *runtime.ServeMux, marshaler runtime.Marshaler, writer http.ResponseWriter, request *http.Request, err error) {
+			requestID := grpcex.GetRequestIDFromContext(ctx)
+
+			s := status.Convert(err)
+			var e *grpcex.EInfo
+			if len(s.Details()) >= 1 {
+				var ok bool
+				e, ok = s.Details()[0].(*grpcex.EInfo)
+				if !ok {
+					e = grpcex.NewInternalError(err, requestID).Info
+				}
+			} else {
+				e = grpcex.NewInternalError(err, requestID).Info
+			}
+			e.Status = int64(runtime.HTTPStatusFromCode(s.Code()))
+			writer.WriteHeader(int(e.Status))
+			buf, _ := json.Marshal(e)
+			_, _ = writer.Write(buf)
+		}),
+	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	if err := account.RegisterAccountServiceHandlerFromEndpoint(
