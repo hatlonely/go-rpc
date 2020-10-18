@@ -29,9 +29,9 @@ message SignUpReq {
   string name = 3 [(gogoproto.moretags) = "rule:\"len(x) < 64 && len(x) >= 8\""];
   string password = 4;
   string birthday = 5;
-  Gender gender = 6 [(gogoproto.moretags) = "rule:\"x in ('male', 'female')\""];
+  Gender gender = 6 [(gogoproto.moretags) = "rule:\"x in ['male', 'female']\""];
   string avatar = 7;
-  string captcha = 8 [(gogoproto.moretags) = "rule:\"x match '[0-9]{6}'\""];
+  string captcha = 8 [(gogoproto.moretags) = "rule:\"x=~'[0-9]{6}'\""];
 }
 
 message SignOutReq {

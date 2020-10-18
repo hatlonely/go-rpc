@@ -31,8 +31,7 @@ import (
 var Version string
 
 type Options struct {
-	Help    bool `flag:"--help,-h; default: false; usage: show help info"`
-	Version bool `flag:"--version,-v; default: false; usage: show version"`
+	flag.Options
 
 	Http struct {
 		Port int
@@ -47,18 +46,16 @@ type Options struct {
 	Account service.AccountServiceOptions
 }
 
-func main() {
-	var options Options
-	conf, err := config.NewConfigWithBaseFile("config/base.json")
+func Must(err error) {
 	if err != nil {
 		panic(err)
 	}
-	if err := flag.Struct(&options); err != nil {
-		panic(err)
-	}
-	if err := flag.Parse(); err != nil {
-		panic(err)
-	}
+}
+
+func main() {
+	var options Options
+	Must(flag.Struct(&options))
+	Must(flag.Parse())
 	if options.Help {
 		fmt.Println(flag.Usage())
 		return
@@ -68,19 +65,17 @@ func main() {
 		return
 	}
 
-	if err := binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(), conf); err != nil {
-		panic(err)
-	}
-
-	grpcLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.grpc"))
+	cfg, err := config.NewConfigWithBaseFile("config/base.json")
 	if err != nil {
 		panic(err)
 	}
-	//httpLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.http"))
-	//if err != nil {
-	//	panic(err)
-	//}
-	infoLog, err := logger.NewLoggerWithConfig(conf.Sub("logger.info"))
+	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(), cfg))
+
+	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"))
+	if err != nil {
+		panic(err)
+	}
+	infoLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.info"))
 	if err != nil {
 		panic(err)
 	}
