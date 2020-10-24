@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: prod
+  name: account
+spec:
+  clusterIP: None
+  selector:
+    app: account
+  ports:
+    - port: 80
+      targetPort: 80
