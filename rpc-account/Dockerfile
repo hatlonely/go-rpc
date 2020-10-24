@@ -7,4 +7,4 @@ COPY docker/ /var/docker/go-rpc-account
 RUN mkdir -p /var/docker/go-rpc-account/log
 
 WORKDIR /var/docker/go-rpc-account
-CMD [ "bin/account", "-c", "config/base.json" ]
+CMD [ "bin/account", "-c", "config/account.json" ]

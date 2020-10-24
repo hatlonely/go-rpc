@@ -67,7 +67,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(), cfg))
+	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(binding.WithEnvPrefix("ACCOUNT")), cfg))
 
 	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"))
 	if err != nil {
