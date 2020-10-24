@@ -16,7 +16,8 @@
     "writeTimeout": "200ms",
     "maxRetries": 3,
     "poolSize": 20,
-    "db": 0
+    "db": 0,
+    "password": ""
   },
   "mysql": {
     "username": "root",

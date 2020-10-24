@@ -60,7 +60,10 @@ func main() {
 		return
 	}
 
-	cfg, err := config.NewConfigWithBaseFile("config/base.json")
+	if options.ConfigPath == "" {
+		options.ConfigPath = "config/account.json"
+	}
+	cfg, err := config.NewSimpleFileConfig(options.ConfigPath)
 	if err != nil {
 		panic(err)
 	}
