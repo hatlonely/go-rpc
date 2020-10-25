@@ -1,8 +1,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: prod
-  name: account
+  namespace: {{.Values.namespace}}
+  name: {{.Values.name}}
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
@@ -12,7 +12,7 @@ spec:
         paths:
           - path:  /
             backend:
-              serviceName: account
+              serviceName: {{.Values.name}}
               servicePort: 80
   tls:
     - hosts:

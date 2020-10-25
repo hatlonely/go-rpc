@@ -1,0 +1,35 @@
+
+namespace: prod
+name: go-rpc-account
+replicaCount: 1
+
+image:
+  repository: registry.cn-beijing.aliyuncs.com/hatlonely/go-rpc-account
+  tag: 1.0.0
+  pullPolicy: Always
+
+imagePullSecrets:
+  name: hatlonely-pull-secrets
+
+
+
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
