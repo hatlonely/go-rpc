@@ -18,8 +18,8 @@ function Warn() {
 function Build() {
     cd .. && make image && cd -
     docker login --username="${RegistryUsername}" --password="${RegistryPassword}" "${RegistryServer}"
-    docker tag ${Image}:${Version} ${RegistryServer}/${Image}:${Version}
-    docker push ${RegistryServer}/${Image}:${Version}
+    docker tag "${Image}:${Version}" "${RegistryServer}/${Image}:${Version}"
+    docker push "${RegistryServer}/${Image}:${Version}"
 }
 
 function SQLTpl() {
