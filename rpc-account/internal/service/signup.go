@@ -22,18 +22,18 @@ func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*e
 	key := "captcha_" + req.Email
 	val, err := s.redisCli.Get(key).Result()
 	if err == redis.Nil {
-		return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "captcha is not exists")
+		return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "captcha is not exists")
 	}
 	if err != nil {
 		return nil, errors.Wrapf(err, "redis get key [%v] failed", key)
 	}
 	if req.Captcha != val {
-		return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "captcha is not match")
+		return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "captcha is not match")
 	}
 
 	birthday, err := cast.ToTimeE(req.Birthday)
 	if err != nil {
-		return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "invalid birthday format")
+		return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "invalid birthday format")
 	}
 
 	user := &model.Account{
@@ -51,13 +51,13 @@ func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*e
 			e := err.(*mysql.MySQLError)
 			if e.Number == 1062 {
 				if strings.Contains(e.Message, "accounts.email_idx") {
-					return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Email)
+					return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Email)
 				}
 				if strings.Contains(e.Message, "accounts.phone_idx") {
-					return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Phone)
+					return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Phone)
 				}
 				if strings.Contains(e.Message, "accounts.name_idx") {
-					return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Name)
+					return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "account [%v] exists", req.Name)
 				}
 			}
 		}
