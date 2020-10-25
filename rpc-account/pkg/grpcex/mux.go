@@ -48,17 +48,17 @@ func WithMuxProtoErrorHandler() runtime.ServeMuxOption {
 		requestID := GetRequestIDFromContext(ctx)
 
 		s := status.Convert(err)
-		var e *EInfo
 		if len(s.Details()) >= 1 {
-			var ok bool
-			e, ok = s.Details()[0].(*EInfo)
-			if !ok {
-				e = NewInternalError(err, requestID).Info
+			if e, ok := s.Details()[0].(*EInfo); ok {
+				writer.WriteHeader(int(e.Status))
+				buf, _ := json.Marshal(e)
+				_, _ = writer.Write(buf)
+				return
 			}
-		} else {
-			e = NewInternalError(err, requestID).Info
 		}
+		e := NewInternalError(err, requestID).Info
 		e.Status = int64(runtime.HTTPStatusFromCode(s.Code()))
+		e.Code = http.StatusText(int(e.Status))
 		writer.WriteHeader(int(e.Status))
 		buf, _ := json.Marshal(e)
 		_, _ = writer.Write(buf)

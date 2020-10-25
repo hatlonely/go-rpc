@@ -27,7 +27,7 @@ func GetRequestIDFromContext(ctx context.Context) string {
 	return requestID
 }
 
-func WithGrpcLogger(log *logger.Logger) grpc.ServerOption {
+func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
 	return grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		var requestID, remoteIP string
 		if md, ok := metadata.FromIncomingContext(ctx); ok {
