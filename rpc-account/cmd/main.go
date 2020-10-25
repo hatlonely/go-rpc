@@ -19,7 +19,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 
-	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/service"
 )
 
@@ -61,7 +61,7 @@ func main() {
 	}
 
 	if options.ConfigPath == "" {
-		options.ConfigPath = "config/account.json"
+		options.ConfigPath = "config/go-rpc-account.json"
 	}
 	cfg, err := config.NewSimpleFileConfig(options.ConfigPath)
 	if err != nil {
@@ -111,7 +111,7 @@ func main() {
 			Timeout:               1 * time.Second,  // Wait 1 second for the ping ack before assuming the connection is dead
 		}),
 	)
-	account.RegisterAccountServiceServer(server, svc)
+	api.RegisterAccountServiceServer(server, svc)
 	address, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port))
 	if err != nil {
 		panic(err)
@@ -131,7 +131,7 @@ func main() {
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	if err := account.RegisterAccountServiceHandlerFromEndpoint(
+	if err := api.RegisterAccountServiceHandlerFromEndpoint(
 		ctx, mux, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
 	); err != nil {
 		panic(err)
