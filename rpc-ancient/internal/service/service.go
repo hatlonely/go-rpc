@@ -27,6 +27,6 @@ func (s *AncientService) PutAncient(ctx context.Context, req *api.PutAncientReq)
 	return nil, nil
 }
 
-func (s *AncientService) UpdateAncient(ctx context.Context, in *api.UpdateAncientReq) (*empty.Empty, error) {
+func (s *AncientService) UpdateAncient(ctx context.Context, req *api.UpdateAncientReq) (*empty.Empty, error) {
 	return nil, nil
 }
