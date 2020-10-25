@@ -17,7 +17,7 @@ import (
 )
 
 func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*empty.Empty, error) {
-	requestID := grpcex.GetRequestIDFromContext(ctx)
+	requestID := grpcex.MetaDataGetRequestID(ctx)
 
 	key := "captcha_" + req.Email
 	val, err := s.redisCli.Get(key).Result()

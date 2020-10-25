@@ -17,14 +17,23 @@ import (
 	"google.golang.org/grpc/peer"
 )
 
-func GetRequestIDFromContext(ctx context.Context) string {
-	var requestID string
+func MetaDataGetRequestID(ctx context.Context) string {
+	return MetaDataGet(ctx, "x-request-id")
+}
+
+func MetaDataGet(ctx context.Context, key string) string {
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
-		if vals, ok := md["x-request-id"]; ok {
-			requestID = strings.Join(vals, ",")
+		if vals, ok := md[key]; ok {
+			return strings.Join(vals, ",")
 		}
 	}
-	return requestID
+	return ""
+}
+
+func MetaDataSet(ctx context.Context, key string, val string) {
+	if md, ok := metadata.FromIncomingContext(ctx); ok {
+		md.Set(key, val)
+	}
 }
 
 func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
@@ -55,22 +64,21 @@ func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
 			if ok && p != nil {
 				clientIP = p.Addr.String()
 			}
-			md, _ := metadata.FromIncomingContext(ctx)
-			c, _ := md["ctx"]
+
 			log.Info(map[string]interface{}{
 				"requestID": requestID,
 				"remoteIP":  remoteIP,
 				"clientIP":  clientIP,
 				"method":    info.FullMethod,
 				"req":       req,
-				"ctx":       c,
+				"ctx":       MetaDataGet(ctx, "ctx"),
 				"res":       res,
 				"err":       err,
 				"errStack":  fmt.Sprintf("%+v", err),
 				"resTimeMs": time.Now().Sub(ts).Milliseconds(),
 			})
 			_ = grpc.SendHeader(ctx, metadata.New(map[string]string{
-				"x-request-id": requestID,
+				"X-Request-Id": requestID,
 			}))
 		}()
 

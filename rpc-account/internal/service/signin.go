@@ -20,7 +20,7 @@ func GenerateToken() string {
 }
 
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
-	requestID := grpcex.GetRequestIDFromContext(ctx)
+	requestID := grpcex.MetaDataGetRequestID(ctx)
 
 	a := &model.Account{}
 	if strex.RePhone.MatchString(req.Username) {
