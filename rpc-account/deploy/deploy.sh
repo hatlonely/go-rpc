@@ -56,7 +56,7 @@ function CreateNamespaceIfNotExists() {
 
 function CreatePullSecretsIfNotExists() {
     kubectl get secret "${PullSecrets}" -n "${Namespace}" 2>/dev/null 1>&2 && return 0
-    kubectl create secret docker-registry ${PullSecrets} \
+    kubectl create secret docker-registry "${PullSecrets}" \
         --docker-server="${RegistryServer}" \
         --docker-username="${RegistryUsername}" \
         --docker-password="${RegistryPassword}" \
@@ -65,130 +65,102 @@ function CreatePullSecretsIfNotExists() {
     Warn "[kubectl create secret docker-registry ${PullSecrets}] failed"
 }
 
-function CreateConfigMap() {
-    CreateNamespaceIfNotExists || return 1
+function Render() {
+    cat > tmp/chart.yaml <<EOF
+namespace: ${Namespace}
+name: ${Name}
+replicaCount: ${ReplicaCount}
 
-cat > tmp/${ConfigmapFile} <<EOF
-{
-  "http": {
-    "port": 80
-  },
-  "grpc": {
-    "port": 6080
-  },
-  "account": {
-    "accountExpiration": "5m",
-    "captchaExpiration": "30m"
-  },
-  "redis": {
-    "addr": "${RedisAddr}",
-    "password": "${RedisPassword}",
-    "dialTimeout": "200ms",
-    "readTimeout": "200ms",
-    "writeTimeout": "200ms",
-    "maxRetries": 3,
-    "poolSize": 20,
-    "db": 0
-  },
-  "mysql": {
-    "username": "${MysqlUsername}",
-    "password": "${MysqlPassword}",
-    "database": "${MysqlDatabase}",
-    "host": "${MysqlServer}",
-    "port": 3306,
-    "connMaxLifeTime": "60s",
-    "maxIdleConns": 10,
-    "maxOpenConns": 20
-  },
-  "email": {
-    "from": "${EmailFrom}",
-    "password": "${EmailPassword}",
-    "server": "${EmailServer}",
-    "port": ${EmailPort}
-  },
-  "logger": {
+image:
+  repository: ${RegistryServer}/${Image}
+  tag: ${Version}
+  pullPolicy: Always
+
+imagePullSecrets:
+  name: ${PullSecrets}
+
+ingress:
+  host: k8s.account.hatlonely.com
+  secretName: k8s-secret
+
+config: |
+  {
+    "http": {
+      "port": 80
+    },
     "grpc": {
-      "level": "Info",
-      "writers": [{
-        "type": "RotateFile",
-        "filename": "log/account.grpc",
-        "maxAge": "24h"
-      }]
+      "port": 6080
     },
-    "warn": {
-      "level": "Warn",
-      "writers": [{
-        "type": "RotateFile",
-        "filename": "log/account.err",
-        "maxAge": "24h"
-      }]
+    "account": {
+      "accountExpiration": "5m",
+      "captchaExpiration": "30m"
     },
-    "info": {
-      "level": "Info",
-      "writers": [{
-        "type": "RotateFile",
-        "filename": "log/account.log",
-        "maxAge": "24h"
-      }]
+    "redis": {
+      "addr": "${RedisAddr}",
+      "password": "${RedisPassword}",
+      "dialTimeout": "200ms",
+      "readTimeout": "200ms",
+      "writeTimeout": "200ms",
+      "maxRetries": 3,
+      "poolSize": 20,
+      "db": 0
+    },
+    "mysql": {
+      "username": "${MysqlUsername}",
+      "password": "${MysqlPassword}",
+      "database": "${MysqlDatabase}",
+      "host": "${MysqlServer}",
+      "port": 3306,
+      "connMaxLifeTime": "60s",
+      "maxIdleConns": 10,
+      "maxOpenConns": 20
+    },
+    "email": {
+      "from": "${EmailFrom}",
+      "password": "${EmailPassword}",
+      "server": "${EmailServer}",
+      "port": ${EmailPort}
+    },
+    "logger": {
+      "grpc": {
+        "level": "Info",
+        "writers": [{
+          "type": "RotateFile",
+          "filename": "log/account.grpc",
+          "maxAge": "24h"
+        }]
+      },
+      "warn": {
+        "level": "Warn",
+        "writers": [{
+          "type": "RotateFile",
+          "filename": "log/account.err",
+          "maxAge": "24h"
+        }]
+      },
+      "info": {
+        "level": "Info",
+        "writers": [{
+          "type": "RotateFile",
+          "filename": "log/account.log",
+          "maxAge": "24h"
+        }]
+      }
     }
   }
-}
 EOF
-
-    kubectl get configmap "${Configmap}" -n "${Namespace}" 2>/dev/null 1>&2 && return 0
-
-    kubectl create configmap "${Configmap}" -n "${Namespace}" --from-file=${ConfigmapFile}=tmp/${ConfigmapFile} &&
-    Info "[kubectl create configmap "${Configmap}" -n "${Namespace}" --from-file=${ConfigmapFile}=tmp/${ConfigmapFile}] success" ||
-    Warn "[kubectl create configmap "${Configmap}" -n "${Namespace}" --from-file=${ConfigmapFile}=tmp/${ConfigmapFile}] fail"
 }
 
-function CreateDeployment() {
-    cat > tmp/job.yaml <<EOF
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: ${Name}
-  namespace: ${Namespace}
-spec:
-  parallelism: 1
-  completions: 1
-  activeDeadlineSeconds: 1800
-  backoffLimit: 1
-  template:
-    metadata:
-      name: ${Name}
-    spec:
-      imagePullSecrets:
-      - name: ${PullSecrets}
-      containers:
-      - name: ${Name}
-        imagePullPolicy: Always
-        image: ${Image}:${Version}
-        command: [ "bin/databus", "-c", "config/shici.json" ]
-        volumeMounts:
-        - name: ${Name}-data
-          mountPath: /var/docker/${Name}/data
-        - name: ${Name}-config
-          mountPath: /var/docker/${Name}/config
-      volumes:
-      - name: ${Name}-data
-        persistentVolumeClaim:
-          claimName: ${PVCName}
-      - name: ${Name}-config
-        projected:
-          sources:
-          - configMap:
-              name: ${Configmap}
-              items:
-                - key: ${ConfigmapFile}
-                  path: shici.json
-      restartPolicy: OnFailure
-EOF
+function Install() {
+    helm install "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/chart.yaml"
+}
 
-    kubectl get job -n "${Namespace}" "${Name}" && kubectl delete job -n "${Namespace}" "${Name}"
-    kubectl apply -f tmp/job.yaml &&
-    Info "[kubectl apply -f tmp/job.yaml] success" ||
-    Warn "[kubectl apply -f tmp/job.yaml] failed"
+function Upgrade() {
+    helm upgrade "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/chart.yaml"
+}
+
+function Delete() {
+    helm delete "${Name}" -n "${Namespace}"
 }
 
 function Help() {
@@ -196,9 +168,11 @@ function Help() {
     echo "example"
     echo "  sh deploy.sh build"
     echo "  sh deploy.sh sql"
-    echo "  sh deploy.sh configmap"
     echo "  sh deploy.sh secret"
-    echo "  sh deploy.sh job"
+    echo "  sh deploy.sh render"
+    echo "  sh deploy.sh install"
+    echo "  sh deploy.sh upgrade"
+    echo "  sh deploy.sh delete"
 }
 
 function main() {
@@ -211,8 +185,10 @@ function main() {
         "build") Build;;
         "sql") SQLTpl;;
         "secret") CreatePullSecretsIfNotExists;;
-        "configmap") CreateConfigMap;;
-        "job") CreateJob;;
+        "render") Render;;
+        "install") Install;;
+        "upgrade") Upgrade;;
+        "delete") Delete;;
     esac
 }
 

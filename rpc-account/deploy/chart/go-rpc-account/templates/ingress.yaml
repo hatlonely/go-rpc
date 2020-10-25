@@ -16,5 +16,5 @@ spec:
               servicePort: 80
   tls:
     - hosts:
-        - k8s.account.hatlonely.com
-      secretName: k8s-secret
+        - {{.Values.ingress.host}}
+      secretName: {{.Values.ingress.secretName}}
