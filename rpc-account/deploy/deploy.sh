@@ -186,8 +186,8 @@ function main() {
         "sql") SQLTpl;;
         "secret") CreatePullSecretsIfNotExists;;
         "render") Render;;
-        "install") Install;;
-        "upgrade") Upgrade;;
+        "install") Render && Install;;
+        "upgrade") Render && Upgrade;;
         "delete") Delete;;
     esac
 }
