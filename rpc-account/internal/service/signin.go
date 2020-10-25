@@ -4,7 +4,8 @@ import (
 	"context"
 	"encoding/hex"
 
-	"github.com/hatlonely/go-kit/strex"
+	"github.com/hatlonely/go-kit/rpcx"
+	"github.com/hatlonely/go-kit/strx"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
@@ -12,7 +13,6 @@ import (
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
-	"github.com/hatlonely/go-rpc/rpc-account/pkg/rpcx"
 )
 
 func GenerateToken() string {
@@ -23,14 +23,14 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 	requestID := rpcx.MetaDataGetRequestID(ctx)
 
 	a := &model.Account{}
-	if strex.RePhone.MatchString(req.Username) {
+	if strx.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return nil, rpcx.NewErrorWithoutReferf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
 			}
 			return nil, errors.Wrapf(err, "mysql select user [%v] failed", req.Username)
 		}
-	} else if strex.ReEmail.MatchString(req.Username) {
+	} else if strx.ReEmail.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("email=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return nil, rpcx.NewErrorWithoutReferf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)

@@ -7,13 +7,13 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/go-sql-driver/mysql"
 	"github.com/golang/protobuf/ptypes/empty"
+	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
 	"google.golang.org/grpc/codes"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
-	"github.com/hatlonely/go-rpc/rpc-account/pkg/rpcx"
 )
 
 func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*empty.Empty, error) {

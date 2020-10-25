@@ -15,12 +15,12 @@ import (
 	"github.com/hatlonely/go-kit/config"
 	"github.com/hatlonely/go-kit/flag"
 	"github.com/hatlonely/go-kit/logger"
+	"github.com/hatlonely/go-kit/rpcx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/service"
-	"github.com/hatlonely/go-rpc/rpc-account/pkg/rpcx"
 )
 
 var Version string
