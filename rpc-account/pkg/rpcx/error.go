@@ -1,6 +1,6 @@
 //go:generate protoc -I. --gofast_out=plugins=grpc,paths=source_relative:. error.proto
 
-package grpcex
+package rpcx
 
 import (
 	"fmt"

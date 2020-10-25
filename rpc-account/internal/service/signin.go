@@ -12,7 +12,7 @@ import (
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
-	"github.com/hatlonely/go-rpc/rpc-account/pkg/grpcex"
+	"github.com/hatlonely/go-rpc/rpc-account/pkg/rpcx"
 )
 
 func GenerateToken() string {
@@ -20,29 +20,29 @@ func GenerateToken() string {
 }
 
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
-	requestID := grpcex.MetaDataGetRequestID(ctx)
+	requestID := rpcx.MetaDataGetRequestID(ctx)
 
 	a := &model.Account{}
 	if strex.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return nil, grpcex.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
+				return nil, rpcx.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
 			}
 			return nil, errors.Wrapf(err, "mysql select user [%v] failed", req.Username)
 		}
 	} else if strex.ReEmail.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("email=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return nil, grpcex.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
+				return nil, rpcx.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
 			}
 			return nil, errors.Wrapf(err, "mysql select user [%v] failed", req.Username)
 		}
 	} else {
-		return nil, grpcex.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "user [%v] is invalid", req.Username)
+		return nil, rpcx.NewErrorf(codes.InvalidArgument, requestID, "InvalidArgument", "user [%v] is invalid", req.Username)
 	}
 
 	if a.Password != req.Password {
-		return nil, grpcex.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "password is incorrect")
+		return nil, rpcx.NewErrorf(codes.PermissionDenied, requestID, "Forbidden", "password is incorrect")
 	}
 
 	token := GenerateToken()

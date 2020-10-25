@@ -1,4 +1,4 @@
-package grpcex
+package rpcx
 
 import (
 	"context"

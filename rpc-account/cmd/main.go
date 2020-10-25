@@ -20,7 +20,7 @@ import (
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-account/internal/service"
-	"github.com/hatlonely/go-rpc/rpc-account/pkg/grpcex"
+	"github.com/hatlonely/go-rpc/rpc-account/pkg/rpcx"
 )
 
 var Version string
@@ -98,7 +98,7 @@ func main() {
 	}
 
 	server := grpc.NewServer(
-		grpcex.WithGrpcDecorator(grpcLog),
+		rpcx.WithGrpcDecorator(grpcLog),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
 			PermitWithoutStream: true,            // Allow pings even when there are no active streams
@@ -124,10 +124,10 @@ func main() {
 	}()
 
 	mux := runtime.NewServeMux(
-		grpcex.WithMuxMetadata(),
-		grpcex.WithMuxIncomingHeaderMatcher(),
-		grpcex.WithMuxOutgoingHeaderMatcher(),
-		grpcex.WithMuxProtoErrorHandler(),
+		rpcx.WithMuxMetadata(),
+		rpcx.WithMuxIncomingHeaderMatcher(),
+		rpcx.WithMuxOutgoingHeaderMatcher(),
+		rpcx.WithMuxProtoErrorHandler(),
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

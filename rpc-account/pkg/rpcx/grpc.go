@@ -1,4 +1,4 @@
-package grpcex
+package rpcx
 
 import (
 	"context"
@@ -16,6 +16,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 )
+
+const GrpcCtxKey = "ctx"
 
 func MetaDataGetRequestID(ctx context.Context) string {
 	return MetaDataGet(ctx, "x-request-id")
@@ -36,6 +38,16 @@ func MetaDataSet(ctx context.Context, key string, val string) {
 	}
 }
 
+func CtxSet(ctx context.Context, key string, val interface{}) {
+	m := ctx.Value(GrpcCtxKey).(map[string]interface{})
+	m[key] = val
+}
+
+func CtxGet(ctx context.Context, key string) interface{} {
+	m := ctx.Value(GrpcCtxKey).(map[string]interface{})
+	return m[key]
+}
+
 func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
 	return grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		var requestID, remoteIP string
@@ -51,6 +63,8 @@ func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
 				remoteIP = strings.Split(strings.Join(vals, ","), ":")[0]
 			}
 		}
+
+		ctx = context.WithValue(ctx, GrpcCtxKey, map[string]interface{}{})
 
 		var res interface{}
 		var err error
@@ -71,7 +85,7 @@ func WithGrpcDecorator(log *logger.Logger) grpc.ServerOption {
 				"clientIP":  clientIP,
 				"method":    info.FullMethod,
 				"req":       req,
-				"ctx":       MetaDataGet(ctx, "ctx"),
+				"ctx":       ctx.Value(GrpcCtxKey),
 				"res":       res,
 				"err":       err,
 				"errStack":  fmt.Sprintf("%+v", err),
