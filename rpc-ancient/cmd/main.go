@@ -91,9 +91,9 @@ func main() {
 			Timeout:               1 * time.Second,  // Wait 1 second for the ping ack before assuming the connection is dead
 		}),
 	)
+	api.RegisterAncientServiceServer(rpcServer, svc)
 
 	go func() {
-		api.RegisterAncientServiceServer(rpcServer, svc)
 		address, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port))
 		Must(err)
 		Must(rpcServer.Serve(address))
@@ -107,14 +107,9 @@ func main() {
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	if err := api.RegisterAncientServiceHandlerFromEndpoint(
+	Must(api.RegisterAncientServiceHandlerFromEndpoint(
 		ctx, muxServer, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
-	); err != nil {
-		panic(err)
-	}
-
+	))
 	infoLog.Info(options)
-	if err := http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, muxServer)); err != nil {
-		panic(err)
-	}
+	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, muxServer)))
 }

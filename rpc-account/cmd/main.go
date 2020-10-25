@@ -64,28 +64,18 @@ func main() {
 		options.ConfigPath = "config/go-rpc-account.json"
 	}
 	cfg, err := config.NewSimpleFileConfig(options.ConfigPath)
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(binding.WithEnvPrefix("ACCOUNT")), cfg))
 
 	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"))
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 	infoLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.info"))
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 
 	redisCli, err := cli.NewRedisWithOptions(&options.Redis)
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 	mysqlCli, err := cli.NewMysqlWithOptions(&options.Mysql)
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 	emailCli := cli.NewEmailWithOptions(&options.Email)
 
 	svc, err := service.NewAccountService(
@@ -93,11 +83,9 @@ func main() {
 		service.WithAccountExpiration(options.Account.AccountExpiration),
 		service.WithCaptchaExpiration(options.Account.CaptchaExpiration),
 	)
-	if err != nil {
-		panic(err)
-	}
+	Must(err)
 
-	server := grpc.NewServer(
+	rpcServer := grpc.NewServer(
 		rpcx.WithGrpcDecorator(grpcLog),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
@@ -111,19 +99,15 @@ func main() {
 			Timeout:               1 * time.Second,  // Wait 1 second for the ping ack before assuming the connection is dead
 		}),
 	)
-	api.RegisterAccountServiceServer(server, svc)
-	address, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port))
-	if err != nil {
-		panic(err)
-	}
+	api.RegisterAccountServiceServer(rpcServer, svc)
 
 	go func() {
-		if err := server.Serve(address); err != nil {
-			panic(err)
-		}
+		address, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port))
+		Must(err)
+		Must(rpcServer.Serve(address))
 	}()
 
-	mux := runtime.NewServeMux(
+	muxServer := runtime.NewServeMux(
 		rpcx.WithMuxMetadata(),
 		rpcx.WithMuxIncomingHeaderMatcher(),
 		rpcx.WithMuxOutgoingHeaderMatcher(),
@@ -131,15 +115,9 @@ func main() {
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	if err := api.RegisterAccountServiceHandlerFromEndpoint(
-		ctx, mux, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
-	); err != nil {
-		panic(err)
-	}
-
+	Must(api.RegisterAccountServiceHandlerFromEndpoint(
+		ctx, muxServer, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
+	))
 	infoLog.Info(options)
-
-	if err := http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, mux)); err != nil {
-		panic(err)
-	}
+	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, muxServer)))
 }
