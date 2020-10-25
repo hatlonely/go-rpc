@@ -163,6 +163,10 @@ function Delete() {
     helm delete "${Name}" -n "${Namespace}"
 }
 
+function Diff() {
+    helm diff upgrade "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/chart.yaml"
+}
+
 function Help() {
     echo "sh deploy.sh <action>"
     echo "example"
@@ -173,6 +177,7 @@ function Help() {
     echo "  sh deploy.sh install"
     echo "  sh deploy.sh upgrade"
     echo "  sh deploy.sh delete"
+    echo "  sh deploy.sh diff"
 }
 
 function main() {
@@ -188,6 +193,7 @@ function main() {
         "render") Render;;
         "install") Render && Install;;
         "upgrade") Render && Upgrade;;
+        "diff") Render && Diff;;
         "delete") Delete;;
     esac
 }
