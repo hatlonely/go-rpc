@@ -20,3 +20,5 @@ PullSecrets="hatlonely-pull-secrets"
 Image="hatlonely/go-rpc-account"
 Version="1.0.0"
 ReplicaCount=2
+IngressHost="k8s.account.hatlonely.com"
+IngressSecret="k8s-secret"

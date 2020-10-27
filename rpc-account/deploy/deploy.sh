@@ -80,8 +80,8 @@ imagePullSecrets:
   name: ${PullSecrets}
 
 ingress:
-  host: k8s.account.hatlonely.com
-  secretName: k8s-secret
+  host: ${IngressHost}
+  secretName: ${IngressSecret}
 
 config: |
   {
