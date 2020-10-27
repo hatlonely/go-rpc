@@ -29,7 +29,7 @@ CREATE USER IF NOT EXISTS '${MysqlUsername}'@'%' IDENTIFIED BY '${MysqlPassword}
 GRANT ALL PRIVILEGES ON ${MysqlDatabase}.* TO '${MysqlUsername}'@'%';
 
 USE ${MysqlDatabase};
-CREATE TABLE \`accounts\` (
+CREATE TABLE \`accounts\` IF NOT EXISTS (
   \`id\` bigint NOT NULL AUTO_INCREMENT,
   \`email\` varchar(64) DEFAULT NULL,
   \`phone\` varchar(64) DEFAULT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE \`accounts\` (
   UNIQUE KEY \`name_idx\` (\`name\`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8
 EOF
-    kubectl run -n prod -it --rm sql --image=mysql:5.7.30 --restart=Never -- mysql -uroot -hmysql -p${MysqlRootPassword} -e "$(cat tmp/create_table.sql)"
+    kubectl run -n prod -it --rm sql --image=mysql:5.7.30 --restart=Never -- mysql -uroot -h${MysqlServer} -p${MysqlRootPassword} -e "$(cat tmp/create_table.sql)"
 }
 
 function CreateNamespaceIfNotExists() {
