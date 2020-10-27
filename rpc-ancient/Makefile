@@ -1,4 +1,4 @@
-binary=account
+binary=ancient
 dockeruser=hatlonely
 gituser=hatlonely
 repository=go-rpc-ancient
