@@ -17,7 +17,7 @@ vendor: go.mod go.sum
 
 codegen: api/ancient.proto
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger
-	protoc -I.. -I. --go_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
+	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
 	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
 	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
 

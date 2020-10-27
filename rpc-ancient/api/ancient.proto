@@ -5,13 +5,12 @@ package api;
 option go_package = "github.com/hatlonely/go-rpc/rpc-ancient/api/gen/go/api";
 
 import "google/api/annotations.proto";
-import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "gogoproto/gogo.proto";
 
 
 message Ancient {
-  int64 id = 1;
+  int64 id = 1 [(gogoproto.moretags) = "rule:\"x >= 0\""];
   string title = 2;
   string author = 3;
   string dynasty = 4;
@@ -19,7 +18,7 @@ message Ancient {
 }
 
 message GetAncientReq {
-  int64 id = 1;
+  int64 id = 1 [(gogoproto.moretags) = "rule:\"x >= 0\""];
 }
 
 message PutAncientReq {
@@ -28,7 +27,6 @@ message PutAncientReq {
 
 message UpdateAncientReq {
   Ancient ancient = 1;
-  google.protobuf.FieldMask update_mask = 2;
 }
 
 service AncientService {

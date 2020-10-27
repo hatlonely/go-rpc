@@ -119,10 +119,6 @@ func local_request_AncientService_PutAncient_0(ctx context.Context, marshaler ru
 
 }
 
-var (
-	filter_AncientService_UpdateAncient_0 = &utilities.DoubleArray{Encoding: map[string]int{"ancient": 0, "id": 1}, Base: []int{1, 2, 1, 0, 0}, Check: []int{0, 1, 2, 3, 2}}
-)
-
 func request_AncientService_UpdateAncient_0(ctx context.Context, marshaler runtime.Marshaler, client AncientServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateAncientReq
 	var metadata runtime.ServerMetadata
@@ -151,13 +147,6 @@ func request_AncientService_UpdateAncient_0(ctx context.Context, marshaler runti
 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ancient.id", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AncientService_UpdateAncient_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.UpdateAncient(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -195,21 +184,10 @@ func local_request_AncientService_UpdateAncient_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ancient.id", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AncientService_UpdateAncient_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := server.UpdateAncient(ctx, &protoReq)
 	return msg, metadata, err
 
 }
-
-var (
-	filter_AncientService_UpdateAncient_1 = &utilities.DoubleArray{Encoding: map[string]int{"ancient": 0, "id": 1}, Base: []int{1, 2, 1, 0, 0}, Check: []int{0, 1, 2, 3, 2}}
-)
 
 func request_AncientService_UpdateAncient_1(ctx context.Context, marshaler runtime.Marshaler, client AncientServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateAncientReq
@@ -221,14 +199,6 @@ func request_AncientService_UpdateAncient_1(ctx context.Context, marshaler runti
 	}
 	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Ancient); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
-		_, md := descriptor.ForMessage(protoReq.Ancient)
-		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), md); err != nil {
-			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-		} else {
-			protoReq.UpdateMask = fieldMask
-		}
 	}
 
 	var (
@@ -247,13 +217,6 @@ func request_AncientService_UpdateAncient_1(ctx context.Context, marshaler runti
 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ancient.id", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AncientService_UpdateAncient_1); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.UpdateAncient(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -272,14 +235,6 @@ func local_request_AncientService_UpdateAncient_1(ctx context.Context, marshaler
 	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Ancient); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
-		_, md := descriptor.ForMessage(protoReq.Ancient)
-		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), md); err != nil {
-			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-		} else {
-			protoReq.UpdateMask = fieldMask
-		}
-	}
 
 	var (
 		val string
@@ -297,13 +252,6 @@ func local_request_AncientService_UpdateAncient_1(ctx context.Context, marshaler
 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ancient.id", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AncientService_UpdateAncient_1); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.UpdateAncient(ctx, &protoReq)

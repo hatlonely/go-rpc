@@ -5,35 +5,15 @@
   "grpc": {
     "port": 6080
   },
-  "account": {
-    "accountExpiration": "5m",
-    "captchaExpiration": "30m"
-  },
-  "redis": {
-    "addr": "127.0.0.1:6379",
-    "dialTimeout": "200ms",
-    "readTimeout": "200ms",
-    "writeTimeout": "200ms",
-    "maxRetries": 3,
-    "poolSize": 20,
-    "db": 0,
-    "password": ""
-  },
   "mysql": {
     "username": "root",
     "password": "",
-    "database": "account",
+    "database": "ancient",
     "host": "127.0.0.1",
     "port": 3306,
     "connMaxLifeTime": "60s",
     "maxIdleConns": 10,
     "maxOpenConns": 20
-  },
-  "email": {
-    "from": "hatlonely@foxmail.com",
-    "password": "xuckndegounrbfhf",
-    "server": "smtp.qq.com",
-    "port": 25
   },
   "logger": {
     "grpc": {
