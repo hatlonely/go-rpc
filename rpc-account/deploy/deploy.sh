@@ -126,15 +126,7 @@ config: |
         "level": "Info",
         "writers": [{
           "type": "RotateFile",
-          "filename": "log/account.grpc",
-          "maxAge": "24h"
-        }]
-      },
-      "warn": {
-        "level": "Warn",
-        "writers": [{
-          "type": "RotateFile",
-          "filename": "log/account.err",
+          "filename": "log/account.rpc",
           "maxAge": "24h"
         }]
       },
@@ -149,6 +141,10 @@ config: |
     }
   }
 EOF
+}
+
+function Run() {
+     kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${Image}:${Version}" --restart=Never -- /bin/bash
 }
 
 function Install() {
@@ -178,6 +174,7 @@ function Help() {
     echo "  sh deploy.sh upgrade"
     echo "  sh deploy.sh delete"
     echo "  sh deploy.sh diff"
+    echo "  sh deploy.sh run"
 }
 
 function main() {
@@ -195,6 +192,7 @@ function main() {
         "upgrade") Render && Upgrade;;
         "diff") Render && Diff;;
         "delete") Delete;;
+        "run") Run;;
     esac
 }
 
