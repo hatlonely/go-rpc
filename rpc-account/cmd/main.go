@@ -86,7 +86,7 @@ func main() {
 	Must(err)
 
 	rpcServer := grpc.NewServer(
-		rpcx.WithGrpcDecorator(grpcLog),
+		rpcx.WithGRPCDecorator(grpcLog),
 		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
 			PermitWithoutStream: true,            // Allow pings even when there are no active streams
