@@ -103,7 +103,7 @@ config: |
         "level": "Info",
         "writers": [{
           "type": "RotateFile",
-          "filename": "log/account.rpc",
+          "filename": "log/${Name}.rpc",
           "maxAge": "24h"
         }]
       },
@@ -111,7 +111,7 @@ config: |
         "level": "Info",
         "writers": [{
           "type": "RotateFile",
-          "filename": "log/account.log",
+          "filename": "log/${Name}.log",
           "maxAge": "24h"
         }]
       }
