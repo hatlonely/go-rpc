@@ -15,6 +15,7 @@ import (
 	"github.com/hatlonely/go-kit/config"
 	"github.com/hatlonely/go-kit/flag"
 	"github.com/hatlonely/go-kit/logger"
+	"github.com/hatlonely/go-kit/refx"
 	"github.com/hatlonely/go-kit/rpcx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
@@ -66,9 +67,9 @@ func main() {
 	}
 	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(binding.WithEnvPrefix("ANCIENT")), cfg))
 
-	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"))
+	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"), refx.WithCamelName())
 	Must(err)
-	infoLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.info"))
+	infoLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.info"), refx.WithCamelName())
 	Must(err)
 
 	mysqlCli, err := cli.NewMysqlWithOptions(&options.Mysql)
