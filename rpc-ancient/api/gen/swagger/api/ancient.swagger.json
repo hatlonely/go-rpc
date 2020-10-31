@@ -149,6 +149,50 @@
           "AncientService"
         ]
       }
+    },
+    "/v1/search": {
+      "get": {
+        "operationId": "AncientService_SearchAncient",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSearchAncientRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AncientService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -178,6 +222,17 @@
       "properties": {
         "ancient": {
           "$ref": "#/definitions/apiAncient"
+        }
+      }
+    },
+    "apiSearchAncientRes": {
+      "type": "object",
+      "properties": {
+        "ancients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAncient"
+          }
         }
       }
     },

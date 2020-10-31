@@ -15,6 +15,9 @@
     "maxIdleConns": 10,
     "maxOpenConns": 20
   },
+  "elasticsearch": {
+    "uri": "http://127.0.0.1:9200"
+  },
   "logger": {
     "grpc": {
       "level": "Info",

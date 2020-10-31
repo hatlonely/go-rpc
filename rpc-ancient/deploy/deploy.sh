@@ -98,6 +98,9 @@ config: |
       "maxIdleConns": 10,
       "maxOpenConns": 20
     },
+    "elasticsearch": {
+      "uri": "http://${ElasticsearchServer}"
+    },
     "logger": {
       "grpc": {
         "level": "Info",

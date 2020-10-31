@@ -29,6 +29,16 @@ message UpdateAncientReq {
   Ancient ancient = 1;
 }
 
+message SearchAncientReq {
+  string keyword = 1;
+  int64 offset = 2;
+  int64 limit = 3 [(gogoproto.moretags) = "rule:\"x >= 0 && x <= 100\""];
+}
+
+message SearchAncientRes {
+  repeated Ancient ancients = 1;
+}
+
 service AncientService {
   rpc GetAncient(GetAncientReq) returns (Ancient) {
     option (google.api.http) = {
@@ -51,6 +61,12 @@ service AncientService {
         patch: "/v1/ancient/{ancient.id}"
         body: "ancient"
       }
+    };
+  }
+
+  rpc SearchAncient(SearchAncientReq) returns (SearchAncientRes) {
+    option (google.api.http) = {
+      get: "/v1/search"
     };
   }
 }
