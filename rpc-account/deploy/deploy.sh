@@ -91,7 +91,7 @@ config: |
     "grpc": {
       "port": 6080
     },
-    "account": {
+    "service": {
       "accountExpiration": "5m",
       "captchaExpiration": "30m"
     },

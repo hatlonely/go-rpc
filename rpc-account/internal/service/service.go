@@ -24,12 +24,16 @@ type AccountService struct {
 	captchaEmailTpl *template.Template
 }
 
-func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.EmailCli, opts ...AccountServiceOption) (*AccountService, error) {
-	options := defaultAccountServiceOptions
+func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.EmailCli, opts ...Option) (*AccountService, error) {
+	options := defaultOptions
 	for _, opt := range opts {
 		opt(&options)
 	}
 
+	return NewAccountServiceWithOptions(mysqlCli, redisCli, emailCli, &options)
+}
+
+func NewAccountServiceWithOptions(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.EmailCli, options *Options) (*AccountService, error) {
 	if !mysqlCli.HasTable(&storage.Account{}) {
 		if err := mysqlCli.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&storage.Account{}).Error; err != nil {
 			return nil, err
@@ -59,26 +63,26 @@ func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.
 	}, nil
 }
 
-type AccountServiceOptions struct {
+type Options struct {
 	CaptchaExpiration time.Duration
 	AccountExpiration time.Duration
 }
 
-var defaultAccountServiceOptions = AccountServiceOptions{
+var defaultOptions = Options{
 	CaptchaExpiration: 5 * time.Minute,
 	AccountExpiration: 30 * time.Minute,
 }
 
-type AccountServiceOption func(options *AccountServiceOptions)
+type Option func(options *Options)
 
-func WithCaptchaExpiration(captchaExpiration time.Duration) AccountServiceOption {
-	return func(options *AccountServiceOptions) {
+func WithCaptchaExpiration(captchaExpiration time.Duration) Option {
+	return func(options *Options) {
 		options.CaptchaExpiration = captchaExpiration
 	}
 }
 
-func WithAccountExpiration(accountExpiration time.Duration) AccountServiceOption {
-	return func(options *AccountServiceOptions) {
+func WithAccountExpiration(accountExpiration time.Duration) Option {
+	return func(options *Options) {
 		options.AccountExpiration = accountExpiration
 	}
 }

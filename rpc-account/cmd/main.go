@@ -39,7 +39,7 @@ type Options struct {
 	Redis   cli.RedisOptions
 	Mysql   cli.MySQLOptions
 	Email   cli.EmailOptions
-	Account service.AccountServiceOptions
+	Service service.Options
 }
 
 func Must(err error) {
@@ -79,11 +79,7 @@ func main() {
 	Must(err)
 	emailCli := cli.NewEmailWithOptions(&options.Email)
 
-	svc, err := service.NewAccountService(
-		mysqlCli, redisCli, emailCli,
-		service.WithAccountExpiration(options.Account.AccountExpiration),
-		service.WithCaptchaExpiration(options.Account.CaptchaExpiration),
-	)
+	svc, err := service.NewAccountServiceWithOptions(mysqlCli, redisCli, emailCli, &options.Service)
 	Must(err)
 
 	rpcServer := grpc.NewServer(
