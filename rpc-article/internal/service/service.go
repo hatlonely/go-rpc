@@ -95,10 +95,16 @@ func (s *ArticleService) UpdateArticle(ctx context.Context, req *api.UpdateArtic
 	rpcx.CtxSet(ctx, "article", article)
 
 	if err := s.mysqlCli.Update(article).Error; err != nil {
-		return nil, errors.Wrap(err, "mysql update failed")
+		if gorm.IsRecordNotFoundError(err) {
+			if err := s.mysqlCli.Create(article).Error; err != nil {
+				return nil, errors.Wrap(err, "mysql update failed")
+			}
+		} else {
+			return nil, errors.Wrap(err, "mysql update failed")
+		}
 	}
 
-	return nil, nil
+	return &empty.Empty{}, nil
 }
 
 func (s *ArticleService) SearchArticle(ctx context.Context, req *api.SearchArticleReq) (*api.SearchArticleRes, error) {
