@@ -42,9 +42,9 @@ func (s *AncientService) SearchAncient(ctx context.Context, req *api.SearchAncie
 		query.Must(q)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5000*time.Millisecond)
+	esCtx, cancel := context.WithTimeout(ctx, 5000*time.Millisecond)
 	defer cancel()
-	res, err := s.esCli.Search().Index("shici").Query(query).From(int(req.Offset)).Size(int(req.Limit)).Do(ctx)
+	res, err := s.esCli.Search().Index("shici").Query(query).From(int(req.Offset)).Size(int(req.Limit)).Do(esCtx)
 	if err != nil {
 		return nil, errors.Wrap(err, "EsCli.Search failed")
 	}
