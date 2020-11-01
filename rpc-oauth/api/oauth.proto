@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "github.com/hatlonely/go-rpc/rpc-oauth/api/gen/go/api";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "gogoproto/gogo.proto";
+
+message AuthReq {
+    string response_type = 1;
+    string client_id = 2;
+    string redirect_uri = 3;
+    string scope = 4;
+}
+
+message TokenReq {
+    string client_id = 1;
+    string client_secret = 2;
+    string grant_type = 3;
+    string code = 4;
+    string redirect_uri = 5;
+}
+
+message TokenRes {
+    string access_token = 1;
+    string token_type = 2;
+    int64 expires_in = 3;
+    string refresh_token = 4;
+    string scope = 5;
+}
+
+message CreateAppReq {
+    string logo = 1;
+    string name = 2;
+    string homePage = 3;
+    string callback = 4;
+}
+
+service OAuthService {
+  rpc Auth(AuthReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/v1/auth"
+    };
+  }
+
+  rpc Token(TokenReq) returns (TokenRes) {
+    option (google.api.http) = {
+      get: "/v1/token"
+    };
+  }
+
+  rpc CreateApp(CreateAppReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/createApp"
+    };
+  }
+}
+

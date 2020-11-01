@@ -1,0 +1,26 @@
+{
+  "http": {
+    "port": 80
+  },
+  "grpc": {
+    "port": 6080
+  },
+  "logger": {
+    "grpc": {
+      "level": "Info",
+      "writers": [{
+        "type": "RotateFile",
+        "filename": "log/account.rpc",
+        "maxAge": "24h"
+      }]
+    },
+    "info": {
+      "level": "Info",
+      "writers": [{
+        "type": "RotateFile",
+        "filename": "log/account.log",
+        "maxAge": "24h"
+      }]
+    }
+  }
+}
