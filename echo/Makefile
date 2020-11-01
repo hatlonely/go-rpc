@@ -1,9 +1,8 @@
 export GOPROXY=https://goproxy.io
 
-build: cmd/*/main.go
+build: cmd/main.go
 	mkdir -p build/bin
-	go build cmd/server/main.go && mv server build/bin
-	go build cmd/client/main.go && mv client build/bin
+	go build cmd/main.go && mv main build/bin
 
 codegen: api/echo.proto
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger
