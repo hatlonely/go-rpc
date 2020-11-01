@@ -14,3 +14,53 @@ type Article struct {
 	CTime   time.Time `gorm:"type:timestamp;column:ctime;not null;default:CURRENT_TIMESTAMP;index:ctime_idx" json:"ctime,omitempty"`
 	UTime   time.Time `gorm:"type:timestamp;column:utime;not null;default:CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;index:utime_idx" json:"utime,omitempty"`
 }
+
+const ArticleMappingForElasticsearch = `{
+    "settings": {
+        "analysis": {
+            "tokenizer": {
+                "ngram_tokenizer": {
+                    "type": "nGram",
+                    "min_gram": 1,
+                    "max_gram": 10,
+                    "token_chars": [
+                        "letter",
+                        "digit"
+                    ]
+                }
+            },
+            "analyzer": {
+                "ngram_tokenizer_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "ngram_tokenizer",
+                    "filter": [
+                        "lowercase"
+                    ]
+                }
+            }
+        },
+        "max_ngram_diff": "10"
+	},
+	"mappings": {
+		"properties": {
+			"id": {
+				"type": "long"
+			},
+			"title": {
+				"type": "text",
+				"analyzer": "ngram_tokenizer_analyzer",
+				"search_analyzer": "standard"
+			},
+			"tags": {
+				"type": "text",
+				"analyzer": "ngram_tokenizer_analyzer",
+				"search_analyzer": "standard"
+			},
+			"content": {
+				"type": "text",
+				"analyzer": "ngram_tokenizer_analyzer",
+				"search_analyzer": "standard"
+			}
+		}
+	}
+}`
