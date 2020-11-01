@@ -18,8 +18,8 @@ function Warn() {
 function Build() {
     cd .. && make image && cd -
     docker login --username="${RegistryUsername}" --password="${RegistryPassword}" "${RegistryServer}"
-    docker tag "${Image}:${Version}" "${RegistryServer}/${Image}:${Version}"
-    docker push "${RegistryServer}/${Image}:${Version}"
+    docker tag "${ImageRepository}:${ImageTag}" "${RegistryServer}/${ImageRepository}:${ImageTag}"
+    docker push "${RegistryServer}/${ImageRepository}:${ImageTag}"
 }
 
 function SQLTpl() {
@@ -69,8 +69,8 @@ name: ${Name}
 replicaCount: ${ReplicaCount}
 
 image:
-  repository: ${RegistryServer}/${Image}
-  tag: ${Version}
+  repository: ${RegistryServer}/${ImageRepository}
+  tag: ${ImageTag}
   pullPolicy: Always
 
 imagePullSecrets:
@@ -124,7 +124,7 @@ EOF
 }
 
 function Run() {
-     kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${Image}:${Version}" --restart=Never -- /bin/bash
+     kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${ImageRepository}:${ImageTag}" --restart=Never -- /bin/bash
 }
 
 function Install() {
