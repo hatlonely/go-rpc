@@ -21,7 +21,6 @@ func split(s string) []string {
 		}
 		return false
 	})
-
 }
 
 func (s *AncientService) SearchAncient(ctx context.Context, req *api.SearchAncientReq) (*api.SearchAncientRes, error) {
