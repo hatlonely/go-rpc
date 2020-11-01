@@ -101,6 +101,9 @@ config: |
     "elasticsearch": {
       "uri": "http://${ElasticsearchServer}"
     },
+    "service": {
+      "elasticsearchIndex": "shici"
+    },
     "logger": {
       "grpc": {
         "level": "Info",

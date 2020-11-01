@@ -14,9 +14,10 @@ import (
 type AncientService struct {
 	mysqlCli *gorm.DB
 	esCli    *elastic.Client
+	options  *Options
 }
 
-func NewAncientService(mysqlCli *gorm.DB, esCli *elastic.Client) (*AncientService, error) {
+func NewAncientServiceWithOptions(mysqlCli *gorm.DB, esCli *elastic.Client, options *Options) (*AncientService, error) {
 	if !mysqlCli.HasTable(&storage.ShiCi{}) {
 		if err := mysqlCli.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4").CreateTable(&storage.ShiCi{}).Error; err != nil {
 			return nil, err
@@ -25,14 +26,14 @@ func NewAncientService(mysqlCli *gorm.DB, esCli *elastic.Client) (*AncientServic
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	exists, err := esCli.IndexExists("shici").Do(ctx)
+	exists, err := esCli.IndexExists(options.ElasticsearchIndex).Do(ctx)
 	if err != nil {
 		return nil, err
 	}
 	if !exists {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		createIndex, err := esCli.CreateIndex("shici").Body(storage.AncientMappingForElasticsearch).Do(ctx)
+		createIndex, err := esCli.CreateIndex(options.ElasticsearchIndex).Body(storage.AncientMappingForElasticsearch).Do(ctx)
 		if err != nil {
 			return nil, errors.Wrap(err, "esCli.CreateIndex failed.")
 		}
@@ -44,5 +45,10 @@ func NewAncientService(mysqlCli *gorm.DB, esCli *elastic.Client) (*AncientServic
 	return &AncientService{
 		mysqlCli: mysqlCli,
 		esCli:    esCli,
+		options:  options,
 	}, nil
+}
+
+type Options struct {
+	ElasticsearchIndex string
 }

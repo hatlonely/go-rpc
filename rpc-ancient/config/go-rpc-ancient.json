@@ -18,6 +18,9 @@
   "elasticsearch": {
     "uri": "http://127.0.0.1:9200"
   },
+  "service": {
+    "elasticsearchIndex": "shici"
+  },
   "logger": {
     "grpc": {
       "level": "Info",

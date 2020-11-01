@@ -38,6 +38,7 @@ type Options struct {
 
 	Mysql         cli.MySQLOptions
 	Elasticsearch cli.ElasticSearchOptions
+	Service       service.Options
 }
 
 func Must(err error) {
@@ -77,7 +78,7 @@ func main() {
 	Must(err)
 	esCli, err := cli.NewElasticSearchWithOptions(&options.Elasticsearch)
 
-	svc, err := service.NewAncientService(mysqlCli, esCli)
+	svc, err := service.NewAncientServiceWithOptions(mysqlCli, esCli, &options.Service)
 	Must(err)
 
 	rpcServer := grpc.NewServer(
