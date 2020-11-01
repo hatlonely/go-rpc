@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "github.com/hatlonely/go-rpc/rpc-article/api/gen/go/api";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "gogoproto/gogo.proto";
+
+message Article {
+  int64 id = 1 [(gogoproto.moretags) = "rule:\"x >= 0\""];
+  int64 ownerID = 2 [(gogoproto.moretags) = "rule:\"x >= 0\""];
+  string title = 3;
+  string tags = 4;
+  string brief = 5;
+  string content = 6;
+  string cTime = 7;
+  string uTime = 8;
+}
+
+message GetArticleReq {
+  int64 id = 1 [(gogoproto.moretags) = "rule:\"x >= 0\""];
+}
+
+message DelArticleReq {
+  int64 id = 1 [(gogoproto.moretags) = "rule:\"x >= 0\""];
+}
+
+message PutArticleReq {
+  Article article = 1;
+}
+
+message UpdateArticleReq {
+  Article article = 1;
+}
+
+message SearchArticleReq {
+  string keyword = 1;
+  int64 offset = 2;
+  int64 limit = 3 [(gogoproto.moretags) = "rule:\"x >= 0 && x <= 100\""];
+}
+
+message SearchArticleRes {
+  repeated Article articles = 1;
+}
+
+service ArticleService {
+  rpc GetArticle(GetArticleReq) returns (Article) {
+    option (google.api.http) = {
+      get: "/v1/article/{id}"
+    };
+  }
+  
+  rpc DelArticle(DelArticleReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/article/{id}"
+    };
+  }
+
+  rpc PutArticle(PutArticleReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/article"
+      body: "*"
+    };
+  }
+
+  rpc UpdateArticle(UpdateArticleReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/article/{article.id}"
+      body: "article"
+      additional_bindings {
+        patch: "/v1/article/{article.id}"
+        body: "article"
+      }
+    };
+  }
+
+  rpc SearchArticle(SearchArticleReq) returns (SearchArticleRes) {
+    option (google.api.http) = {
+      get: "/v1/search"
+    };
+  }
+}
+
