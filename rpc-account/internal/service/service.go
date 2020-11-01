@@ -18,9 +18,7 @@ type AccountService struct {
 	emailCli *cli.EmailCli
 	kv       *kv.KV
 
-	captchaExpiration time.Duration
-	accountExpiration time.Duration
-
+	options         *Options
 	captchaEmailTpl *template.Template
 }
 
@@ -57,9 +55,7 @@ func NewAccountServiceWithOptions(mysqlCli *gorm.DB, redisCli *redis.Client, ema
 		emailCli:        emailCli,
 		captchaEmailTpl: captchaEmailTpl,
 		kv:              kv,
-
-		captchaExpiration: options.CaptchaExpiration,
-		accountExpiration: options.AccountExpiration,
+		options:         options,
 	}, nil
 }
 

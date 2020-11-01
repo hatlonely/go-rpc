@@ -25,7 +25,7 @@ func (s *AccountService) GetCaptcha(ctx context.Context, req *account.GetCaptcha
 	key := "captcha_" + req.Email
 	if val, err := s.redisCli.Get(key).Result(); err == redis.Nil {
 		captcha = GenerateCaptcha()
-		if err := s.redisCli.Set(key, captcha, s.captchaExpiration).Err(); err != nil {
+		if err := s.redisCli.Set(key, captcha, s.options.CaptchaExpiration).Err(); err != nil {
 			return nil, errors.Wrapf(err, "redis set key [%v] failed", key)
 		}
 	} else if err != nil {
