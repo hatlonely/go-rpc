@@ -20,3 +20,4 @@ ImageTag="1.0.0"
 ReplicaCount=2
 IngressHost="k8s.ancient.hatlonely.com"
 IngressSecret="k8s-secret"
+K8sContext="homek8s"

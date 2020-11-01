@@ -166,6 +166,11 @@ function main() {
         return 0
     fi
 
+    if [ "${K8sContext}" != "$(kubectl config current-context)" ]; then
+        Warn "context [${WebOffice_K8S_Context}] not match [$(kubectl config current-context)]"
+        return 1
+    fi
+
     case "$1" in
         "build") Build;;
         "sql") SQLTpl;;
