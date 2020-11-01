@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/codes"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/storage"
 )
 
 func GenerateToken() string {
@@ -22,7 +22,7 @@ func GenerateToken() string {
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
 	requestID := rpcx.MetaDataGetRequestID(ctx)
 
-	a := &model.Account{}
+	a := &storage.Account{}
 	if strx.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {

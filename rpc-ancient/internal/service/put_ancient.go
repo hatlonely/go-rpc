@@ -8,11 +8,11 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/hatlonely/go-rpc/rpc-ancient/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/rpc-ancient/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-ancient/internal/storage"
 )
 
 func (s *AncientService) PutAncient(ctx context.Context, req *api.PutAncientReq) (*empty.Empty, error) {
-	shici := &model.ShiCi{
+	shici := &storage.ShiCi{
 		ID:      int(req.Ancient.Id),
 		Title:   req.Ancient.Title,
 		Author:  req.Ancient.Author,

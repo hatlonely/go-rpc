@@ -9,13 +9,13 @@ import (
 	"google.golang.org/grpc/codes"
 
 	"github.com/hatlonely/go-rpc/rpc-ancient/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/rpc-ancient/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-ancient/internal/storage"
 )
 
 func (s *AncientService) GetAncient(ctx context.Context, req *api.GetAncientReq) (*api.Ancient, error) {
 	requestID := rpcx.MetaDataGetRequestID(ctx)
 
-	shici := &model.ShiCi{}
+	shici := &storage.ShiCi{}
 	if err := s.mysqlCli.Where("id=?", req.Id).First(shici).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, rpcx.NewErrorWithoutReferf(codes.NotFound, requestID, "NotFound", "shici [%v] not exist", req.Id)

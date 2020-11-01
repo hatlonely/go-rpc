@@ -8,12 +8,12 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/storage"
 )
 
 func TestAccountService_SignUp(t *testing.T) {
 	Convey("TestAccountService_SignUp", t, func() {
-		mysqlCli.Delete(&model.Account{Email: "hatlonely@foxmail.com"})
+		mysqlCli.Delete(&storage.Account{Email: "hatlonely@foxmail.com"})
 		redisCli.Set("captcha_hatlonely@foxmail.com", "041736", 5*time.Second)
 
 		_, err := service.SignUp(context.Background(), &account.SignUpReq{

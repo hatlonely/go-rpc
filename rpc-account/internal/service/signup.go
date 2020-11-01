@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/codes"
 
 	account "github.com/hatlonely/go-rpc/rpc-account/api/gen/go/api"
-	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/storage"
 )
 
 func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*empty.Empty, error) {
@@ -36,7 +36,7 @@ func (s *AccountService) SignUp(ctx context.Context, req *account.SignUpReq) (*e
 		return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "invalid birthday format")
 	}
 
-	user := &model.Account{
+	user := &storage.Account{
 		Email:    req.Email,
 		Phone:    req.Phone,
 		Name:     req.Name,

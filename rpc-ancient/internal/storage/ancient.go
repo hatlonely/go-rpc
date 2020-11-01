@@ -1,4 +1,4 @@
-package model
+package storage
 
 type ShiCi struct {
 	ID      int    `gorm:"type:bigint(20);primary_key" json:"id"`

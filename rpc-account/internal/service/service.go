@@ -9,7 +9,7 @@ import (
 	"github.com/hatlonely/go-kit/kv"
 	"github.com/jinzhu/gorm"
 
-	"github.com/hatlonely/go-rpc/rpc-account/internal/model"
+	"github.com/hatlonely/go-rpc/rpc-account/internal/storage"
 )
 
 type AccountService struct {
@@ -30,8 +30,8 @@ func NewAccountService(mysqlCli *gorm.DB, redisCli *redis.Client, emailCli *cli.
 		opt(&options)
 	}
 
-	if !mysqlCli.HasTable(&model.Account{}) {
-		if err := mysqlCli.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&model.Account{}).Error; err != nil {
+	if !mysqlCli.HasTable(&storage.Account{}) {
+		if err := mysqlCli.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&storage.Account{}).Error; err != nil {
 			return nil, err
 		}
 	}
