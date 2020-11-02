@@ -8,7 +8,7 @@
   "mysql": {
     "username": "root",
     "password": "",
-    "database": "ancient",
+    "database": "article",
     "host": "127.0.0.1",
     "port": 3306,
     "connMaxLifeTime": "60s",
@@ -19,14 +19,14 @@
     "uri": "http://127.0.0.1:9200"
   },
   "service": {
-    "elasticsearchIndex": "shici"
+    "elasticsearchIndex": "article"
   },
   "logger": {
     "grpc": {
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "log/ancient.rpc",
+        "filename": "log/article.rpc",
         "maxAge": "24h"
       }]
     },
@@ -34,7 +34,7 @@
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "log/ancient.log",
+        "filename": "log/article.log",
         "maxAge": "24h"
       }]
     }
