@@ -126,16 +126,26 @@ config: |
         "level": "Info",
         "writers": [{
           "type": "RotateFile",
-          "filename": "log/${Name}.rpc",
-          "maxAge": "24h"
+          "rotateFileWriter": {
+            "filename": "log/${Name}.rpc",
+            "maxAge": "24h",
+            "formatter": {
+              "type": "Json"
+            }
+          }
         }]
       },
       "info": {
         "level": "Info",
         "writers": [{
           "type": "RotateFile",
-          "filename": "log/${Name}.log",
-          "maxAge": "24h"
+          "rotateFileWriter": {
+            "filename": "log/${Name}.rpc",
+            "maxAge": "24h",
+            "formatter": {
+              "type": "Json"
+            }
+          }
         }]
       }
     }
