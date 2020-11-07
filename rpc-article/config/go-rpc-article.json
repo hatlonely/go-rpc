@@ -26,16 +26,26 @@
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "log/article.rpc",
-        "maxAge": "24h"
+        "rotateFileWriter": {
+          "filename": "log/article.rpc",
+          "maxAge": "24h",
+          "formatter": {
+            "type": "Json"
+          }
+        }
       }]
     },
     "info": {
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
-        "filename": "log/article.log",
-        "maxAge": "24h"
+        "rotateFileWriter": {
+          "filename": "log/article.rpc",
+          "maxAge": "24h",
+          "formatter": {
+            "type": "Json"
+          }
+        }
       }]
     }
   }

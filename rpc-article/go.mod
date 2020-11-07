@@ -7,7 +7,7 @@ require (
 	github.com/golang/protobuf v1.4.3
 	github.com/gorilla/handlers v1.5.1
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
-	github.com/hatlonely/go-kit v1.0.6
+	github.com/hatlonely/go-kit v1.0.7
 	github.com/jinzhu/gorm v1.9.16
 	github.com/olivere/elastic/v7 v7.0.21
 	github.com/pkg/errors v0.9.1
