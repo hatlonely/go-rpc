@@ -103,8 +103,8 @@ github.com/gorilla/handlers v1.5.1 h1:9lRY6j8DEeeBT10CvO9hGW0gmky0BprnvDI5vfhUHH
 github.com/gorilla/handlers v1.5.1/go.mod h1:t8XrUpc4KVXb7HGyJ4/cEnwQiaxrX/hz1Zv/4g96P1Q=
 github.com/grpc-ecosystem/grpc-gateway v1.15.2 h1:HC+hWRWf+v5zTMPyoaYTKIJih+4sd4XRWmj0qlG87Co=
 github.com/grpc-ecosystem/grpc-gateway v1.15.2/go.mod h1:vO11I9oWA+KsxmfFQPhLnnIb1VDE24M+pdxZFiuZcA8=
-github.com/hatlonely/go-kit v1.0.6 h1:Mt6ldMjcPekAg8G7a0T9xdxa9JO47IyLcvNNSHNSZUM=
-github.com/hatlonely/go-kit v1.0.6/go.mod h1:HWM2ItZojfjXkL+QJc/+9BP0OBocIzbiIa34V1W5C1I=
+github.com/hatlonely/go-kit v1.0.7 h1:1zDAb6D9dd3XTzB7p82NU6VaBt08d1LNjTaWW/b5jR4=
+github.com/hatlonely/go-kit v1.0.7/go.mod h1:HWM2ItZojfjXkL+QJc/+9BP0OBocIzbiIa34V1W5C1I=
 github.com/hpcloud/tail v1.0.0 h1:nfCOvKYfkgYP8hkirhJocXT2+zOD8yUNjXaWfTlyFKI=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 h1:IPJ3dvxmJ4uczJe5YQdrYB16oTJlGSC/OyZDqUk9xX4=

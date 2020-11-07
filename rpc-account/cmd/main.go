@@ -10,7 +10,7 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/hatlonely/go-kit/binding"
+	"github.com/hatlonely/go-kit/bind"
 	"github.com/hatlonely/go-kit/cli"
 	"github.com/hatlonely/go-kit/config"
 	"github.com/hatlonely/go-kit/flag"
@@ -40,6 +40,11 @@ type Options struct {
 	Mysql   cli.MySQLOptions
 	Email   cli.EmailOptions
 	Service service.Options
+
+	Logger struct {
+		Info logger.Options
+		Grpc logger.Options
+	}
 }
 
 func Must(err error) {
@@ -66,11 +71,13 @@ func main() {
 	}
 	cfg, err := config.NewSimpleFileConfig(options.ConfigPath)
 	Must(err)
-	Must(binding.Bind(&options, flag.Instance(), binding.NewEnvGetter(binding.WithEnvPrefix("ACCOUNT")), cfg))
+	Must(bind.Bind(&options, []bind.Getter{
+		flag.Instance(), bind.NewEnvGetter(bind.WithEnvPrefix("ACCOUNT")), cfg,
+	}, refx.WithCamelName()))
 
-	grpcLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.grpc"), refx.WithCamelName())
+	grpcLog, err := logger.NewLoggerWithOptions(&options.Logger.Grpc)
 	Must(err)
-	infoLog, err := logger.NewLoggerWithConfig(cfg.Sub("logger.info"), refx.WithCamelName())
+	infoLog, err := logger.NewLoggerWithOptions(&options.Logger.Info)
 	Must(err)
 
 	redisCli, err := cli.NewRedisWithOptions(&options.Redis)
