@@ -173,6 +173,10 @@ function Diff() {
     helm diff upgrade "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/chart.yaml"
 }
 
+function Restart() {
+    kubectl get pods -n "${Namespace}" | grep "${Name}" | awk '{print $1}' | xargs kubectl delete pods -n "${Namespace}"
+}
+
 function Help() {
     echo "sh deploy.sh <action>"
     echo "example"
@@ -185,6 +189,7 @@ function Help() {
     echo "  sh deploy.sh delete"
     echo "  sh deploy.sh diff"
     echo "  sh deploy.sh run"
+    echo "  sh deploy.sh restart"
 }
 
 function main() {
@@ -208,6 +213,8 @@ function main() {
         "diff") Render && Diff;;
         "delete") Delete;;
         "run") Run;;
+        "restart") Restart;;
+        *) Help;;
     esac
 }
 

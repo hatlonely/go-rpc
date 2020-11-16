@@ -54,7 +54,7 @@ func Must(err error) {
 func main() {
 	var options Options
 	Must(flag.Struct(&options, refx.WithCamelName()))
-	Must(flag.Parse())
+	Must(flag.Parse(flag.WithJsonVal()))
 	if options.Help {
 		fmt.Println(flag.Usage())
 		return
