@@ -54,8 +54,8 @@ func Must(err error) {
 
 func main() {
 	var options Options
-	Must(flag.Struct(&options))
-	Must(flag.Parse())
+	Must(flag.Struct(&options, refx.WithCamelName()))
+	Must(flag.Parse(flag.WithJsonVal()))
 	if options.Help {
 		fmt.Println(flag.Usage())
 		return
@@ -68,7 +68,7 @@ func main() {
 	if options.ConfigPath == "" {
 		options.ConfigPath = "config/go-rpc-article.json"
 	}
-	cfg, err := config.NewSimpleFileConfig(options.ConfigPath)
+	cfg, err := config.NewConfigWithSimpleFile(options.ConfigPath)
 	Must(err)
 	Must(bind.Bind(&options, []bind.Getter{
 		flag.Instance(), bind.NewEnvGetter(bind.WithEnvPrefix("ACCOUNT")), cfg,
