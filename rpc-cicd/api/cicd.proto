@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "gogoproto/gogo.proto";
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+
+message ScriptTask {
+  string language = 1;
+  string script = 2;
+}
+
+message Task {
+  string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
+  string name = 2 [(gogoproto.moretags) = "bson:\"name,omitempty\""];
+  string type = 3 [(gogoproto.moretags) = "bson:\"type,omitempty\""];
+  ScriptTask scriptTask = 4 [(gogoproto.moretags) = "bson:\"scriptTask,omitempty\""];
+}
+
+message GetTaskReq {
+  string id = 1;
+}
+
+message DelTaskReq {
+  string id = 1;
+}
+
+message PutTaskReq {
+  Task task = 1;
+}
+
+message UpdateTaskReq {
+  Task task = 1;
+}
+
+message ListTaskReq {
+  int64 offset = 1;
+  int64 limit = 2;
+}
+
+message ListTaskRes {
+  repeated Task tasks = 1;
+}
+
+service CICDService {
+  rpc GetTask(GetTaskReq) returns (Task) {
+    option (google.api.http) = {
+      get: "/v1/task/{id}"
+    };
+  }
+
+  rpc DelTask(DelTaskReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/task/{id}"
+    };
+  }
+
+  rpc PutTask(PutTaskReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/task"
+      body: "task"
+    };
+  }
+
+  rpc UpdateTask(UpdateTaskReq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/task/{task.id}"
+      body: "task"
+    };
+  }
+
+  rpc ListTask(ListTaskReq) returns (ListTaskRes) {
+    option (google.api.http) = {
+      get: "/v1/list"
+    };
+  }
+}
+
