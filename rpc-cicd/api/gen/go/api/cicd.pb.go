@@ -29,23 +29,23 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type ScriptTask struct {
+type ScriptTemplate struct {
 	Language string `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
 	Script   string `protobuf:"bytes,2,opt,name=script,proto3" json:"script,omitempty"`
 }
 
-func (m *ScriptTask) Reset()         { *m = ScriptTask{} }
-func (m *ScriptTask) String() string { return proto.CompactTextString(m) }
-func (*ScriptTask) ProtoMessage()    {}
-func (*ScriptTask) Descriptor() ([]byte, []int) {
+func (m *ScriptTemplate) Reset()         { *m = ScriptTemplate{} }
+func (m *ScriptTemplate) String() string { return proto.CompactTextString(m) }
+func (*ScriptTemplate) ProtoMessage()    {}
+func (*ScriptTemplate) Descriptor() ([]byte, []int) {
 	return fileDescriptor_7a38a6ec253b08d3, []int{0}
 }
-func (m *ScriptTask) XXX_Unmarshal(b []byte) error {
+func (m *ScriptTemplate) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ScriptTask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ScriptTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ScriptTask.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ScriptTemplate.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -55,44 +55,741 @@ func (m *ScriptTask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *ScriptTask) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ScriptTask.Merge(m, src)
+func (m *ScriptTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ScriptTemplate.Merge(m, src)
 }
-func (m *ScriptTask) XXX_Size() int {
+func (m *ScriptTemplate) XXX_Size() int {
 	return m.Size()
 }
-func (m *ScriptTask) XXX_DiscardUnknown() {
-	xxx_messageInfo_ScriptTask.DiscardUnknown(m)
+func (m *ScriptTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_ScriptTemplate.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ScriptTask proto.InternalMessageInfo
+var xxx_messageInfo_ScriptTemplate proto.InternalMessageInfo
 
-func (m *ScriptTask) GetLanguage() string {
+func (m *ScriptTemplate) GetLanguage() string {
 	if m != nil {
 		return m.Language
 	}
 	return ""
 }
 
-func (m *ScriptTask) GetScript() string {
+func (m *ScriptTemplate) GetScript() string {
 	if m != nil {
 		return m.Script
 	}
 	return ""
 }
 
+type Template struct {
+	Id             string          `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id,omitempty"`
+	Name           string          `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name,omitempty"`
+	Description    string          `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty" bson:"description,omitempty"`
+	Type           string          `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty" bson:"type,omitempty"`
+	Category       string          `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty" bson:"category,omitempty"`
+	ScriptTemplate *ScriptTemplate `protobuf:"bytes,6,opt,name=scriptTemplate,proto3" json:"scriptTemplate,omitempty" bson:"scriptTemplate,omitempty"`
+}
+
+func (m *Template) Reset()         { *m = Template{} }
+func (m *Template) String() string { return proto.CompactTextString(m) }
+func (*Template) ProtoMessage()    {}
+func (*Template) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{1}
+}
+func (m *Template) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Template) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Template.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Template) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Template.Merge(m, src)
+}
+func (m *Template) XXX_Size() int {
+	return m.Size()
+}
+func (m *Template) XXX_DiscardUnknown() {
+	xxx_messageInfo_Template.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Template proto.InternalMessageInfo
+
+func (m *Template) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Template) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Template) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *Template) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
+func (m *Template) GetCategory() string {
+	if m != nil {
+		return m.Category
+	}
+	return ""
+}
+
+func (m *Template) GetScriptTemplate() *ScriptTemplate {
+	if m != nil {
+		return m.ScriptTemplate
+	}
+	return nil
+}
+
+type GetTemplateReq struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *GetTemplateReq) Reset()         { *m = GetTemplateReq{} }
+func (m *GetTemplateReq) String() string { return proto.CompactTextString(m) }
+func (*GetTemplateReq) ProtoMessage()    {}
+func (*GetTemplateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{2}
+}
+func (m *GetTemplateReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetTemplateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetTemplateReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetTemplateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetTemplateReq.Merge(m, src)
+}
+func (m *GetTemplateReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetTemplateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetTemplateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetTemplateReq proto.InternalMessageInfo
+
+func (m *GetTemplateReq) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DelTemplateReq struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelTemplateReq) Reset()         { *m = DelTemplateReq{} }
+func (m *DelTemplateReq) String() string { return proto.CompactTextString(m) }
+func (*DelTemplateReq) ProtoMessage()    {}
+func (*DelTemplateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{3}
+}
+func (m *DelTemplateReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelTemplateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelTemplateReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelTemplateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTemplateReq.Merge(m, src)
+}
+func (m *DelTemplateReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelTemplateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTemplateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTemplateReq proto.InternalMessageInfo
+
+func (m *DelTemplateReq) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type PutTemplateReq struct {
+	Template *Template `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
+}
+
+func (m *PutTemplateReq) Reset()         { *m = PutTemplateReq{} }
+func (m *PutTemplateReq) String() string { return proto.CompactTextString(m) }
+func (*PutTemplateReq) ProtoMessage()    {}
+func (*PutTemplateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{4}
+}
+func (m *PutTemplateReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PutTemplateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PutTemplateReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PutTemplateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PutTemplateReq.Merge(m, src)
+}
+func (m *PutTemplateReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *PutTemplateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_PutTemplateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PutTemplateReq proto.InternalMessageInfo
+
+func (m *PutTemplateReq) GetTemplate() *Template {
+	if m != nil {
+		return m.Template
+	}
+	return nil
+}
+
+type UpdateTemplateReq struct {
+	Template *Template `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
+}
+
+func (m *UpdateTemplateReq) Reset()         { *m = UpdateTemplateReq{} }
+func (m *UpdateTemplateReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateTemplateReq) ProtoMessage()    {}
+func (*UpdateTemplateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{5}
+}
+func (m *UpdateTemplateReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateTemplateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateTemplateReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateTemplateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTemplateReq.Merge(m, src)
+}
+func (m *UpdateTemplateReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateTemplateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTemplateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateTemplateReq proto.InternalMessageInfo
+
+func (m *UpdateTemplateReq) GetTemplate() *Template {
+	if m != nil {
+		return m.Template
+	}
+	return nil
+}
+
+type ListTemplateReq struct {
+	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit  int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+}
+
+func (m *ListTemplateReq) Reset()         { *m = ListTemplateReq{} }
+func (m *ListTemplateReq) String() string { return proto.CompactTextString(m) }
+func (*ListTemplateReq) ProtoMessage()    {}
+func (*ListTemplateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{6}
+}
+func (m *ListTemplateReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTemplateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTemplateReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTemplateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTemplateReq.Merge(m, src)
+}
+func (m *ListTemplateReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTemplateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTemplateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTemplateReq proto.InternalMessageInfo
+
+func (m *ListTemplateReq) GetOffset() int64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *ListTemplateReq) GetLimit() int64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+type ListTemplateRes struct {
+	Templates []*Template `protobuf:"bytes,1,rep,name=templates,proto3" json:"templates,omitempty"`
+}
+
+func (m *ListTemplateRes) Reset()         { *m = ListTemplateRes{} }
+func (m *ListTemplateRes) String() string { return proto.CompactTextString(m) }
+func (*ListTemplateRes) ProtoMessage()    {}
+func (*ListTemplateRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{7}
+}
+func (m *ListTemplateRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTemplateRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTemplateRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTemplateRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTemplateRes.Merge(m, src)
+}
+func (m *ListTemplateRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTemplateRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTemplateRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTemplateRes proto.InternalMessageInfo
+
+func (m *ListTemplateRes) GetTemplates() []*Template {
+	if m != nil {
+		return m.Templates
+	}
+	return nil
+}
+
+type Variable struct {
+	Id          string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id,omitempty"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name,omitempty"`
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty" bson:"description,omitempty"`
+	Kvs         string `protobuf:"bytes,4,opt,name=kvs,proto3" json:"kvs,omitempty" bson:"kvs,omitempty"`
+}
+
+func (m *Variable) Reset()         { *m = Variable{} }
+func (m *Variable) String() string { return proto.CompactTextString(m) }
+func (*Variable) ProtoMessage()    {}
+func (*Variable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{8}
+}
+func (m *Variable) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Variable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Variable.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Variable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Variable.Merge(m, src)
+}
+func (m *Variable) XXX_Size() int {
+	return m.Size()
+}
+func (m *Variable) XXX_DiscardUnknown() {
+	xxx_messageInfo_Variable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Variable proto.InternalMessageInfo
+
+func (m *Variable) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Variable) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Variable) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *Variable) GetKvs() string {
+	if m != nil {
+		return m.Kvs
+	}
+	return ""
+}
+
+type GetVariableReq struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *GetVariableReq) Reset()         { *m = GetVariableReq{} }
+func (m *GetVariableReq) String() string { return proto.CompactTextString(m) }
+func (*GetVariableReq) ProtoMessage()    {}
+func (*GetVariableReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{9}
+}
+func (m *GetVariableReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetVariableReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetVariableReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetVariableReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetVariableReq.Merge(m, src)
+}
+func (m *GetVariableReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetVariableReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetVariableReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetVariableReq proto.InternalMessageInfo
+
+func (m *GetVariableReq) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DelVariableReq struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelVariableReq) Reset()         { *m = DelVariableReq{} }
+func (m *DelVariableReq) String() string { return proto.CompactTextString(m) }
+func (*DelVariableReq) ProtoMessage()    {}
+func (*DelVariableReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{10}
+}
+func (m *DelVariableReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelVariableReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelVariableReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelVariableReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelVariableReq.Merge(m, src)
+}
+func (m *DelVariableReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelVariableReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelVariableReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelVariableReq proto.InternalMessageInfo
+
+func (m *DelVariableReq) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type PutVariableReq struct {
+	Variable *Variable `protobuf:"bytes,1,opt,name=variable,proto3" json:"variable,omitempty"`
+}
+
+func (m *PutVariableReq) Reset()         { *m = PutVariableReq{} }
+func (m *PutVariableReq) String() string { return proto.CompactTextString(m) }
+func (*PutVariableReq) ProtoMessage()    {}
+func (*PutVariableReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{11}
+}
+func (m *PutVariableReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PutVariableReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PutVariableReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PutVariableReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PutVariableReq.Merge(m, src)
+}
+func (m *PutVariableReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *PutVariableReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_PutVariableReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PutVariableReq proto.InternalMessageInfo
+
+func (m *PutVariableReq) GetVariable() *Variable {
+	if m != nil {
+		return m.Variable
+	}
+	return nil
+}
+
+type UpdateVariableReq struct {
+	Variable *Variable `protobuf:"bytes,1,opt,name=variable,proto3" json:"variable,omitempty"`
+}
+
+func (m *UpdateVariableReq) Reset()         { *m = UpdateVariableReq{} }
+func (m *UpdateVariableReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateVariableReq) ProtoMessage()    {}
+func (*UpdateVariableReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{12}
+}
+func (m *UpdateVariableReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateVariableReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateVariableReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateVariableReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateVariableReq.Merge(m, src)
+}
+func (m *UpdateVariableReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateVariableReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateVariableReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateVariableReq proto.InternalMessageInfo
+
+func (m *UpdateVariableReq) GetVariable() *Variable {
+	if m != nil {
+		return m.Variable
+	}
+	return nil
+}
+
+type ListVariableReq struct {
+	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit  int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+}
+
+func (m *ListVariableReq) Reset()         { *m = ListVariableReq{} }
+func (m *ListVariableReq) String() string { return proto.CompactTextString(m) }
+func (*ListVariableReq) ProtoMessage()    {}
+func (*ListVariableReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{13}
+}
+func (m *ListVariableReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListVariableReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListVariableReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListVariableReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVariableReq.Merge(m, src)
+}
+func (m *ListVariableReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListVariableReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVariableReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVariableReq proto.InternalMessageInfo
+
+func (m *ListVariableReq) GetOffset() int64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *ListVariableReq) GetLimit() int64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+type ListVariableRes struct {
+	Variables []*Variable `protobuf:"bytes,1,rep,name=variables,proto3" json:"variables,omitempty"`
+}
+
+func (m *ListVariableRes) Reset()         { *m = ListVariableRes{} }
+func (m *ListVariableRes) String() string { return proto.CompactTextString(m) }
+func (*ListVariableRes) ProtoMessage()    {}
+func (*ListVariableRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{14}
+}
+func (m *ListVariableRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListVariableRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListVariableRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListVariableRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVariableRes.Merge(m, src)
+}
+func (m *ListVariableRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListVariableRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVariableRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVariableRes proto.InternalMessageInfo
+
+func (m *ListVariableRes) GetVariables() []*Variable {
+	if m != nil {
+		return m.Variables
+	}
+	return nil
+}
+
 type Task struct {
-	Id         string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id,omitempty"`
-	Name       string      `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name,omitempty"`
-	Type       string      `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty" bson:"type,omitempty"`
-	ScriptTask *ScriptTask `protobuf:"bytes,4,opt,name=scriptTask,proto3" json:"scriptTask,omitempty" bson:"scriptTask,omitempty"`
+	Id          string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id,omitempty"`
+	Name        string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name,omitempty"`
+	Description string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty" bson:"description,omitempty"`
+	TemplateID  string   `protobuf:"bytes,4,opt,name=templateID,proto3" json:"templateID,omitempty" bson:"templateID,omitempty"`
+	VariableIDs []string `protobuf:"bytes,5,rep,name=variableIDs,proto3" json:"variableIDs,omitempty" bson:"variableIDs,omitempty"`
 }
 
 func (m *Task) Reset()         { *m = Task{} }
 func (m *Task) String() string { return proto.CompactTextString(m) }
 func (*Task) ProtoMessage()    {}
 func (*Task) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{1}
+	return fileDescriptor_7a38a6ec253b08d3, []int{15}
 }
 func (m *Task) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -135,16 +832,23 @@ func (m *Task) GetName() string {
 	return ""
 }
 
-func (m *Task) GetType() string {
+func (m *Task) GetDescription() string {
 	if m != nil {
-		return m.Type
+		return m.Description
 	}
 	return ""
 }
 
-func (m *Task) GetScriptTask() *ScriptTask {
+func (m *Task) GetTemplateID() string {
 	if m != nil {
-		return m.ScriptTask
+		return m.TemplateID
+	}
+	return ""
+}
+
+func (m *Task) GetVariableIDs() []string {
+	if m != nil {
+		return m.VariableIDs
 	}
 	return nil
 }
@@ -157,7 +861,7 @@ func (m *GetTaskReq) Reset()         { *m = GetTaskReq{} }
 func (m *GetTaskReq) String() string { return proto.CompactTextString(m) }
 func (*GetTaskReq) ProtoMessage()    {}
 func (*GetTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{2}
+	return fileDescriptor_7a38a6ec253b08d3, []int{16}
 }
 func (m *GetTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -201,7 +905,7 @@ func (m *DelTaskReq) Reset()         { *m = DelTaskReq{} }
 func (m *DelTaskReq) String() string { return proto.CompactTextString(m) }
 func (*DelTaskReq) ProtoMessage()    {}
 func (*DelTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{3}
+	return fileDescriptor_7a38a6ec253b08d3, []int{17}
 }
 func (m *DelTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -245,7 +949,7 @@ func (m *PutTaskReq) Reset()         { *m = PutTaskReq{} }
 func (m *PutTaskReq) String() string { return proto.CompactTextString(m) }
 func (*PutTaskReq) ProtoMessage()    {}
 func (*PutTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{4}
+	return fileDescriptor_7a38a6ec253b08d3, []int{18}
 }
 func (m *PutTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -289,7 +993,7 @@ func (m *UpdateTaskReq) Reset()         { *m = UpdateTaskReq{} }
 func (m *UpdateTaskReq) String() string { return proto.CompactTextString(m) }
 func (*UpdateTaskReq) ProtoMessage()    {}
 func (*UpdateTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{5}
+	return fileDescriptor_7a38a6ec253b08d3, []int{19}
 }
 func (m *UpdateTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -334,7 +1038,7 @@ func (m *ListTaskReq) Reset()         { *m = ListTaskReq{} }
 func (m *ListTaskReq) String() string { return proto.CompactTextString(m) }
 func (*ListTaskReq) ProtoMessage()    {}
 func (*ListTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{6}
+	return fileDescriptor_7a38a6ec253b08d3, []int{20}
 }
 func (m *ListTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -385,7 +1089,7 @@ func (m *ListTaskRes) Reset()         { *m = ListTaskRes{} }
 func (m *ListTaskRes) String() string { return proto.CompactTextString(m) }
 func (*ListTaskRes) ProtoMessage()    {}
 func (*ListTaskRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{7}
+	return fileDescriptor_7a38a6ec253b08d3, []int{21}
 }
 func (m *ListTaskRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -421,8 +1125,134 @@ func (m *ListTaskRes) GetTasks() []*Task {
 	return nil
 }
 
+type RunTaskReq struct {
+	TaskID string `protobuf:"bytes,1,opt,name=taskID,proto3" json:"taskID,omitempty"`
+}
+
+func (m *RunTaskReq) Reset()         { *m = RunTaskReq{} }
+func (m *RunTaskReq) String() string { return proto.CompactTextString(m) }
+func (*RunTaskReq) ProtoMessage()    {}
+func (*RunTaskReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{22}
+}
+func (m *RunTaskReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RunTaskReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RunTaskReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RunTaskReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RunTaskReq.Merge(m, src)
+}
+func (m *RunTaskReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *RunTaskReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_RunTaskReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RunTaskReq proto.InternalMessageInfo
+
+func (m *RunTaskReq) GetTaskID() string {
+	if m != nil {
+		return m.TaskID
+	}
+	return ""
+}
+
+type RunTaskRes struct {
+	JobID    string `protobuf:"bytes,1,opt,name=jobID,proto3" json:"jobID,omitempty"`
+	ExitCode string `protobuf:"bytes,2,opt,name=exitCode,proto3" json:"exitCode,omitempty"`
+	Stdout   string `protobuf:"bytes,3,opt,name=stdout,proto3" json:"stdout,omitempty"`
+	Stderr   string `protobuf:"bytes,4,opt,name=stderr,proto3" json:"stderr,omitempty"`
+}
+
+func (m *RunTaskRes) Reset()         { *m = RunTaskRes{} }
+func (m *RunTaskRes) String() string { return proto.CompactTextString(m) }
+func (*RunTaskRes) ProtoMessage()    {}
+func (*RunTaskRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{23}
+}
+func (m *RunTaskRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RunTaskRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RunTaskRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RunTaskRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RunTaskRes.Merge(m, src)
+}
+func (m *RunTaskRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *RunTaskRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RunTaskRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RunTaskRes proto.InternalMessageInfo
+
+func (m *RunTaskRes) GetJobID() string {
+	if m != nil {
+		return m.JobID
+	}
+	return ""
+}
+
+func (m *RunTaskRes) GetExitCode() string {
+	if m != nil {
+		return m.ExitCode
+	}
+	return ""
+}
+
+func (m *RunTaskRes) GetStdout() string {
+	if m != nil {
+		return m.Stdout
+	}
+	return ""
+}
+
+func (m *RunTaskRes) GetStderr() string {
+	if m != nil {
+		return m.Stderr
+	}
+	return ""
+}
+
 func init() {
-	proto.RegisterType((*ScriptTask)(nil), "api.ScriptTask")
+	proto.RegisterType((*ScriptTemplate)(nil), "api.ScriptTemplate")
+	proto.RegisterType((*Template)(nil), "api.Template")
+	proto.RegisterType((*GetTemplateReq)(nil), "api.GetTemplateReq")
+	proto.RegisterType((*DelTemplateReq)(nil), "api.DelTemplateReq")
+	proto.RegisterType((*PutTemplateReq)(nil), "api.PutTemplateReq")
+	proto.RegisterType((*UpdateTemplateReq)(nil), "api.UpdateTemplateReq")
+	proto.RegisterType((*ListTemplateReq)(nil), "api.ListTemplateReq")
+	proto.RegisterType((*ListTemplateRes)(nil), "api.ListTemplateRes")
+	proto.RegisterType((*Variable)(nil), "api.Variable")
+	proto.RegisterType((*GetVariableReq)(nil), "api.GetVariableReq")
+	proto.RegisterType((*DelVariableReq)(nil), "api.DelVariableReq")
+	proto.RegisterType((*PutVariableReq)(nil), "api.PutVariableReq")
+	proto.RegisterType((*UpdateVariableReq)(nil), "api.UpdateVariableReq")
+	proto.RegisterType((*ListVariableReq)(nil), "api.ListVariableReq")
+	proto.RegisterType((*ListVariableRes)(nil), "api.ListVariableRes")
 	proto.RegisterType((*Task)(nil), "api.Task")
 	proto.RegisterType((*GetTaskReq)(nil), "api.GetTaskReq")
 	proto.RegisterType((*DelTaskReq)(nil), "api.DelTaskReq")
@@ -430,50 +1260,85 @@ func init() {
 	proto.RegisterType((*UpdateTaskReq)(nil), "api.UpdateTaskReq")
 	proto.RegisterType((*ListTaskReq)(nil), "api.ListTaskReq")
 	proto.RegisterType((*ListTaskRes)(nil), "api.ListTaskRes")
+	proto.RegisterType((*RunTaskReq)(nil), "api.RunTaskReq")
+	proto.RegisterType((*RunTaskRes)(nil), "api.RunTaskRes")
 }
 
 func init() { proto.RegisterFile("api/cicd.proto", fileDescriptor_7a38a6ec253b08d3) }
 
 var fileDescriptor_7a38a6ec253b08d3 = []byte{
-	// 594 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0xc1, 0x6a, 0xdb, 0x40,
-	0x10, 0x86, 0x2d, 0xcb, 0x49, 0x9c, 0x31, 0x49, 0xcc, 0xe2, 0x18, 0x55, 0x49, 0x65, 0xa3, 0x93,
-	0x69, 0x6b, 0x89, 0x26, 0xb7, 0xb4, 0x87, 0xe0, 0xa4, 0x94, 0x94, 0x1e, 0x52, 0xa7, 0xbd, 0xe4,
-	0x52, 0x64, 0x69, 0xad, 0x2c, 0x95, 0xb5, 0xaa, 0xb5, 0x0e, 0x98, 0x12, 0x28, 0x7d, 0x82, 0x42,
-	0x2f, 0x7d, 0xa4, 0x1e, 0x03, 0xbd, 0xf4, 0x64, 0x82, 0xdd, 0x27, 0xf0, 0x13, 0x94, 0x1d, 0xc9,
-	0x96, 0x6d, 0x30, 0xf4, 0x62, 0x76, 0x67, 0xfe, 0xf9, 0x3c, 0xf3, 0x8f, 0x58, 0xd8, 0x75, 0x22,
-	0x66, 0xbb, 0xcc, 0xf5, 0xac, 0xa8, 0xcf, 0x05, 0x27, 0xaa, 0x13, 0x31, 0xfd, 0xd0, 0xe7, 0xdc,
-	0x0f, 0xa8, 0x2d, 0x73, 0x4e, 0x18, 0x72, 0xe1, 0x08, 0xc6, 0xc3, 0x38, 0x91, 0xe8, 0x07, 0x69,
-	0x16, 0x6f, 0x9d, 0x41, 0xd7, 0xa6, 0xbd, 0x48, 0x0c, 0xd3, 0x64, 0xc5, 0xe7, 0x3e, 0xc7, 0xa3,
-	0x2d, 0x4f, 0x49, 0xd4, 0x3c, 0x05, 0xb8, 0x72, 0xfb, 0x2c, 0x12, 0xef, 0x9d, 0xf8, 0x13, 0xd1,
-	0xa1, 0x18, 0x38, 0xa1, 0x3f, 0x70, 0x7c, 0xaa, 0x29, 0x75, 0xa5, 0xb1, 0xdd, 0x9e, 0xdf, 0x49,
-	0x15, 0x36, 0x63, 0x54, 0x6a, 0x79, 0xcc, 0xa4, 0x37, 0xf3, 0x41, 0x81, 0x02, 0x16, 0x37, 0x20,
-	0xcf, 0xbc, 0xa4, 0xac, 0xa5, 0x4d, 0x47, 0xb5, 0x4a, 0x27, 0xe6, 0xe1, 0x89, 0xf9, 0x91, 0x79,
-	0xcf, 0x78, 0x8f, 0x09, 0xec, 0xc5, 0x6c, 0xe7, 0x99, 0x47, 0x9a, 0x50, 0x08, 0x9d, 0x1e, 0x4d,
-	0x40, 0xad, 0x47, 0xd3, 0x51, 0x6d, 0x3f, 0xd1, 0xca, 0xe8, 0xa2, 0x18, 0x65, 0x52, 0x2e, 0x86,
-	0x11, 0xd5, 0xd4, 0x55, 0xb9, 0x8c, 0x2e, 0xc9, 0x65, 0x80, 0x5c, 0x02, 0xc4, 0xf3, 0x91, 0xb4,
-	0x42, 0x5d, 0x69, 0x94, 0x8e, 0xf6, 0x2c, 0x27, 0x62, 0x56, 0x36, 0x69, 0xab, 0x36, 0x1d, 0xd5,
-	0x0e, 0x12, 0x4a, 0x26, 0x5e, 0x64, 0x2d, 0x30, 0xcc, 0x43, 0x80, 0xd7, 0x14, 0x8f, 0x6d, 0xfa,
-	0x99, 0xec, 0x66, 0x73, 0xca, 0x69, 0x64, 0xf6, 0x9c, 0x06, 0xeb, 0xb2, 0x4f, 0x01, 0x2e, 0x07,
-	0xf3, 0xda, 0xc7, 0x50, 0x10, 0xb2, 0x2b, 0x05, 0xbb, 0xda, 0xc6, 0xae, 0x30, 0x87, 0x61, 0xd3,
-	0x82, 0x9d, 0x0f, 0x91, 0xe7, 0x08, 0xfa, 0x9f, 0xfa, 0x17, 0x50, 0x7a, 0xcb, 0xe2, 0x39, 0xbd,
-	0x0a, 0x9b, 0xbc, 0xdb, 0x8d, 0xa9, 0x40, 0xbd, 0xda, 0x4e, 0x6f, 0xa4, 0x02, 0x1b, 0x01, 0xeb,
-	0xb1, 0x64, 0x73, 0x6a, 0x3b, 0xb9, 0x98, 0xd6, 0x62, 0x71, 0x4c, 0x6a, 0xb0, 0x21, 0x99, 0xb1,
-	0xa6, 0xd4, 0xd5, 0xe5, 0xff, 0x4a, 0xe2, 0x47, 0x5f, 0x55, 0x28, 0x9d, 0x5d, 0x9c, 0x9d, 0x5f,
-	0xd1, 0xfe, 0x2d, 0x73, 0x29, 0x79, 0x09, 0x5b, 0xa9, 0x2b, 0x24, 0xb1, 0x37, 0xf3, 0x48, 0xcf,
-	0xaa, 0xcd, 0xfd, 0x6f, 0xbf, 0xff, 0xfe, 0xc8, 0xef, 0x91, 0x1d, 0xfb, 0xf6, 0xb9, 0x2d, 0x49,
-	0xf6, 0x17, 0xe6, 0xdd, 0x91, 0x0b, 0xd8, 0x4a, 0x5d, 0x4b, 0xab, 0x33, 0x0f, 0xf5, 0xaa, 0x95,
-	0x7c, 0xc8, 0xd6, 0xec, 0x43, 0xb6, 0x5e, 0xe1, 0x52, 0x52, 0xd4, 0x93, 0x15, 0xd4, 0x1b, 0xd8,
-	0x4a, 0x2d, 0x4e, 0x51, 0x99, 0xe1, 0x6b, 0x51, 0x55, 0x44, 0x95, 0xcd, 0xe2, 0x0c, 0x75, 0x82,
-	0x8e, 0x92, 0x6b, 0x80, 0x6c, 0x03, 0x84, 0x20, 0x6e, 0x69, 0x25, 0x6b, 0x89, 0x75, 0x24, 0xea,
-	0x3a, 0xc9, 0x9a, 0x93, 0xbf, 0x16, 0xf3, 0xee, 0x52, 0xf6, 0x29, 0x14, 0x67, 0x86, 0x93, 0x32,
-	0x92, 0x17, 0x96, 0xa7, 0xaf, 0x46, 0x62, 0xb3, 0x8c, 0x44, 0x20, 0xd8, 0x63, 0xc0, 0x62, 0xd1,
-	0x7a, 0xf7, 0x6b, 0x6c, 0x28, 0xf7, 0x63, 0x43, 0x79, 0x18, 0x1b, 0xca, 0xf7, 0x89, 0x91, 0xfb,
-	0x39, 0x31, 0x72, 0xf7, 0x13, 0x23, 0xf7, 0x67, 0x62, 0xe4, 0xae, 0x8f, 0x7d, 0x26, 0x6e, 0x06,
-	0x1d, 0xcb, 0xe5, 0x3d, 0xfb, 0xc6, 0x11, 0x01, 0x0f, 0x69, 0x30, 0xb4, 0x7d, 0xde, 0xec, 0x47,
-	0xae, 0xdd, 0x8f, 0xdc, 0xa6, 0x7c, 0x4d, 0xf0, 0xe9, 0xf0, 0x69, 0x68, 0xfb, 0x5c, 0x1e, 0x3b,
-	0x9b, 0x38, 0xc6, 0xf1, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xc3, 0x0e, 0xf6, 0x3b, 0x6f, 0x04,
-	0x00, 0x00,
+	// 1130 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x57, 0x4d, 0x6f, 0x1b, 0x45,
+	0x18, 0x8e, 0xed, 0x7c, 0xb8, 0xaf, 0x13, 0x27, 0x9d, 0xa4, 0xd1, 0x66, 0x9b, 0xda, 0xd6, 0x80,
+	0x50, 0x9a, 0x36, 0x5e, 0xd1, 0x9e, 0x48, 0x51, 0x2b, 0x25, 0x46, 0x28, 0xa8, 0x07, 0x70, 0x53,
+	0x0e, 0xb9, 0xc0, 0xda, 0x9e, 0x6c, 0x87, 0xd8, 0x3b, 0xcb, 0xee, 0x3a, 0x22, 0x42, 0xbd, 0xf0,
+	0x0b, 0x90, 0xb8, 0xf0, 0x13, 0xf8, 0x29, 0x1c, 0x2b, 0xf5, 0x00, 0x27, 0x0b, 0x25, 0xfc, 0x02,
+	0xf3, 0x07, 0xd0, 0x7c, 0xec, 0xec, 0x8c, 0x89, 0x2b, 0x93, 0x53, 0x2f, 0xd1, 0xbe, 0x5f, 0xcf,
+	0xfb, 0xce, 0x3c, 0x4f, 0x66, 0xc6, 0x50, 0xf5, 0x23, 0xea, 0x75, 0x69, 0xb7, 0xd7, 0x8c, 0x62,
+	0x96, 0x32, 0x54, 0xf2, 0x23, 0xea, 0x6e, 0x07, 0x8c, 0x05, 0x7d, 0xe2, 0xf1, 0x98, 0x1f, 0x86,
+	0x2c, 0xf5, 0x53, 0xca, 0xc2, 0x44, 0xa6, 0xb8, 0x77, 0x55, 0x54, 0x58, 0x9d, 0xe1, 0xa9, 0x47,
+	0x06, 0x51, 0x7a, 0xa1, 0x82, 0x1b, 0x01, 0x0b, 0x98, 0xf8, 0xf4, 0xf8, 0x97, 0xf4, 0xe2, 0x16,
+	0x54, 0x5f, 0x74, 0x63, 0x1a, 0xa5, 0xc7, 0x64, 0x10, 0xf5, 0xfd, 0x94, 0x20, 0x17, 0xca, 0x7d,
+	0x3f, 0x0c, 0x86, 0x7e, 0x40, 0x9c, 0x42, 0xa3, 0xb0, 0x73, 0xab, 0xad, 0x6d, 0xb4, 0x09, 0x8b,
+	0x89, 0xc8, 0x76, 0x8a, 0x22, 0xa2, 0x2c, 0xfc, 0x4f, 0x11, 0xca, 0x1a, 0x60, 0x07, 0x8a, 0xb4,
+	0x27, 0x4b, 0x0f, 0x9c, 0xf1, 0xa8, 0xbe, 0xd1, 0x49, 0x58, 0xb8, 0x8f, 0xbf, 0xa1, 0xbd, 0x87,
+	0x6c, 0x40, 0x53, 0x31, 0x13, 0x6e, 0x17, 0x69, 0x0f, 0xed, 0xc1, 0x7c, 0xe8, 0x0f, 0x88, 0x04,
+	0x3b, 0xd8, 0x1a, 0x8f, 0xea, 0x77, 0x64, 0x2e, 0xf7, 0x9a, 0xc9, 0x22, 0x0d, 0x1d, 0x40, 0xa5,
+	0x47, 0x64, 0x47, 0xca, 0x42, 0xa7, 0x24, 0xaa, 0x1a, 0xe3, 0x51, 0x7d, 0x5b, 0x56, 0x19, 0x41,
+	0xb3, 0xd8, 0x2c, 0xe2, 0x2d, 0xd3, 0x8b, 0x88, 0x38, 0xf3, 0x93, 0x2d, 0xb9, 0xd7, 0x6a, 0xc9,
+	0x1d, 0xe8, 0x13, 0x28, 0x77, 0xfd, 0x94, 0x04, 0x2c, 0xbe, 0x70, 0x16, 0x44, 0xc9, 0xbd, 0xf1,
+	0xa8, 0xbe, 0x25, 0x4b, 0xb2, 0x88, 0x59, 0xa6, 0xd3, 0xd1, 0xb7, 0x50, 0x4d, 0xac, 0x9d, 0x75,
+	0x16, 0x1b, 0x85, 0x9d, 0xca, 0xa3, 0xf5, 0xa6, 0x1f, 0xd1, 0xa6, 0xbd, 0xe9, 0x07, 0x1f, 0x8c,
+	0x47, 0xf5, 0xba, 0x44, 0xb5, 0x8b, 0x4c, 0xec, 0x09, 0x3c, 0xdc, 0x80, 0xea, 0xe7, 0x44, 0x9b,
+	0x6d, 0xf2, 0x3d, 0xaa, 0xe6, 0x5b, 0xcf, 0x37, 0x98, 0x67, 0xb4, 0x48, 0xff, 0x5d, 0x19, 0x4f,
+	0xa0, 0xfa, 0xe5, 0xd0, 0xc2, 0xb8, 0x0f, 0xe5, 0x34, 0x9b, 0xb8, 0x20, 0x26, 0x5e, 0x11, 0x13,
+	0xeb, 0x1c, 0x1d, 0xc6, 0x4f, 0xe1, 0xf6, 0xcb, 0xa8, 0xe7, 0xa7, 0xe4, 0x86, 0xf5, 0xcf, 0x60,
+	0xf5, 0x39, 0x4d, 0xac, 0xee, 0x9b, 0xb0, 0xc8, 0x4e, 0x4f, 0x13, 0x92, 0x8a, 0xda, 0x52, 0x5b,
+	0x59, 0x68, 0x03, 0x16, 0xfa, 0x74, 0x40, 0xa5, 0xf0, 0x4a, 0x6d, 0x69, 0xe0, 0xa7, 0x93, 0x00,
+	0x09, 0x7a, 0x00, 0xb7, 0x32, 0xfc, 0xc4, 0x29, 0x34, 0x4a, 0xff, 0xed, 0x9f, 0xc7, 0xf1, 0xdb,
+	0x02, 0x94, 0xbf, 0xf6, 0x63, 0xea, 0x77, 0xfa, 0xef, 0xb9, 0x6e, 0x77, 0xa1, 0x74, 0x76, 0x9e,
+	0x28, 0xd9, 0x1a, 0xd3, 0x9d, 0x9d, 0x27, 0x66, 0x0d, 0x4f, 0x52, 0xba, 0xc8, 0xd6, 0x35, 0x5d,
+	0x17, 0xef, 0xca, 0x90, 0xba, 0x30, 0x33, 0xee, 0x43, 0xf9, 0x5c, 0x99, 0x16, 0xaf, 0x3a, 0x47,
+	0x87, 0x73, 0x5d, 0xdc, 0xb0, 0x5e, 0xe9, 0xc2, 0xac, 0xbe, 0x91, 0x2e, 0x72, 0x00, 0xa1, 0x8b,
+	0x0c, 0xdf, 0xd6, 0x85, 0x4e, 0xca, 0xe3, 0xf8, 0xb7, 0x22, 0xcc, 0x1f, 0xfb, 0xc9, 0xd9, 0xfb,
+	0xad, 0x89, 0x67, 0x00, 0x99, 0x94, 0x8f, 0x5a, 0x4a, 0x1a, 0xf5, 0xf1, 0xa8, 0x7e, 0x57, 0x9d,
+	0x68, 0x3a, 0x66, 0x22, 0x18, 0x25, 0x7c, 0x88, 0x6c, 0xcd, 0x47, 0xad, 0xc4, 0x59, 0x68, 0x94,
+	0xec, 0x21, 0x8c, 0xa0, 0x35, 0x84, 0xe1, 0xc7, 0xdb, 0x00, 0xfc, 0x10, 0xf2, 0x93, 0xb3, 0xeb,
+	0x64, 0xb4, 0x0d, 0xc0, 0x0f, 0xa0, 0x29, 0xd1, 0x07, 0x00, 0xfc, 0xf0, 0x51, 0xd1, 0x7b, 0x30,
+	0x9f, 0xfa, 0xc9, 0x99, 0x12, 0xc7, 0x2d, 0xf9, 0x4f, 0xcb, 0x63, 0xc2, 0x8d, 0x9b, 0xb0, 0xa2,
+	0x0e, 0x9b, 0xd9, 0xf2, 0x9f, 0x40, 0x45, 0x9c, 0x0d, 0x2a, 0xfb, 0xff, 0x09, 0xa8, 0x69, 0x16,
+	0x27, 0xa8, 0x0e, 0x0b, 0x1c, 0x33, 0x13, 0x8e, 0xd1, 0x4b, 0xfa, 0xf1, 0x87, 0x00, 0xed, 0x61,
+	0x68, 0xf4, 0xe2, 0xee, 0xa3, 0x96, 0x5a, 0xab, 0xb2, 0x70, 0x68, 0x64, 0x25, 0xbc, 0xf3, 0x77,
+	0xac, 0xa3, 0x93, 0xa4, 0xc1, 0xaf, 0x5f, 0xf2, 0x03, 0x4d, 0x0f, 0x59, 0x4f, 0x69, 0xa9, 0xad,
+	0x6d, 0x71, 0xfd, 0xa6, 0x3d, 0x36, 0x4c, 0xa5, 0x5e, 0xda, 0xca, 0x52, 0x7e, 0x12, 0xc7, 0x52,
+	0x04, 0x6d, 0x65, 0x3d, 0xfa, 0x03, 0xa0, 0x72, 0x78, 0x74, 0xd8, 0x7a, 0x41, 0xe2, 0x73, 0xda,
+	0x25, 0xe8, 0x10, 0x96, 0x54, 0x7f, 0xb4, 0x2a, 0x96, 0x90, 0xcf, 0xec, 0x4e, 0x38, 0x12, 0xbc,
+	0xf9, 0xd3, 0xdb, 0xbf, 0x7f, 0x29, 0xae, 0xe1, 0x8a, 0x77, 0xfe, 0xb1, 0x17, 0x4b, 0xff, 0x7e,
+	0x61, 0x17, 0x7d, 0x0a, 0x4b, 0x8a, 0x70, 0x05, 0x92, 0xd3, 0xef, 0xe6, 0x1b, 0x83, 0xef, 0x88,
+	0xf2, 0x55, 0xb4, 0xc2, 0xcb, 0xf9, 0xfa, 0xbd, 0x1f, 0x69, 0xef, 0x35, 0x3a, 0x82, 0x25, 0x25,
+	0x08, 0x55, 0x9d, 0xcb, 0xc3, 0xdd, 0x6c, 0xca, 0xf7, 0x4b, 0x33, 0x7b, 0xbf, 0x34, 0x3f, 0x13,
+	0x82, 0x53, 0x50, 0xbb, 0x13, 0x50, 0x5f, 0xc0, 0x92, 0x52, 0x8f, 0x82, 0xca, 0xb5, 0x34, 0x15,
+	0x2a, 0x5b, 0x54, 0x39, 0x83, 0xda, 0x17, 0x62, 0x41, 0x27, 0x00, 0xb9, 0xb8, 0x10, 0x12, 0x70,
+	0x96, 0xda, 0xa6, 0x22, 0x36, 0x04, 0xa2, 0xeb, 0xa2, 0x7c, 0x38, 0xfe, 0xb7, 0x49, 0x7b, 0xaf,
+	0x15, 0x76, 0x0b, 0xca, 0x99, 0x96, 0xd0, 0x9a, 0x40, 0x36, 0x74, 0xe9, 0x4e, 0x7a, 0x12, 0xbc,
+	0x21, 0x10, 0xab, 0x68, 0x99, 0x23, 0xf6, 0xb3, 0xca, 0xe7, 0x50, 0x31, 0x2e, 0x7b, 0xb4, 0xae,
+	0xb7, 0x3e, 0xbf, 0x3c, 0x5d, 0xfb, 0xa2, 0xc3, 0x5b, 0x02, 0x68, 0x1d, 0xdd, 0x16, 0xa3, 0x29,
+	0xaf, 0xdc, 0xbb, 0x97, 0x50, 0x31, 0x1e, 0x06, 0x0a, 0xcd, 0x7e, 0x2a, 0x4c, 0x5d, 0xb1, 0x82,
+	0xdd, 0xbd, 0x06, 0xf6, 0x04, 0x2a, 0xc6, 0x6b, 0x42, 0xc1, 0xda, 0xef, 0x8b, 0xa9, 0xb0, 0x35,
+	0x01, 0xeb, 0xe0, 0x65, 0x13, 0x76, 0x5f, 0x3f, 0x16, 0x50, 0x08, 0x55, 0xfb, 0xb1, 0x81, 0x36,
+	0x4d, 0x9a, 0x66, 0xe8, 0xf0, 0x50, 0x74, 0xf8, 0xc8, 0x75, 0xed, 0xc1, 0xb3, 0x2f, 0x41, 0x59,
+	0xde, 0xef, 0x18, 0x96, 0xcd, 0xb7, 0x05, 0xda, 0xc8, 0x89, 0x32, 0x7a, 0x5d, 0xe7, 0x4d, 0xb0,
+	0x23, 0x3a, 0x21, 0xb4, 0xa6, 0x29, 0xcc, 0x50, 0x24, 0x8d, 0xfa, 0xcd, 0xa1, 0x69, 0x34, 0xee,
+	0x3a, 0xd7, 0xbe, 0x97, 0x6c, 0x1a, 0xb3, 0xa3, 0xd7, 0xa4, 0x71, 0x02, 0xcd, 0xbe, 0xd9, 0x67,
+	0xa3, 0xd1, 0x86, 0x95, 0x34, 0x4e, 0xc0, 0xda, 0xcf, 0x81, 0xd9, 0x68, 0xcc, 0x60, 0xf7, 0xf5,
+	0xdd, 0x9e, 0xd3, 0xa8, 0xe1, 0x4d, 0x1a, 0x67, 0xe9, 0x60, 0xd1, 0x98, 0x0f, 0x9e, 0x7d, 0x49,
+	0x1a, 0x75, 0x3f, 0x45, 0xa3, 0xee, 0x96, 0x13, 0x66, 0xf6, 0xba, 0xce, 0x7b, 0x0d, 0x8d, 0x59,
+	0xf0, 0xe0, 0xab, 0xdf, 0x2f, 0x6b, 0x85, 0x37, 0x97, 0xb5, 0xc2, 0x5f, 0x97, 0xb5, 0xc2, 0xcf,
+	0x57, 0xb5, 0xb9, 0x5f, 0xaf, 0x6a, 0x73, 0x6f, 0xae, 0x6a, 0x73, 0x7f, 0x5e, 0xd5, 0xe6, 0x4e,
+	0x1e, 0x07, 0x34, 0x7d, 0x35, 0xec, 0x34, 0xbb, 0x6c, 0xe0, 0xbd, 0xf2, 0xd3, 0x3e, 0x0b, 0x49,
+	0xff, 0xc2, 0x0b, 0xd8, 0x5e, 0x1c, 0x75, 0xbd, 0x38, 0xea, 0xee, 0xf1, 0x9f, 0x75, 0xe2, 0x37,
+	0x5c, 0x40, 0x42, 0x2f, 0x60, 0xfc, 0xb3, 0xb3, 0x28, 0x96, 0xf9, 0xf8, 0xdf, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0xdc, 0x63, 0x33, 0x64, 0xf8, 0x0d, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -488,11 +1353,22 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CICDServiceClient interface {
+	RunTask(ctx context.Context, in *RunTaskReq, opts ...grpc.CallOption) (*RunTaskRes, error)
 	GetTask(ctx context.Context, in *GetTaskReq, opts ...grpc.CallOption) (*Task, error)
 	DelTask(ctx context.Context, in *DelTaskReq, opts ...grpc.CallOption) (*empty.Empty, error)
 	PutTask(ctx context.Context, in *PutTaskReq, opts ...grpc.CallOption) (*empty.Empty, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskReq, opts ...grpc.CallOption) (*empty.Empty, error)
 	ListTask(ctx context.Context, in *ListTaskReq, opts ...grpc.CallOption) (*ListTaskRes, error)
+	GetTemplate(ctx context.Context, in *GetTemplateReq, opts ...grpc.CallOption) (*Template, error)
+	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	ListTemplate(ctx context.Context, in *ListTemplateReq, opts ...grpc.CallOption) (*ListTemplateRes, error)
+	GetVariable(ctx context.Context, in *GetVariableReq, opts ...grpc.CallOption) (*Variable, error)
+	DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*empty.Empty, error)
+	ListVariable(ctx context.Context, in *ListVariableReq, opts ...grpc.CallOption) (*ListVariableRes, error)
 }
 
 type cICDServiceClient struct {
@@ -501,6 +1377,15 @@ type cICDServiceClient struct {
 
 func NewCICDServiceClient(cc *grpc.ClientConn) CICDServiceClient {
 	return &cICDServiceClient{cc}
+}
+
+func (c *cICDServiceClient) RunTask(ctx context.Context, in *RunTaskReq, opts ...grpc.CallOption) (*RunTaskRes, error) {
+	out := new(RunTaskRes)
+	err := c.cc.Invoke(ctx, "/api.CICDService/RunTask", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *cICDServiceClient) GetTask(ctx context.Context, in *GetTaskReq, opts ...grpc.CallOption) (*Task, error) {
@@ -548,19 +1433,123 @@ func (c *cICDServiceClient) ListTask(ctx context.Context, in *ListTaskReq, opts 
 	return out, nil
 }
 
+func (c *cICDServiceClient) GetTemplate(ctx context.Context, in *GetTemplateReq, opts ...grpc.CallOption) (*Template, error) {
+	out := new(Template)
+	err := c.cc.Invoke(ctx, "/api.CICDService/GetTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/DelTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/PutTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/UpdateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) ListTemplate(ctx context.Context, in *ListTemplateReq, opts ...grpc.CallOption) (*ListTemplateRes, error) {
+	out := new(ListTemplateRes)
+	err := c.cc.Invoke(ctx, "/api.CICDService/ListTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) GetVariable(ctx context.Context, in *GetVariableReq, opts ...grpc.CallOption) (*Variable, error) {
+	out := new(Variable)
+	err := c.cc.Invoke(ctx, "/api.CICDService/GetVariable", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/DelVariable", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/PutVariable", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/api.CICDService/UpdateVariable", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cICDServiceClient) ListVariable(ctx context.Context, in *ListVariableReq, opts ...grpc.CallOption) (*ListVariableRes, error) {
+	out := new(ListVariableRes)
+	err := c.cc.Invoke(ctx, "/api.CICDService/ListVariable", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CICDServiceServer is the server API for CICDService service.
 type CICDServiceServer interface {
+	RunTask(context.Context, *RunTaskReq) (*RunTaskRes, error)
 	GetTask(context.Context, *GetTaskReq) (*Task, error)
 	DelTask(context.Context, *DelTaskReq) (*empty.Empty, error)
 	PutTask(context.Context, *PutTaskReq) (*empty.Empty, error)
 	UpdateTask(context.Context, *UpdateTaskReq) (*empty.Empty, error)
 	ListTask(context.Context, *ListTaskReq) (*ListTaskRes, error)
+	GetTemplate(context.Context, *GetTemplateReq) (*Template, error)
+	DelTemplate(context.Context, *DelTemplateReq) (*empty.Empty, error)
+	PutTemplate(context.Context, *PutTemplateReq) (*empty.Empty, error)
+	UpdateTemplate(context.Context, *UpdateTemplateReq) (*empty.Empty, error)
+	ListTemplate(context.Context, *ListTemplateReq) (*ListTemplateRes, error)
+	GetVariable(context.Context, *GetVariableReq) (*Variable, error)
+	DelVariable(context.Context, *DelVariableReq) (*empty.Empty, error)
+	PutVariable(context.Context, *PutVariableReq) (*empty.Empty, error)
+	UpdateVariable(context.Context, *UpdateVariableReq) (*empty.Empty, error)
+	ListVariable(context.Context, *ListVariableReq) (*ListVariableRes, error)
 }
 
 // UnimplementedCICDServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedCICDServiceServer struct {
 }
 
+func (*UnimplementedCICDServiceServer) RunTask(ctx context.Context, req *RunTaskReq) (*RunTaskRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RunTask not implemented")
+}
 func (*UnimplementedCICDServiceServer) GetTask(ctx context.Context, req *GetTaskReq) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTask not implemented")
 }
@@ -576,9 +1565,57 @@ func (*UnimplementedCICDServiceServer) UpdateTask(ctx context.Context, req *Upda
 func (*UnimplementedCICDServiceServer) ListTask(ctx context.Context, req *ListTaskReq) (*ListTaskRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTask not implemented")
 }
+func (*UnimplementedCICDServiceServer) GetTemplate(ctx context.Context, req *GetTemplateReq) (*Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
+}
+func (*UnimplementedCICDServiceServer) DelTemplate(ctx context.Context, req *DelTemplateReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelTemplate not implemented")
+}
+func (*UnimplementedCICDServiceServer) PutTemplate(ctx context.Context, req *PutTemplateReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PutTemplate not implemented")
+}
+func (*UnimplementedCICDServiceServer) UpdateTemplate(ctx context.Context, req *UpdateTemplateReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
+}
+func (*UnimplementedCICDServiceServer) ListTemplate(ctx context.Context, req *ListTemplateReq) (*ListTemplateRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTemplate not implemented")
+}
+func (*UnimplementedCICDServiceServer) GetVariable(ctx context.Context, req *GetVariableReq) (*Variable, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVariable not implemented")
+}
+func (*UnimplementedCICDServiceServer) DelVariable(ctx context.Context, req *DelVariableReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelVariable not implemented")
+}
+func (*UnimplementedCICDServiceServer) PutVariable(ctx context.Context, req *PutVariableReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PutVariable not implemented")
+}
+func (*UnimplementedCICDServiceServer) UpdateVariable(ctx context.Context, req *UpdateVariableReq) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateVariable not implemented")
+}
+func (*UnimplementedCICDServiceServer) ListVariable(ctx context.Context, req *ListVariableReq) (*ListVariableRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVariable not implemented")
+}
 
 func RegisterCICDServiceServer(s *grpc.Server, srv CICDServiceServer) {
 	s.RegisterService(&_CICDService_serviceDesc, srv)
+}
+
+func _CICDService_RunTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunTaskReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).RunTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/RunTask",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).RunTask(ctx, req.(*RunTaskReq))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CICDService_GetTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -671,10 +1708,194 @@ func _CICDService_ListTask_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CICDService_GetTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).GetTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/GetTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).GetTemplate(ctx, req.(*GetTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_DelTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).DelTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/DelTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).DelTemplate(ctx, req.(*DelTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_PutTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).PutTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/PutTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).PutTemplate(ctx, req.(*PutTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).UpdateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/UpdateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).UpdateTemplate(ctx, req.(*UpdateTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_ListTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).ListTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/ListTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).ListTemplate(ctx, req.(*ListTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_GetVariable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVariableReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).GetVariable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/GetVariable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).GetVariable(ctx, req.(*GetVariableReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_DelVariable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelVariableReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).DelVariable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/DelVariable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).DelVariable(ctx, req.(*DelVariableReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_PutVariable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutVariableReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).PutVariable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/PutVariable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).PutVariable(ctx, req.(*PutVariableReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_UpdateVariable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateVariableReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).UpdateVariable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/UpdateVariable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).UpdateVariable(ctx, req.(*UpdateVariableReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CICDService_ListVariable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVariableReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CICDServiceServer).ListVariable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.CICDService/ListVariable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CICDServiceServer).ListVariable(ctx, req.(*ListVariableReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _CICDService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.CICDService",
 	HandlerType: (*CICDServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "RunTask",
+			Handler:    _CICDService_RunTask_Handler,
+		},
 		{
 			MethodName: "GetTask",
 			Handler:    _CICDService_GetTask_Handler,
@@ -695,12 +1916,52 @@ var _CICDService_serviceDesc = grpc.ServiceDesc{
 			MethodName: "ListTask",
 			Handler:    _CICDService_ListTask_Handler,
 		},
+		{
+			MethodName: "GetTemplate",
+			Handler:    _CICDService_GetTemplate_Handler,
+		},
+		{
+			MethodName: "DelTemplate",
+			Handler:    _CICDService_DelTemplate_Handler,
+		},
+		{
+			MethodName: "PutTemplate",
+			Handler:    _CICDService_PutTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateTemplate",
+			Handler:    _CICDService_UpdateTemplate_Handler,
+		},
+		{
+			MethodName: "ListTemplate",
+			Handler:    _CICDService_ListTemplate_Handler,
+		},
+		{
+			MethodName: "GetVariable",
+			Handler:    _CICDService_GetVariable_Handler,
+		},
+		{
+			MethodName: "DelVariable",
+			Handler:    _CICDService_DelVariable_Handler,
+		},
+		{
+			MethodName: "PutVariable",
+			Handler:    _CICDService_PutVariable_Handler,
+		},
+		{
+			MethodName: "UpdateVariable",
+			Handler:    _CICDService_UpdateVariable_Handler,
+		},
+		{
+			MethodName: "ListVariable",
+			Handler:    _CICDService_ListVariable_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "api/cicd.proto",
 }
 
-func (m *ScriptTask) Marshal() (dAtA []byte, err error) {
+func (m *ScriptTemplate) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -710,12 +1971,12 @@ func (m *ScriptTask) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ScriptTask) MarshalTo(dAtA []byte) (int, error) {
+func (m *ScriptTemplate) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ScriptTask) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ScriptTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -733,6 +1994,527 @@ func (m *ScriptTask) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintCicd(dAtA, i, uint64(len(m.Language)))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Template) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Template) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Template) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ScriptTemplate != nil {
+		{
+			size, err := m.ScriptTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCicd(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.Category) > 0 {
+		i -= len(m.Category)
+		copy(dAtA[i:], m.Category)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Category)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Type) > 0 {
+		i -= len(m.Type)
+		copy(dAtA[i:], m.Type)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Type)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetTemplateReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetTemplateReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DelTemplateReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelTemplateReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *PutTemplateReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PutTemplateReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Template != nil {
+		{
+			size, err := m.Template.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCicd(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateTemplateReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateTemplateReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Template != nil {
+		{
+			size, err := m.Template.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCicd(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListTemplateReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTemplateReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Limit != 0 {
+		i = encodeVarintCicd(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Offset != 0 {
+		i = encodeVarintCicd(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListTemplateRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTemplateRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTemplateRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Templates) > 0 {
+		for iNdEx := len(m.Templates) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Templates[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintCicd(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Variable) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Variable) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Variable) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Kvs) > 0 {
+		i -= len(m.Kvs)
+		copy(dAtA[i:], m.Kvs)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Kvs)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetVariableReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetVariableReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DelVariableReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelVariableReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *PutVariableReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PutVariableReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Variable != nil {
+		{
+			size, err := m.Variable.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCicd(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateVariableReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateVariableReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Variable != nil {
+		{
+			size, err := m.Variable.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCicd(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListVariableReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListVariableReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Limit != 0 {
+		i = encodeVarintCicd(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Offset != 0 {
+		i = encodeVarintCicd(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListVariableRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListVariableRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListVariableRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Variables) > 0 {
+		for iNdEx := len(m.Variables) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Variables[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintCicd(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -757,22 +2539,26 @@ func (m *Task) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.ScriptTask != nil {
-		{
-			size, err := m.ScriptTask.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintCicd(dAtA, i, uint64(size))
+	if len(m.VariableIDs) > 0 {
+		for iNdEx := len(m.VariableIDs) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.VariableIDs[iNdEx])
+			copy(dAtA[i:], m.VariableIDs[iNdEx])
+			i = encodeVarintCicd(dAtA, i, uint64(len(m.VariableIDs[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
 		}
+	}
+	if len(m.TemplateID) > 0 {
+		i -= len(m.TemplateID)
+		copy(dAtA[i:], m.TemplateID)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.TemplateID)))
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.Type) > 0 {
-		i -= len(m.Type)
-		copy(dAtA[i:], m.Type)
-		i = encodeVarintCicd(dAtA, i, uint64(len(m.Type)))
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Description)))
 		i--
 		dAtA[i] = 0x1a
 	}
@@ -993,6 +2779,87 @@ func (m *ListTaskRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *RunTaskReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RunTaskReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RunTaskReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.TaskID) > 0 {
+		i -= len(m.TaskID)
+		copy(dAtA[i:], m.TaskID)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.TaskID)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *RunTaskRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RunTaskRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RunTaskRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Stderr) > 0 {
+		i -= len(m.Stderr)
+		copy(dAtA[i:], m.Stderr)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Stderr)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Stdout) > 0 {
+		i -= len(m.Stdout)
+		copy(dAtA[i:], m.Stdout)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Stdout)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ExitCode) > 0 {
+		i -= len(m.ExitCode)
+		copy(dAtA[i:], m.ExitCode)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.ExitCode)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.JobID) > 0 {
+		i -= len(m.JobID)
+		copy(dAtA[i:], m.JobID)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.JobID)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintCicd(dAtA []byte, offset int, v uint64) int {
 	offset -= sovCicd(v)
 	base := offset
@@ -1004,7 +2871,7 @@ func encodeVarintCicd(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *ScriptTask) Size() (n int) {
+func (m *ScriptTemplate) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1017,6 +2884,228 @@ func (m *ScriptTask) Size() (n int) {
 	l = len(m.Script)
 	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *Template) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Category)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	if m.ScriptTemplate != nil {
+		l = m.ScriptTemplate.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *GetTemplateReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *DelTemplateReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *PutTemplateReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Template != nil {
+		l = m.Template.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdateTemplateReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Template != nil {
+		l = m.Template.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *ListTemplateReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Offset != 0 {
+		n += 1 + sovCicd(uint64(m.Offset))
+	}
+	if m.Limit != 0 {
+		n += 1 + sovCicd(uint64(m.Limit))
+	}
+	return n
+}
+
+func (m *ListTemplateRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Templates) > 0 {
+		for _, e := range m.Templates {
+			l = e.Size()
+			n += 1 + l + sovCicd(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *Variable) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Kvs)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *GetVariableReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *DelVariableReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *PutVariableReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Variable != nil {
+		l = m.Variable.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdateVariableReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Variable != nil {
+		l = m.Variable.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *ListVariableReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Offset != 0 {
+		n += 1 + sovCicd(uint64(m.Offset))
+	}
+	if m.Limit != 0 {
+		n += 1 + sovCicd(uint64(m.Limit))
+	}
+	return n
+}
+
+func (m *ListVariableRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Variables) > 0 {
+		for _, e := range m.Variables {
+			l = e.Size()
+			n += 1 + l + sovCicd(uint64(l))
+		}
 	}
 	return n
 }
@@ -1035,13 +3124,19 @@ func (m *Task) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
 	}
-	l = len(m.Type)
+	l = len(m.Description)
 	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
 	}
-	if m.ScriptTask != nil {
-		l = m.ScriptTask.Size()
+	l = len(m.TemplateID)
+	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
+	}
+	if len(m.VariableIDs) > 0 {
+		for _, s := range m.VariableIDs {
+			l = len(s)
+			n += 1 + l + sovCicd(uint64(l))
+		}
 	}
 	return n
 }
@@ -1128,13 +3223,51 @@ func (m *ListTaskRes) Size() (n int) {
 	return n
 }
 
+func (m *RunTaskReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.TaskID)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *RunTaskRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.JobID)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.ExitCode)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Stdout)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	l = len(m.Stderr)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func sovCicd(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozCicd(x uint64) (n int) {
 	return sovCicd(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *ScriptTask) Unmarshal(dAtA []byte) error {
+func (m *ScriptTemplate) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1157,10 +3290,10 @@ func (m *ScriptTask) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ScriptTask: wiretype end group for non-group")
+			return fmt.Errorf("proto: ScriptTemplate: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ScriptTask: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ScriptTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1226,6 +3359,1488 @@ func (m *ScriptTask) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Script = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Template) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Template: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Template: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Category", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Category = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ScriptTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ScriptTemplate == nil {
+				m.ScriptTemplate = &ScriptTemplate{}
+			}
+			if err := m.ScriptTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetTemplateReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetTemplateReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetTemplateReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DelTemplateReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelTemplateReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelTemplateReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *PutTemplateReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PutTemplateReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PutTemplateReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Template", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Template == nil {
+				m.Template = &Template{}
+			}
+			if err := m.Template.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateTemplateReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateTemplateReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateTemplateReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Template", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Template == nil {
+				m.Template = &Template{}
+			}
+			if err := m.Template.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTemplateReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListTemplateReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListTemplateReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTemplateRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListTemplateRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListTemplateRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Templates", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Templates = append(m.Templates, &Template{})
+			if err := m.Templates[len(m.Templates)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Variable) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Variable: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Variable: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kvs", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Kvs = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetVariableReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetVariableReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetVariableReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DelVariableReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelVariableReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelVariableReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *PutVariableReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PutVariableReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PutVariableReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Variable", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Variable == nil {
+				m.Variable = &Variable{}
+			}
+			if err := m.Variable.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateVariableReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateVariableReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateVariableReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Variable", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Variable == nil {
+				m.Variable = &Variable{}
+			}
+			if err := m.Variable.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListVariableReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListVariableReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListVariableReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListVariableRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListVariableRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListVariableRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Variables", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Variables = append(m.Variables, &Variable{})
+			if err := m.Variables[len(m.Variables)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1346,7 +4961,7 @@ func (m *Task) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1374,13 +4989,13 @@ func (m *Task) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Type = string(dAtA[iNdEx:postIndex])
+			m.Description = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ScriptTask", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field TemplateID", wireType)
 			}
-			var msglen int
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowCicd
@@ -1390,27 +5005,55 @@ func (m *Task) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			if msglen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthCicd
 			}
-			postIndex := iNdEx + msglen
+			postIndex := iNdEx + intStringLen
 			if postIndex < 0 {
 				return ErrInvalidLengthCicd
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ScriptTask == nil {
-				m.ScriptTask = &ScriptTask{}
+			m.TemplateID = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field VariableIDs", wireType)
 			}
-			if err := m.ScriptTask.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.VariableIDs = append(m.VariableIDs, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1937,6 +5580,272 @@ func (m *ListTaskRes) Unmarshal(dAtA []byte) error {
 			if err := m.Tasks[len(m.Tasks)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *RunTaskReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RunTaskReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RunTaskReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TaskID", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TaskID = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *RunTaskRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RunTaskRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RunTaskRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JobID", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.JobID = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ExitCode", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ExitCode = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Stdout", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Stdout = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Stderr", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Stderr = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
