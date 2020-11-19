@@ -19,12 +19,12 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 }
 
 func (s *CICDService) GetTask(ctx context.Context, req *api.GetTaskReq) (*api.Task, error) {
-	collection := s.mongoCli.Database(s.options.Mongo.Database).Collection(s.options.Mongo.Collection)
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Id)
 	if err != nil {
 		return nil, rpcx.NewErrorWithoutRefer(err, codes.InvalidArgument, rpcx.MetaDataGetRequestID(ctx), "InvalidObjectID", "object id is not valid")
 	}
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Mongo.Timeout)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	var task api.Task
 	if err := collection.FindOne(mongoCtx, bson.M{"_id": objectID}).Decode(&task); err != nil {
@@ -34,12 +34,12 @@ func (s *CICDService) GetTask(ctx context.Context, req *api.GetTaskReq) (*api.Ta
 }
 
 func (s *CICDService) DelTask(ctx context.Context, req *api.DelTaskReq) (*empty.Empty, error) {
-	collection := s.mongoCli.Database(s.options.Mongo.Database).Collection(s.options.Mongo.Collection)
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Id)
 	if err != nil {
 		return nil, rpcx.NewErrorWithoutRefer(err, codes.InvalidArgument, rpcx.MetaDataGetRequestID(ctx), "InvalidObjectID", "object id is not valid")
 	}
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Mongo.Timeout)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	res, err := collection.DeleteOne(mongoCtx, bson.M{"_id": objectID})
 	if err != nil {
@@ -50,8 +50,8 @@ func (s *CICDService) DelTask(ctx context.Context, req *api.DelTaskReq) (*empty.
 }
 
 func (s *CICDService) PutTask(ctx context.Context, req *api.PutTaskReq) (*empty.Empty, error) {
-	collection := s.mongoCli.Database(s.options.Mongo.Database).Collection(s.options.Mongo.Collection)
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Mongo.Timeout)
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	res, err := collection.InsertOne(mongoCtx, req.Task)
 	if err != nil {
@@ -62,12 +62,12 @@ func (s *CICDService) PutTask(ctx context.Context, req *api.PutTaskReq) (*empty.
 }
 
 func (s *CICDService) UpdateTask(ctx context.Context, req *api.UpdateTaskReq) (*empty.Empty, error) {
-	collection := s.mongoCli.Database(s.options.Mongo.Database).Collection(s.options.Mongo.Collection)
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Task.Id)
 	if err != nil {
 		return nil, rpcx.NewErrorWithoutRefer(err, codes.InvalidArgument, rpcx.MetaDataGetRequestID(ctx), "InvalidObjectID", "object id is not valid")
 	}
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Mongo.Timeout)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	req.Task.Id = ""
 	res, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": req.Task})
@@ -79,8 +79,8 @@ func (s *CICDService) UpdateTask(ctx context.Context, req *api.UpdateTaskReq) (*
 }
 
 func (s *CICDService) ListTask(ctx context.Context, req *api.ListTaskReq) (*api.ListTaskRes, error) {
-	collection := s.mongoCli.Database(s.options.Mongo.Database).Collection(s.options.Mongo.Collection)
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Mongo.Timeout)
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	res, err := collection.Find(mongoCtx, bson.M{}, mopt.Find().SetLimit(req.Limit).SetSkip(req.Offset))
 	if err != nil {

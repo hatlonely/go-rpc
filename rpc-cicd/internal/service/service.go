@@ -11,13 +11,36 @@ import (
 )
 
 func NewCICDServiceWithOptions(mongoCli *mongo.Client, options *Options) (*CICDService, error) {
-	collection := mongoCli.Database(options.Mongo.Database).Collection(options.Mongo.Collection)
-	mongoCtx, cancel := context.WithTimeout(context.Background(), options.Mongo.Timeout)
-	defer cancel()
-	if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
-		{Keys: bson.M{"name": 1}, Options: mopt.Index().SetUnique(true).SetName("nameIdx")},
-	}); err != nil {
-		return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
+	{
+
+		collection := mongoCli.Database(options.Database).Collection(options.TaskCollection)
+		mongoCtx, cancel := context.WithTimeout(context.Background(), options.Timeout)
+		defer cancel()
+		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
+			{Keys: bson.M{"name": 1}, Options: mopt.Index().SetUnique(true).SetName("nameIdx")},
+		}); err != nil {
+			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
+		}
+	}
+	{
+		collection := mongoCli.Database(options.Database).Collection(options.VariableCollection)
+		mongoCtx, cancel := context.WithTimeout(context.Background(), options.Timeout)
+		defer cancel()
+		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
+			{Keys: bson.M{"name": 1}, Options: mopt.Index().SetUnique(true).SetName("nameIdx")},
+		}); err != nil {
+			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
+		}
+	}
+	{
+		collection := mongoCli.Database(options.Database).Collection(options.TemplateCollection)
+		mongoCtx, cancel := context.WithTimeout(context.Background(), options.Timeout)
+		defer cancel()
+		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
+			{Keys: bson.M{"name": 1}, Options: mopt.Index().SetUnique(true).SetName("nameIdx")},
+		}); err != nil {
+			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
+		}
 	}
 
 	return &CICDService{
@@ -33,9 +56,9 @@ type CICDService struct {
 }
 
 type Options struct {
-	Mongo struct {
-		Database   string
-		Collection string
-		Timeout    time.Duration
-	}
+	Database           string
+	TaskCollection     string
+	TemplateCollection string
+	VariableCollection string
+	Timeout            time.Duration
 }
