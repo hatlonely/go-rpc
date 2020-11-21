@@ -17,13 +17,16 @@
     "variableCollection": "variable",
     "timeout": "3s"
   },
+  "allowCORS": {
+    "accessControlAllowOrigin": "*"
+  },
   "logger": {
     "grpc": {
       "level": "Info",
       "writers": [{
         "type": "RotateFile",
         "rotateFileWriter": {
-          "filename": "log/article.rpc",
+          "filename": "log/cicd.rpc",
           "maxAge": "24h",
           "formatter": {
             "type": "Json"
@@ -36,7 +39,7 @@
       "writers": [{
         "type": "RotateFile",
         "rotateFileWriter": {
-          "filename": "log/article.rpc",
+          "filename": "log/cicd.log",
           "maxAge": "24h",
           "formatter": {
             "type": "Json"

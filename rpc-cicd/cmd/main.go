@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"regexp"
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -36,7 +37,8 @@ type Options struct {
 
 	Service service.Options
 
-	Mongo cli.MongoOptions
+	Mongo     cli.MongoOptions
+	AllowCORS AllowCORSOptions
 
 	Logger struct {
 		Info logger.Options
@@ -103,5 +105,27 @@ func main() {
 		ctx, muxServer, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
 	))
 	infoLog.Info(options)
-	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), handlers.CombinedLoggingHandler(os.Stdout, muxServer)))
+	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), AllowCORSWithOptions(handlers.CombinedLoggingHandler(os.Stdout, muxServer), &options.AllowCORS)))
+}
+
+type AllowCORSOptions struct {
+	AccessControlAllowOrigin string
+}
+
+func AllowCORSWithOptions(h http.Handler, options *AllowCORSOptions) http.Handler {
+	var re *regexp.Regexp
+	if options.AccessControlAllowOrigin != "*" {
+		re = regexp.MustCompile(options.AccessControlAllowOrigin)
+	}
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if origin := r.Header.Get("Origin"); origin != "" && options.AccessControlAllowOrigin != "" {
+			if options.AccessControlAllowOrigin == "*" {
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+			} else if re.MatchString(origin) {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+			}
+		}
+		h.ServeHTTP(w, r)
+	})
 }
