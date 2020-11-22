@@ -11,7 +11,34 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../google/protobuf/empty.pb.dart' as $0;
+class Empty extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Empty', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'api'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  Empty._() : super();
+  factory Empty() => create();
+  factory Empty.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Empty.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Empty clone() => Empty()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Empty copyWith(void Function(Empty) updates) => super.copyWith((message) => updates(message as Empty)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Empty create() => Empty._();
+  Empty createEmptyInstance() => create();
+  static $pb.PbList<Empty> createRepeated() => $pb.PbList<Empty>();
+  @$core.pragma('dart2js:noInline')
+  static Empty getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty>(create);
+  static Empty _defaultInstance;
+}
 
 class ScriptTemplate extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ScriptTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'api'), createEmptyInstance: create)
@@ -1141,17 +1168,17 @@ class CICDServiceApi {
     var emptyResponse = Task();
     return _client.invoke<Task>(ctx, 'CICDService', 'GetTask', request, emptyResponse);
   }
-  $async.Future<$0.Empty> delTask($pb.ClientContext ctx, DelTaskReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'DelTask', request, emptyResponse);
+  $async.Future<Empty> delTask($pb.ClientContext ctx, DelTaskReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'DelTask', request, emptyResponse);
   }
-  $async.Future<$0.Empty> putTask($pb.ClientContext ctx, PutTaskReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'PutTask', request, emptyResponse);
+  $async.Future<Empty> putTask($pb.ClientContext ctx, PutTaskReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'PutTask', request, emptyResponse);
   }
-  $async.Future<$0.Empty> updateTask($pb.ClientContext ctx, UpdateTaskReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'UpdateTask', request, emptyResponse);
+  $async.Future<Empty> updateTask($pb.ClientContext ctx, UpdateTaskReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'UpdateTask', request, emptyResponse);
   }
   $async.Future<ListTaskRes> listTask($pb.ClientContext ctx, ListTaskReq request) {
     var emptyResponse = ListTaskRes();
@@ -1161,17 +1188,17 @@ class CICDServiceApi {
     var emptyResponse = Template();
     return _client.invoke<Template>(ctx, 'CICDService', 'GetTemplate', request, emptyResponse);
   }
-  $async.Future<$0.Empty> delTemplate($pb.ClientContext ctx, DelTemplateReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'DelTemplate', request, emptyResponse);
+  $async.Future<Empty> delTemplate($pb.ClientContext ctx, DelTemplateReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'DelTemplate', request, emptyResponse);
   }
-  $async.Future<$0.Empty> putTemplate($pb.ClientContext ctx, PutTemplateReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'PutTemplate', request, emptyResponse);
+  $async.Future<Empty> putTemplate($pb.ClientContext ctx, PutTemplateReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'PutTemplate', request, emptyResponse);
   }
-  $async.Future<$0.Empty> updateTemplate($pb.ClientContext ctx, UpdateTemplateReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'UpdateTemplate', request, emptyResponse);
+  $async.Future<Empty> updateTemplate($pb.ClientContext ctx, UpdateTemplateReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'UpdateTemplate', request, emptyResponse);
   }
   $async.Future<ListTemplateRes> listTemplate($pb.ClientContext ctx, ListTemplateReq request) {
     var emptyResponse = ListTemplateRes();
@@ -1181,17 +1208,17 @@ class CICDServiceApi {
     var emptyResponse = Variable();
     return _client.invoke<Variable>(ctx, 'CICDService', 'GetVariable', request, emptyResponse);
   }
-  $async.Future<$0.Empty> delVariable($pb.ClientContext ctx, DelVariableReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'DelVariable', request, emptyResponse);
+  $async.Future<Empty> delVariable($pb.ClientContext ctx, DelVariableReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'DelVariable', request, emptyResponse);
   }
-  $async.Future<$0.Empty> putVariable($pb.ClientContext ctx, PutVariableReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'PutVariable', request, emptyResponse);
+  $async.Future<Empty> putVariable($pb.ClientContext ctx, PutVariableReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'PutVariable', request, emptyResponse);
   }
-  $async.Future<$0.Empty> updateVariable($pb.ClientContext ctx, UpdateVariableReq request) {
-    var emptyResponse = $0.Empty();
-    return _client.invoke<$0.Empty>(ctx, 'CICDService', 'UpdateVariable', request, emptyResponse);
+  $async.Future<Empty> updateVariable($pb.ClientContext ctx, UpdateVariableReq request) {
+    var emptyResponse = Empty();
+    return _client.invoke<Empty>(ctx, 'CICDService', 'UpdateVariable', request, emptyResponse);
   }
   $async.Future<ListVariableRes> listVariable($pb.ClientContext ctx, ListVariableReq request) {
     var emptyResponse = ListVariableRes();

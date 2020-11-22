@@ -5,7 +5,9 @@
 // @dart = 2.3
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
-import '../google/protobuf/empty.pbjson.dart' as $0;
+const Empty$json = const {
+  '1': 'Empty',
+};
 
 const ScriptTemplate$json = const {
   '1': 'ScriptTemplate',
@@ -199,19 +201,19 @@ const CICDServiceBase$json = const {
   '2': const [
     const {'1': 'RunTask', '2': '.api.RunTaskReq', '3': '.api.RunTaskRes', '4': const {}},
     const {'1': 'GetTask', '2': '.api.GetTaskReq', '3': '.api.Task', '4': const {}},
-    const {'1': 'DelTask', '2': '.api.DelTaskReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'PutTask', '2': '.api.PutTaskReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'UpdateTask', '2': '.api.UpdateTaskReq', '3': '.google.protobuf.Empty', '4': const {}},
+    const {'1': 'DelTask', '2': '.api.DelTaskReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'PutTask', '2': '.api.PutTaskReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'UpdateTask', '2': '.api.UpdateTaskReq', '3': '.api.Empty', '4': const {}},
     const {'1': 'ListTask', '2': '.api.ListTaskReq', '3': '.api.ListTaskRes', '4': const {}},
     const {'1': 'GetTemplate', '2': '.api.GetTemplateReq', '3': '.api.Template', '4': const {}},
-    const {'1': 'DelTemplate', '2': '.api.DelTemplateReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'PutTemplate', '2': '.api.PutTemplateReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'UpdateTemplate', '2': '.api.UpdateTemplateReq', '3': '.google.protobuf.Empty', '4': const {}},
+    const {'1': 'DelTemplate', '2': '.api.DelTemplateReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'PutTemplate', '2': '.api.PutTemplateReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'UpdateTemplate', '2': '.api.UpdateTemplateReq', '3': '.api.Empty', '4': const {}},
     const {'1': 'ListTemplate', '2': '.api.ListTemplateReq', '3': '.api.ListTemplateRes', '4': const {}},
     const {'1': 'GetVariable', '2': '.api.GetVariableReq', '3': '.api.Variable', '4': const {}},
-    const {'1': 'DelVariable', '2': '.api.DelVariableReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'PutVariable', '2': '.api.PutVariableReq', '3': '.google.protobuf.Empty', '4': const {}},
-    const {'1': 'UpdateVariable', '2': '.api.UpdateVariableReq', '3': '.google.protobuf.Empty', '4': const {}},
+    const {'1': 'DelVariable', '2': '.api.DelVariableReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'PutVariable', '2': '.api.PutVariableReq', '3': '.api.Empty', '4': const {}},
+    const {'1': 'UpdateVariable', '2': '.api.UpdateVariableReq', '3': '.api.Empty', '4': const {}},
     const {'1': 'ListVariable', '2': '.api.ListVariableReq', '3': '.api.ListVariableRes', '4': const {}},
   ],
 };
@@ -222,7 +224,7 @@ const CICDServiceBase$messageJson = const {
   '.api.GetTaskReq': GetTaskReq$json,
   '.api.Task': Task$json,
   '.api.DelTaskReq': DelTaskReq$json,
-  '.google.protobuf.Empty': $0.Empty$json,
+  '.api.Empty': Empty$json,
   '.api.PutTaskReq': PutTaskReq$json,
   '.api.UpdateTaskReq': UpdateTaskReq$json,
   '.api.ListTaskReq': ListTaskReq$json,

@@ -5,11 +5,12 @@ package api;
 option go_package = "github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api";
 
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 import "gogoproto/gogo.proto";
 option (gogoproto.goproto_unkeyed_all) = false;
 option (gogoproto.goproto_unrecognized_all) = false;
 option (gogoproto.goproto_sizecache_all) = false;
+
+message Empty {}
 
 message ScriptTemplate {
   string language = 1;
@@ -140,20 +141,20 @@ service CICDService {
     };
   }
 
-  rpc DelTask(DelTaskReq) returns (google.protobuf.Empty) {
+  rpc DelTask(DelTaskReq) returns (Empty) {
     option (google.api.http) = {
       delete: "/v1/task/{id}"
     };
   }
 
-  rpc PutTask(PutTaskReq) returns (google.protobuf.Empty) {
+  rpc PutTask(PutTaskReq) returns (Empty) {
     option (google.api.http) = {
       post: "/v1/task"
       body: "task"
     };
   }
 
-  rpc UpdateTask(UpdateTaskReq) returns (google.protobuf.Empty) {
+  rpc UpdateTask(UpdateTaskReq) returns (Empty) {
     option (google.api.http) = {
       put: "/v1/task/{task.id}"
       body: "task"
@@ -172,20 +173,20 @@ service CICDService {
     };
   }
 
-  rpc DelTemplate(DelTemplateReq) returns (google.protobuf.Empty) {
+  rpc DelTemplate(DelTemplateReq) returns (Empty) {
     option (google.api.http) = {
       delete: "/v1/template/{id}"
     };
   }
 
-  rpc PutTemplate(PutTemplateReq) returns (google.protobuf.Empty) {
+  rpc PutTemplate(PutTemplateReq) returns (Empty) {
     option (google.api.http) = {
       post: "/v1/template"
       body: "template"
     };
   }
 
-  rpc UpdateTemplate(UpdateTemplateReq) returns (google.protobuf.Empty) {
+  rpc UpdateTemplate(UpdateTemplateReq) returns (Empty) {
     option (google.api.http) = {
       put: "/v1/template/{template.id}"
       body: "template"
@@ -204,20 +205,20 @@ service CICDService {
     };
   }
 
-  rpc DelVariable(DelVariableReq) returns (google.protobuf.Empty) {
+  rpc DelVariable(DelVariableReq) returns (Empty) {
     option (google.api.http) = {
       delete: "/v1/variable/{id}"
     };
   }
 
-  rpc PutVariable(PutVariableReq) returns (google.protobuf.Empty) {
+  rpc PutVariable(PutVariableReq) returns (Empty) {
     option (google.api.http) = {
       post: "/v1/variable"
       body: "variable"
     };
   }
 
-  rpc UpdateVariable(UpdateVariableReq) returns (google.protobuf.Empty) {
+  rpc UpdateVariable(UpdateVariableReq) returns (Empty) {
     option (google.api.http) = {
       put: "/v1/variable/{variable.id}"
       body: "variable"

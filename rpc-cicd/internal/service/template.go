@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
@@ -29,7 +28,7 @@ func (s *CICDService) GetTemplate(ctx context.Context, req *api.GetTemplateReq) 
 	return &template, nil
 }
 
-func (s *CICDService) DelTemplate(ctx context.Context, req *api.DelTemplateReq) (*empty.Empty, error) {
+func (s *CICDService) DelTemplate(ctx context.Context, req *api.DelTemplateReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Id)
 	if err != nil {
@@ -42,10 +41,10 @@ func (s *CICDService) DelTemplate(ctx context.Context, req *api.DelTemplateReq) 
 		return nil, errors.Wrap(err, "mongo.Collection.DeleteOne failed")
 	}
 	rpcx.CtxSet(ctx, "DeleteOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
-func (s *CICDService) PutTemplate(ctx context.Context, req *api.PutTemplateReq) (*empty.Empty, error) {
+func (s *CICDService) PutTemplate(ctx context.Context, req *api.PutTemplateReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
@@ -54,10 +53,10 @@ func (s *CICDService) PutTemplate(ctx context.Context, req *api.PutTemplateReq) 
 		return nil, errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
-func (s *CICDService) UpdateTemplate(ctx context.Context, req *api.UpdateTemplateReq) (*empty.Empty, error) {
+func (s *CICDService) UpdateTemplate(ctx context.Context, req *api.UpdateTemplateReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Template.Id)
 	if err != nil {
@@ -71,7 +70,7 @@ func (s *CICDService) UpdateTemplate(ctx context.Context, req *api.UpdateTemplat
 		return nil, errors.Wrap(err, "mongo.Collection.UpdateOne failed")
 	}
 	rpcx.CtxSet(ctx, "UpdateOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
 func (s *CICDService) ListTemplate(ctx context.Context, req *api.ListTemplateReq) (*api.ListTemplateRes, error) {

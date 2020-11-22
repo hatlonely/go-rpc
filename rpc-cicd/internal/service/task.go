@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
@@ -33,7 +32,7 @@ func (s *CICDService) GetTask(ctx context.Context, req *api.GetTaskReq) (*api.Ta
 	return &task, nil
 }
 
-func (s *CICDService) DelTask(ctx context.Context, req *api.DelTaskReq) (*empty.Empty, error) {
+func (s *CICDService) DelTask(ctx context.Context, req *api.DelTaskReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Id)
 	if err != nil {
@@ -46,10 +45,10 @@ func (s *CICDService) DelTask(ctx context.Context, req *api.DelTaskReq) (*empty.
 		return nil, errors.Wrap(err, "mongo.Collection.DeleteOne failed")
 	}
 	rpcx.CtxSet(ctx, "DeleteOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
-func (s *CICDService) PutTask(ctx context.Context, req *api.PutTaskReq) (*empty.Empty, error) {
+func (s *CICDService) PutTask(ctx context.Context, req *api.PutTaskReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
@@ -58,10 +57,10 @@ func (s *CICDService) PutTask(ctx context.Context, req *api.PutTaskReq) (*empty.
 		return nil, errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
-func (s *CICDService) UpdateTask(ctx context.Context, req *api.UpdateTaskReq) (*empty.Empty, error) {
+func (s *CICDService) UpdateTask(ctx context.Context, req *api.UpdateTaskReq) (*api.Empty, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Task.Id)
 	if err != nil {
@@ -75,7 +74,7 @@ func (s *CICDService) UpdateTask(ctx context.Context, req *api.UpdateTaskReq) (*
 		return nil, errors.Wrap(err, "mongo.Collection.UpdateOne failed")
 	}
 	rpcx.CtxSet(ctx, "UpdateOneRes", res)
-	return &empty.Empty{}, nil
+	return &api.Empty{}, nil
 }
 
 func (s *CICDService) ListTask(ctx context.Context, req *api.ListTaskReq) (*api.ListTaskRes, error) {

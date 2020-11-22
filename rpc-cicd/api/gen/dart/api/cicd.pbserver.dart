@@ -10,48 +10,47 @@ import 'dart:async' as $async;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'dart:core' as $core;
-import 'cicd.pb.dart' as $1;
-import '../google/protobuf/empty.pb.dart' as $0;
+import 'cicd.pb.dart' as $0;
 import 'cicd.pbjson.dart';
 
 export 'cicd.pb.dart';
 
 abstract class CICDServiceBase extends $pb.GeneratedService {
-  $async.Future<$1.RunTaskRes> runTask($pb.ServerContext ctx, $1.RunTaskReq request);
-  $async.Future<$1.Task> getTask($pb.ServerContext ctx, $1.GetTaskReq request);
-  $async.Future<$0.Empty> delTask($pb.ServerContext ctx, $1.DelTaskReq request);
-  $async.Future<$0.Empty> putTask($pb.ServerContext ctx, $1.PutTaskReq request);
-  $async.Future<$0.Empty> updateTask($pb.ServerContext ctx, $1.UpdateTaskReq request);
-  $async.Future<$1.ListTaskRes> listTask($pb.ServerContext ctx, $1.ListTaskReq request);
-  $async.Future<$1.Template> getTemplate($pb.ServerContext ctx, $1.GetTemplateReq request);
-  $async.Future<$0.Empty> delTemplate($pb.ServerContext ctx, $1.DelTemplateReq request);
-  $async.Future<$0.Empty> putTemplate($pb.ServerContext ctx, $1.PutTemplateReq request);
-  $async.Future<$0.Empty> updateTemplate($pb.ServerContext ctx, $1.UpdateTemplateReq request);
-  $async.Future<$1.ListTemplateRes> listTemplate($pb.ServerContext ctx, $1.ListTemplateReq request);
-  $async.Future<$1.Variable> getVariable($pb.ServerContext ctx, $1.GetVariableReq request);
-  $async.Future<$0.Empty> delVariable($pb.ServerContext ctx, $1.DelVariableReq request);
-  $async.Future<$0.Empty> putVariable($pb.ServerContext ctx, $1.PutVariableReq request);
-  $async.Future<$0.Empty> updateVariable($pb.ServerContext ctx, $1.UpdateVariableReq request);
-  $async.Future<$1.ListVariableRes> listVariable($pb.ServerContext ctx, $1.ListVariableReq request);
+  $async.Future<$0.RunTaskRes> runTask($pb.ServerContext ctx, $0.RunTaskReq request);
+  $async.Future<$0.Task> getTask($pb.ServerContext ctx, $0.GetTaskReq request);
+  $async.Future<$0.Empty> delTask($pb.ServerContext ctx, $0.DelTaskReq request);
+  $async.Future<$0.Empty> putTask($pb.ServerContext ctx, $0.PutTaskReq request);
+  $async.Future<$0.Empty> updateTask($pb.ServerContext ctx, $0.UpdateTaskReq request);
+  $async.Future<$0.ListTaskRes> listTask($pb.ServerContext ctx, $0.ListTaskReq request);
+  $async.Future<$0.Template> getTemplate($pb.ServerContext ctx, $0.GetTemplateReq request);
+  $async.Future<$0.Empty> delTemplate($pb.ServerContext ctx, $0.DelTemplateReq request);
+  $async.Future<$0.Empty> putTemplate($pb.ServerContext ctx, $0.PutTemplateReq request);
+  $async.Future<$0.Empty> updateTemplate($pb.ServerContext ctx, $0.UpdateTemplateReq request);
+  $async.Future<$0.ListTemplateRes> listTemplate($pb.ServerContext ctx, $0.ListTemplateReq request);
+  $async.Future<$0.Variable> getVariable($pb.ServerContext ctx, $0.GetVariableReq request);
+  $async.Future<$0.Empty> delVariable($pb.ServerContext ctx, $0.DelVariableReq request);
+  $async.Future<$0.Empty> putVariable($pb.ServerContext ctx, $0.PutVariableReq request);
+  $async.Future<$0.Empty> updateVariable($pb.ServerContext ctx, $0.UpdateVariableReq request);
+  $async.Future<$0.ListVariableRes> listVariable($pb.ServerContext ctx, $0.ListVariableReq request);
 
   $pb.GeneratedMessage createRequest($core.String method) {
     switch (method) {
-      case 'RunTask': return $1.RunTaskReq();
-      case 'GetTask': return $1.GetTaskReq();
-      case 'DelTask': return $1.DelTaskReq();
-      case 'PutTask': return $1.PutTaskReq();
-      case 'UpdateTask': return $1.UpdateTaskReq();
-      case 'ListTask': return $1.ListTaskReq();
-      case 'GetTemplate': return $1.GetTemplateReq();
-      case 'DelTemplate': return $1.DelTemplateReq();
-      case 'PutTemplate': return $1.PutTemplateReq();
-      case 'UpdateTemplate': return $1.UpdateTemplateReq();
-      case 'ListTemplate': return $1.ListTemplateReq();
-      case 'GetVariable': return $1.GetVariableReq();
-      case 'DelVariable': return $1.DelVariableReq();
-      case 'PutVariable': return $1.PutVariableReq();
-      case 'UpdateVariable': return $1.UpdateVariableReq();
-      case 'ListVariable': return $1.ListVariableReq();
+      case 'RunTask': return $0.RunTaskReq();
+      case 'GetTask': return $0.GetTaskReq();
+      case 'DelTask': return $0.DelTaskReq();
+      case 'PutTask': return $0.PutTaskReq();
+      case 'UpdateTask': return $0.UpdateTaskReq();
+      case 'ListTask': return $0.ListTaskReq();
+      case 'GetTemplate': return $0.GetTemplateReq();
+      case 'DelTemplate': return $0.DelTemplateReq();
+      case 'PutTemplate': return $0.PutTemplateReq();
+      case 'UpdateTemplate': return $0.UpdateTemplateReq();
+      case 'ListTemplate': return $0.ListTemplateReq();
+      case 'GetVariable': return $0.GetVariableReq();
+      case 'DelVariable': return $0.DelVariableReq();
+      case 'PutVariable': return $0.PutVariableReq();
+      case 'UpdateVariable': return $0.UpdateVariableReq();
+      case 'ListVariable': return $0.ListVariableReq();
       default: throw $core.ArgumentError('Unknown method: $method');
     }
   }

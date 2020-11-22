@@ -164,7 +164,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -224,7 +224,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -254,7 +254,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -292,7 +292,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -352,7 +352,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -382,7 +382,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -420,7 +420,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -480,7 +480,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -510,7 +510,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {
@@ -543,6 +543,9 @@
     }
   },
   "definitions": {
+    "apiEmpty": {
+      "type": "object"
+    },
     "apiListTaskRes": {
       "type": "object",
       "properties": {
