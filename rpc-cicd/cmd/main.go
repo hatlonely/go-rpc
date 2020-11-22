@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -112,6 +113,7 @@ type AllowCORSOptions struct {
 	AccessControlAllowOrigin string
 }
 
+// 参考 https://github.com/grpc-ecosystem/grpc-gateway/issues/544
 func AllowCORSWithOptions(h http.Handler, options *AllowCORSOptions) http.Handler {
 	var re *regexp.Regexp
 	if options.AccessControlAllowOrigin != "*" {
@@ -124,6 +126,14 @@ func AllowCORSWithOptions(h http.Handler, options *AllowCORSOptions) http.Handle
 				w.Header().Set("Access-Control-Allow-Origin", "*")
 			} else if re.MatchString(origin) {
 				w.Header().Set("Access-Control-Allow-Origin", origin)
+			}
+
+			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {
+				headers := []string{"Content-Type", "Accept"}
+				w.Header().Set("Access-Control-Allow-Headers", strings.Join(headers, ","))
+				methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE"}
+				w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods, ","))
+				return
 			}
 		}
 		h.ServeHTTP(w, r)

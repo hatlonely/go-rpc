@@ -163,7 +163,7 @@ service CICDService {
 
   rpc ListTask(ListTaskReq) returns (ListTaskRes) {
     option (google.api.http) = {
-      get: "/v1/listTask"
+      get: "/v1/task"
     };
   }
 
@@ -195,7 +195,7 @@ service CICDService {
 
   rpc ListTemplate(ListTemplateReq) returns (ListTemplateRes) {
     option (google.api.http) = {
-      get: "/v1/listTemplate"
+      get: "/v1/template"
     };
   }
 
@@ -227,7 +227,7 @@ service CICDService {
 
   rpc ListVariable(ListVariableReq) returns (ListVariableRes) {
     option (google.api.http) = {
-      get: "/v1/listVariable"
+      get: "/v1/variable"
     };
   }
 }

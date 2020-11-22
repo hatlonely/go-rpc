@@ -11,7 +11,39 @@
     "application/json"
   ],
   "paths": {
-    "/v1/listTask": {
+    "/v1/runTask": {
+      "post": {
+        "operationId": "CICDService_RunTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiRunTaskRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiRunTaskReq"
+            }
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      }
+    },
+    "/v1/task": {
       "get": {
         "operationId": "CICDService_ListTask",
         "responses": {
@@ -47,117 +79,7 @@
         "tags": [
           "CICDService"
         ]
-      }
-    },
-    "/v1/listTemplate": {
-      "get": {
-        "operationId": "CICDService_ListTemplate",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiListTemplateRes"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "CICDService"
-        ]
-      }
-    },
-    "/v1/listVariable": {
-      "get": {
-        "operationId": "CICDService_ListVariable",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiListVariableRes"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "CICDService"
-        ]
-      }
-    },
-    "/v1/runTask": {
-      "post": {
-        "operationId": "CICDService_RunTask",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiRunTaskRes"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiRunTaskReq"
-            }
-          }
-        ],
-        "tags": [
-          "CICDService"
-        ]
-      }
-    },
-    "/v1/task": {
+      },
       "post": {
         "operationId": "CICDService_PutTask",
         "responses": {
@@ -286,6 +208,42 @@
       }
     },
     "/v1/template": {
+      "get": {
+        "operationId": "CICDService_ListTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListTemplateRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      },
       "post": {
         "operationId": "CICDService_PutTemplate",
         "responses": {
@@ -414,6 +372,42 @@
       }
     },
     "/v1/variable": {
+      "get": {
+        "operationId": "CICDService_ListVariable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListVariableRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      },
       "post": {
         "operationId": "CICDService_PutVariable",
         "responses": {

@@ -1509,7 +1509,7 @@ var (
 
 	pattern_CICDService_UpdateTask_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "task", "task.id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_CICDService_ListTask_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "listTask"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_CICDService_ListTask_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "task"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_CICDService_GetTemplate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "template", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -1519,7 +1519,7 @@ var (
 
 	pattern_CICDService_UpdateTemplate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "template", "template.id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_CICDService_ListTemplate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "listTemplate"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_CICDService_ListTemplate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "template"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_CICDService_GetVariable_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "variable", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -1529,7 +1529,7 @@ var (
 
 	pattern_CICDService_UpdateVariable_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "variable", "variable.id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_CICDService_ListVariable_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "listVariable"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_CICDService_ListVariable_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "variable"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
