@@ -12,12 +12,12 @@ option (gogoproto.goproto_sizecache_all) = false;
 
 message Empty {}
 
-message ScriptTemplate {
-  string language = 1;
-  string script = 2;
-}
-
 message Template {
+  message ScriptTemplate {
+    string language = 1;
+    string script = 2;
+  }
+
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
   string name = 2 [(gogoproto.moretags) = "bson:\"name,omitempty\""];
   string description = 3 [(gogoproto.moretags) = "bson:\"description,omitempty\""];

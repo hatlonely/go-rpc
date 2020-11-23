@@ -537,6 +537,17 @@
     }
   },
   "definitions": {
+    "TemplateScriptTemplate": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        }
+      }
+    },
     "apiEmpty": {
       "type": "object"
     },
@@ -598,17 +609,6 @@
         }
       }
     },
-    "apiScriptTemplate": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "type": "string"
-        },
-        "script": {
-          "type": "string"
-        }
-      }
-    },
     "apiTask": {
       "type": "object",
       "properties": {
@@ -651,7 +651,7 @@
           "type": "string"
         },
         "scriptTemplate": {
-          "$ref": "#/definitions/apiScriptTemplate"
+          "$ref": "#/definitions/TemplateScriptTemplate"
         }
       }
     },
