@@ -45,6 +45,7 @@ message UpdateTemplateReq {
 message ListTemplateReq {
   int64 offset = 1;
   int64 limit = 2;
+  bool brief = 3;
 }
 
 message ListTemplateRes {
@@ -77,6 +78,7 @@ message UpdateVariableReq {
 message ListVariableReq {
   int64 offset = 1;
   int64 limit = 2;
+  bool brief = 3;
 }
 
 message ListVariableRes {
@@ -110,6 +112,7 @@ message UpdateTaskReq {
 message ListTaskReq {
   int64 offset = 1;
   int64 limit = 2;
+  bool brief = 3;
 }
 
 message ListTaskRes {

@@ -63,6 +63,7 @@ const ListTemplateReq$json = const {
   '2': const [
     const {'1': 'offset', '3': 1, '4': 1, '5': 3, '10': 'offset'},
     const {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    const {'1': 'brief', '3': 3, '4': 1, '5': 8, '10': 'brief'},
   ],
 };
 
@@ -116,6 +117,7 @@ const ListVariableReq$json = const {
   '2': const [
     const {'1': 'offset', '3': 1, '4': 1, '5': 3, '10': 'offset'},
     const {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    const {'1': 'brief', '3': 3, '4': 1, '5': 8, '10': 'brief'},
   ],
 };
 
@@ -170,6 +172,7 @@ const ListTaskReq$json = const {
   '2': const [
     const {'1': 'offset', '3': 1, '4': 1, '5': 3, '10': 'offset'},
     const {'1': 'limit', '3': 2, '4': 1, '5': 3, '10': 'limit'},
+    const {'1': 'brief', '3': 3, '4': 1, '5': 8, '10': 'brief'},
   ],
 };
 

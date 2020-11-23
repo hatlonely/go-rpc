@@ -74,6 +74,13 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "brief",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -238,6 +245,13 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "brief",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -402,6 +416,13 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "brief",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
