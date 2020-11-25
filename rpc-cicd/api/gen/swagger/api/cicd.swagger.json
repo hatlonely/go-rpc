@@ -642,8 +642,11 @@
         "description": {
           "type": "string"
         },
-        "templateID": {
-          "type": "string"
+        "templateIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "variableIDs": {
           "type": "array",

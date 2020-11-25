@@ -89,7 +89,7 @@ message Task {
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
   string name = 2 [(gogoproto.moretags) = "bson:\"name,omitempty\""];
   string description = 3 [(gogoproto.moretags) = "bson:\"description,omitempty\""];
-  string templateID = 4 [(gogoproto.moretags) = "bson:\"templateID,omitempty\""];
+  repeated string templateIDs = 4 [(gogoproto.moretags) = "bson:\"templateIDs,omitempty\""];
   repeated string variableIDs = 5 [(gogoproto.moretags) = "bson:\"variableIDs,omitempty\""];
 }
 

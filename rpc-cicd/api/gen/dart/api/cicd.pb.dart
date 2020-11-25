@@ -758,7 +758,7 @@ class Task extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'templateID', protoName: 'templateID')
+    ..pPS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'templateIDs', protoName: 'templateIDs')
     ..pPS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'variableIDs', protoName: 'variableIDs')
     ..hasRequiredFields = false
   ;
@@ -814,13 +814,7 @@ class Task extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get templateID => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set templateID($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasTemplateID() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearTemplateID() => clearField(4);
+  $core.List<$core.String> get templateIDs => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.List<$core.String> get variableIDs => $_getList(4);
