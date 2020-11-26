@@ -13,4 +13,5 @@ require (
 	go.mongodb.org/mongo-driver v1.4.3
 	google.golang.org/genproto v0.0.0-20201116144945-7adebfbe6a3f
 	google.golang.org/grpc v1.33.2
+	google.golang.org/protobuf v1.25.0
 )

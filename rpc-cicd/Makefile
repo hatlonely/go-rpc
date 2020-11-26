@@ -20,7 +20,8 @@ codegen: api/cicd.proto
 	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
 	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
 	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
-	protoc -I.. -I. --dart_out=api/gen/dart $<
+	#protoc -I.. -I. --dart_out=grpc:api/gen/dart $<
+	java -jar $$HOME/local/swagger-codegen-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -l dart -o api/gen/dart
 
 .PHONY: dockerenv
 dockerenv:
