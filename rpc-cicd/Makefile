@@ -1,4 +1,4 @@
-binary=oauth
+binary=cicd
 dockeruser=hatlonely
 gituser=hatlonely
 repository=go-rpc-oauth
