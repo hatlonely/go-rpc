@@ -1,6 +1,9 @@
 {
   "http": {
-    "port": 80
+    "port": 80,
+    "cors": {
+      "allowAll": true
+    }
   },
   "grpc": {
     "port": 6080
@@ -16,9 +19,6 @@
     "templateCollection": "template",
     "variableCollection": "variable",
     "timeout": "3s"
-  },
-  "allowCORS": {
-    "accessControlAllowOrigin": "*"
   },
   "logger": {
     "grpc": {

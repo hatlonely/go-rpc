@@ -6,8 +6,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"regexp"
-	"strings"
 
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -31,6 +29,7 @@ type Options struct {
 
 	Http struct {
 		Port int
+		Cors rpcx.CORSOptions
 	}
 	Grpc struct {
 		Port int
@@ -38,8 +37,7 @@ type Options struct {
 
 	Service service.Options
 
-	Mongo     cli.MongoOptions
-	AllowCORS AllowCORSOptions
+	Mongo cli.MongoOptions
 
 	Logger struct {
 		Info logger.Options
@@ -106,36 +104,5 @@ func main() {
 		ctx, muxServer, fmt.Sprintf("0.0.0.0:%v", options.Grpc.Port), []grpc.DialOption{grpc.WithInsecure()},
 	))
 	infoLog.Info(options)
-	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), AllowCORSWithOptions(handlers.CombinedLoggingHandler(os.Stdout, muxServer), &options.AllowCORS)))
-}
-
-type AllowCORSOptions struct {
-	AccessControlAllowOrigin string
-}
-
-// 参考 https://github.com/grpc-ecosystem/grpc-gateway/issues/544
-func AllowCORSWithOptions(h http.Handler, options *AllowCORSOptions) http.Handler {
-	var re *regexp.Regexp
-	if options.AccessControlAllowOrigin != "*" {
-		re = regexp.MustCompile(options.AccessControlAllowOrigin)
-	}
-
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if origin := r.Header.Get("Origin"); origin != "" && options.AccessControlAllowOrigin != "" {
-			if options.AccessControlAllowOrigin == "*" {
-				w.Header().Set("Access-Control-Allow-Origin", "*")
-			} else if re.MatchString(origin) {
-				w.Header().Set("Access-Control-Allow-Origin", origin)
-			}
-
-			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {
-				headers := []string{"Content-Type", "Accept"}
-				w.Header().Set("Access-Control-Allow-Headers", strings.Join(headers, ","))
-				methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE"}
-				w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods, ","))
-				return
-			}
-		}
-		h.ServeHTTP(w, r)
-	})
+	Must(http.ListenAndServe(fmt.Sprintf(":%v", options.Http.Port), rpcx.CORSWithOptions(handlers.CombinedLoggingHandler(os.Stdout, muxServer), &options.Http.Cors)))
 }
