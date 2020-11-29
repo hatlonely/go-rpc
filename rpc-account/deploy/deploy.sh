@@ -124,6 +124,7 @@ config: |
     "logger": {
       "grpc": {
         "level": "Info",
+        "flatMap": true,
         "writers": [{
           "type": "RotateFile",
           "rotateFileWriter": {
@@ -131,6 +132,18 @@ config: |
             "maxAge": "24h",
             "formatter": {
               "type": "Json"
+            }
+          }
+        }, {
+          "type": "ElasticSearch",
+          "elasticSearchWriter": {
+            "index": "grpc",
+            "idField": "requestID",
+            "timeout": "200ms",
+            "msgChanLen": 200,
+            "workerNum": 2,
+            "elasticSearch": {
+              "uri": "http://elasticsearch:9200"
             }
           }
         }]

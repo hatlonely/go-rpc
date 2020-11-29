@@ -87,7 +87,7 @@ func main() {
 	svc, err := service.NewAccountServiceWithOptions(mysqlCli, redisCli, emailCli, &options.Service)
 	Must(err)
 
-	rpcServer := grpc.NewServer(rpcx.WithGRPCDecorator(grpcLog))
+	rpcServer := grpc.NewServer(rpcx.GRPCUnaryInterceptor(grpcLog, rpcx.WithDefaultValidator()))
 	api.RegisterAccountServiceServer(rpcServer, svc)
 
 	go func() {
@@ -97,10 +97,10 @@ func main() {
 	}()
 
 	muxServer := runtime.NewServeMux(
-		rpcx.WithMuxMetadata(),
-		rpcx.WithMuxIncomingHeaderMatcher(),
-		rpcx.WithMuxOutgoingHeaderMatcher(),
-		rpcx.WithMuxProtoErrorHandler(),
+		rpcx.MuxWithMetadata(),
+		rpcx.MuxWithIncomingHeaderMatcher(),
+		rpcx.MuxWithOutgoingHeaderMatcher(),
+		rpcx.MuxWithProtoErrorHandler(),
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
