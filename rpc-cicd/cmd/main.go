@@ -71,7 +71,7 @@ func main() {
 	Must(err)
 	Must(bind.Bind(&options, []bind.Getter{
 		flag.Instance(), bind.NewEnvGetter(bind.WithEnvPrefix("ACCOUNT")), cfg,
-	}, refx.WithCamelName()))
+	}, refx.WithCamelName(), refx.WithDefaultValidator()))
 
 	grpcLog, err := logger.NewLoggerWithOptions(&options.Logger.Grpc)
 	Must(err)
@@ -83,7 +83,7 @@ func main() {
 
 	svc, err := service.NewCICDServiceWithOptions(mongoCli, &options.Service)
 	Must(err)
-	rpcServer := grpc.NewServer(rpcx.WithGRPCDecorator(grpcLog))
+	rpcServer := grpc.NewServer(rpcx.GRPCUnaryInterceptor(grpcLog, rpcx.WithDefaultValidator()))
 	api.RegisterCICDServiceServer(rpcServer, svc)
 
 	go func() {
@@ -93,10 +93,10 @@ func main() {
 	}()
 
 	muxServer := runtime.NewServeMux(
-		rpcx.WithMuxMetadata(),
-		rpcx.WithMuxIncomingHeaderMatcher(),
-		rpcx.WithMuxOutgoingHeaderMatcher(),
-		rpcx.WithMuxProtoErrorHandler(),
+		rpcx.MuxWithMetadata(),
+		rpcx.MuxWithIncomingHeaderMatcher(),
+		rpcx.MuxWithOutgoingHeaderMatcher(),
+		rpcx.MuxWithProtoErrorHandler(),
 	)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
