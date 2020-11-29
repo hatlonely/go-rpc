@@ -13,12 +13,10 @@ import (
 )
 
 func (s *AncientService) GetAncient(ctx context.Context, req *api.GetAncientReq) (*api.Ancient, error) {
-	requestID := rpcx.MetaDataGetRequestID(ctx)
-
 	shici := &storage.ShiCi{}
 	if err := s.mysqlCli.Where("id=?", req.Id).First(shici).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, rpcx.NewErrorWithoutReferf(codes.NotFound, requestID, "NotFound", "shici [%v] not exist", req.Id)
+			return nil, rpcx.NewErrorf(codes.NotFound, "NotFound", "shici [%v] not exist", req.Id)
 		}
 		return nil, errors.Wrapf(err, "mysql select shici [%v] failed", req.Id)
 	}

@@ -26,23 +26,23 @@ func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*a
 	if strx.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return nil, rpcx.NewErrorWithoutReferf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
+				return nil, rpcx.NewErrorf(codes.PermissionDenied, "Forbidden", "user [%v] not exist", req.Username)
 			}
 			return nil, errors.Wrapf(err, "mysql select user [%v] failed", req.Username)
 		}
 	} else if strx.ReEmail.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("email=?", req.Username).First(a).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return nil, rpcx.NewErrorWithoutReferf(codes.PermissionDenied, requestID, "Forbidden", "user [%v] not exist", req.Username)
+				return nil, rpcx.NewErrorf(codes.PermissionDenied, "Forbidden", "user [%v] not exist", req.Username)
 			}
 			return nil, errors.Wrapf(err, "mysql select user [%v] failed", req.Username)
 		}
 	} else {
-		return nil, rpcx.NewErrorWithoutReferf(codes.InvalidArgument, requestID, "InvalidArgument", "user [%v] is invalid", req.Username)
+		return nil, rpcx.NewErrorf(codes.InvalidArgument, "InvalidArgument", "user [%v] is invalid", req.Username)
 	}
 
 	if a.Password != req.Password {
-		return nil, rpcx.NewErrorWithoutReferf(codes.PermissionDenied, requestID, "Forbidden", "password is incorrect")
+		return nil, rpcx.NewErrorf(codes.PermissionDenied, "Forbidden", "password is incorrect")
 	}
 
 	token := GenerateToken()
