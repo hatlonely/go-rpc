@@ -20,8 +20,6 @@ func GenerateToken() string {
 }
 
 func (s *AccountService) SignIn(ctx context.Context, req *account.SignInReq) (*account.SignInRes, error) {
-	requestID := rpcx.MetaDataGetRequestID(ctx)
-
 	a := &storage.Account{}
 	if strx.RePhone.MatchString(req.Username) {
 		if err := s.mysqlCli.Where("phone=?", req.Username).First(a).Error; err != nil {
