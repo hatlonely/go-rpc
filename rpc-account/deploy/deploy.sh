@@ -143,7 +143,7 @@ config: |
             "msgChanLen": 200,
             "workerNum": 2,
             "elasticSearch": {
-              "uri": "http://elasticsearch:9200"
+              "uri": "http://${ElasticsearchServer}"
             }
           }
         }]
