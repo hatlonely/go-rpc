@@ -14,12 +14,10 @@ import (
 )
 
 func (s *ArticleService) GetArticle(ctx context.Context, req *api.GetArticleReq) (*api.Article, error) {
-	requestID := rpcx.MetaDataGetRequestID(ctx)
-
 	article := &storage.Article{}
 	if err := s.mysqlCli.Where("id=?", req.Id).First(article).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, rpcx.NewErrorWithoutReferf(codes.NotFound, requestID, "NotFound", "article [%v] not exist", req.Id)
+			return nil, rpcx.NewErrorf(codes.NotFound, "NotFound", "article [%v] not exist", req.Id)
 		}
 		return nil, errors.Wrapf(err, "mysql select article [%v] failed", req.Id)
 	}
