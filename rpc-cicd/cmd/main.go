@@ -70,7 +70,7 @@ func main() {
 	cfg, err := config.NewConfigWithSimpleFile(options.ConfigPath)
 	Must(err)
 	Must(bind.Bind(&options, []bind.Getter{
-		flag.Instance(), bind.NewEnvGetter(bind.WithEnvPrefix("ACCOUNT")), cfg,
+		flag.Instance(), bind.NewEnvGetter(bind.WithEnvPrefix("CICD")), cfg,
 	}, refx.WithCamelName(), refx.WithDefaultValidator()))
 
 	grpcLog, err := logger.NewLoggerWithOptions(&options.Logger.Grpc)
