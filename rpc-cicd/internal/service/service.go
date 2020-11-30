@@ -57,8 +57,8 @@ type CICDService struct {
 
 type Options struct {
 	Database           string
-	TaskCollection     string
-	TemplateCollection string
-	VariableCollection string
-	Timeout            time.Duration
+	TaskCollection     string        `dft:"task"`
+	TemplateCollection string        `dft:"template"`
+	VariableCollection string        `dft:"variable"`
+	Timeout            time.Duration `dft:"1s"`
 }
