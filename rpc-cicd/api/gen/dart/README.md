@@ -69,7 +69,9 @@ Class | Method | HTTP request | Description
 *CICDServiceApi* | [**cICDServiceGetJob**](docs//CICDServiceApi.md#cicdservicegetjob) | **GET** /v1/job/{id} | 
 *CICDServiceApi* | [**cICDServiceGetTask**](docs//CICDServiceApi.md#cicdservicegettask) | **GET** /v1/task/{id} | 
 *CICDServiceApi* | [**cICDServiceGetTemplate**](docs//CICDServiceApi.md#cicdservicegettemplate) | **GET** /v1/template/{id} | 
+*CICDServiceApi* | [**cICDServiceGetTemplates**](docs//CICDServiceApi.md#cicdservicegettemplates) | **POST** /v1/getTemplates | 
 *CICDServiceApi* | [**cICDServiceGetVariable**](docs//CICDServiceApi.md#cicdservicegetvariable) | **GET** /v1/variable/{id} | 
+*CICDServiceApi* | [**cICDServiceGetVariables**](docs//CICDServiceApi.md#cicdservicegetvariables) | **POST** /v1/getVariables | 
 *CICDServiceApi* | [**cICDServiceListJob**](docs//CICDServiceApi.md#cicdservicelistjob) | **GET** /v1/job | 
 *CICDServiceApi* | [**cICDServiceListTask**](docs//CICDServiceApi.md#cicdservicelisttask) | **GET** /v1/task | 
 *CICDServiceApi* | [**cICDServiceListTemplate**](docs//CICDServiceApi.md#cicdservicelisttemplate) | **GET** /v1/template | 
@@ -86,6 +88,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ApiEmpty](docs//ApiEmpty.md)
+ - [ApiGetTemplatesReq](docs//ApiGetTemplatesReq.md)
+ - [ApiGetVariablesReq](docs//ApiGetVariablesReq.md)
  - [ApiJob](docs//ApiJob.md)
  - [ApiListJobRes](docs//ApiListJobRes.md)
  - [ApiListTaskRes](docs//ApiListTaskRes.md)

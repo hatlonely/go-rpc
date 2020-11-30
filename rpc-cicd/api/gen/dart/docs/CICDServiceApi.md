@@ -16,7 +16,9 @@ Method | HTTP request | Description
 [**cICDServiceGetJob**](CICDServiceApi.md#cICDServiceGetJob) | **GET** /v1/job/{id} | 
 [**cICDServiceGetTask**](CICDServiceApi.md#cICDServiceGetTask) | **GET** /v1/task/{id} | 
 [**cICDServiceGetTemplate**](CICDServiceApi.md#cICDServiceGetTemplate) | **GET** /v1/template/{id} | 
+[**cICDServiceGetTemplates**](CICDServiceApi.md#cICDServiceGetTemplates) | **POST** /v1/getTemplates | 
 [**cICDServiceGetVariable**](CICDServiceApi.md#cICDServiceGetVariable) | **GET** /v1/variable/{id} | 
+[**cICDServiceGetVariables**](CICDServiceApi.md#cICDServiceGetVariables) | **POST** /v1/getVariables | 
 [**cICDServiceListJob**](CICDServiceApi.md#cICDServiceListJob) | **GET** /v1/job | 
 [**cICDServiceListTask**](CICDServiceApi.md#cICDServiceListTask) | **GET** /v1/task | 
 [**cICDServiceListTemplate**](CICDServiceApi.md#cICDServiceListTemplate) | **GET** /v1/template | 
@@ -317,6 +319,47 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **cICDServiceGetTemplates**
+> ApiListTemplateRes cICDServiceGetTemplates(body)
+
+
+
+### Example 
+```dart
+import 'package:swagger/api.dart';
+
+var api_instance = new CICDServiceApi();
+var body = new ApiGetTemplatesReq(); // ApiGetTemplatesReq | 
+
+try { 
+    var result = api_instance.cICDServiceGetTemplates(body);
+    print(result);
+} catch (e) {
+    print("Exception when calling CICDServiceApi->cICDServiceGetTemplates: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ApiGetTemplatesReq**](ApiGetTemplatesReq.md)|  | 
+
+### Return type
+
+[**ApiListTemplateRes**](ApiListTemplateRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **cICDServiceGetVariable**
 > ApiVariable cICDServiceGetVariable(id)
 
@@ -346,6 +389,47 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiVariable**](ApiVariable.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **cICDServiceGetVariables**
+> ApiListVariableRes cICDServiceGetVariables(body)
+
+
+
+### Example 
+```dart
+import 'package:swagger/api.dart';
+
+var api_instance = new CICDServiceApi();
+var body = new ApiGetVariablesReq(); // ApiGetVariablesReq | 
+
+try { 
+    var result = api_instance.cICDServiceGetVariables(body);
+    print(result);
+} catch (e) {
+    print("Exception when calling CICDServiceApi->cICDServiceGetVariables: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ApiGetVariablesReq**](ApiGetVariablesReq.md)|  | 
+
+### Return type
+
+[**ApiListVariableRes**](ApiListVariableRes.md)
 
 ### Authorization
 

@@ -30,6 +30,10 @@ message GetTemplateReq {
   string id = 1;
 }
 
+message GetTemplatesReq {
+  repeated string ids = 1;
+}
+
 message DelTemplateReq {
   string id = 1;
 }
@@ -61,6 +65,10 @@ message Variable {
 
 message GetVariableReq {
   string id = 1;
+}
+
+message GetVariablesReq {
+  repeated string ids = 1;
 }
 
 message DelVariableReq {
@@ -160,6 +168,27 @@ message ListJobRes {
 }
 
 service CICDService {
+  rpc RunTask(RunTaskReq) returns (RunTaskRes) {
+    option (google.api.http) = {
+      post: "/v1/runTask"
+      body: "*"
+    };
+  }
+
+  rpc GetTemplates(GetTemplatesReq) returns (ListTemplateRes) {
+    option (google.api.http) = {
+      post: "/v1/getTemplates"
+      body: "*"
+    };
+  }
+
+  rpc GetVariables(GetVariablesReq) returns (ListVariableRes) {
+    option (google.api.http) = {
+      post: "/v1/getVariables"
+      body: "*"
+    };
+  }
+
   rpc GetJob(GetJobReq) returns (Job) {
     option (google.api.http) = {
       get: "/v1/job/{id}"
@@ -175,13 +204,6 @@ service CICDService {
   rpc ListJob(ListJobReq) returns (ListJobRes) {
     option (google.api.http) = {
       get: "/v1/job"
-    };
-  }
-
-  rpc RunTask(RunTaskReq) returns (RunTaskRes) {
-    option (google.api.http) = {
-      post: "/v1/runTask"
-      body: "*"
     };
   }
 

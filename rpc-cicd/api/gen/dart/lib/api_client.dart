@@ -39,6 +39,10 @@ class ApiClient {
           return value is double ? value : double.parse('$value');
         case 'ApiEmpty':
           return new ApiEmpty.fromJson(value);
+        case 'ApiGetTemplatesReq':
+          return new ApiGetTemplatesReq.fromJson(value);
+        case 'ApiGetVariablesReq':
+          return new ApiGetVariablesReq.fromJson(value);
         case 'ApiJob':
           return new ApiJob.fromJson(value);
         case 'ApiListJobRes':

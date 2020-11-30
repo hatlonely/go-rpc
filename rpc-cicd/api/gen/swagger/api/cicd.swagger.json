@@ -11,6 +11,70 @@
     "application/json"
   ],
   "paths": {
+    "/v1/getTemplates": {
+      "post": {
+        "operationId": "CICDService_GetTemplates",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListTemplateRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetTemplatesReq"
+            }
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      }
+    },
+    "/v1/getVariables": {
+      "post": {
+        "operationId": "CICDService_GetVariables",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListVariableRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetVariablesReq"
+            }
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      }
+    },
     "/v1/job": {
       "get": {
         "operationId": "CICDService_ListJob",
@@ -674,6 +738,28 @@
     },
     "apiEmpty": {
       "type": "object"
+    },
+    "apiGetTemplatesReq": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiGetVariablesReq": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "apiJob": {
       "type": "object",
