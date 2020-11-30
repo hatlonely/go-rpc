@@ -91,7 +91,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiJob"
+              "$ref": "#/definitions/apiEmpty"
             }
           },
           "default": {

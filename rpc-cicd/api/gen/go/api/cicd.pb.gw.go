@@ -86,7 +86,7 @@ func local_request_CICDService_GetJob_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_CICDService_DelJob_0(ctx context.Context, marshaler runtime.Marshaler, client CICDServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetJobReq
+	var protoReq DelJobReq
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -113,7 +113,7 @@ func request_CICDService_DelJob_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 func local_request_CICDService_DelJob_0(ctx context.Context, marshaler runtime.Marshaler, server CICDServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetJobReq
+	var protoReq DelJobReq
 	var metadata runtime.ServerMetadata
 
 	var (

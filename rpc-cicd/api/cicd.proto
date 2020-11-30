@@ -166,7 +166,7 @@ service CICDService {
     };
   }
 
-  rpc DelJob(GetJobReq) returns (Job) {
+  rpc DelJob(DelJobReq) returns (Empty) {
     option (google.api.http) = {
       delete: "/v1/job/{id}"
     };

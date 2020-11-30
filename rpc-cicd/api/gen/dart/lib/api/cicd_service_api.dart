@@ -10,7 +10,7 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<ApiJob> cICDServiceDelJob(String id) async {
+  Future<ApiEmpty> cICDServiceDelJob(String id) async {
     Object postBody = null;
 
     // verify required params are set
@@ -54,7 +54,7 @@ class CICDServiceApi {
       throw new ApiException(response.statusCode, response.body);
     } else if(response.body != null) {
       return 
-          apiClient.deserialize(response.body, 'ApiJob') as ApiJob ;
+          apiClient.deserialize(response.body, 'ApiEmpty') as ApiEmpty ;
     } else {
       return null;
     }

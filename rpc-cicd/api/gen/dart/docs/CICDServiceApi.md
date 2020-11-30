@@ -31,7 +31,7 @@ Method | HTTP request | Description
 
 
 # **cICDServiceDelJob**
-> ApiJob cICDServiceDelJob(id)
+> ApiEmpty cICDServiceDelJob(id)
 
 
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiJob**](ApiJob.md)
+[**ApiEmpty**](ApiEmpty.md)
 
 ### Authorization
 

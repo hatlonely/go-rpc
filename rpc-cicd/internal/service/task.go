@@ -13,10 +13,6 @@ import (
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
 )
 
-func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.RunTaskRes, error) {
-	return &api.RunTaskRes{}, nil
-}
-
 func (s *CICDService) GetTask(ctx context.Context, req *api.GetTaskReq) (*api.Task, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	objectID, err := primitive.ObjectIDFromHex(req.Id)
