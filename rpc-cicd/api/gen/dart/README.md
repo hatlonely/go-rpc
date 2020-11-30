@@ -48,10 +48,10 @@ var api_instance = new CICDServiceApi();
 var id = id_example; // String | 
 
 try {
-    var result = api_instance.cICDServiceDelTask(id);
+    var result = api_instance.cICDServiceDelJob(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelTask: $e\n");
+    print("Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n");
 }
 
 ```
@@ -62,12 +62,15 @@ All URIs are relative to *https://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CICDServiceApi* | [**cICDServiceDelJob**](docs//CICDServiceApi.md#cicdservicedeljob) | **DELETE** /v1/job/{id} | 
 *CICDServiceApi* | [**cICDServiceDelTask**](docs//CICDServiceApi.md#cicdservicedeltask) | **DELETE** /v1/task/{id} | 
 *CICDServiceApi* | [**cICDServiceDelTemplate**](docs//CICDServiceApi.md#cicdservicedeltemplate) | **DELETE** /v1/template/{id} | 
 *CICDServiceApi* | [**cICDServiceDelVariable**](docs//CICDServiceApi.md#cicdservicedelvariable) | **DELETE** /v1/variable/{id} | 
+*CICDServiceApi* | [**cICDServiceGetJob**](docs//CICDServiceApi.md#cicdservicegetjob) | **GET** /v1/job/{id} | 
 *CICDServiceApi* | [**cICDServiceGetTask**](docs//CICDServiceApi.md#cicdservicegettask) | **GET** /v1/task/{id} | 
 *CICDServiceApi* | [**cICDServiceGetTemplate**](docs//CICDServiceApi.md#cicdservicegettemplate) | **GET** /v1/template/{id} | 
 *CICDServiceApi* | [**cICDServiceGetVariable**](docs//CICDServiceApi.md#cicdservicegetvariable) | **GET** /v1/variable/{id} | 
+*CICDServiceApi* | [**cICDServiceListJob**](docs//CICDServiceApi.md#cicdservicelistjob) | **GET** /v1/job | 
 *CICDServiceApi* | [**cICDServiceListTask**](docs//CICDServiceApi.md#cicdservicelisttask) | **GET** /v1/task | 
 *CICDServiceApi* | [**cICDServiceListTemplate**](docs//CICDServiceApi.md#cicdservicelisttemplate) | **GET** /v1/template | 
 *CICDServiceApi* | [**cICDServiceListVariable**](docs//CICDServiceApi.md#cicdservicelistvariable) | **GET** /v1/variable | 
@@ -83,6 +86,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ApiEmpty](docs//ApiEmpty.md)
+ - [ApiJob](docs//ApiJob.md)
+ - [ApiListJobRes](docs//ApiListJobRes.md)
  - [ApiListTaskRes](docs//ApiListTaskRes.md)
  - [ApiListTemplateRes](docs//ApiListTemplateRes.md)
  - [ApiListVariableRes](docs//ApiListVariableRes.md)

@@ -6,3 +6,4 @@ data/
 *.bk
 docker/
 tmp/
+third/

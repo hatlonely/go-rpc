@@ -9,12 +9,15 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cICDServiceDelJob**](CICDServiceApi.md#cICDServiceDelJob) | **DELETE** /v1/job/{id} | 
 [**cICDServiceDelTask**](CICDServiceApi.md#cICDServiceDelTask) | **DELETE** /v1/task/{id} | 
 [**cICDServiceDelTemplate**](CICDServiceApi.md#cICDServiceDelTemplate) | **DELETE** /v1/template/{id} | 
 [**cICDServiceDelVariable**](CICDServiceApi.md#cICDServiceDelVariable) | **DELETE** /v1/variable/{id} | 
+[**cICDServiceGetJob**](CICDServiceApi.md#cICDServiceGetJob) | **GET** /v1/job/{id} | 
 [**cICDServiceGetTask**](CICDServiceApi.md#cICDServiceGetTask) | **GET** /v1/task/{id} | 
 [**cICDServiceGetTemplate**](CICDServiceApi.md#cICDServiceGetTemplate) | **GET** /v1/template/{id} | 
 [**cICDServiceGetVariable**](CICDServiceApi.md#cICDServiceGetVariable) | **GET** /v1/variable/{id} | 
+[**cICDServiceListJob**](CICDServiceApi.md#cICDServiceListJob) | **GET** /v1/job | 
 [**cICDServiceListTask**](CICDServiceApi.md#cICDServiceListTask) | **GET** /v1/task | 
 [**cICDServiceListTemplate**](CICDServiceApi.md#cICDServiceListTemplate) | **GET** /v1/template | 
 [**cICDServiceListVariable**](CICDServiceApi.md#cICDServiceListVariable) | **GET** /v1/variable | 
@@ -26,6 +29,47 @@ Method | HTTP request | Description
 [**cICDServiceUpdateTemplate**](CICDServiceApi.md#cICDServiceUpdateTemplate) | **PUT** /v1/template/{template.id} | 
 [**cICDServiceUpdateVariable**](CICDServiceApi.md#cICDServiceUpdateVariable) | **PUT** /v1/variable/{variable.id} | 
 
+
+# **cICDServiceDelJob**
+> ApiJob cICDServiceDelJob(id)
+
+
+
+### Example 
+```dart
+import 'package:swagger/api.dart';
+
+var api_instance = new CICDServiceApi();
+var id = id_example; // String | 
+
+try { 
+    var result = api_instance.cICDServiceDelJob(id);
+    print(result);
+} catch (e) {
+    print("Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+
+### Return type
+
+[**ApiJob**](ApiJob.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelTask**
 > ApiEmpty cICDServiceDelTask(id)
@@ -150,6 +194,47 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **cICDServiceGetJob**
+> ApiJob cICDServiceGetJob(id)
+
+
+
+### Example 
+```dart
+import 'package:swagger/api.dart';
+
+var api_instance = new CICDServiceApi();
+var id = id_example; // String | 
+
+try { 
+    var result = api_instance.cICDServiceGetJob(id);
+    print(result);
+} catch (e) {
+    print("Exception when calling CICDServiceApi->cICDServiceGetJob: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+
+### Return type
+
+[**ApiJob**](ApiJob.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **cICDServiceGetTask**
 > ApiTask cICDServiceGetTask(id)
 
@@ -261,6 +346,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiVariable**](ApiVariable.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **cICDServiceListJob**
+> ApiListJobRes cICDServiceListJob(offset, limit, brief)
+
+
+
+### Example 
+```dart
+import 'package:swagger/api.dart';
+
+var api_instance = new CICDServiceApi();
+var offset = offset_example; // String | 
+var limit = limit_example; // String | 
+var brief = true; // bool | 
+
+try { 
+    var result = api_instance.cICDServiceListJob(offset, limit, brief);
+    print(result);
+} catch (e) {
+    print("Exception when calling CICDServiceApi->cICDServiceListJob: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **String**|  | [optional] 
+ **limit** | **String**|  | [optional] 
+ **brief** | **bool**|  | [optional] 
+
+### Return type
+
+[**ApiListJobRes**](ApiListJobRes.md)
 
 ### Authorization
 

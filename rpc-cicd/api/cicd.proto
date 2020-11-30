@@ -120,12 +120,17 @@ message ListTaskRes {
 }
 
 message Job {
+  message Sub {
+    string templateID = 1 [(gogoproto.moretags) = "bson:\"templateID,omitempty\""];
+    string status = 2 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
+    string exitCode = 3 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
+    string stdout = 4 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
+    string stderr = 5 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
+  }
+
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
   string taskID = 2 [(gogoproto.moretags) = "bson:\"taskID,omitempty\""];
   string status = 3 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-  string exitCode = 4 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
-  string stdout = 5 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
-  string stderr = 6 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
 }
 
 message RunTaskReq {
@@ -134,12 +139,45 @@ message RunTaskReq {
 
 message RunTaskRes {
   string jobID = 1;
-  string exitCode = 2;
-  string stdout = 3;
-  string stderr = 4;
+}
+
+message GetJobReq {
+  string id = 1;
+}
+
+message DelJobReq {
+  string id = 1;
+}
+
+message ListJobReq {
+  int64 offset = 1;
+  int64 limit = 2;
+  bool brief = 3;
+}
+
+message ListJobRes {
+  repeated Job jobs = 1;
 }
 
 service CICDService {
+  rpc GetJob(GetJobReq) returns (Job) {
+    option (google.api.http) = {
+      get: "/v1/job/{id}"
+    };
+  }
+
+  rpc DelJob(GetJobReq) returns (Job) {
+    option (google.api.http) = {
+      delete: "/v1/job/{id}"
+    };
+  }
+
+  rpc ListJob(ListJobReq) returns (ListJobRes) {
+    option (google.api.http) = {
+      get: "/v1/job"
+    };
+  }
+
   rpc RunTask(RunTaskReq) returns (RunTaskRes) {
     option (google.api.http) = {
       post: "/v1/runTask"

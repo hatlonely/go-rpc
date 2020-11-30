@@ -11,6 +11,109 @@
     "application/json"
   ],
   "paths": {
+    "/v1/job": {
+      "get": {
+        "operationId": "CICDService_ListJob",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListJobRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "brief",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      }
+    },
+    "/v1/job/{id}": {
+      "get": {
+        "operationId": "CICDService_GetJob",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      },
+      "delete": {
+        "operationId": "CICDService_DelJob",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CICDService"
+        ]
+      }
+    },
     "/v1/runTask": {
       "post": {
         "operationId": "CICDService_RunTask",
@@ -572,6 +675,31 @@
     "apiEmpty": {
       "type": "object"
     },
+    "apiJob": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "taskID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "apiListJobRes": {
+      "type": "object",
+      "properties": {
+        "jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJob"
+          }
+        }
+      }
+    },
     "apiListTaskRes": {
       "type": "object",
       "properties": {
@@ -617,15 +745,6 @@
       "type": "object",
       "properties": {
         "jobID": {
-          "type": "string"
-        },
-        "exitCode": {
-          "type": "string"
-        },
-        "stdout": {
-          "type": "string"
-        },
-        "stderr": {
           "type": "string"
         }
       }

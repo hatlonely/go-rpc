@@ -15,13 +15,13 @@ vendor: go.mod go.sum
 	go mod tidy
 	go mod vendor
 
-codegen: api/cicd.proto
+codegen: api/cicd.proto third/swagger-codegen-cli.jar
 	mkdir -p api/gen/go && mkdir -p api/gen/swagger && mkdir -p api/gen/dart
 	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
 	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
 	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
 	#protoc -I.. -I. --dart_out=grpc:api/gen/dart $<
-	java -jar $$HOME/local/swagger-codegen-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -l dart -o api/gen/dart
+	java -jar third/swagger-codegen-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -l dart -o api/gen/dart
 
 .PHONY: dockerenv
 dockerenv:
@@ -50,3 +50,7 @@ image: dockerenv
 	docker exec go-build-env bash -c "cd /data/src/${gituser}/${repository} && make build"
 	docker cp go-build-env:/data/src/${gituser}/${repository}/build/ docker/
 	docker build --tag=${dockeruser}/${repository}:${version} .
+
+third/swagger-codegen-cli.jar:
+	mkdir -p third
+	wget https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.17/swagger-codegen-cli-2.4.17.jar -O third/swagger-codegen-cli.jar

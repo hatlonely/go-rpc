@@ -16,6 +16,8 @@ part 'auth/http_basic_auth.dart';
 part 'api/cicd_service_api.dart';
 
 part 'model/api_empty.dart';
+part 'model/api_job.dart';
+part 'model/api_list_job_res.dart';
 part 'model/api_list_task_res.dart';
 part 'model/api_list_template_res.dart';
 part 'model/api_list_variable_res.dart';
