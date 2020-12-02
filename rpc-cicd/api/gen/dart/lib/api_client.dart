@@ -63,6 +63,8 @@ class ApiClient {
           return new ApiTemplate.fromJson(value);
         case 'ApiVariable':
           return new ApiVariable.fromJson(value);
+        case 'JobSub':
+          return new JobSub.fromJson(value);
         case 'ProtobufAny':
           return new ProtobufAny.fromJson(value);
         case 'RuntimeError':

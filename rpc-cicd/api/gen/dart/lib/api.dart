@@ -28,6 +28,7 @@ part 'model/api_run_task_res.dart';
 part 'model/api_task.dart';
 part 'model/api_template.dart';
 part 'model/api_variable.dart';
+part 'model/job_sub.dart';
 part 'model/protobuf_any.dart';
 part 'model/runtime_error.dart';
 part 'model/template_script_template.dart';

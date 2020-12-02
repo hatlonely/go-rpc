@@ -1,8 +1,13 @@
 package service
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
+	"os/exec"
+	"syscall"
+	"text/template"
 
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
@@ -50,7 +55,7 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
 
 	// 执行 job
-	go s.runTask(jobID.String(), task)
+	go s.runTask(ctx, jobID.String(), task)
 
 	return &api.RunTaskRes{JobID: jobID.String()}, nil
 }
@@ -107,7 +112,7 @@ func (s *CICDService) GetVariables(ctx context.Context, req *api.GetVariablesReq
 	return &api.ListVariableRes{Variables: variables}, nil
 }
 
-func mergeVariables(variables []api.Variable) (map[string]interface{}, error) {
+func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
 	kvs := map[string]interface{}{}
 
 	for _, variable := range variables {
@@ -122,6 +127,79 @@ func mergeVariables(variables []api.Variable) (map[string]interface{}, error) {
 	return kvs, nil
 }
 
-func (s *CICDService) runTask(jobID string, task api.Task) error {
+func (s *CICDService) runTask(ctx context.Context, jobID string, task api.Task) error {
+	getVariablesRes, err := s.GetVariables(ctx, &api.GetVariablesReq{Ids: task.VariableIDs})
+	if err != nil {
+		return errors.Wrap(err, "GetVariables failed")
+	}
+	getTemplatesRes, err := s.GetTemplates(ctx, &api.GetTemplatesReq{Ids: task.TemplateIDs})
+	if err != nil {
+		return errors.Wrap(err, "GetTemplates failed")
+	}
+	kvs, err := mergeVariables(getVariablesRes.Variables)
+	if err != nil {
+		return errors.Wrap(err, "mergeVariables failed")
+	}
+
+	var job api.Job
+	for _, i := range getTemplatesRes.Templates {
+		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
+		if err != nil {
+			return errors.Wrap(err, "create template failed")
+		}
+
+		buf := &bytes.Buffer{}
+		if err := tpl.Execute(buf, kvs); err != nil {
+			return errors.Wrap(err, "tpl execute failed")
+		}
+
+		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, i.ScriptTemplate.Script)
+		if err != nil {
+			return errors.Wrap(err, "Exec failed")
+		}
+
+		job.Subs = append(job.Subs, &api.Job_Sub{
+			TemplateID: i.Id,
+			ExitCode:   int32(exitCode),
+			Stdout:     stdout,
+			Stderr:     stderr,
+			Status:     "Success",
+		})
+
+		fmt.Println(buf.String())
+	}
+
 	return nil
+}
+
+func Exec(interpreter string, script string) (int, string, string, error) {
+	var stdout = &bytes.Buffer{}
+	var stderr = &bytes.Buffer{}
+	var cmd *exec.Cmd
+	switch interpreter {
+	case "python3":
+		cmd = exec.Command("python3", "-c", script)
+	case "bash":
+		cmd = exec.Command("bash", "-c", script)
+	default:
+		return -1, "", "", errors.New("unsupported interpreter")
+	}
+	cmd.Stdout = stdout
+	cmd.Stderr = stderr
+
+	if err := cmd.Start(); err != nil {
+		return -1, "", "", err
+	}
+
+	if err := cmd.Wait(); err != nil {
+		if e, ok := err.(*exec.ExitError); ok {
+			if status, ok := e.Sys().(syscall.WaitStatus); ok {
+				return status.ExitStatus(), stdout.String(), stderr.String(), nil
+			}
+		}
+
+		return -1, stdout.String(), stderr.String(), err
+	}
+
+	return 0, stdout.String(), stderr.String(), nil
 }

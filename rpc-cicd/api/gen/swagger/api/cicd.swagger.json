@@ -725,6 +725,27 @@
     }
   },
   "definitions": {
+    "JobSub": {
+      "type": "object",
+      "properties": {
+        "templateID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stdout": {
+          "type": "string"
+        },
+        "stderr": {
+          "type": "string"
+        }
+      }
+    },
     "TemplateScriptTemplate": {
       "type": "object",
       "properties": {
@@ -772,6 +793,12 @@
         },
         "status": {
           "type": "string"
+        },
+        "subs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobSub"
+          }
         }
       }
     },

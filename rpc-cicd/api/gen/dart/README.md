@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
  - [ApiTask](docs//ApiTask.md)
  - [ApiTemplate](docs//ApiTemplate.md)
  - [ApiVariable](docs//ApiVariable.md)
+ - [JobSub](docs//JobSub.md)
  - [ProtobufAny](docs//ProtobufAny.md)
  - [RuntimeError](docs//RuntimeError.md)
  - [TemplateScriptTemplate](docs//TemplateScriptTemplate.md)
