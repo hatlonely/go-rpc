@@ -179,7 +179,7 @@ func Exec(interpreter string, script string) (int, string, string, error) {
 	switch interpreter {
 	case "python3":
 		cmd = exec.Command("python3", "-c", script)
-	case "bash":
+	case "bash", "shell", "sh":
 		cmd = exec.Command("bash", "-c", script)
 	default:
 		return -1, "", "", errors.New("unsupported interpreter")

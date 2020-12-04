@@ -26,15 +26,12 @@ func init() {
 		panic(err)
 	}
 	svc, err = NewCICDServiceWithOptions(mongoCli, &Options{
-		Mongo: struct {
-			Database   string
-			Collection string
-			Timeout    time.Duration
-		}{
-			Database:   "hatlonely",
-			Collection: "task",
-			Timeout:    3 * time.Second,
-		},
+		Database:           "hatlonely",
+		TaskCollection:     "task",
+		TemplateCollection: "template",
+		VariableCollection: "variable",
+		JobCollection:      "job",
+		Timeout:            3 * time.Second,
 	})
 	if err != nil {
 		panic(err)
@@ -48,11 +45,6 @@ func TestCICDService_PutTask(t *testing.T) {
 		_, err := svc.PutTask(ctx, &api.PutTaskReq{
 			Task: &api.Task{
 				Name: "test-task2",
-				Type: "script",
-				ScriptTask: &api.ScriptTask{
-					Language: "sh",
-					Script:   `echo hello world`,
-				},
 			},
 		})
 		So(err, ShouldBeNil)
@@ -91,11 +83,6 @@ func TestCICDService_UpdateTask(t *testing.T) {
 			Task: &api.Task{
 				Id:   "5fb554cc4c94d887ac699119",
 				Name: "test-task",
-				Type: "script",
-				ScriptTask: &api.ScriptTask{
-					Language: "sh",
-					Script:   `echo hello world 4`,
-				},
 			},
 		})
 		So(err, ShouldBeNil)
