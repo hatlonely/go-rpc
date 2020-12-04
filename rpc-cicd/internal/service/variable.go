@@ -15,10 +15,7 @@ func (s *CICDService) DelVariable(ctx context.Context, req *api.DelVariableReq) 
 }
 
 func (s *CICDService) PutVariable(ctx context.Context, req *api.PutVariableReq) (*api.Empty, error) {
-	if err := s.storage.PutVariable(ctx, req.Variable); err != nil {
-		return nil, err
-	}
-	return &api.Empty{}, nil
+	return &api.Empty{}, s.storage.PutVariable(ctx, req.Variable)
 }
 
 func (s *CICDService) UpdateVariable(ctx context.Context, req *api.UpdateVariableReq) (*api.Empty, error) {
