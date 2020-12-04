@@ -87,3 +87,29 @@ func (s *CICDStorage) ListVariable(ctx context.Context, offset int64, limit int6
 	}
 	return variables, nil
 }
+
+func (s *CICDStorage) GetVariableByIDs(ctx context.Context, ids []string) ([]*api.Variable, error) {
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.VariableCollection)
+
+	var objectIDs []primitive.ObjectID
+	for _, i := range ids {
+		objectID, err := primitive.ObjectIDFromHex(i)
+		if err != nil {
+			return nil, rpcx.NewError(codes.InvalidArgument, "InvalidObjectID", "object id is not valid", err)
+		}
+		objectIDs = append(objectIDs, objectID)
+	}
+
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
+	defer cancel()
+	res, err := collection.Find(mongoCtx, bson.M{"_id": bson.M{"$in": objectIDs}})
+	if err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
+	}
+	var variables []*api.Variable
+	if err := res.All(mongoCtx, &variables); err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
+	}
+
+	return variables, nil
+}

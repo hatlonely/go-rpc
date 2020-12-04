@@ -9,11 +9,8 @@ import (
 	"syscall"
 	"text/template"
 
-	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"google.golang.org/grpc/codes"
 
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
 )
@@ -25,16 +22,9 @@ const JobStatusFinish = "Finish"
 
 func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.RunTaskRes, error) {
 	// 获取 task
-	taskCollection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
-	objectID, err := primitive.ObjectIDFromHex(req.TaskID)
+	task, err := s.storage.GetTask(ctx, req.TaskID)
 	if err != nil {
-		return nil, rpcx.NewError(codes.InvalidArgument, "InvalidObjectID", "object id is not valid", err)
-	}
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
-	defer cancel()
-	var task api.Task
-	if err := taskCollection.FindOne(mongoCtx, bson.M{"_id": objectID}).Decode(&task); err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.FindOne failed")
+		return nil, err
 	}
 
 	jobID := primitive.NewObjectID()
@@ -45,14 +35,9 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 	}
 
 	// 插入 job
-	jobCollection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
-	mongoCtx, cancel = context.WithTimeout(ctx, s.options.Timeout)
-	defer cancel()
-	res, err := jobCollection.InsertOne(mongoCtx, job)
-	if err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.InsertOne failed")
+	if err := s.storage.PutJob(ctx, &job); err != nil {
+		return nil, err
 	}
-	rpcx.CtxSet(ctx, "InsertOneRes", res)
 
 	// 执行 job
 	go s.runTask(ctx, jobID.String(), task)
@@ -61,55 +46,21 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 }
 
 func (s *CICDService) GetTemplates(ctx context.Context, req *api.GetTemplatesReq) (*api.ListTemplateRes, error) {
-	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
-
-	var objectIDs []primitive.ObjectID
-	for _, i := range req.Ids {
-		objectID, err := primitive.ObjectIDFromHex(i)
-		if err != nil {
-			return nil, rpcx.NewError(codes.InvalidArgument, "InvalidObjectID", "object id is not valid", err)
-		}
-		objectIDs = append(objectIDs, objectID)
-	}
-
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
-	defer cancel()
-	res, err := collection.Find(mongoCtx, bson.M{"_id": bson.M{"$in": objectIDs}})
+	res, err := s.storage.GetTemplateByIDs(ctx, req.Ids)
 	if err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
-	}
-	var templates []*api.Template
-	if err := res.All(mongoCtx, &templates); err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
+		return nil, err
 	}
 
-	return &api.ListTemplateRes{Templates: templates}, nil
+	return &api.ListTemplateRes{Templates: res}, nil
 }
 
 func (s *CICDService) GetVariables(ctx context.Context, req *api.GetVariablesReq) (*api.ListVariableRes, error) {
-	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.VariableCollection)
-
-	var objectIDs []primitive.ObjectID
-	for _, i := range req.Ids {
-		objectID, err := primitive.ObjectIDFromHex(i)
-		if err != nil {
-			return nil, rpcx.NewError(codes.InvalidArgument, "InvalidObjectID", "object id is not valid", err)
-		}
-		objectIDs = append(objectIDs, objectID)
-	}
-
-	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
-	defer cancel()
-	res, err := collection.Find(mongoCtx, bson.M{"_id": bson.M{"$in": objectIDs}})
+	res, err := s.storage.GetVariableByIDs(ctx, req.Ids)
 	if err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
-	}
-	var variables []*api.Variable
-	if err := res.All(mongoCtx, &variables); err != nil {
-		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
+		return nil, err
 	}
 
-	return &api.ListVariableRes{Variables: variables}, nil
+	return &api.ListVariableRes{Variables: res}, nil
 }
 
 func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
@@ -127,22 +78,22 @@ func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
 	return kvs, nil
 }
 
-func (s *CICDService) runTask(ctx context.Context, jobID string, task api.Task) error {
-	getVariablesRes, err := s.GetVariables(ctx, &api.GetVariablesReq{Ids: task.VariableIDs})
+func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task) error {
+	variables, err := s.storage.GetVariableByIDs(ctx, task.VariableIDs)
 	if err != nil {
 		return errors.Wrap(err, "GetVariables failed")
 	}
-	getTemplatesRes, err := s.GetTemplates(ctx, &api.GetTemplatesReq{Ids: task.TemplateIDs})
+	templates, err := s.storage.GetTemplateByIDs(ctx, task.TemplateIDs)
 	if err != nil {
 		return errors.Wrap(err, "GetTemplates failed")
 	}
-	kvs, err := mergeVariables(getVariablesRes.Variables)
+	kvs, err := mergeVariables(variables)
 	if err != nil {
 		return errors.Wrap(err, "mergeVariables failed")
 	}
 
 	var job api.Job
-	for _, i := range getTemplatesRes.Templates {
+	for _, i := range templates {
 		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
 		if err != nil {
 			return errors.Wrap(err, "create template failed")

@@ -87,3 +87,29 @@ func (s *CICDStorage) ListTemplate(ctx context.Context, offset int64, limit int6
 	}
 	return templates, nil
 }
+
+func (s *CICDStorage) GetTemplateByIDs(ctx context.Context, ids []string) ([]*api.Template, error) {
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
+
+	var objectIDs []primitive.ObjectID
+	for _, i := range ids {
+		objectID, err := primitive.ObjectIDFromHex(i)
+		if err != nil {
+			return nil, rpcx.NewError(codes.InvalidArgument, "InvalidObjectID", "object id is not valid", err)
+		}
+		objectIDs = append(objectIDs, objectID)
+	}
+
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
+	defer cancel()
+	res, err := collection.Find(mongoCtx, bson.M{"_id": bson.M{"$in": objectIDs}})
+	if err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
+	}
+	var templates []*api.Template
+	if err := res.All(mongoCtx, &templates); err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
+	}
+
+	return templates, nil
+}
