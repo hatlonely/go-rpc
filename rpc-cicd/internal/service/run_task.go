@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"os/exec"
 	"syscall"
 	"text/template"
@@ -92,7 +91,10 @@ func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task)
 		return errors.Wrap(err, "mergeVariables failed")
 	}
 
-	var job api.Job
+	job, err := s.storage.GetJob(ctx, jobID)
+	if err != nil {
+		return err
+	}
 	for _, i := range templates {
 		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
 		if err != nil {
@@ -104,7 +106,7 @@ func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task)
 			return errors.Wrap(err, "tpl execute failed")
 		}
 
-		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, i.ScriptTemplate.Script)
+		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, buf.String())
 		if err != nil {
 			return errors.Wrap(err, "Exec failed")
 		}
@@ -117,7 +119,14 @@ func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task)
 			Status:     "Success",
 		})
 
-		fmt.Println(buf.String())
+		if err := s.storage.UpdateJob(ctx, job); err != nil {
+			return err
+		}
+	}
+
+	job.Status = JobStatusFailed
+	if err := s.storage.UpdateJob(ctx, job); err != nil {
+		return err
 	}
 
 	return nil
