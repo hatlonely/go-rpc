@@ -20,6 +20,13 @@
     "variableCollection": "variable",
     "timeout": "3s"
   },
+  "storage": {
+    "database": "hatlonely",
+    "taskCollection": "task",
+    "templateCollection": "template",
+    "variableCollection": "variable",
+    "timeout": "3s"
+  },
   "logger": {
     "grpc": {
       "level": "Info",

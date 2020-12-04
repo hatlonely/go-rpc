@@ -1,4 +1,4 @@
-package service
+package storage
 
 import (
 	"context"
@@ -8,11 +8,23 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	mopt "go.mongodb.org/mongo-driver/mongo/options"
-
-	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
 
-func NewCICDServiceWithOptions(storage *storage.CICDStorage, mongoCli *mongo.Client, options *Options) (*CICDService, error) {
+type CICDStorage struct {
+	mongoCli *mongo.Client
+	options  *Options
+}
+
+type Options struct {
+	Database           string
+	TaskCollection     string        `dft:"task"`
+	JobCollection      string        `dft:"job"`
+	TemplateCollection string        `dft:"template"`
+	VariableCollection string        `dft:"variable"`
+	Timeout            time.Duration `dft:"1s"`
+}
+
+func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDStorage, error) {
 	{
 
 		collection := mongoCli.Database(options.Database).Collection(options.TaskCollection)
@@ -45,25 +57,8 @@ func NewCICDServiceWithOptions(storage *storage.CICDStorage, mongoCli *mongo.Cli
 		}
 	}
 
-	return &CICDService{
+	return &CICDStorage{
 		mongoCli: mongoCli,
 		options:  options,
-		storage:  storage,
 	}, nil
-}
-
-type CICDService struct {
-	mongoCli *mongo.Client
-	storage  *storage.CICDStorage
-
-	options *Options
-}
-
-type Options struct {
-	Database           string
-	TaskCollection     string        `dft:"task"`
-	JobCollection      string        `dft:"job"`
-	TemplateCollection string        `dft:"template"`
-	VariableCollection string        `dft:"variable"`
-	Timeout            time.Duration `dft:"1s"`
 }
