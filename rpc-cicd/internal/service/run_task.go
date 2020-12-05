@@ -39,7 +39,9 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 	}
 
 	// 执行 job
-	go s.runTask(ctx, jobID.String(), task)
+	go func() {
+		_ = s.runTask(ctx, jobID.String(), task)
+	}()
 
 	return &api.RunTaskRes{JobID: jobID.String()}, nil
 }
