@@ -36,24 +36,21 @@ func (s *CICDStorage) DelJob(ctx context.Context, id string) error {
 	}
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
-	res, err := collection.DeleteOne(mongoCtx, bson.M{"_id": objectID})
-	if err != nil {
+	if _, err := collection.DeleteOne(mongoCtx, bson.M{"_id": objectID}); err != nil {
 		return errors.Wrap(err, "mongo.Collection.DeleteOne failed")
 	}
-	rpcx.CtxSet(ctx, "DeleteOneRes", res)
 	return nil
 }
 
-func (s *CICDStorage) PutJob(ctx context.Context, job *api.Job) error {
+func (s *CICDStorage) PutJob(ctx context.Context, job *api.Job) (string, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	res, err := collection.InsertOne(mongoCtx, job)
 	if err != nil {
-		return errors.Wrap(err, "mongo.Collection.InsertOne failed")
+		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
-	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return nil
+	return res.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
@@ -65,11 +62,9 @@ func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	job.Id = ""
-	res, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": job})
-	if err != nil {
+	if _, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": job}); err != nil {
 		return errors.Wrap(err, "mongo.Collection.UpdateOne failed")
 	}
-	rpcx.CtxSet(ctx, "UpdateOneRes", res)
 	return nil
 }
 

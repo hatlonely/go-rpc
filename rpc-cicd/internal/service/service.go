@@ -1,20 +1,26 @@
 package service
 
 import (
-	"go.mongodb.org/mongo-driver/mongo"
-
+	"github.com/hatlonely/go-rpc/rpc-cicd/internal/executor"
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
 
-func NewCICDServiceWithOptions(storage *storage.CICDStorage, mongoCli *mongo.Client, options *Options) (*CICDService, error) {
-	return &CICDService{
+func NewCICDServiceWithOptions(storage *storage.CICDStorage, options *Options) (*CICDService, error) {
+	svc := &CICDService{
 		options: options,
 		storage: storage,
-	}, nil
+	}
+
+	return svc, nil
+}
+
+func (s *CICDService) SetExecutor(executor *executor.Executor) {
+	s.executor = executor
 }
 
 type CICDService struct {
-	storage *storage.CICDStorage
+	storage  *storage.CICDStorage
+	executor *executor.Executor
 
 	options *Options
 }

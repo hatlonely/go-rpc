@@ -19,6 +19,7 @@ import (
 
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/cli"
+	"github.com/hatlonely/go-rpc/rpc-cicd/internal/executor"
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/service"
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
@@ -36,8 +37,9 @@ type Options struct {
 		Port int
 	}
 
-	Storage storage.Options
-	Service service.Options
+	Storage  storage.Options
+	Executor executor.Options
+	Service  service.Options
 
 	Mongo cli.MongoOptions
 
@@ -86,8 +88,14 @@ func main() {
 	storage, err := storage.NewCICDStorageWithOptions(mongoCli, &options.Storage)
 	Must(err)
 
-	svc, err := service.NewCICDServiceWithOptions(storage, mongoCli, &options.Service)
+	svc, err := service.NewCICDServiceWithOptions(storage, &options.Service)
 	Must(err)
+
+	executor := executor.NewExecutorWithOptions(svc.ExecutorHandler, &options.Executor)
+	executor.Run()
+	defer executor.Stop()
+	svc.SetExecutor(executor)
+
 	rpcServer := grpc.NewServer(rpcx.GRPCUnaryInterceptor(grpcLog, rpcx.WithDefaultValidator()))
 	api.RegisterCICDServiceServer(rpcServer, svc)
 

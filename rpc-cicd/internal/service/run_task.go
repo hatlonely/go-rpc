@@ -8,10 +8,11 @@ import (
 	"syscall"
 	"text/template"
 
+	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-cicd/internal/executor"
 )
 
 const JobStatusRunning = "Running"
@@ -20,30 +21,19 @@ const JobStatusFailed = "Failed"
 const JobStatusFinish = "Finish"
 
 func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.RunTaskRes, error) {
-	// 获取 task
-	task, err := s.storage.GetTask(ctx, req.TaskID)
+	job := api.Job{
+		TaskID: req.TaskID,
+		Status: JobStatusWaiting,
+	}
+
+	jobID, err := s.storage.PutJob(ctx, &job)
 	if err != nil {
 		return nil, err
 	}
 
-	jobID := primitive.NewObjectID()
-	job := api.Job{
-		Id:     jobID.String(),
-		TaskID: req.TaskID,
-		Status: JobStatusRunning,
-	}
+	s.executor.AddTask(rpcx.MetaDataGetRequestID(ctx), jobID)
 
-	// 插入 job
-	if err := s.storage.PutJob(ctx, &job); err != nil {
-		return nil, err
-	}
-
-	// 执行 job
-	go func() {
-		_ = s.runTask(ctx, jobID.String(), task)
-	}()
-
-	return &api.RunTaskRes{JobID: jobID.Hex()}, nil
+	return &api.RunTaskRes{JobID: jobID}, nil
 }
 
 func (s *CICDService) GetTemplates(ctx context.Context, req *api.GetTemplatesReq) (*api.ListTemplateRes, error) {
@@ -79,11 +69,23 @@ func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
 	return kvs, nil
 }
 
-func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task) error {
+func (s *CICDService) ExecutorHandler(ctx context.Context, jobID interface{}) error {
+	return s.runTask(ctx, jobID.(string))
+}
+
+func (s *CICDService) runTask(ctx context.Context, jobID string) error {
 	job, err := s.storage.GetJob(ctx, jobID)
 	if err != nil {
 		return err
 	}
+	defer executor.CtxSet(ctx, "job", job)
+
+	task, err := s.storage.GetTask(ctx, job.TaskID)
+	if err != nil {
+		return err
+	}
+	defer executor.CtxSet(ctx, "task", task)
+
 	job.Status = JobStatusFinish
 	if err := s.runSubTasks(ctx, job, task); err != nil {
 		job.Error = err.Error()

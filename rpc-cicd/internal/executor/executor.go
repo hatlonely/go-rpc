@@ -9,7 +9,7 @@ import (
 	"github.com/hatlonely/go-kit/logger"
 )
 
-func NewExecutorWithOptions(handler Handler, options *Options) (*Executor, error) {
+func NewExecutorWithOptions(handler Handler, options *Options) *Executor {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &Executor{
 		taskQueue: make(chan *Task, options.QueueLen),
@@ -18,7 +18,7 @@ func NewExecutorWithOptions(handler Handler, options *Options) (*Executor, error
 		ctx:       ctx,
 		cancel:    cancel,
 		logger:    logger.NewStdoutJsonLogger(),
-	}, nil
+	}
 }
 
 type Options struct {
