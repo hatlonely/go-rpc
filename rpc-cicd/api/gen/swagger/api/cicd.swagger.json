@@ -801,6 +801,14 @@
           "items": {
             "$ref": "#/definitions/JobSub"
           }
+        },
+        "createAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateAt": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

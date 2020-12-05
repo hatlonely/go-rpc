@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"syscall"
 	"text/template"
+	"time"
 
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
@@ -22,8 +23,9 @@ const JobStatusFinish = "Finish"
 
 func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.RunTaskRes, error) {
 	job := api.Job{
-		TaskID: req.TaskID,
-		Status: JobStatusWaiting,
+		TaskID:   req.TaskID,
+		Status:   JobStatusWaiting,
+		CreateAt: int32(time.Now().Unix()),
 	}
 
 	jobID, err := s.storage.PutJob(ctx, &job)

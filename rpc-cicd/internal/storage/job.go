@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"time"
 
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
@@ -66,6 +67,7 @@ func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
 	defer func() {
 		job.Id = id
 	}()
+	job.UpdateAt = int32(time.Now().Unix())
 	if _, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": job}); err != nil {
 		return errors.Wrap(err, "mongo.Collection.UpdateOne failed")
 	}
