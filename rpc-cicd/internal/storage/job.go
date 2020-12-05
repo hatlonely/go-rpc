@@ -61,7 +61,11 @@ func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
 	}
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
+	id := job.Id
 	job.Id = ""
+	defer func() {
+		job.Id = id
+	}()
 	if _, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": job}); err != nil {
 		return errors.Wrap(err, "mongo.Collection.UpdateOne failed")
 	}

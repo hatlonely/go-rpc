@@ -46,6 +46,7 @@ type Options struct {
 	Logger struct {
 		Info logger.Options
 		Grpc logger.Options
+		Exec logger.Options
 	}
 }
 
@@ -79,6 +80,8 @@ func main() {
 
 	grpcLog, err := logger.NewLoggerWithOptions(&options.Logger.Grpc)
 	Must(err)
+	execLog, err := logger.NewLoggerWithOptions(&options.Logger.Exec)
+	Must(err)
 	infoLog, err := logger.NewLoggerWithOptions(&options.Logger.Info)
 	Must(err)
 
@@ -95,6 +98,7 @@ func main() {
 	executor.Run()
 	defer executor.Stop()
 	svc.SetExecutor(executor)
+	executor.SetLogger(execLog)
 
 	rpcServer := grpc.NewServer(rpcx.GRPCUnaryInterceptor(grpcLog, rpcx.WithDefaultValidator()))
 	api.RegisterCICDServiceServer(rpcServer, svc)

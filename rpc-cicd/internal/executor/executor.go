@@ -21,6 +21,10 @@ func NewExecutorWithOptions(handler Handler, options *Options) *Executor {
 	}
 }
 
+func (e *Executor) SetLogger(log *logger.Logger) {
+	e.logger = log
+}
+
 type Options struct {
 	QueueLen  int `dft:"200"`
 	WorkerNum int `dft:"20"`

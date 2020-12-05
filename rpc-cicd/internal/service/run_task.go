@@ -80,6 +80,11 @@ func (s *CICDService) runTask(ctx context.Context, jobID string) error {
 	}
 	defer executor.CtxSet(ctx, "job", job)
 
+	job.Status = JobStatusRunning
+	if err := s.storage.UpdateJob(ctx, job); err != nil {
+		return err
+	}
+
 	task, err := s.storage.GetTask(ctx, job.TaskID)
 	if err != nil {
 		return err
