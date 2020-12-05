@@ -9,7 +9,7 @@ import (
 
 func TestExecutor(t *testing.T) {
 	Convey("TextExecutor", t, func() {
-		executor, err := NewExecutorWithOptions(func(ctx context.Context, v interface{}) error {
+		executor := NewExecutorWithOptions(func(ctx context.Context, v interface{}) error {
 			CtxSet(ctx, "key1", "val1")
 			CtxSet(ctx, "key2", "val2")
 			return nil
@@ -18,7 +18,6 @@ func TestExecutor(t *testing.T) {
 			WorkerNum: 20,
 		})
 
-		So(err, ShouldBeNil)
 		executor.Run()
 
 		executor.AddTask("task1", "hello world")
