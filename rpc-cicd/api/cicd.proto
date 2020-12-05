@@ -139,7 +139,8 @@ message Job {
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
   string taskID = 2 [(gogoproto.moretags) = "bson:\"taskID,omitempty\""];
   string status = 3 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-  repeated Sub subs = 4 [(gogoproto.moretags) = "bson:\"sub,omitempty\""];
+  string error = 4 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
+  repeated Sub subs = 5 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
 }
 
 message RunTaskReq {

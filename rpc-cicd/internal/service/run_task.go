@@ -43,7 +43,7 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 		_ = s.runTask(ctx, jobID.String(), task)
 	}()
 
-	return &api.RunTaskRes{JobID: jobID.String()}, nil
+	return &api.RunTaskRes{JobID: jobID.Hex()}, nil
 }
 
 func (s *CICDService) GetTemplates(ctx context.Context, req *api.GetTemplatesReq) (*api.ListTemplateRes, error) {
@@ -80,6 +80,22 @@ func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
 }
 
 func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task) error {
+	job, err := s.storage.GetJob(ctx, jobID)
+	if err != nil {
+		return err
+	}
+	job.Status = JobStatusFinish
+	if err := s.runSubTasks(ctx, job, task); err != nil {
+		job.Error = err.Error()
+		job.Status = JobStatusFailed
+	}
+	if err := s.storage.UpdateJob(ctx, job); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.Task) error {
 	variables, err := s.storage.GetVariableByIDs(ctx, task.VariableIDs)
 	if err != nil {
 		return errors.Wrap(err, "GetVariables failed")
@@ -93,10 +109,6 @@ func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task)
 		return errors.Wrap(err, "mergeVariables failed")
 	}
 
-	job, err := s.storage.GetJob(ctx, jobID)
-	if err != nil {
-		return err
-	}
 	for _, i := range templates {
 		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
 		if err != nil {
@@ -124,11 +136,6 @@ func (s *CICDService) runTask(ctx context.Context, jobID string, task *api.Task)
 		if err := s.storage.UpdateJob(ctx, job); err != nil {
 			return err
 		}
-	}
-
-	job.Status = JobStatusFailed
-	if err := s.storage.UpdateJob(ctx, job); err != nil {
-		return err
 	}
 
 	return nil

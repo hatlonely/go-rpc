@@ -793,6 +793,9 @@
         "status": {
           "type": "string"
         },
+        "error": {
+          "type": "string"
+        },
         "subs": {
           "type": "array",
           "items": {
