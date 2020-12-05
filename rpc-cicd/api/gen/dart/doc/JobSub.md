@@ -8,11 +8,11 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**templateID** | **String** |  | [optional] 
-**status** | **String** |  | [optional] 
-**exitCode** | **int** |  | [optional] 
-**stdout** | **String** |  | [optional] 
-**stderr** | **String** |  | [optional] 
+**templateID** | **String** |  | [optional] [default to null]
+**status** | **String** |  | [optional] [default to null]
+**exitCode** | **int** |  | [optional] [default to null]
+**stdout** | **String** |  | [optional] [default to null]
+**stderr** | **String** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

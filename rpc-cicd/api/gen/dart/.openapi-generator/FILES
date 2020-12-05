@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 doc/ApiGetTemplatesReq.md
@@ -47,20 +46,3 @@ lib/model/protobuf_any.dart
 lib/model/runtime_error.dart
 lib/model/template_script_template.dart
 pubspec.yaml
-test/api_get_templates_req_test.dart
-test/api_get_variables_req_test.dart
-test/api_job_test.dart
-test/api_list_job_res_test.dart
-test/api_list_task_res_test.dart
-test/api_list_template_res_test.dart
-test/api_list_variable_res_test.dart
-test/api_run_task_req_test.dart
-test/api_run_task_res_test.dart
-test/api_task_test.dart
-test/api_template_test.dart
-test/api_variable_test.dart
-test/cicd_service_api_test.dart
-test/job_sub_test.dart
-test/protobuf_any_test.dart
-test/runtime_error_test.dart
-test/template_script_template_test.dart

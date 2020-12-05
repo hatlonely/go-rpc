@@ -8,7 +8,7 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tasks** | [**List<ApiTask>**](ApiTask.md) |  | [optional] [default to const []]
+**tasks** | [**List&lt;ApiTask&gt;**](ApiTask.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

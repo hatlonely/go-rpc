@@ -57,4 +57,4 @@ third/swagger-codegen-cli.jar:
 
 third/openapi-generator-cli.jar:
 	mkdir -p third
-	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0-beta3/openapi-generator-cli-5.0.0-beta3.jar -O third/openapi-generator-cli.jar
+	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/4.3.1/openapi-generator-cli-4.3.1.jar -O third/openapi-generator-cli.jar
