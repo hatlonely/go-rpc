@@ -78,7 +78,7 @@ func (s *CICDStorage) ListJob(ctx context.Context, taskID string, offset int64, 
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
-	res, err := collection.Find(mongoCtx, bson.M{"taskID": taskID}, mopt.Find().SetLimit(limit).SetSkip(offset))
+	res, err := collection.Find(mongoCtx, bson.M{"taskID": taskID}, mopt.Find().SetLimit(limit).SetSkip(offset).SetSort(bson.M{"createAt": -1}))
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}
