@@ -161,7 +161,7 @@ message DelJobReq {
 message ListJobReq {
   int64 offset = 1;
   int64 limit = 2;
-  bool brief = 3;
+  string taskID = 3;
 }
 
 message ListJobRes {

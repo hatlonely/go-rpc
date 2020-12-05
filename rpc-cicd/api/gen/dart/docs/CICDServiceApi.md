@@ -443,7 +443,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceListJob**
-> ApiListJobRes cICDServiceListJob(offset, limit, brief)
+> ApiListJobRes cICDServiceListJob(offset, limit, taskID)
 
 
 
@@ -454,10 +454,10 @@ import 'package:swagger/api.dart';
 var api_instance = new CICDServiceApi();
 var offset = offset_example; // String | 
 var limit = limit_example; // String | 
-var brief = true; // bool | 
+var taskID = taskID_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceListJob(offset, limit, brief);
+    var result = api_instance.cICDServiceListJob(offset, limit, taskID);
     print(result);
 } catch (e) {
     print("Exception when calling CICDServiceApi->cICDServiceListJob: $e\n");
@@ -470,7 +470,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **String**|  | [optional] 
  **limit** | **String**|  | [optional] 
- **brief** | **bool**|  | [optional] 
+ **taskID** | **String**|  | [optional] 
 
 ### Return type
 

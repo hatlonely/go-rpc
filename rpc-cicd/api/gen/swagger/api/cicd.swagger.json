@@ -108,11 +108,10 @@
             "format": "int64"
           },
           {
-            "name": "brief",
+            "name": "taskID",
             "in": "query",
             "required": false,
-            "type": "boolean",
-            "format": "boolean"
+            "type": "string"
           }
         ],
         "tags": [

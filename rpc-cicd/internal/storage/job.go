@@ -73,11 +73,11 @@ func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
 	return nil
 }
 
-func (s *CICDStorage) ListJob(ctx context.Context, offset int64, limit int64) ([]*api.Job, error) {
+func (s *CICDStorage) ListJob(ctx context.Context, taskID string, offset int64, limit int64) ([]*api.Job, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
-	res, err := collection.Find(mongoCtx, bson.M{}, mopt.Find().SetLimit(limit).SetSkip(offset))
+	res, err := collection.Find(mongoCtx, bson.M{"taskID": taskID}, mopt.Find().SetLimit(limit).SetSkip(offset))
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}

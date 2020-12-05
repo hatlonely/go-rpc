@@ -530,7 +530,7 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<ApiListJobRes> cICDServiceListJob({ String offset, String limit, bool brief }) async {
+  Future<ApiListJobRes> cICDServiceListJob({ String offset, String limit, String taskID }) async {
     Object postBody = null;
 
     // verify required params are set
@@ -548,8 +548,8 @@ class CICDServiceApi {
     if(limit != null) {
       queryParams.addAll(_convertParametersForCollectionFormat("", "limit", limit));
     }
-    if(brief != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "brief", brief));
+    if(taskID != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat("", "taskID", taskID));
     }
     
     List<String> contentTypes = ["application/json"];
