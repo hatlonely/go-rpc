@@ -3,10 +3,10 @@ import 'package:test/test.dart';
 
 // tests for ApiListTemplateRes
 void main() {
-    var instance = new ApiListTemplateRes();
+  final instance = ApiListTemplateRes();
 
   group('test ApiListTemplateRes', () {
-    // List<ApiTemplate> templates (default value: [])
+    // List<ApiTemplate> templates (default value: const [])
     test('to test the property `templates`', () async {
       // TODO
     });

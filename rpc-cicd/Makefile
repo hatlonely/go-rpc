@@ -20,7 +20,8 @@ codegen: api/cicd.proto third/openapi-generator-cli.jar
 	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
 	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
 	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
-	openapi-generator generate -i api/gen/swagger/api/cicd.swagger.json -g dart -o api/gen/dart
+	#openapi-generator generate -i api/gen/swagger/api/cicd.swagger.json -g dart -o api/gen/dart
+	java -jar third/openapi-generator-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -g dart -o api/gen/dart
 
 .PHONY: dockerenv
 dockerenv:

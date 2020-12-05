@@ -3,30 +3,30 @@ import 'package:test/test.dart';
 
 // tests for ApiTask
 void main() {
-    var instance = new ApiTask();
+  final instance = ApiTask();
 
   group('test ApiTask', () {
-    // String id (default value: null)
+    // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // String name (default value: null)
+    // String name
     test('to test the property `name`', () async {
       // TODO
     });
 
-    // String description (default value: null)
+    // String description
     test('to test the property `description`', () async {
       // TODO
     });
 
-    // List<String> templateIDs (default value: [])
+    // List<String> templateIDs (default value: const [])
     test('to test the property `templateIDs`', () async {
       // TODO
     });
 
-    // List<String> variableIDs (default value: [])
+    // List<String> variableIDs (default value: const [])
     test('to test the property `variableIDs`', () async {
       // TODO
     });

@@ -3,15 +3,15 @@ import 'package:test/test.dart';
 
 // tests for TemplateScriptTemplate
 void main() {
-    var instance = new TemplateScriptTemplate();
+  final instance = TemplateScriptTemplate();
 
   group('test TemplateScriptTemplate', () {
-    // String language (default value: null)
+    // String language
     test('to test the property `language`', () async {
       // TODO
     });
 
-    // String script (default value: null)
+    // String script
     test('to test the property `script`', () async {
       // TODO
     });

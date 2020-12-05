@@ -3,25 +3,25 @@ import 'package:test/test.dart';
 
 // tests for RuntimeError
 void main() {
-    var instance = new RuntimeError();
+  final instance = RuntimeError();
 
   group('test RuntimeError', () {
-    // String error (default value: null)
+    // String error
     test('to test the property `error`', () async {
       // TODO
     });
 
-    // int code (default value: null)
+    // int code
     test('to test the property `code`', () async {
       // TODO
     });
 
-    // String message (default value: null)
+    // String message
     test('to test the property `message`', () async {
       // TODO
     });
 
-    // List<ProtobufAny> details (default value: [])
+    // List<ProtobufAny> details (default value: const [])
     test('to test the property `details`', () async {
       // TODO
     });

@@ -3,35 +3,35 @@ import 'package:test/test.dart';
 
 // tests for ApiTemplate
 void main() {
-    var instance = new ApiTemplate();
+  final instance = ApiTemplate();
 
   group('test ApiTemplate', () {
-    // String id (default value: null)
+    // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // String name (default value: null)
+    // String name
     test('to test the property `name`', () async {
       // TODO
     });
 
-    // String description (default value: null)
+    // String description
     test('to test the property `description`', () async {
       // TODO
     });
 
-    // String type (default value: null)
+    // String type
     test('to test the property `type`', () async {
       // TODO
     });
 
-    // String category (default value: null)
+    // String category
     test('to test the property `category`', () async {
       // TODO
     });
 
-    // TemplateScriptTemplate scriptTemplate (default value: null)
+    // TemplateScriptTemplate scriptTemplate
     test('to test the property `scriptTemplate`', () async {
       // TODO
     });

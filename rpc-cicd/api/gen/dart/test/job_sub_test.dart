@@ -3,30 +3,30 @@ import 'package:test/test.dart';
 
 // tests for JobSub
 void main() {
-    var instance = new JobSub();
+  final instance = JobSub();
 
   group('test JobSub', () {
-    // String templateID (default value: null)
+    // String templateID
     test('to test the property `templateID`', () async {
       // TODO
     });
 
-    // String status (default value: null)
+    // String status
     test('to test the property `status`', () async {
       // TODO
     });
 
-    // int exitCode (default value: null)
+    // int exitCode
     test('to test the property `exitCode`', () async {
       // TODO
     });
 
-    // String stdout (default value: null)
+    // String stdout
     test('to test the property `stdout`', () async {
       // TODO
     });
 
-    // String stderr (default value: null)
+    // String stderr
     test('to test the property `stderr`', () async {
       // TODO
     });

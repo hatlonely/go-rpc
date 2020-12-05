@@ -40,14 +40,14 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import 'package:openapi/api.dart';
 
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try {
-    var result = api_instance.cICDServiceDelJob(id);
+    final result = api_instance.cICDServiceDelJob(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n');
 }
 
 ```

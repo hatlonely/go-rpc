@@ -3,10 +3,10 @@ import 'package:test/test.dart';
 
 // tests for ApiListJobRes
 void main() {
-    var instance = new ApiListJobRes();
+  final instance = ApiListJobRes();
 
   group('test ApiListJobRes', () {
-    // List<ApiJob> jobs (default value: [])
+    // List<ApiJob> jobs (default value: const [])
     test('to test the property `jobs`', () async {
       // TODO
     });

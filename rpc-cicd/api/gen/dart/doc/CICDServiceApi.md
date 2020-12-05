@@ -41,14 +41,14 @@ Method | HTTP request | Description
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceDelJob(id);
+    final result = api_instance.cICDServiceDelJob(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceDelJob: $e\n');
 }
 ```
 
@@ -56,7 +56,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -82,14 +82,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceDelTask(id);
+    final result = api_instance.cICDServiceDelTask(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceDelTask: $e\n');
 }
 ```
 
@@ -97,7 +97,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -123,14 +123,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceDelTemplate(id);
+    final result = api_instance.cICDServiceDelTemplate(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelTemplate: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceDelTemplate: $e\n');
 }
 ```
 
@@ -138,7 +138,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -164,14 +164,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceDelVariable(id);
+    final result = api_instance.cICDServiceDelVariable(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceDelVariable: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceDelVariable: $e\n');
 }
 ```
 
@@ -179,7 +179,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -205,14 +205,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceGetJob(id);
+    final result = api_instance.cICDServiceGetJob(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetJob: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetJob: $e\n');
 }
 ```
 
@@ -220,7 +220,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -246,14 +246,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceGetTask(id);
+    final result = api_instance.cICDServiceGetTask(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetTask: $e\n');
 }
 ```
 
@@ -261,7 +261,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -287,14 +287,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceGetTemplate(id);
+    final result = api_instance.cICDServiceGetTemplate(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetTemplate: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetTemplate: $e\n');
 }
 ```
 
@@ -302,7 +302,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -328,14 +328,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiGetTemplatesReq(); // ApiGetTemplatesReq | 
+final api_instance = CICDServiceApi();
+final body = ApiGetTemplatesReq(); // ApiGetTemplatesReq | 
 
 try { 
-    var result = api_instance.cICDServiceGetTemplates(body);
+    final result = api_instance.cICDServiceGetTemplates(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetTemplates: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetTemplates: $e\n');
 }
 ```
 
@@ -369,14 +369,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var id = id_example; // String | 
+final api_instance = CICDServiceApi();
+final id = id_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceGetVariable(id);
+    final result = api_instance.cICDServiceGetVariable(id);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetVariable: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetVariable: $e\n');
 }
 ```
 
@@ -384,7 +384,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
+ **id** | **String**|  | 
 
 ### Return type
 
@@ -410,14 +410,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiGetVariablesReq(); // ApiGetVariablesReq | 
+final api_instance = CICDServiceApi();
+final body = ApiGetVariablesReq(); // ApiGetVariablesReq | 
 
 try { 
-    var result = api_instance.cICDServiceGetVariables(body);
+    final result = api_instance.cICDServiceGetVariables(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceGetVariables: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceGetVariables: $e\n');
 }
 ```
 
@@ -451,16 +451,16 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var offset = offset_example; // String | 
-var limit = limit_example; // String | 
-var taskID = taskID_example; // String | 
+final api_instance = CICDServiceApi();
+final offset = offset_example; // String | 
+final limit = limit_example; // String | 
+final taskID = taskID_example; // String | 
 
 try { 
-    var result = api_instance.cICDServiceListJob(offset, limit, taskID);
+    final result = api_instance.cICDServiceListJob(offset, limit, taskID);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceListJob: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceListJob: $e\n');
 }
 ```
 
@@ -468,9 +468,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] [default to null]
- **limit** | **String**|  | [optional] [default to null]
- **taskID** | **String**|  | [optional] [default to null]
+ **offset** | **String**|  | [optional] 
+ **limit** | **String**|  | [optional] 
+ **taskID** | **String**|  | [optional] 
 
 ### Return type
 
@@ -496,16 +496,16 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var offset = offset_example; // String | 
-var limit = limit_example; // String | 
-var brief = true; // bool | 
+final api_instance = CICDServiceApi();
+final offset = offset_example; // String | 
+final limit = limit_example; // String | 
+final brief = true; // bool | 
 
 try { 
-    var result = api_instance.cICDServiceListTask(offset, limit, brief);
+    final result = api_instance.cICDServiceListTask(offset, limit, brief);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceListTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceListTask: $e\n');
 }
 ```
 
@@ -513,9 +513,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] [default to null]
- **limit** | **String**|  | [optional] [default to null]
- **brief** | **bool**|  | [optional] [default to null]
+ **offset** | **String**|  | [optional] 
+ **limit** | **String**|  | [optional] 
+ **brief** | **bool**|  | [optional] 
 
 ### Return type
 
@@ -541,16 +541,16 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var offset = offset_example; // String | 
-var limit = limit_example; // String | 
-var brief = true; // bool | 
+final api_instance = CICDServiceApi();
+final offset = offset_example; // String | 
+final limit = limit_example; // String | 
+final brief = true; // bool | 
 
 try { 
-    var result = api_instance.cICDServiceListTemplate(offset, limit, brief);
+    final result = api_instance.cICDServiceListTemplate(offset, limit, brief);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceListTemplate: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceListTemplate: $e\n');
 }
 ```
 
@@ -558,9 +558,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] [default to null]
- **limit** | **String**|  | [optional] [default to null]
- **brief** | **bool**|  | [optional] [default to null]
+ **offset** | **String**|  | [optional] 
+ **limit** | **String**|  | [optional] 
+ **brief** | **bool**|  | [optional] 
 
 ### Return type
 
@@ -586,16 +586,16 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var offset = offset_example; // String | 
-var limit = limit_example; // String | 
-var brief = true; // bool | 
+final api_instance = CICDServiceApi();
+final offset = offset_example; // String | 
+final limit = limit_example; // String | 
+final brief = true; // bool | 
 
 try { 
-    var result = api_instance.cICDServiceListVariable(offset, limit, brief);
+    final result = api_instance.cICDServiceListVariable(offset, limit, brief);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceListVariable: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceListVariable: $e\n');
 }
 ```
 
@@ -603,9 +603,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] [default to null]
- **limit** | **String**|  | [optional] [default to null]
- **brief** | **bool**|  | [optional] [default to null]
+ **offset** | **String**|  | [optional] 
+ **limit** | **String**|  | [optional] 
+ **brief** | **bool**|  | [optional] 
 
 ### Return type
 
@@ -631,14 +631,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiTask(); // ApiTask | 
+final api_instance = CICDServiceApi();
+final body = ApiTask(); // ApiTask | 
 
 try { 
-    var result = api_instance.cICDServicePutTask(body);
+    final result = api_instance.cICDServicePutTask(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServicePutTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServicePutTask: $e\n');
 }
 ```
 
@@ -672,14 +672,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiTemplate(); // ApiTemplate | 
+final api_instance = CICDServiceApi();
+final body = ApiTemplate(); // ApiTemplate | 
 
 try { 
-    var result = api_instance.cICDServicePutTemplate(body);
+    final result = api_instance.cICDServicePutTemplate(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServicePutTemplate: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServicePutTemplate: $e\n');
 }
 ```
 
@@ -713,14 +713,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiVariable(); // ApiVariable | 
+final api_instance = CICDServiceApi();
+final body = ApiVariable(); // ApiVariable | 
 
 try { 
-    var result = api_instance.cICDServicePutVariable(body);
+    final result = api_instance.cICDServicePutVariable(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServicePutVariable: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServicePutVariable: $e\n');
 }
 ```
 
@@ -754,14 +754,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var body = ApiRunTaskReq(); // ApiRunTaskReq | 
+final api_instance = CICDServiceApi();
+final body = ApiRunTaskReq(); // ApiRunTaskReq | 
 
 try { 
-    var result = api_instance.cICDServiceRunTask(body);
+    final result = api_instance.cICDServiceRunTask(body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceRunTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceRunTask: $e\n');
 }
 ```
 
@@ -795,15 +795,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var taskId = taskId_example; // String | 
-var body = ApiTask(); // ApiTask | 
+final api_instance = CICDServiceApi();
+final taskId = taskId_example; // String | 
+final body = ApiTask(); // ApiTask | 
 
 try { 
-    var result = api_instance.cICDServiceUpdateTask(taskId, body);
+    final result = api_instance.cICDServiceUpdateTask(taskId, body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceUpdateTask: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceUpdateTask: $e\n');
 }
 ```
 
@@ -811,7 +811,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **taskId** | **String**|  | [default to null]
+ **taskId** | **String**|  | 
  **body** | [**ApiTask**](ApiTask.md)|  | 
 
 ### Return type
@@ -838,15 +838,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var templateId = templateId_example; // String | 
-var body = ApiTemplate(); // ApiTemplate | 
+final api_instance = CICDServiceApi();
+final templateId = templateId_example; // String | 
+final body = ApiTemplate(); // ApiTemplate | 
 
 try { 
-    var result = api_instance.cICDServiceUpdateTemplate(templateId, body);
+    final result = api_instance.cICDServiceUpdateTemplate(templateId, body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceUpdateTemplate: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceUpdateTemplate: $e\n');
 }
 ```
 
@@ -854,7 +854,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **String**|  | [default to null]
+ **templateId** | **String**|  | 
  **body** | [**ApiTemplate**](ApiTemplate.md)|  | 
 
 ### Return type
@@ -881,15 +881,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-var api_instance = CICDServiceApi();
-var variableId = variableId_example; // String | 
-var body = ApiVariable(); // ApiVariable | 
+final api_instance = CICDServiceApi();
+final variableId = variableId_example; // String | 
+final body = ApiVariable(); // ApiVariable | 
 
 try { 
-    var result = api_instance.cICDServiceUpdateVariable(variableId, body);
+    final result = api_instance.cICDServiceUpdateVariable(variableId, body);
     print(result);
 } catch (e) {
-    print("Exception when calling CICDServiceApi->cICDServiceUpdateVariable: $e\n");
+    print('Exception when calling CICDServiceApi->cICDServiceUpdateVariable: $e\n');
 }
 ```
 
@@ -897,7 +897,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **variableId** | **String**|  | [default to null]
+ **variableId** | **String**|  | 
  **body** | [**ApiVariable**](ApiVariable.md)|  | 
 
 ### Return type

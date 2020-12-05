@@ -3,40 +3,40 @@ import 'package:test/test.dart';
 
 // tests for ApiJob
 void main() {
-    var instance = new ApiJob();
+  final instance = ApiJob();
 
   group('test ApiJob', () {
-    // String id (default value: null)
+    // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // String taskID (default value: null)
+    // String taskID
     test('to test the property `taskID`', () async {
       // TODO
     });
 
-    // String status (default value: null)
+    // String status
     test('to test the property `status`', () async {
       // TODO
     });
 
-    // String error (default value: null)
+    // String error
     test('to test the property `error`', () async {
       // TODO
     });
 
-    // List<JobSub> subs (default value: [])
+    // List<JobSub> subs (default value: const [])
     test('to test the property `subs`', () async {
       // TODO
     });
 
-    // int createAt (default value: null)
+    // int createAt
     test('to test the property `createAt`', () async {
       // TODO
     });
 
-    // int updateAt (default value: null)
+    // int updateAt
     test('to test the property `updateAt`', () async {
       // TODO
     });

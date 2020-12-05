@@ -3,15 +3,15 @@ import 'package:test/test.dart';
 
 // tests for ProtobufAny
 void main() {
-    var instance = new ProtobufAny();
+  final instance = ProtobufAny();
 
   group('test ProtobufAny', () {
-    // String typeUrl (default value: null)
+    // String typeUrl
     test('to test the property `typeUrl`', () async {
       // TODO
     });
 
-    // String value (default value: null)
+    // String value
     test('to test the property `value`', () async {
       // TODO
     });

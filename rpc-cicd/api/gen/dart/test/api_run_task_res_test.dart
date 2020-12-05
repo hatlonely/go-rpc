@@ -3,10 +3,10 @@ import 'package:test/test.dart';
 
 // tests for ApiRunTaskRes
 void main() {
-    var instance = new ApiRunTaskRes();
+  final instance = ApiRunTaskRes();
 
   group('test ApiRunTaskRes', () {
-    // String jobID (default value: null)
+    // String jobID
     test('to test the property `jobID`', () async {
       // TODO
     });
