@@ -730,6 +730,9 @@
         "templateID": {
           "type": "string"
         },
+        "templateName": {
+          "type": "string"
+        },
         "status": {
           "type": "string"
         },

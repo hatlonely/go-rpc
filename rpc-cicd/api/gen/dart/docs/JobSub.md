@@ -9,6 +9,7 @@ import 'package:swagger/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **templateID** | **String** |  | [optional] [default to null]
+**templateName** | **String** |  | [optional] [default to null]
 **status** | **String** |  | [optional] [default to null]
 **language** | **String** |  | [optional] [default to null]
 **script** | **String** |  | [optional] [default to null]

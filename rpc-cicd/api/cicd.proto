@@ -130,12 +130,13 @@ message ListTaskRes {
 message Job {
   message Sub {
     string templateID = 1 [(gogoproto.moretags) = "bson:\"templateID,omitempty\""];
-    string status = 2 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-    string language = 3 [(gogoproto.moretags) = "bson:\"language,omitempty\""];
-    string script = 4 [(gogoproto.moretags) = "bson:\"script,omitempty\""];
-    int32 exitCode = 5 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
-    string stdout = 6 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
-    string stderr = 7 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
+    string templateName = 2 [(gogoproto.moretags) = "bson:\"templateName,omitempty\""];
+    string status = 3 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
+    string language = 4 [(gogoproto.moretags) = "bson:\"language,omitempty\""];
+    string script = 5 [(gogoproto.moretags) = "bson:\"script,omitempty\""];
+    int32 exitCode = 6 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
+    string stdout = 7 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
+    string stderr = 8 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
   }
 
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];

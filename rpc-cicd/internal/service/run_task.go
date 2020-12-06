@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
+	"os"
 	"os/exec"
 	"syscall"
 	"text/template"
@@ -130,19 +132,20 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 			return errors.Wrapf(err, "tpl execute [%v] failed", i.Name)
 		}
 
-		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, buf.String())
+		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, buf.String(), fmt.Sprintf("%v/%v", s.options.Data, job.Id))
 		if err != nil {
 			return errors.Wrapf(err, "Exec [%v] failed", i.Name)
 		}
 
 		job.Subs = append(job.Subs, &api.Job_Sub{
-			TemplateID: i.Id,
-			ExitCode:   int32(exitCode),
-			Language:   i.ScriptTemplate.Language,
-			Script:     buf.String(),
-			Stdout:     stdout,
-			Stderr:     stderr,
-			Status:     "Success",
+			TemplateID:   i.Id,
+			TemplateName: i.Name,
+			ExitCode:     int32(exitCode),
+			Language:     i.ScriptTemplate.Language,
+			Script:       buf.String(),
+			Stdout:       stdout,
+			Stderr:       stderr,
+			Status:       "Success",
 		})
 
 		if err := s.storage.UpdateJob(ctx, job); err != nil {
@@ -153,7 +156,11 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 	return nil
 }
 
-func Exec(interpreter string, script string) (int, string, string, error) {
+func Exec(interpreter string, script string, workdir string) (int, string, string, error) {
+	if err := os.MkdirAll(workdir, 0755); err != nil {
+		return 0, "", "", errors.Wrap(err, "os.MkdirAll failed")
+	}
+
 	var stdout = &bytes.Buffer{}
 	var stderr = &bytes.Buffer{}
 	var cmd *exec.Cmd
@@ -165,6 +172,7 @@ func Exec(interpreter string, script string) (int, string, string, error) {
 	default:
 		return -1, "", "", errors.New("unsupported interpreter")
 	}
+	cmd.Dir = workdir
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 

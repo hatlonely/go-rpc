@@ -26,4 +26,5 @@ type CICDService struct {
 }
 
 type Options struct {
+	Data string `dft:"data"`
 }
