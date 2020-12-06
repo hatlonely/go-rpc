@@ -733,6 +733,12 @@
         "status": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
         "exitCode": {
           "type": "integer",
           "format": "int32"
@@ -790,17 +796,14 @@
         "taskID": {
           "type": "string"
         },
+        "taskName": {
+          "type": "string"
+        },
         "status": {
           "type": "string"
         },
         "error": {
           "type": "string"
-        },
-        "subs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobSub"
-          }
         },
         "createAt": {
           "type": "integer",
@@ -809,6 +812,12 @@
         "updateAt": {
           "type": "integer",
           "format": "int32"
+        },
+        "subs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobSub"
+          }
         }
       }
     },

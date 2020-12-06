@@ -131,18 +131,21 @@ message Job {
   message Sub {
     string templateID = 1 [(gogoproto.moretags) = "bson:\"templateID,omitempty\""];
     string status = 2 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-    int32 exitCode = 3 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
-    string stdout = 4 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
-    string stderr = 5 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
+    string language = 3 [(gogoproto.moretags) = "bson:\"language,omitempty\""];
+    string script = 4 [(gogoproto.moretags) = "bson:\"script,omitempty\""];
+    int32 exitCode = 5 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
+    string stdout = 6 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
+    string stderr = 7 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
   }
 
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
   string taskID = 2 [(gogoproto.moretags) = "bson:\"taskID,omitempty\""];
-  string status = 3 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-  string error = 4 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
-  repeated Sub subs = 5 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
+  string taskName = 3 [(gogoproto.moretags) = "bson:\"taskName,omitempty\""];
+  string status = 4 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
+  string error = 5 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
   int32 createAt = 6 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
   int32 updateAt = 7 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
+  repeated Sub subs = 8 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
 }
 
 message RunTaskReq {

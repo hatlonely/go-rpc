@@ -82,13 +82,14 @@ func (s *CICDService) runTask(ctx context.Context, jobID string) error {
 	}
 	defer executor.CtxSet(ctx, "job", job)
 
-	job.Status = JobStatusRunning
-	if err := s.storage.UpdateJob(ctx, job); err != nil {
+	task, err := s.storage.GetTask(ctx, job.TaskID)
+	if err != nil {
 		return err
 	}
 
-	task, err := s.storage.GetTask(ctx, job.TaskID)
-	if err != nil {
+	job.TaskName = task.Name
+	job.Status = JobStatusRunning
+	if err := s.storage.UpdateJob(ctx, job); err != nil {
 		return err
 	}
 	defer executor.CtxSet(ctx, "task", task)
@@ -121,22 +122,24 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 	for _, i := range templates {
 		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
 		if err != nil {
-			return errors.Wrap(err, "create template failed")
+			return errors.Wrapf(err, "create template [%v] failed", i.Name)
 		}
 
 		buf := &bytes.Buffer{}
 		if err := tpl.Execute(buf, kvs); err != nil {
-			return errors.Wrap(err, "tpl execute failed")
+			return errors.Wrapf(err, "tpl execute [%v] failed", i.Name)
 		}
 
 		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, buf.String())
 		if err != nil {
-			return errors.Wrap(err, "Exec failed")
+			return errors.Wrapf(err, "Exec [%v] failed", i.Name)
 		}
 
 		job.Subs = append(job.Subs, &api.Job_Sub{
 			TemplateID: i.Id,
 			ExitCode:   int32(exitCode),
+			Language:   i.ScriptTemplate.Language,
+			Script:     buf.String(),
 			Stdout:     stdout,
 			Stderr:     stderr,
 			Status:     "Success",

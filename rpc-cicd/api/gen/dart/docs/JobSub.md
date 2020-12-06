@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **templateID** | **String** |  | [optional] [default to null]
 **status** | **String** |  | [optional] [default to null]
+**language** | **String** |  | [optional] [default to null]
+**script** | **String** |  | [optional] [default to null]
 **exitCode** | **int** |  | [optional] [default to null]
 **stdout** | **String** |  | [optional] [default to null]
 **stderr** | **String** |  | [optional] [default to null]
