@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"time"
 
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
@@ -48,6 +49,7 @@ func (s *CICDStorage) PutTask(ctx context.Context, task *api.Task) error {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
+	task.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, task)
 	if err != nil {
 		return errors.Wrap(err, "mongo.Collection.InsertOne failed")
@@ -64,7 +66,12 @@ func (s *CICDStorage) UpdateTask(ctx context.Context, task *api.Task) error {
 	}
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
+	id := task.Id
 	task.Id = ""
+	defer func() {
+		task.Id = id
+	}()
+	task.UpdateAt = int32(time.Now().Unix())
 	res, err := collection.UpdateOne(mongoCtx, bson.M{"_id": objectID}, bson.M{"$set": task})
 	if err != nil {
 		return errors.Wrap(err, "mongo.Collection.UpdateOne failed")

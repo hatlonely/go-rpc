@@ -907,6 +907,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "createAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateAt": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -928,6 +936,14 @@
         "category": {
           "type": "string"
         },
+        "createAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateAt": {
+          "type": "integer",
+          "format": "int32"
+        },
         "scriptTemplate": {
           "$ref": "#/definitions/TemplateScriptTemplate"
         }
@@ -947,6 +963,14 @@
         },
         "kvs": {
           "type": "string"
+        },
+        "createAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateAt": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

@@ -23,7 +23,9 @@ message Template {
   string description = 3 [(gogoproto.moretags) = "bson:\"description,omitempty\""];
   string type = 4 [(gogoproto.moretags) = "bson:\"type,omitempty\""];
   string category = 5 [(gogoproto.moretags) = "bson:\"category,omitempty\""];
-  ScriptTemplate scriptTemplate = 6 [(gogoproto.moretags) = "bson:\"scriptTemplate,omitempty\""];
+  int32 createAt = 6 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
+  int32 updateAt = 7 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
+  ScriptTemplate scriptTemplate = 8 [(gogoproto.moretags) = "bson:\"scriptTemplate,omitempty\""];
 }
 
 message GetTemplateReq {
@@ -61,6 +63,8 @@ message Variable {
   string name = 2 [(gogoproto.moretags) = "bson:\"name,omitempty\""];
   string description = 3 [(gogoproto.moretags) = "bson:\"description,omitempty\""];
   string kvs = 4 [(gogoproto.moretags) = "bson:\"kvs,omitempty\""];
+  int32 createAt = 5 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
+  int32 updateAt = 6 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
 }
 
 message GetVariableReq {
@@ -99,6 +103,8 @@ message Task {
   string description = 3 [(gogoproto.moretags) = "bson:\"description,omitempty\""];
   repeated string templateIDs = 4 [(gogoproto.moretags) = "bson:\"templateIDs,omitempty\""];
   repeated string variableIDs = 5 [(gogoproto.moretags) = "bson:\"variableIDs,omitempty\""];
+  int32 createAt = 6 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
+  int32 updateAt = 7 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
 }
 
 message GetTaskReq {

@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **description** | **String** |  | [optional] [default to null]
 **type** | **String** |  | [optional] [default to null]
 **category** | **String** |  | [optional] [default to null]
+**createAt** | **int** |  | [optional] [default to null]
+**updateAt** | **int** |  | [optional] [default to null]
 **scriptTemplate** | [**TemplateScriptTemplate**](TemplateScriptTemplate.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

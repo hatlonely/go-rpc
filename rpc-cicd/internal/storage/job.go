@@ -47,6 +47,7 @@ func (s *CICDStorage) PutJob(ctx context.Context, job *api.Job) (string, error) 
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
+	job.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, job)
 	if err != nil {
 		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
