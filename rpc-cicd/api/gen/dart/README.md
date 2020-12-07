@@ -83,6 +83,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ApiDelJobRes](doc//ApiDelJobRes.md)
+ - [ApiDelTaskRes](doc//ApiDelTaskRes.md)
+ - [ApiDelTemplateRes](doc//ApiDelTemplateRes.md)
+ - [ApiDelVariableRes](doc//ApiDelVariableRes.md)
  - [ApiGetTemplatesReq](doc//ApiGetTemplatesReq.md)
  - [ApiGetVariablesReq](doc//ApiGetVariablesReq.md)
  - [ApiJob](doc//ApiJob.md)
@@ -90,10 +94,16 @@ Class | Method | HTTP request | Description
  - [ApiListTaskRes](doc//ApiListTaskRes.md)
  - [ApiListTemplateRes](doc//ApiListTemplateRes.md)
  - [ApiListVariableRes](doc//ApiListVariableRes.md)
+ - [ApiPutTaskRes](doc//ApiPutTaskRes.md)
+ - [ApiPutTemplateRes](doc//ApiPutTemplateRes.md)
+ - [ApiPutVariableRes](doc//ApiPutVariableRes.md)
  - [ApiRunTaskReq](doc//ApiRunTaskReq.md)
  - [ApiRunTaskRes](doc//ApiRunTaskRes.md)
  - [ApiTask](doc//ApiTask.md)
  - [ApiTemplate](doc//ApiTemplate.md)
+ - [ApiUpdateTaskRes](doc//ApiUpdateTaskRes.md)
+ - [ApiUpdateTemplateRes](doc//ApiUpdateTemplateRes.md)
+ - [ApiUpdateVariableRes](doc//ApiUpdateVariableRes.md)
  - [ApiVariable](doc//ApiVariable.md)
  - [JobSub](doc//JobSub.md)
  - [ProtobufAny](doc//ProtobufAny.md)

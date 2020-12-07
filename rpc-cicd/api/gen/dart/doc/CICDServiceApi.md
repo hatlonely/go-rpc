@@ -33,7 +33,7 @@ Method | HTTP request | Description
 
 
 # **cICDServiceDelJob**
-> Object cICDServiceDelJob(id)
+> ApiDelJobRes cICDServiceDelJob(id)
 
 
 
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiDelJobRes**](ApiDelJobRes.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelTask**
-> Object cICDServiceDelTask(id)
+> ApiDelTaskRes cICDServiceDelTask(id)
 
 
 
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiDelTaskRes**](ApiDelTaskRes.md)
 
 ### Authorization
 
@@ -115,7 +115,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelTemplate**
-> Object cICDServiceDelTemplate(id)
+> ApiDelTemplateRes cICDServiceDelTemplate(id)
 
 
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiDelTemplateRes**](ApiDelTemplateRes.md)
 
 ### Authorization
 
@@ -156,7 +156,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelVariable**
-> Object cICDServiceDelVariable(id)
+> ApiDelVariableRes cICDServiceDelVariable(id)
 
 
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiDelVariableRes**](ApiDelVariableRes.md)
 
 ### Authorization
 
@@ -623,7 +623,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutTask**
-> Object cICDServicePutTask(body)
+> ApiPutTaskRes cICDServicePutTask(body)
 
 
 
@@ -650,7 +650,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiPutTaskRes**](ApiPutTaskRes.md)
 
 ### Authorization
 
@@ -664,7 +664,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutTemplate**
-> Object cICDServicePutTemplate(body)
+> ApiPutTemplateRes cICDServicePutTemplate(body)
 
 
 
@@ -691,7 +691,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiPutTemplateRes**](ApiPutTemplateRes.md)
 
 ### Authorization
 
@@ -705,7 +705,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutVariable**
-> Object cICDServicePutVariable(body)
+> ApiPutVariableRes cICDServicePutVariable(body)
 
 
 
@@ -732,7 +732,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiPutVariableRes**](ApiPutVariableRes.md)
 
 ### Authorization
 
@@ -787,7 +787,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateTask**
-> Object cICDServiceUpdateTask(taskId, body)
+> ApiUpdateTaskRes cICDServiceUpdateTask(taskId, body)
 
 
 
@@ -816,7 +816,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiUpdateTaskRes**](ApiUpdateTaskRes.md)
 
 ### Authorization
 
@@ -830,7 +830,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateTemplate**
-> Object cICDServiceUpdateTemplate(templateId, body)
+> ApiUpdateTemplateRes cICDServiceUpdateTemplate(templateId, body)
 
 
 
@@ -859,7 +859,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiUpdateTemplateRes**](ApiUpdateTemplateRes.md)
 
 ### Authorization
 
@@ -873,7 +873,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateVariable**
-> Object cICDServiceUpdateVariable(variableId, body)
+> ApiUpdateVariableRes cICDServiceUpdateVariable(variableId, body)
 
 
 
@@ -902,7 +902,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**ApiUpdateVariableRes**](ApiUpdateVariableRes.md)
 
 ### Authorization
 

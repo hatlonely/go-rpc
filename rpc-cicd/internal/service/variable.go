@@ -10,16 +10,20 @@ func (s *CICDService) GetVariable(ctx context.Context, req *api.GetVariableReq) 
 	return s.storage.GetVariable(ctx, req.Id)
 }
 
-func (s *CICDService) DelVariable(ctx context.Context, req *api.DelVariableReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.DelVariable(ctx, req.Id)
+func (s *CICDService) DelVariable(ctx context.Context, req *api.DelVariableReq) (*api.DelVariableRes, error) {
+	return &api.DelVariableRes{Id: req.Id}, s.storage.DelVariable(ctx, req.Id)
 }
 
-func (s *CICDService) PutVariable(ctx context.Context, req *api.PutVariableReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.PutVariable(ctx, req.Variable)
+func (s *CICDService) PutVariable(ctx context.Context, req *api.PutVariableReq) (*api.PutVariableRes, error) {
+	id, err := s.storage.PutVariable(ctx, req.Variable)
+	if err != nil {
+		return nil, err
+	}
+	return &api.PutVariableRes{Id: id}, nil
 }
 
-func (s *CICDService) UpdateVariable(ctx context.Context, req *api.UpdateVariableReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.UpdateVariable(ctx, req.Variable)
+func (s *CICDService) UpdateVariable(ctx context.Context, req *api.UpdateVariableReq) (*api.UpdateVariableRes, error) {
+	return &api.UpdateVariableRes{Id: req.Variable.Id}, s.storage.UpdateVariable(ctx, req.Variable)
 }
 
 func (s *CICDService) ListVariable(ctx context.Context, req *api.ListVariableReq) (*api.ListVariableRes, error) {

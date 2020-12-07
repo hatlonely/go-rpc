@@ -10,16 +10,20 @@ func (s *CICDService) GetTemplate(ctx context.Context, req *api.GetTemplateReq) 
 	return s.storage.GetTemplate(ctx, req.Id)
 }
 
-func (s *CICDService) DelTemplate(ctx context.Context, req *api.DelTemplateReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.DelTemplate(ctx, req.Id)
+func (s *CICDService) DelTemplate(ctx context.Context, req *api.DelTemplateReq) (*api.DelTemplateRes, error) {
+	return &api.DelTemplateRes{Id: req.Id}, s.storage.DelTemplate(ctx, req.Id)
 }
 
-func (s *CICDService) PutTemplate(ctx context.Context, req *api.PutTemplateReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.PutTemplate(ctx, req.Template)
+func (s *CICDService) PutTemplate(ctx context.Context, req *api.PutTemplateReq) (*api.PutTemplateRes, error) {
+	id, err := s.storage.PutTemplate(ctx, req.Template)
+	if err != nil {
+		return nil, err
+	}
+	return &api.PutTemplateRes{Id: id}, nil
 }
 
-func (s *CICDService) UpdateTemplate(ctx context.Context, req *api.UpdateTemplateReq) (*api.Empty, error) {
-	return &api.Empty{}, s.storage.UpdateTemplate(ctx, req.Template)
+func (s *CICDService) UpdateTemplate(ctx context.Context, req *api.UpdateTemplateReq) (*api.UpdateTemplateRes, error) {
+	return &api.UpdateTemplateRes{Id: req.Template.Id}, s.storage.UpdateTemplate(ctx, req.Template)
 }
 
 func (s *CICDService) ListTemplate(ctx context.Context, req *api.ListTemplateReq) (*api.ListTemplateRes, error) {

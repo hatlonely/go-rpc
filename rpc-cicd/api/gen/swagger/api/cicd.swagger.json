@@ -154,7 +154,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiDelJobRes"
             }
           },
           "default": {
@@ -259,7 +259,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiPutTaskRes"
             }
           },
           "default": {
@@ -319,7 +319,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiDelTaskRes"
             }
           },
           "default": {
@@ -349,7 +349,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiUpdateTaskRes"
             }
           },
           "default": {
@@ -430,7 +430,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiPutTemplateRes"
             }
           },
           "default": {
@@ -490,7 +490,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiDelTemplateRes"
             }
           },
           "default": {
@@ -520,7 +520,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiUpdateTemplateRes"
             }
           },
           "default": {
@@ -601,7 +601,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiPutVariableRes"
             }
           },
           "default": {
@@ -661,7 +661,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiDelVariableRes"
             }
           },
           "default": {
@@ -691,7 +691,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiEmpty"
+              "$ref": "#/definitions/apiUpdateVariableRes"
             }
           },
           "default": {
@@ -765,8 +765,37 @@
         }
       }
     },
-    "apiEmpty": {
-      "type": "object"
+    "apiDelJobRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiDelTaskRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiDelTemplateRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiDelVariableRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     },
     "apiGetTemplatesReq": {
       "type": "object",
@@ -868,6 +897,30 @@
         }
       }
     },
+    "apiPutTaskRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPutTemplateRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPutVariableRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
     "apiRunTaskReq": {
       "type": "object",
       "properties": {
@@ -946,6 +999,30 @@
         },
         "scriptTemplate": {
           "$ref": "#/definitions/TemplateScriptTemplate"
+        }
+      }
+    },
+    "apiUpdateTaskRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiUpdateTemplateRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiUpdateVariableRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         }
       }
     },

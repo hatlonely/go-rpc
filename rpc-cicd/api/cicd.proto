@@ -10,8 +10,6 @@ option (gogoproto.goproto_unkeyed_all) = false;
 option (gogoproto.goproto_unrecognized_all) = false;
 option (gogoproto.goproto_sizecache_all) = false;
 
-message Empty {}
-
 message Template {
   message ScriptTemplate {
     string language = 1;
@@ -40,12 +38,24 @@ message DelTemplateReq {
   string id = 1;
 }
 
+message DelTemplateRes {
+  string id = 1;
+}
+
 message PutTemplateReq {
   Template template = 1;
 }
 
+message PutTemplateRes {
+  string id = 1;
+}
+
 message UpdateTemplateReq {
   Template template = 1;
+}
+
+message UpdateTemplateRes {
+  string id = 1;
 }
 
 message ListTemplateReq {
@@ -79,12 +89,24 @@ message DelVariableReq {
   string id = 1;
 }
 
+message DelVariableRes {
+  string id = 1;
+}
+
 message PutVariableReq {
   Variable variable = 1;
 }
 
+message PutVariableRes {
+  string id = 1;
+}
+
 message UpdateVariableReq {
   Variable variable = 1;
+}
+
+message UpdateVariableRes {
+  string id = 1;
 }
 
 message ListVariableReq {
@@ -115,12 +137,24 @@ message DelTaskReq {
   string id = 1;
 }
 
+message DelTaskRes {
+  string id = 1;
+}
+
 message PutTaskReq {
   Task task = 1;
 }
 
+message PutTaskRes {
+  string id = 1;
+}
+
 message UpdateTaskReq {
   Task task = 1;
+}
+
+message UpdateTaskRes {
+  string id = 1;
 }
 
 message ListTaskReq {
@@ -171,6 +205,10 @@ message DelJobReq {
   string id = 1;
 }
 
+message DelJobRes {
+  string id = 1;
+}
+
 message ListJobReq {
   int64 offset = 1;
   int64 limit = 2;
@@ -209,7 +247,7 @@ service CICDService {
     };
   }
 
-  rpc DelJob(DelJobReq) returns (Empty) {
+  rpc DelJob(DelJobReq) returns (DelJobRes) {
     option (google.api.http) = {
       delete: "/v1/job/{id}"
     };
@@ -227,20 +265,20 @@ service CICDService {
     };
   }
 
-  rpc DelTask(DelTaskReq) returns (Empty) {
+  rpc DelTask(DelTaskReq) returns (DelTaskRes) {
     option (google.api.http) = {
       delete: "/v1/task/{id}"
     };
   }
 
-  rpc PutTask(PutTaskReq) returns (Empty) {
+  rpc PutTask(PutTaskReq) returns (PutTaskRes) {
     option (google.api.http) = {
       post: "/v1/task"
       body: "task"
     };
   }
 
-  rpc UpdateTask(UpdateTaskReq) returns (Empty) {
+  rpc UpdateTask(UpdateTaskReq) returns (UpdateTaskRes) {
     option (google.api.http) = {
       put: "/v1/task/{task.id}"
       body: "task"
@@ -259,20 +297,20 @@ service CICDService {
     };
   }
 
-  rpc DelTemplate(DelTemplateReq) returns (Empty) {
+  rpc DelTemplate(DelTemplateReq) returns (DelTemplateRes) {
     option (google.api.http) = {
       delete: "/v1/template/{id}"
     };
   }
 
-  rpc PutTemplate(PutTemplateReq) returns (Empty) {
+  rpc PutTemplate(PutTemplateReq) returns (PutTemplateRes) {
     option (google.api.http) = {
       post: "/v1/template"
       body: "template"
     };
   }
 
-  rpc UpdateTemplate(UpdateTemplateReq) returns (Empty) {
+  rpc UpdateTemplate(UpdateTemplateReq) returns (UpdateTemplateRes) {
     option (google.api.http) = {
       put: "/v1/template/{template.id}"
       body: "template"
@@ -291,20 +329,20 @@ service CICDService {
     };
   }
 
-  rpc DelVariable(DelVariableReq) returns (Empty) {
+  rpc DelVariable(DelVariableReq) returns (DelVariableRes) {
     option (google.api.http) = {
       delete: "/v1/variable/{id}"
     };
   }
 
-  rpc PutVariable(PutVariableReq) returns (Empty) {
+  rpc PutVariable(PutVariableReq) returns (PutVariableRes) {
     option (google.api.http) = {
       post: "/v1/variable"
       body: "variable"
     };
   }
 
-  rpc UpdateVariable(UpdateVariableReq) returns (Empty) {
+  rpc UpdateVariable(UpdateVariableReq) returns (UpdateVariableRes) {
     option (google.api.http) = {
       put: "/v1/variable/{variable.id}"
       body: "variable"

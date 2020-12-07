@@ -28,42 +28,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type Empty struct {
-}
-
-func (m *Empty) Reset()         { *m = Empty{} }
-func (m *Empty) String() string { return proto.CompactTextString(m) }
-func (*Empty) ProtoMessage()    {}
-func (*Empty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{0}
-}
-func (m *Empty) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Empty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Empty.Merge(m, src)
-}
-func (m *Empty) XXX_Size() int {
-	return m.Size()
-}
-func (m *Empty) XXX_DiscardUnknown() {
-	xxx_messageInfo_Empty.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Empty proto.InternalMessageInfo
-
 type Template struct {
 	Id             string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id,omitempty"`
 	Name           string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name,omitempty"`
@@ -79,7 +43,7 @@ func (m *Template) Reset()         { *m = Template{} }
 func (m *Template) String() string { return proto.CompactTextString(m) }
 func (*Template) ProtoMessage()    {}
 func (*Template) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{1}
+	return fileDescriptor_7a38a6ec253b08d3, []int{0}
 }
 func (m *Template) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -173,7 +137,7 @@ func (m *Template_ScriptTemplate) Reset()         { *m = Template_ScriptTemplate
 func (m *Template_ScriptTemplate) String() string { return proto.CompactTextString(m) }
 func (*Template_ScriptTemplate) ProtoMessage()    {}
 func (*Template_ScriptTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{1, 0}
+	return fileDescriptor_7a38a6ec253b08d3, []int{0, 0}
 }
 func (m *Template_ScriptTemplate) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -224,7 +188,7 @@ func (m *GetTemplateReq) Reset()         { *m = GetTemplateReq{} }
 func (m *GetTemplateReq) String() string { return proto.CompactTextString(m) }
 func (*GetTemplateReq) ProtoMessage()    {}
 func (*GetTemplateReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{2}
+	return fileDescriptor_7a38a6ec253b08d3, []int{1}
 }
 func (m *GetTemplateReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -268,7 +232,7 @@ func (m *GetTemplatesReq) Reset()         { *m = GetTemplatesReq{} }
 func (m *GetTemplatesReq) String() string { return proto.CompactTextString(m) }
 func (*GetTemplatesReq) ProtoMessage()    {}
 func (*GetTemplatesReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{3}
+	return fileDescriptor_7a38a6ec253b08d3, []int{2}
 }
 func (m *GetTemplatesReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -312,7 +276,7 @@ func (m *DelTemplateReq) Reset()         { *m = DelTemplateReq{} }
 func (m *DelTemplateReq) String() string { return proto.CompactTextString(m) }
 func (*DelTemplateReq) ProtoMessage()    {}
 func (*DelTemplateReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{4}
+	return fileDescriptor_7a38a6ec253b08d3, []int{3}
 }
 func (m *DelTemplateReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -342,6 +306,50 @@ func (m *DelTemplateReq) XXX_DiscardUnknown() {
 var xxx_messageInfo_DelTemplateReq proto.InternalMessageInfo
 
 func (m *DelTemplateReq) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DelTemplateRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelTemplateRes) Reset()         { *m = DelTemplateRes{} }
+func (m *DelTemplateRes) String() string { return proto.CompactTextString(m) }
+func (*DelTemplateRes) ProtoMessage()    {}
+func (*DelTemplateRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{4}
+}
+func (m *DelTemplateRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelTemplateRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelTemplateRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelTemplateRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTemplateRes.Merge(m, src)
+}
+func (m *DelTemplateRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelTemplateRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTemplateRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTemplateRes proto.InternalMessageInfo
+
+func (m *DelTemplateRes) GetId() string {
 	if m != nil {
 		return m.Id
 	}
@@ -392,6 +400,50 @@ func (m *PutTemplateReq) GetTemplate() *Template {
 	return nil
 }
 
+type PutTemplateRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *PutTemplateRes) Reset()         { *m = PutTemplateRes{} }
+func (m *PutTemplateRes) String() string { return proto.CompactTextString(m) }
+func (*PutTemplateRes) ProtoMessage()    {}
+func (*PutTemplateRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{6}
+}
+func (m *PutTemplateRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PutTemplateRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PutTemplateRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PutTemplateRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PutTemplateRes.Merge(m, src)
+}
+func (m *PutTemplateRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *PutTemplateRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_PutTemplateRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PutTemplateRes proto.InternalMessageInfo
+
+func (m *PutTemplateRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type UpdateTemplateReq struct {
 	Template *Template `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 }
@@ -400,7 +452,7 @@ func (m *UpdateTemplateReq) Reset()         { *m = UpdateTemplateReq{} }
 func (m *UpdateTemplateReq) String() string { return proto.CompactTextString(m) }
 func (*UpdateTemplateReq) ProtoMessage()    {}
 func (*UpdateTemplateReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{6}
+	return fileDescriptor_7a38a6ec253b08d3, []int{7}
 }
 func (m *UpdateTemplateReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -436,6 +488,50 @@ func (m *UpdateTemplateReq) GetTemplate() *Template {
 	return nil
 }
 
+type UpdateTemplateRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *UpdateTemplateRes) Reset()         { *m = UpdateTemplateRes{} }
+func (m *UpdateTemplateRes) String() string { return proto.CompactTextString(m) }
+func (*UpdateTemplateRes) ProtoMessage()    {}
+func (*UpdateTemplateRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{8}
+}
+func (m *UpdateTemplateRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateTemplateRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateTemplateRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateTemplateRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTemplateRes.Merge(m, src)
+}
+func (m *UpdateTemplateRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateTemplateRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTemplateRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateTemplateRes proto.InternalMessageInfo
+
+func (m *UpdateTemplateRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type ListTemplateReq struct {
 	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit  int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -446,7 +542,7 @@ func (m *ListTemplateReq) Reset()         { *m = ListTemplateReq{} }
 func (m *ListTemplateReq) String() string { return proto.CompactTextString(m) }
 func (*ListTemplateReq) ProtoMessage()    {}
 func (*ListTemplateReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{7}
+	return fileDescriptor_7a38a6ec253b08d3, []int{9}
 }
 func (m *ListTemplateReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -504,7 +600,7 @@ func (m *ListTemplateRes) Reset()         { *m = ListTemplateRes{} }
 func (m *ListTemplateRes) String() string { return proto.CompactTextString(m) }
 func (*ListTemplateRes) ProtoMessage()    {}
 func (*ListTemplateRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{8}
+	return fileDescriptor_7a38a6ec253b08d3, []int{10}
 }
 func (m *ListTemplateRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -553,7 +649,7 @@ func (m *Variable) Reset()         { *m = Variable{} }
 func (m *Variable) String() string { return proto.CompactTextString(m) }
 func (*Variable) ProtoMessage()    {}
 func (*Variable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{9}
+	return fileDescriptor_7a38a6ec253b08d3, []int{11}
 }
 func (m *Variable) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -632,7 +728,7 @@ func (m *GetVariableReq) Reset()         { *m = GetVariableReq{} }
 func (m *GetVariableReq) String() string { return proto.CompactTextString(m) }
 func (*GetVariableReq) ProtoMessage()    {}
 func (*GetVariableReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{10}
+	return fileDescriptor_7a38a6ec253b08d3, []int{12}
 }
 func (m *GetVariableReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -676,7 +772,7 @@ func (m *GetVariablesReq) Reset()         { *m = GetVariablesReq{} }
 func (m *GetVariablesReq) String() string { return proto.CompactTextString(m) }
 func (*GetVariablesReq) ProtoMessage()    {}
 func (*GetVariablesReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{11}
+	return fileDescriptor_7a38a6ec253b08d3, []int{13}
 }
 func (m *GetVariablesReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -720,7 +816,7 @@ func (m *DelVariableReq) Reset()         { *m = DelVariableReq{} }
 func (m *DelVariableReq) String() string { return proto.CompactTextString(m) }
 func (*DelVariableReq) ProtoMessage()    {}
 func (*DelVariableReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{12}
+	return fileDescriptor_7a38a6ec253b08d3, []int{14}
 }
 func (m *DelVariableReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -756,6 +852,50 @@ func (m *DelVariableReq) GetId() string {
 	return ""
 }
 
+type DelVariableRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelVariableRes) Reset()         { *m = DelVariableRes{} }
+func (m *DelVariableRes) String() string { return proto.CompactTextString(m) }
+func (*DelVariableRes) ProtoMessage()    {}
+func (*DelVariableRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{15}
+}
+func (m *DelVariableRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelVariableRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelVariableRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelVariableRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelVariableRes.Merge(m, src)
+}
+func (m *DelVariableRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelVariableRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelVariableRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelVariableRes proto.InternalMessageInfo
+
+func (m *DelVariableRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type PutVariableReq struct {
 	Variable *Variable `protobuf:"bytes,1,opt,name=variable,proto3" json:"variable,omitempty"`
 }
@@ -764,7 +904,7 @@ func (m *PutVariableReq) Reset()         { *m = PutVariableReq{} }
 func (m *PutVariableReq) String() string { return proto.CompactTextString(m) }
 func (*PutVariableReq) ProtoMessage()    {}
 func (*PutVariableReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{13}
+	return fileDescriptor_7a38a6ec253b08d3, []int{16}
 }
 func (m *PutVariableReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -800,6 +940,50 @@ func (m *PutVariableReq) GetVariable() *Variable {
 	return nil
 }
 
+type PutVariableRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *PutVariableRes) Reset()         { *m = PutVariableRes{} }
+func (m *PutVariableRes) String() string { return proto.CompactTextString(m) }
+func (*PutVariableRes) ProtoMessage()    {}
+func (*PutVariableRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{17}
+}
+func (m *PutVariableRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PutVariableRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PutVariableRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PutVariableRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PutVariableRes.Merge(m, src)
+}
+func (m *PutVariableRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *PutVariableRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_PutVariableRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PutVariableRes proto.InternalMessageInfo
+
+func (m *PutVariableRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type UpdateVariableReq struct {
 	Variable *Variable `protobuf:"bytes,1,opt,name=variable,proto3" json:"variable,omitempty"`
 }
@@ -808,7 +992,7 @@ func (m *UpdateVariableReq) Reset()         { *m = UpdateVariableReq{} }
 func (m *UpdateVariableReq) String() string { return proto.CompactTextString(m) }
 func (*UpdateVariableReq) ProtoMessage()    {}
 func (*UpdateVariableReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{14}
+	return fileDescriptor_7a38a6ec253b08d3, []int{18}
 }
 func (m *UpdateVariableReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -844,6 +1028,50 @@ func (m *UpdateVariableReq) GetVariable() *Variable {
 	return nil
 }
 
+type UpdateVariableRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *UpdateVariableRes) Reset()         { *m = UpdateVariableRes{} }
+func (m *UpdateVariableRes) String() string { return proto.CompactTextString(m) }
+func (*UpdateVariableRes) ProtoMessage()    {}
+func (*UpdateVariableRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{19}
+}
+func (m *UpdateVariableRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateVariableRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateVariableRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateVariableRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateVariableRes.Merge(m, src)
+}
+func (m *UpdateVariableRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateVariableRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateVariableRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateVariableRes proto.InternalMessageInfo
+
+func (m *UpdateVariableRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type ListVariableReq struct {
 	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit  int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -854,7 +1082,7 @@ func (m *ListVariableReq) Reset()         { *m = ListVariableReq{} }
 func (m *ListVariableReq) String() string { return proto.CompactTextString(m) }
 func (*ListVariableReq) ProtoMessage()    {}
 func (*ListVariableReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{15}
+	return fileDescriptor_7a38a6ec253b08d3, []int{20}
 }
 func (m *ListVariableReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -912,7 +1140,7 @@ func (m *ListVariableRes) Reset()         { *m = ListVariableRes{} }
 func (m *ListVariableRes) String() string { return proto.CompactTextString(m) }
 func (*ListVariableRes) ProtoMessage()    {}
 func (*ListVariableRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{16}
+	return fileDescriptor_7a38a6ec253b08d3, []int{21}
 }
 func (m *ListVariableRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -962,7 +1190,7 @@ func (m *Task) Reset()         { *m = Task{} }
 func (m *Task) String() string { return proto.CompactTextString(m) }
 func (*Task) ProtoMessage()    {}
 func (*Task) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{17}
+	return fileDescriptor_7a38a6ec253b08d3, []int{22}
 }
 func (m *Task) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1048,7 +1276,7 @@ func (m *GetTaskReq) Reset()         { *m = GetTaskReq{} }
 func (m *GetTaskReq) String() string { return proto.CompactTextString(m) }
 func (*GetTaskReq) ProtoMessage()    {}
 func (*GetTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{18}
+	return fileDescriptor_7a38a6ec253b08d3, []int{23}
 }
 func (m *GetTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1092,7 +1320,7 @@ func (m *DelTaskReq) Reset()         { *m = DelTaskReq{} }
 func (m *DelTaskReq) String() string { return proto.CompactTextString(m) }
 func (*DelTaskReq) ProtoMessage()    {}
 func (*DelTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{19}
+	return fileDescriptor_7a38a6ec253b08d3, []int{24}
 }
 func (m *DelTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1128,6 +1356,50 @@ func (m *DelTaskReq) GetId() string {
 	return ""
 }
 
+type DelTaskRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelTaskRes) Reset()         { *m = DelTaskRes{} }
+func (m *DelTaskRes) String() string { return proto.CompactTextString(m) }
+func (*DelTaskRes) ProtoMessage()    {}
+func (*DelTaskRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{25}
+}
+func (m *DelTaskRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelTaskRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelTaskRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelTaskRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTaskRes.Merge(m, src)
+}
+func (m *DelTaskRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelTaskRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTaskRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTaskRes proto.InternalMessageInfo
+
+func (m *DelTaskRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type PutTaskReq struct {
 	Task *Task `protobuf:"bytes,1,opt,name=task,proto3" json:"task,omitempty"`
 }
@@ -1136,7 +1408,7 @@ func (m *PutTaskReq) Reset()         { *m = PutTaskReq{} }
 func (m *PutTaskReq) String() string { return proto.CompactTextString(m) }
 func (*PutTaskReq) ProtoMessage()    {}
 func (*PutTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{20}
+	return fileDescriptor_7a38a6ec253b08d3, []int{26}
 }
 func (m *PutTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1172,6 +1444,50 @@ func (m *PutTaskReq) GetTask() *Task {
 	return nil
 }
 
+type PutTaskRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *PutTaskRes) Reset()         { *m = PutTaskRes{} }
+func (m *PutTaskRes) String() string { return proto.CompactTextString(m) }
+func (*PutTaskRes) ProtoMessage()    {}
+func (*PutTaskRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{27}
+}
+func (m *PutTaskRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PutTaskRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PutTaskRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PutTaskRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PutTaskRes.Merge(m, src)
+}
+func (m *PutTaskRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *PutTaskRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_PutTaskRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PutTaskRes proto.InternalMessageInfo
+
+func (m *PutTaskRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type UpdateTaskReq struct {
 	Task *Task `protobuf:"bytes,1,opt,name=task,proto3" json:"task,omitempty"`
 }
@@ -1180,7 +1496,7 @@ func (m *UpdateTaskReq) Reset()         { *m = UpdateTaskReq{} }
 func (m *UpdateTaskReq) String() string { return proto.CompactTextString(m) }
 func (*UpdateTaskReq) ProtoMessage()    {}
 func (*UpdateTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{21}
+	return fileDescriptor_7a38a6ec253b08d3, []int{28}
 }
 func (m *UpdateTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1216,6 +1532,50 @@ func (m *UpdateTaskReq) GetTask() *Task {
 	return nil
 }
 
+type UpdateTaskRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *UpdateTaskRes) Reset()         { *m = UpdateTaskRes{} }
+func (m *UpdateTaskRes) String() string { return proto.CompactTextString(m) }
+func (*UpdateTaskRes) ProtoMessage()    {}
+func (*UpdateTaskRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{29}
+}
+func (m *UpdateTaskRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateTaskRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateTaskRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateTaskRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTaskRes.Merge(m, src)
+}
+func (m *UpdateTaskRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateTaskRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTaskRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateTaskRes proto.InternalMessageInfo
+
+func (m *UpdateTaskRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type ListTaskReq struct {
 	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit  int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -1226,7 +1586,7 @@ func (m *ListTaskReq) Reset()         { *m = ListTaskReq{} }
 func (m *ListTaskReq) String() string { return proto.CompactTextString(m) }
 func (*ListTaskReq) ProtoMessage()    {}
 func (*ListTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{22}
+	return fileDescriptor_7a38a6ec253b08d3, []int{30}
 }
 func (m *ListTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1284,7 +1644,7 @@ func (m *ListTaskRes) Reset()         { *m = ListTaskRes{} }
 func (m *ListTaskRes) String() string { return proto.CompactTextString(m) }
 func (*ListTaskRes) ProtoMessage()    {}
 func (*ListTaskRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{23}
+	return fileDescriptor_7a38a6ec253b08d3, []int{31}
 }
 func (m *ListTaskRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1335,7 +1695,7 @@ func (m *Job) Reset()         { *m = Job{} }
 func (m *Job) String() string { return proto.CompactTextString(m) }
 func (*Job) ProtoMessage()    {}
 func (*Job) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{24}
+	return fileDescriptor_7a38a6ec253b08d3, []int{32}
 }
 func (m *Job) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1435,7 +1795,7 @@ func (m *Job_Sub) Reset()         { *m = Job_Sub{} }
 func (m *Job_Sub) String() string { return proto.CompactTextString(m) }
 func (*Job_Sub) ProtoMessage()    {}
 func (*Job_Sub) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{24, 0}
+	return fileDescriptor_7a38a6ec253b08d3, []int{32, 0}
 }
 func (m *Job_Sub) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1528,7 +1888,7 @@ func (m *RunTaskReq) Reset()         { *m = RunTaskReq{} }
 func (m *RunTaskReq) String() string { return proto.CompactTextString(m) }
 func (*RunTaskReq) ProtoMessage()    {}
 func (*RunTaskReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{25}
+	return fileDescriptor_7a38a6ec253b08d3, []int{33}
 }
 func (m *RunTaskReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1572,7 +1932,7 @@ func (m *RunTaskRes) Reset()         { *m = RunTaskRes{} }
 func (m *RunTaskRes) String() string { return proto.CompactTextString(m) }
 func (*RunTaskRes) ProtoMessage()    {}
 func (*RunTaskRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{26}
+	return fileDescriptor_7a38a6ec253b08d3, []int{34}
 }
 func (m *RunTaskRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1616,7 +1976,7 @@ func (m *GetJobReq) Reset()         { *m = GetJobReq{} }
 func (m *GetJobReq) String() string { return proto.CompactTextString(m) }
 func (*GetJobReq) ProtoMessage()    {}
 func (*GetJobReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{27}
+	return fileDescriptor_7a38a6ec253b08d3, []int{35}
 }
 func (m *GetJobReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1660,7 +2020,7 @@ func (m *DelJobReq) Reset()         { *m = DelJobReq{} }
 func (m *DelJobReq) String() string { return proto.CompactTextString(m) }
 func (*DelJobReq) ProtoMessage()    {}
 func (*DelJobReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{28}
+	return fileDescriptor_7a38a6ec253b08d3, []int{36}
 }
 func (m *DelJobReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1696,6 +2056,50 @@ func (m *DelJobReq) GetId() string {
 	return ""
 }
 
+type DelJobRes struct {
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *DelJobRes) Reset()         { *m = DelJobRes{} }
+func (m *DelJobRes) String() string { return proto.CompactTextString(m) }
+func (*DelJobRes) ProtoMessage()    {}
+func (*DelJobRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_7a38a6ec253b08d3, []int{37}
+}
+func (m *DelJobRes) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DelJobRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DelJobRes.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DelJobRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelJobRes.Merge(m, src)
+}
+func (m *DelJobRes) XXX_Size() int {
+	return m.Size()
+}
+func (m *DelJobRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelJobRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelJobRes proto.InternalMessageInfo
+
+func (m *DelJobRes) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type ListJobReq struct {
 	Offset int64  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit  int64  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -1706,7 +2110,7 @@ func (m *ListJobReq) Reset()         { *m = ListJobReq{} }
 func (m *ListJobReq) String() string { return proto.CompactTextString(m) }
 func (*ListJobReq) ProtoMessage()    {}
 func (*ListJobReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{29}
+	return fileDescriptor_7a38a6ec253b08d3, []int{38}
 }
 func (m *ListJobReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1764,7 +2168,7 @@ func (m *ListJobRes) Reset()         { *m = ListJobRes{} }
 func (m *ListJobRes) String() string { return proto.CompactTextString(m) }
 func (*ListJobRes) ProtoMessage()    {}
 func (*ListJobRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7a38a6ec253b08d3, []int{30}
+	return fileDescriptor_7a38a6ec253b08d3, []int{39}
 }
 func (m *ListJobRes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1801,29 +2205,37 @@ func (m *ListJobRes) GetJobs() []*Job {
 }
 
 func init() {
-	proto.RegisterType((*Empty)(nil), "api.Empty")
 	proto.RegisterType((*Template)(nil), "api.Template")
 	proto.RegisterType((*Template_ScriptTemplate)(nil), "api.Template.ScriptTemplate")
 	proto.RegisterType((*GetTemplateReq)(nil), "api.GetTemplateReq")
 	proto.RegisterType((*GetTemplatesReq)(nil), "api.GetTemplatesReq")
 	proto.RegisterType((*DelTemplateReq)(nil), "api.DelTemplateReq")
+	proto.RegisterType((*DelTemplateRes)(nil), "api.DelTemplateRes")
 	proto.RegisterType((*PutTemplateReq)(nil), "api.PutTemplateReq")
+	proto.RegisterType((*PutTemplateRes)(nil), "api.PutTemplateRes")
 	proto.RegisterType((*UpdateTemplateReq)(nil), "api.UpdateTemplateReq")
+	proto.RegisterType((*UpdateTemplateRes)(nil), "api.UpdateTemplateRes")
 	proto.RegisterType((*ListTemplateReq)(nil), "api.ListTemplateReq")
 	proto.RegisterType((*ListTemplateRes)(nil), "api.ListTemplateRes")
 	proto.RegisterType((*Variable)(nil), "api.Variable")
 	proto.RegisterType((*GetVariableReq)(nil), "api.GetVariableReq")
 	proto.RegisterType((*GetVariablesReq)(nil), "api.GetVariablesReq")
 	proto.RegisterType((*DelVariableReq)(nil), "api.DelVariableReq")
+	proto.RegisterType((*DelVariableRes)(nil), "api.DelVariableRes")
 	proto.RegisterType((*PutVariableReq)(nil), "api.PutVariableReq")
+	proto.RegisterType((*PutVariableRes)(nil), "api.PutVariableRes")
 	proto.RegisterType((*UpdateVariableReq)(nil), "api.UpdateVariableReq")
+	proto.RegisterType((*UpdateVariableRes)(nil), "api.UpdateVariableRes")
 	proto.RegisterType((*ListVariableReq)(nil), "api.ListVariableReq")
 	proto.RegisterType((*ListVariableRes)(nil), "api.ListVariableRes")
 	proto.RegisterType((*Task)(nil), "api.Task")
 	proto.RegisterType((*GetTaskReq)(nil), "api.GetTaskReq")
 	proto.RegisterType((*DelTaskReq)(nil), "api.DelTaskReq")
+	proto.RegisterType((*DelTaskRes)(nil), "api.DelTaskRes")
 	proto.RegisterType((*PutTaskReq)(nil), "api.PutTaskReq")
+	proto.RegisterType((*PutTaskRes)(nil), "api.PutTaskRes")
 	proto.RegisterType((*UpdateTaskReq)(nil), "api.UpdateTaskReq")
+	proto.RegisterType((*UpdateTaskRes)(nil), "api.UpdateTaskRes")
 	proto.RegisterType((*ListTaskReq)(nil), "api.ListTaskReq")
 	proto.RegisterType((*ListTaskRes)(nil), "api.ListTaskRes")
 	proto.RegisterType((*Job)(nil), "api.Job")
@@ -1832,6 +2244,7 @@ func init() {
 	proto.RegisterType((*RunTaskRes)(nil), "api.RunTaskRes")
 	proto.RegisterType((*GetJobReq)(nil), "api.GetJobReq")
 	proto.RegisterType((*DelJobReq)(nil), "api.DelJobReq")
+	proto.RegisterType((*DelJobRes)(nil), "api.DelJobRes")
 	proto.RegisterType((*ListJobReq)(nil), "api.ListJobReq")
 	proto.RegisterType((*ListJobRes)(nil), "api.ListJobRes")
 }
@@ -1839,103 +2252,107 @@ func init() {
 func init() { proto.RegisterFile("api/cicd.proto", fileDescriptor_7a38a6ec253b08d3) }
 
 var fileDescriptor_7a38a6ec253b08d3 = []byte{
-	// 1534 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x58, 0xdf, 0x6e, 0x13, 0xc7,
-	0x17, 0x8e, 0xb3, 0xfe, 0x7b, 0x6c, 0x9c, 0x30, 0x84, 0xfc, 0xcc, 0x26, 0xd8, 0xfe, 0x0d, 0x55,
-	0x15, 0x02, 0xd8, 0x2d, 0xb9, 0x29, 0xa1, 0xa5, 0x6d, 0x12, 0x84, 0x82, 0x50, 0x04, 0x0e, 0xb4,
-	0x52, 0x6f, 0xaa, 0x5d, 0x7b, 0x58, 0x96, 0x38, 0x1e, 0x77, 0x77, 0x1d, 0x35, 0xaa, 0xb8, 0xe9,
-	0x13, 0x54, 0xe2, 0xa6, 0xb7, 0x7d, 0x8b, 0xbe, 0x40, 0xa5, 0xf6, 0x0e, 0xa9, 0x17, 0xed, 0x95,
-	0x55, 0x91, 0x3e, 0x81, 0x9f, 0xa0, 0x9a, 0x7f, 0xbb, 0x33, 0x9b, 0x18, 0x41, 0x84, 0x04, 0x37,
-	0x91, 0xe7, 0x9c, 0xf3, 0x7d, 0x67, 0x76, 0xbe, 0x33, 0x67, 0x66, 0x02, 0x55, 0x67, 0xe8, 0xb7,
-	0xbb, 0x7e, 0xb7, 0xd7, 0x1a, 0x06, 0x34, 0xa2, 0xc8, 0x72, 0x86, 0xbe, 0xbd, 0xec, 0x51, 0xea,
-	0xf5, 0x49, 0x9b, 0xf9, 0x9c, 0xc1, 0x80, 0x46, 0x4e, 0xe4, 0xd3, 0x41, 0x28, 0x42, 0xec, 0x05,
-	0x8f, 0x7a, 0x94, 0xff, 0x6c, 0xb3, 0x5f, 0xc2, 0x8a, 0x0b, 0x90, 0xbb, 0xbd, 0x3f, 0x8c, 0x0e,
-	0xf1, 0xaf, 0x59, 0x28, 0x3e, 0x24, 0xfb, 0xc3, 0xbe, 0x13, 0x11, 0xb4, 0x02, 0xb3, 0x7e, 0xaf,
-	0x96, 0x69, 0x66, 0x56, 0x4a, 0x1b, 0xb5, 0xc9, 0xb8, 0xb1, 0xe0, 0x86, 0x74, 0xb0, 0x8e, 0xbf,
-	0xf5, 0x7b, 0x57, 0xe9, 0xbe, 0x1f, 0x11, 0x8e, 0xe8, 0xcc, 0xfa, 0x3d, 0x74, 0x0d, 0xb2, 0x03,
-	0x67, 0x9f, 0xd4, 0x66, 0x79, 0xec, 0x85, 0xc9, 0xb8, 0x71, 0x5e, 0xc4, 0x32, 0xab, 0x1e, 0xcc,
-	0xc3, 0xd0, 0x06, 0x94, 0x7b, 0x24, 0xec, 0x06, 0xfe, 0x90, 0x4d, 0xad, 0x66, 0x71, 0x54, 0x73,
-	0x32, 0x6e, 0x2c, 0x0b, 0x94, 0xe6, 0xd4, 0xc1, 0x3a, 0x88, 0xa5, 0x8c, 0x0e, 0x87, 0xa4, 0x96,
-	0x4d, 0xa7, 0x64, 0x56, 0x23, 0x25, 0x33, 0xa0, 0x1b, 0x50, 0xec, 0x3a, 0x11, 0xf1, 0x68, 0x70,
-	0x58, 0xcb, 0x71, 0xc8, 0xc5, 0xc9, 0xb8, 0x71, 0x41, 0x40, 0x94, 0x47, 0x87, 0xc5, 0xe1, 0x1c,
-	0x1a, 0x10, 0x27, 0x22, 0x5f, 0x46, 0xb5, 0x7c, 0x33, 0xb3, 0x92, 0x33, 0xa0, 0xd2, 0x63, 0x42,
-	0xa5, 0x91, 0x41, 0x47, 0xc3, 0x9e, 0x80, 0x16, 0xd2, 0x50, 0xe5, 0x31, 0xa0, 0xca, 0x88, 0x7c,
-	0xa8, 0x8a, 0x8f, 0x55, 0x72, 0xd4, 0x8a, 0xcd, 0xcc, 0x4a, 0xf9, 0xfa, 0x72, 0xcb, 0x19, 0xfa,
-	0x2d, 0x65, 0x6c, 0xed, 0x1a, 0x31, 0x1b, 0x97, 0x26, 0xe3, 0x46, 0x43, 0xd0, 0x9b, 0x68, 0x3d,
-	0x49, 0x8a, 0xd8, 0xde, 0x82, 0xaa, 0x49, 0x83, 0x6c, 0x28, 0xf6, 0x9d, 0x81, 0x37, 0x72, 0x3c,
-	0x22, 0xf4, 0xef, 0xc4, 0x63, 0xb4, 0x08, 0x79, 0x81, 0x17, 0x6a, 0x77, 0xe4, 0x08, 0x37, 0xa1,
-	0x7a, 0x87, 0xc4, 0x14, 0x1d, 0xf2, 0x1d, 0xaa, 0x26, 0xf5, 0xc3, 0xaa, 0x04, 0x5f, 0x82, 0x39,
-	0x2d, 0x22, 0x64, 0x21, 0xf3, 0x60, 0xf9, 0xbd, 0xb0, 0x96, 0x69, 0x5a, 0x2b, 0xa5, 0x0e, 0xfb,
-	0xc9, 0x68, 0xb6, 0x48, 0xff, 0x55, 0x34, 0x37, 0xa1, 0x7a, 0x7f, 0x64, 0x24, 0xba, 0x0c, 0xc5,
-	0x48, 0xad, 0x52, 0x86, 0xaf, 0xd2, 0x19, 0x63, 0x95, 0x3a, 0xb1, 0x1b, 0xdf, 0x82, 0xb3, 0x8f,
-	0xf8, 0x12, 0x9f, 0x12, 0xff, 0x08, 0xe6, 0xee, 0xf9, 0xa1, 0x91, 0x7d, 0x11, 0xf2, 0xf4, 0xf1,
-	0xe3, 0x90, 0x44, 0x1c, 0x6b, 0x75, 0xe4, 0x08, 0x2d, 0x40, 0xae, 0xef, 0xef, 0xfb, 0x62, 0x9d,
-	0xac, 0x8e, 0x18, 0x30, 0xab, 0x1b, 0xf8, 0xe4, 0x31, 0xaf, 0xfa, 0x62, 0x47, 0x0c, 0xf0, 0xad,
-	0x34, 0x6d, 0x88, 0xae, 0x40, 0x49, 0x65, 0x15, 0x0b, 0x74, 0x6c, 0x56, 0x89, 0x1f, 0xff, 0x31,
-	0x0b, 0xc5, 0xaf, 0x9c, 0xc0, 0x77, 0xdc, 0xfe, 0x7b, 0xbe, 0x6f, 0x57, 0xc1, 0xda, 0x3b, 0x08,
-	0xe5, 0xb6, 0xd5, 0x66, 0xb7, 0x77, 0x10, 0xea, 0x18, 0x16, 0x64, 0xec, 0xbc, 0xdc, 0xe9, 0x77,
-	0x5e, 0xfe, 0x8d, 0x76, 0x9e, 0x2c, 0x64, 0xb5, 0x9a, 0xd3, 0x0b, 0x59, 0x45, 0xbc, 0xb2, 0x90,
-	0x5f, 0x45, 0x23, 0x0a, 0x59, 0x8f, 0xb8, 0x0c, 0xc5, 0x03, 0x39, 0x34, 0x0a, 0x31, 0x8e, 0x89,
-	0xdd, 0x49, 0x21, 0x9f, 0x12, 0x2f, 0x0b, 0x59, 0x47, 0xbf, 0xc5, 0x42, 0x4e, 0x68, 0x79, 0x21,
-	0xab, 0xac, 0x66, 0x21, 0xc7, 0x41, 0x89, 0x1f, 0xff, 0x62, 0x41, 0xf6, 0xa1, 0x13, 0xee, 0xbd,
-	0xdf, 0x45, 0xbc, 0x01, 0x65, 0xb5, 0xf7, 0xb6, 0xb7, 0x58, 0x31, 0x5b, 0x26, 0x87, 0xe6, 0x34,
-	0x38, 0x34, 0x3b, 0xe3, 0x50, 0x9f, 0xcd, 0x38, 0x72, 0x69, 0x0e, 0xcd, 0x69, 0x70, 0x68, 0xf6,
-	0x77, 0x73, 0x34, 0xe1, 0x65, 0x00, 0xd6, 0xc7, 0x9d, 0x70, 0xef, 0xa4, 0xaa, 0x5e, 0x06, 0x60,
-	0x0d, 0x7c, 0x8a, 0xf7, 0x0a, 0x00, 0x6b, 0xde, 0xd2, 0x7b, 0x11, 0xb2, 0x91, 0x13, 0xee, 0xc9,
-	0x5a, 0x2d, 0x89, 0xf6, 0xc6, 0x7c, 0xdc, 0x8c, 0x5b, 0x70, 0x46, 0x36, 0xeb, 0xd7, 0x8b, 0x7f,
-	0x00, 0x65, 0xde, 0x45, 0x65, 0xf4, 0xdb, 0xa8, 0xe7, 0x96, 0x4e, 0x19, 0xa2, 0x06, 0xe4, 0x58,
-	0x26, 0x55, 0xc7, 0xda, 0x0c, 0x84, 0x1d, 0x3f, 0x2f, 0x80, 0x75, 0x97, 0xba, 0x6f, 0x50, 0xbe,
-	0x6b, 0x90, 0x67, 0xd0, 0xed, 0x2d, 0x59, 0xc0, 0x4b, 0x93, 0x71, 0xe3, 0x7f, 0xb2, 0x8c, 0xb8,
-	0x5d, 0x07, 0xc8, 0x50, 0xa6, 0x1e, 0xfb, 0xb5, 0xc3, 0xea, 0xde, 0x4a, 0x5f, 0x67, 0x94, 0xc7,
-	0x50, 0x4f, 0x19, 0x59, 0xbe, 0x30, 0x72, 0xa2, 0x91, 0xea, 0xc1, 0x5a, 0x3e, 0x61, 0x37, 0xf2,
-	0x09, 0x13, 0xfa, 0x08, 0x72, 0x24, 0x08, 0x68, 0x20, 0xef, 0x4e, 0xf6, 0x64, 0xdc, 0x58, 0x14,
-	0x18, 0x6e, 0xd6, 0x21, 0x22, 0xf0, 0x1d, 0xdd, 0x9a, 0x6e, 0x42, 0x36, 0x1c, 0xb9, 0x61, 0xad,
-	0xc8, 0xe5, 0xa9, 0x70, 0x79, 0xee, 0x52, 0xb7, 0xb5, 0x3b, 0x72, 0xf5, 0xce, 0xc0, 0x62, 0x8c,
-	0xce, 0xc0, 0x0c, 0xf6, 0x5f, 0x16, 0x58, 0xbb, 0x23, 0x17, 0x7d, 0x0e, 0x90, 0x6c, 0x54, 0xa9,
-	0x61, 0x63, 0x32, 0x6e, 0x2c, 0xa5, 0x37, 0xb7, 0x4e, 0xa1, 0x41, 0xd0, 0x6d, 0xa8, 0xa8, 0xd1,
-	0x4e, 0xd2, 0x99, 0xfe, 0x3f, 0x19, 0x37, 0x2e, 0x9a, 0x14, 0x69, 0x95, 0x0c, 0x98, 0xa6, 0x94,
-	0xf5, 0xfa, 0x4a, 0xdd, 0xd0, 0xae, 0x6e, 0xd9, 0x74, 0x65, 0x28, 0x8f, 0xb1, 0x78, 0xf1, 0xcd,
-	0x6e, 0x2d, 0xbe, 0xd9, 0xe5, 0x8e, 0xe5, 0xe3, 0x76, 0x33, 0x1f, 0x37, 0xb1, 0x7c, 0xe4, 0x7b,
-	0x3f, 0xda, 0xa4, 0x3d, 0x72, 0x5c, 0x67, 0xe5, 0x31, 0xf2, 0x29, 0xa3, 0xf8, 0xbe, 0x1e, 0x1d,
-	0x09, 0x95, 0x53, 0xdf, 0xc7, 0xec, 0xa9, 0xef, 0x63, 0x26, 0x09, 0x22, 0x41, 0xc0, 0xef, 0xc3,
-	0x69, 0x10, 0x09, 0x82, 0x34, 0x88, 0x04, 0x01, 0xfe, 0x00, 0xa0, 0x33, 0x1a, 0x68, 0x7d, 0x41,
-	0xee, 0x38, 0xd1, 0x97, 0xe4, 0x08, 0x63, 0x2d, 0x2a, 0x64, 0xfd, 0xe0, 0x29, 0x75, 0xe3, 0x20,
-	0x31, 0xc0, 0x4b, 0x50, 0xba, 0x43, 0xa2, 0xbb, 0xd4, 0x3d, 0xa9, 0xb9, 0x2d, 0x41, 0x69, 0x8b,
-	0xf4, 0xa7, 0x38, 0x3b, 0x00, 0xac, 0x93, 0x48, 0xef, 0x9b, 0xf5, 0xa6, 0x64, 0xc6, 0x96, 0x31,
-	0xe3, 0x55, 0x8d, 0x33, 0x44, 0xcb, 0x90, 0x7d, 0x4a, 0x5d, 0xd5, 0x9b, 0x8a, 0xaa, 0xf8, 0x3b,
-	0xdc, 0x7a, 0xfd, 0xb7, 0x0a, 0x94, 0x37, 0xb7, 0x37, 0xb7, 0x76, 0x49, 0x70, 0xe0, 0x77, 0x09,
-	0xda, 0x84, 0x82, 0xfc, 0x5a, 0x34, 0xc7, 0x43, 0x93, 0x15, 0xb2, 0x53, 0x86, 0x10, 0x2f, 0xfe,
-	0xf8, 0xe7, 0xbf, 0xcf, 0x67, 0xe7, 0x71, 0xb9, 0x7d, 0xf0, 0x71, 0x3b, 0x10, 0xf6, 0xf5, 0xcc,
-	0x2a, 0xfa, 0x1a, 0x2a, 0xfa, 0x95, 0x1e, 0x2d, 0x70, 0x60, 0xea, 0x96, 0x6f, 0x0b, 0x6b, 0xea,
-	0x82, 0x8b, 0x97, 0x38, 0xe7, 0x79, 0x3c, 0xcf, 0x38, 0x3d, 0x0d, 0x92, 0x10, 0xc7, 0x57, 0xac,
-	0x84, 0x58, 0xbf, 0x75, 0x69, 0xc4, 0xda, 0x85, 0xe3, 0x18, 0x71, 0x0c, 0x61, 0xc4, 0x9f, 0x40,
-	0x5e, 0x08, 0x88, 0xaa, 0x8a, 0x52, 0x48, 0x62, 0xc7, 0x0b, 0x86, 0x17, 0x38, 0x41, 0x15, 0x55,
-	0x18, 0xc1, 0x53, 0xea, 0xb6, 0x7f, 0xf0, 0x7b, 0xcf, 0xd0, 0x3a, 0xe4, 0x85, 0xba, 0x12, 0x19,
-	0x4b, 0x6d, 0x03, 0x1f, 0x8b, 0x17, 0xb4, 0xc4, 0xae, 0x9a, 0xd8, 0x4f, 0xa1, 0x20, 0x85, 0x92,
-	0x8b, 0x9d, 0x94, 0x82, 0x9d, 0x32, 0x84, 0x78, 0x8e, 0x53, 0x94, 0x50, 0x41, 0x52, 0x30, 0xb4,
-	0x3c, 0x70, 0x25, 0x3a, 0x39, 0x7e, 0xed, 0xe4, 0x08, 0xc2, 0xe7, 0x39, 0x6e, 0x0e, 0x9d, 0x61,
-	0x38, 0x56, 0x21, 0x22, 0xf7, 0x67, 0x50, 0x90, 0x07, 0xb2, 0x44, 0x27, 0xc7, 0xb3, 0x31, 0x73,
-	0x09, 0x5f, 0x4d, 0xc1, 0x6f, 0x41, 0x41, 0x9e, 0xd8, 0x12, 0x9e, 0x9c, 0xdf, 0x06, 0x5c, 0x95,
-	0x48, 0x51, 0xc1, 0xd7, 0xf9, 0xa1, 0x8c, 0x76, 0x00, 0x92, 0x43, 0x1c, 0x21, 0x8e, 0x30, 0x4e,
-	0x75, 0x83, 0xa5, 0xc9, 0x59, 0x6c, 0x1b, 0x25, 0x93, 0x60, 0x7f, 0x5b, 0x7e, 0xef, 0x99, 0xe4,
-	0xfb, 0x02, 0x8a, 0xea, 0x44, 0x46, 0xf3, 0x49, 0x61, 0x49, 0xae, 0xb4, 0x25, 0xc4, 0xf3, 0x9c,
-	0x11, 0x50, 0x3c, 0x2f, 0x74, 0x0f, 0xca, 0x5a, 0x85, 0xa2, 0x73, 0xe9, 0x9a, 0x65, 0x3c, 0xe6,
-	0x53, 0x0b, 0x5f, 0xe0, 0x24, 0xe7, 0xd0, 0x59, 0x4e, 0x22, 0xad, 0x62, 0x7d, 0xb6, 0xa1, 0xac,
-	0x3d, 0x58, 0x25, 0x9b, 0xf9, 0x84, 0x35, 0xbe, 0x50, 0x52, 0xad, 0x9e, 0x40, 0xb5, 0x03, 0x65,
-	0xed, 0x65, 0x2b, 0xa9, 0xcc, 0xb7, 0xae, 0x41, 0x55, 0xe7, 0x54, 0x35, 0x5c, 0xd1, 0xa9, 0xd6,
-	0xe3, 0xc7, 0x2a, 0x72, 0xa1, 0x6a, 0x3e, 0x76, 0xd1, 0xa2, 0xbe, 0xfc, 0x53, 0x58, 0xaf, 0x72,
-	0xd6, 0x0f, 0x6d, 0xdb, 0x9c, 0xa0, 0xfa, 0xc5, 0xa5, 0x48, 0x72, 0xdc, 0x87, 0x8a, 0xbe, 0xb1,
-	0xd1, 0x49, 0x7b, 0x7d, 0x5a, 0x07, 0x30, 0xf6, 0x59, 0xcc, 0x28, 0xe4, 0x89, 0x5f, 0xb3, 0xe7,
-	0xd2, 0x3b, 0x3f, 0x91, 0x47, 0x59, 0x4c, 0x79, 0xd4, 0x05, 0x59, 0x97, 0x27, 0xc5, 0x66, 0x3e,
-	0xcc, 0xa6, 0xcb, 0x63, 0x52, 0x09, 0x79, 0x52, 0x54, 0xe6, 0x0b, 0x6e, 0xba, 0x3c, 0x8a, 0x6a,
-	0x3d, 0x7e, 0x82, 0x25, 0xf2, 0xc4, 0x94, 0xba, 0x3c, 0xd3, 0x58, 0x0d, 0x79, 0x92, 0x09, 0xaa,
-	0x5f, 0x42, 0x9e, 0x38, 0x87, 0x94, 0x27, 0xce, 0x70, 0x52, 0xc7, 0x9c, 0xd6, 0x47, 0x0d, 0x79,
-	0x14, 0xe3, 0xc6, 0x83, 0xdf, 0x5f, 0xd6, 0x33, 0x2f, 0x5e, 0xd6, 0x33, 0xff, 0xbc, 0xac, 0x67,
-	0x7e, 0x3a, 0xaa, 0xcf, 0xfc, 0x7c, 0x54, 0x9f, 0x79, 0x71, 0x54, 0x9f, 0xf9, 0xfb, 0xa8, 0x3e,
-	0xf3, 0xcd, 0x9a, 0xe7, 0x47, 0x4f, 0x46, 0x6e, 0xab, 0x4b, 0xf7, 0xdb, 0x4f, 0x9c, 0xa8, 0x4f,
-	0x07, 0xa4, 0x7f, 0xd8, 0xf6, 0xe8, 0xb5, 0x60, 0xd8, 0x6d, 0x07, 0xc3, 0xee, 0xb5, 0xae, 0xdf,
-	0xed, 0xf1, 0xff, 0x4d, 0x7a, 0x64, 0xd0, 0xf6, 0x28, 0xfb, 0xe9, 0xe6, 0xf9, 0x7f, 0x21, 0xd7,
-	0xfe, 0x0b, 0x00, 0x00, 0xff, 0xff, 0x62, 0xba, 0xe9, 0x70, 0xd0, 0x14, 0x00, 0x00,
+	// 1590 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x58, 0x5d, 0x6f, 0x13, 0x47,
+	0x17, 0x8e, 0xb3, 0xfe, 0x3c, 0x4e, 0x9c, 0x30, 0x84, 0xbc, 0x66, 0x13, 0x6c, 0xbf, 0x9b, 0x57,
+	0xaf, 0x42, 0x00, 0xbb, 0x25, 0x37, 0x25, 0x54, 0xb4, 0x4d, 0x52, 0x21, 0x10, 0x42, 0xe0, 0xf0,
+	0x21, 0xf5, 0xa6, 0xda, 0xb5, 0x07, 0xb3, 0xc4, 0xf1, 0xba, 0x3b, 0xeb, 0xa8, 0x51, 0xc5, 0x4d,
+	0x7f, 0x41, 0x25, 0x2e, 0xda, 0xdb, 0xfe, 0x8b, 0xfe, 0x84, 0xf6, 0x0e, 0xa9, 0x17, 0xed, 0x95,
+	0x55, 0x91, 0xfe, 0x02, 0xff, 0x82, 0x6a, 0xbe, 0x76, 0x67, 0x66, 0x9d, 0x14, 0x10, 0x12, 0xdc,
+	0x58, 0x3b, 0xcf, 0x9c, 0xe7, 0x39, 0x33, 0x73, 0xe6, 0x9c, 0x99, 0x31, 0x54, 0xdc, 0xa1, 0xdf,
+	0xea, 0xf8, 0x9d, 0x6e, 0x73, 0x18, 0x06, 0x51, 0x80, 0x2c, 0x77, 0xe8, 0xdb, 0xab, 0xbd, 0x20,
+	0xe8, 0xf5, 0x71, 0x8b, 0xf6, 0xb9, 0x83, 0x41, 0x10, 0xb9, 0x91, 0x1f, 0x0c, 0x08, 0x37, 0xb1,
+	0x97, 0x7a, 0x41, 0x2f, 0x60, 0x9f, 0x2d, 0xfa, 0xc5, 0x51, 0xe7, 0x97, 0x2c, 0x14, 0x1f, 0xe0,
+	0x83, 0x61, 0xdf, 0x8d, 0x30, 0x5a, 0x87, 0x59, 0xbf, 0x5b, 0xcd, 0x34, 0x32, 0xeb, 0xa5, 0xed,
+	0xea, 0x64, 0x5c, 0x5f, 0xf2, 0x48, 0x30, 0xd8, 0x72, 0xbe, 0xf6, 0xbb, 0x97, 0x83, 0x03, 0x3f,
+	0xc2, 0x07, 0xc3, 0xe8, 0xc8, 0x69, 0xcf, 0xfa, 0x5d, 0x74, 0x05, 0xb2, 0x03, 0xf7, 0x00, 0x57,
+	0x67, 0x99, 0xed, 0xf9, 0xc9, 0xb8, 0x7e, 0x8e, 0xdb, 0x52, 0x54, 0x35, 0x66, 0x66, 0x68, 0x1b,
+	0xca, 0x5d, 0x4c, 0x3a, 0xa1, 0x3f, 0xa4, 0x23, 0xaa, 0x5a, 0x8c, 0xd5, 0x98, 0x8c, 0xeb, 0xab,
+	0x9c, 0xa5, 0x74, 0xaa, 0x64, 0x95, 0x44, 0x5d, 0x46, 0x47, 0x43, 0x5c, 0xcd, 0x9a, 0x2e, 0x29,
+	0xaa, 0xb9, 0xa4, 0x00, 0xba, 0x06, 0xc5, 0x8e, 0x1b, 0xe1, 0x5e, 0x10, 0x1e, 0x55, 0x73, 0x8c,
+	0x72, 0x61, 0x32, 0xae, 0x9f, 0xe7, 0x14, 0xd9, 0xa3, 0xd2, 0x62, 0x73, 0x46, 0x0d, 0xb1, 0x1b,
+	0xe1, 0x2f, 0xa2, 0x6a, 0xbe, 0x91, 0x59, 0xcf, 0x69, 0x54, 0xd1, 0xa3, 0x53, 0x05, 0x48, 0xa9,
+	0xa3, 0x61, 0x97, 0x53, 0x0b, 0x26, 0x55, 0xf6, 0x68, 0x54, 0x09, 0x22, 0x1f, 0x2a, 0x7c, 0xb2,
+	0x32, 0x1c, 0xd5, 0x62, 0x23, 0xb3, 0x5e, 0xbe, 0xba, 0xda, 0x74, 0x87, 0x7e, 0x53, 0x82, 0xcd,
+	0x3d, 0xcd, 0x66, 0x7b, 0x6d, 0x32, 0xae, 0xd7, 0xb9, 0xbc, 0xce, 0x56, 0x9d, 0x18, 0xc2, 0xf6,
+	0x2e, 0x54, 0x74, 0x19, 0x64, 0x43, 0xb1, 0xef, 0x0e, 0x7a, 0x23, 0xb7, 0x87, 0x79, 0xfc, 0xdb,
+	0x71, 0x1b, 0x2d, 0x43, 0x9e, 0xf3, 0x79, 0xb4, 0xdb, 0xa2, 0xe5, 0x34, 0xa0, 0x72, 0x13, 0xc7,
+	0x12, 0x6d, 0xfc, 0x0d, 0xaa, 0x24, 0xfb, 0x87, 0xee, 0x12, 0x67, 0x0d, 0x16, 0x14, 0x0b, 0x42,
+	0x4d, 0x16, 0xc1, 0xf2, 0xbb, 0xa4, 0x9a, 0x69, 0x58, 0xeb, 0xa5, 0x36, 0xfd, 0xa4, 0x32, 0xbb,
+	0xb8, 0x7f, 0x9a, 0x8c, 0x69, 0x41, 0x52, 0x16, 0xd7, 0xa1, 0x72, 0x6f, 0xa4, 0x0d, 0xe5, 0x22,
+	0x14, 0x23, 0xb9, 0x8e, 0x19, 0xb6, 0x8e, 0xf3, 0xda, 0x3a, 0xb6, 0xe3, 0x6e, 0x2a, 0xaf, 0x91,
+	0xd3, 0xf2, 0x37, 0xe0, 0xcc, 0x43, 0x16, 0xa6, 0xb7, 0xf4, 0xb0, 0x96, 0xe6, 0xa7, 0x9d, 0x3c,
+	0x84, 0x85, 0x3b, 0x3e, 0xd1, 0x26, 0xb1, 0x0c, 0xf9, 0xe0, 0xc9, 0x13, 0x82, 0x23, 0x66, 0x66,
+	0xb5, 0x45, 0x0b, 0x2d, 0x41, 0xae, 0xef, 0x1f, 0xf8, 0x3c, 0x20, 0x56, 0x9b, 0x37, 0x28, 0xea,
+	0x85, 0x3e, 0x7e, 0xc2, 0xd2, 0xab, 0xd8, 0xe6, 0x0d, 0xe7, 0x86, 0x29, 0x4b, 0xd0, 0x25, 0x28,
+	0xc9, 0xa1, 0xf1, 0x48, 0xa4, 0x86, 0x9e, 0xf4, 0x3b, 0xbf, 0xcd, 0x42, 0xf1, 0x91, 0x1b, 0xfa,
+	0xae, 0xd7, 0xff, 0xc0, 0x0b, 0xc4, 0x06, 0x58, 0xfb, 0x87, 0x44, 0xd4, 0x07, 0x65, 0x74, 0xfb,
+	0x87, 0x44, 0xe5, 0x50, 0x23, 0x2d, 0xc5, 0x73, 0x6f, 0x9f, 0xe2, 0xf9, 0x37, 0x4a, 0x71, 0x91,
+	0x31, 0x72, 0x35, 0x4f, 0xce, 0x18, 0x69, 0x71, 0x6a, 0xc6, 0x9c, 0x26, 0x63, 0x5a, 0x9c, 0x94,
+	0x31, 0xaa, 0xc6, 0x45, 0x28, 0x1e, 0x8a, 0xa6, 0xb6, 0x9f, 0x63, 0x9b, 0xb8, 0x5b, 0x64, 0xcc,
+	0x69, 0xf2, 0x71, 0xc6, 0xbc, 0xa5, 0x87, 0xb5, 0x34, 0xff, 0xc4, 0x8c, 0x51, 0x5d, 0xbc, 0xc3,
+	0x8c, 0x51, 0x3d, 0x5f, 0x82, 0x92, 0x1c, 0x9a, 0x9e, 0x31, 0xb1, 0x51, 0xd2, 0xef, 0xfc, 0x6c,
+	0x41, 0xf6, 0x81, 0x4b, 0xf6, 0x3f, 0xec, 0x6c, 0xd9, 0x86, 0xb2, 0x4c, 0xf2, 0x5b, 0xbb, 0x34,
+	0x6b, 0x2c, 0x5d, 0x43, 0xe9, 0xd4, 0x34, 0x14, 0x9c, 0x6a, 0xc8, 0x69, 0x53, 0x8d, 0x9c, 0xa9,
+	0xa1, 0x74, 0x6a, 0x1a, 0x0a, 0xfe, 0x7e, 0x0e, 0x5b, 0x67, 0x15, 0x80, 0x9e, 0x4c, 0x2e, 0xd9,
+	0x9f, 0x96, 0x3e, 0xab, 0x00, 0xf4, 0xc0, 0x79, 0x8d, 0xde, 0xf4, 0xa6, 0xbc, 0x04, 0x40, 0x4f,
+	0x13, 0xc1, 0xbd, 0x00, 0xd9, 0xc8, 0x25, 0xfb, 0x62, 0xbb, 0x97, 0x78, 0x95, 0xa5, 0x7d, 0x0c,
+	0xa6, 0x52, 0xb1, 0x71, 0x5a, 0xaa, 0x09, 0xf3, 0xe2, 0xd8, 0x78, 0x3d, 0xb5, 0xba, 0x6e, 0x9f,
+	0x16, 0xbc, 0x0f, 0x65, 0x76, 0x16, 0x08, 0xb9, 0x77, 0x91, 0x2c, 0x4d, 0x55, 0x92, 0xa0, 0x3a,
+	0xe4, 0xe8, 0x50, 0x64, 0x92, 0x28, 0x43, 0xe4, 0xb8, 0xf3, 0xa2, 0x00, 0xd6, 0xed, 0xc0, 0x7b,
+	0x83, 0xdc, 0xd8, 0x84, 0x3c, 0xa5, 0xde, 0xda, 0x15, 0xd9, 0xb1, 0x32, 0x19, 0xd7, 0xff, 0x23,
+	0xf6, 0x28, 0xc3, 0x55, 0x82, 0x30, 0xa5, 0x5b, 0x83, 0x7e, 0xdd, 0xa5, 0x49, 0x65, 0x99, 0xb7,
+	0x3f, 0xd9, 0xa3, 0x6d, 0x0d, 0x09, 0x52, 0x7f, 0x24, 0x72, 0xa3, 0x91, 0x3c, 0x49, 0x14, 0x7f,
+	0x1c, 0xd7, 0xfc, 0x71, 0x08, 0x7d, 0x04, 0x39, 0x1c, 0x86, 0x41, 0x28, 0xae, 0x9a, 0xf6, 0x64,
+	0x5c, 0x5f, 0xe6, 0x1c, 0x06, 0xab, 0x14, 0x6e, 0xf8, 0x9e, 0x2e, 0x99, 0xd7, 0x21, 0x4b, 0x46,
+	0x1e, 0xa9, 0x16, 0x59, 0x78, 0xe6, 0x58, 0x78, 0x6e, 0x07, 0x5e, 0x73, 0x6f, 0xe4, 0xa9, 0x65,
+	0x87, 0xda, 0x68, 0x65, 0x87, 0x02, 0xf6, 0x1f, 0x16, 0x58, 0x7b, 0x23, 0x0f, 0x7d, 0x06, 0x90,
+	0x54, 0x01, 0x11, 0xc3, 0xfa, 0x64, 0x5c, 0x5f, 0x31, 0x2b, 0x87, 0x2a, 0xa1, 0x50, 0xd0, 0x97,
+	0x30, 0x27, 0x5b, 0x77, 0x93, 0xb2, 0xf7, 0xdf, 0xc9, 0xb8, 0x7e, 0x41, 0x97, 0x30, 0xa3, 0xa4,
+	0xd1, 0x94, 0x48, 0x59, 0xaf, 0x1f, 0xa9, 0x6b, 0xca, 0x4d, 0x37, 0x6b, 0xee, 0x0c, 0xd9, 0xa3,
+	0x2d, 0x5e, 0x7c, 0x11, 0xde, 0x8c, 0x2f, 0xc2, 0xb9, 0x94, 0x3f, 0x86, 0xeb, 0xfe, 0x18, 0x44,
+	0xfd, 0xe1, 0x6f, 0xfd, 0x68, 0x27, 0xe8, 0xe2, 0x74, 0x9c, 0x65, 0x8f, 0xe6, 0x4f, 0x82, 0x7c,
+	0x7e, 0xdd, 0x60, 0xc4, 0xa3, 0x6c, 0xcc, 0x8f, 0xe2, 0xc6, 0xfc, 0x28, 0x24, 0x48, 0x38, 0x0c,
+	0xd9, 0xf3, 0xc1, 0x24, 0xe1, 0x30, 0x34, 0x49, 0x38, 0x0c, 0x9d, 0xff, 0x01, 0xb4, 0x47, 0x03,
+	0xa5, 0x2e, 0x88, 0x8c, 0xe3, 0xa5, 0x43, 0xb4, 0x1c, 0x47, 0xb1, 0x22, 0xb4, 0x1e, 0x3c, 0x0b,
+	0xbc, 0xd8, 0x88, 0x37, 0x9c, 0x15, 0x28, 0xdd, 0xc4, 0xd1, 0xed, 0xc0, 0x9b, 0x56, 0x39, 0x57,
+	0xa0, 0xb4, 0x8b, 0xfb, 0xff, 0xde, 0x99, 0xae, 0x5c, 0x6d, 0x00, 0x5a, 0x66, 0x04, 0xf5, 0xcd,
+	0x0a, 0x57, 0x32, 0x1d, 0x4b, 0x9b, 0xce, 0x86, 0xa2, 0x49, 0xd0, 0x2a, 0x64, 0x9f, 0x05, 0x9e,
+	0x2c, 0x5c, 0x45, 0x99, 0x19, 0x6d, 0x86, 0x5e, 0xfd, 0x71, 0x1e, 0xca, 0x3b, 0xb7, 0x76, 0x76,
+	0xf7, 0x70, 0x78, 0xe8, 0x77, 0x30, 0xda, 0x81, 0x82, 0x58, 0x0a, 0xb4, 0xc0, 0x4c, 0x93, 0xe5,
+	0xb3, 0x0d, 0x80, 0x38, 0xcb, 0xdf, 0xff, 0xfe, 0xf7, 0x8b, 0xd9, 0x45, 0xa7, 0xdc, 0x3a, 0xfc,
+	0xb8, 0x15, 0x72, 0x7c, 0x2b, 0xb3, 0x81, 0x1e, 0xc3, 0x9c, 0xfa, 0x3c, 0x42, 0x4b, 0x8c, 0x68,
+	0xbc, 0x98, 0x6c, 0x8e, 0x1a, 0x77, 0x78, 0x67, 0x85, 0x69, 0x9e, 0x73, 0x16, 0xa9, 0x66, 0x4f,
+	0xa1, 0x24, 0xc2, 0xf1, 0x2d, 0x32, 0x11, 0x56, 0x2f, 0x96, 0x8a, 0xb0, 0x72, 0xd5, 0x49, 0x09,
+	0xc7, 0x14, 0x2a, 0xfc, 0x09, 0xe4, 0x79, 0x74, 0x51, 0x45, 0x4a, 0xf2, 0x90, 0xd8, 0xf1, 0x82,
+	0x39, 0x4b, 0x4c, 0xa0, 0x82, 0xe6, 0xa8, 0xc0, 0xb3, 0xc0, 0x6b, 0x7d, 0xe7, 0x77, 0x9f, 0xa3,
+	0x1b, 0x90, 0xe7, 0xd1, 0x15, 0xcc, 0x78, 0x1f, 0xd8, 0x7a, 0x9b, 0x48, 0xfe, 0x86, 0xce, 0xff,
+	0x14, 0x0a, 0x22, 0x58, 0x62, 0xc1, 0x93, 0xed, 0x60, 0x1b, 0x00, 0x71, 0x16, 0x98, 0x44, 0x09,
+	0x15, 0x84, 0x04, 0x65, 0x8b, 0xe3, 0x5e, 0xb0, 0x93, 0xc3, 0xdf, 0x4e, 0xce, 0x28, 0xe7, 0x1c,
+	0xe3, 0x2d, 0xa0, 0x79, 0xca, 0xa3, 0xbb, 0x84, 0xfb, 0xde, 0x86, 0x82, 0x38, 0xf0, 0x05, 0x3b,
+	0xb9, 0x1c, 0xd8, 0x06, 0x40, 0xa4, 0xc6, 0x86, 0xa1, 0xb1, 0x03, 0x05, 0x71, 0xd2, 0x0b, 0x8d,
+	0xe4, 0x92, 0x60, 0x1b, 0x40, 0xb2, 0x61, 0x8a, 0x52, 0x63, 0x8b, 0x1d, 0xf0, 0xe8, 0x11, 0x40,
+	0x72, 0xc0, 0x23, 0xc4, 0x68, 0xda, 0x0d, 0xc1, 0x4e, 0x63, 0xc4, 0x69, 0x30, 0x35, 0xdb, 0x46,
+	0xc9, 0x88, 0xe8, 0x6f, 0xd3, 0xef, 0x3e, 0x17, 0xba, 0x9f, 0x43, 0x51, 0x1e, 0xe2, 0x68, 0x31,
+	0xd9, 0x6e, 0x42, 0xd3, 0x44, 0x88, 0xb3, 0xc8, 0x14, 0x01, 0xc5, 0xe3, 0x43, 0x77, 0xa0, 0xac,
+	0xec, 0x5b, 0x74, 0xd6, 0xdc, 0xc9, 0x54, 0x47, 0x7f, 0x63, 0x3a, 0xe7, 0x99, 0xc8, 0x59, 0x74,
+	0x86, 0x89, 0x08, 0x94, 0x2f, 0x56, 0x1b, 0xca, 0xca, 0x83, 0x5f, 0xa8, 0xe9, 0x7f, 0x12, 0xd8,
+	0x53, 0x40, 0x22, 0x35, 0x37, 0xa6, 0x68, 0x3e, 0x86, 0xb2, 0xf2, 0xca, 0x17, 0x9a, 0xfa, 0x9f,
+	0x06, 0xf6, 0x14, 0x90, 0x38, 0x35, 0xa6, 0x59, 0x75, 0xe6, 0x54, 0xcd, 0xad, 0xf8, 0x71, 0x8f,
+	0x06, 0x50, 0xd1, 0x1f, 0xf7, 0x68, 0x59, 0x0d, 0x82, 0x22, 0x3f, 0x1d, 0x27, 0xce, 0x65, 0xe6,
+	0xe1, 0xff, 0xb6, 0xad, 0x8f, 0x5a, 0x7e, 0xb1, 0x40, 0x25, 0xfe, 0xee, 0xc1, 0x9c, 0x5a, 0x0c,
+	0xd0, 0xb4, 0xfa, 0x70, 0x52, 0xd5, 0xd0, 0x72, 0x33, 0x56, 0xe4, 0xc1, 0x8b, 0x1f, 0xf9, 0x67,
+	0xcd, 0x6a, 0x91, 0x04, 0x4f, 0x22, 0x7a, 0xf0, 0xe4, 0x75, 0x5e, 0x0d, 0x9e, 0xa1, 0xa6, 0xbf,
+	0x57, 0xed, 0x29, 0xa0, 0x11, 0x3c, 0x5d, 0x93, 0x07, 0xcf, 0xd0, 0xd4, 0xdf, 0xaf, 0xf6, 0x14,
+	0xd0, 0x08, 0x9e, 0xd4, 0xdc, 0x8a, 0xdf, 0x99, 0x49, 0xf0, 0x62, 0x6d, 0x35, 0x48, 0xaa, 0xfc,
+	0x74, 0xdc, 0x08, 0x5e, 0x32, 0x6a, 0xf9, 0xc5, 0x83, 0x17, 0xfb, 0x13, 0xc1, 0x8b, 0xbd, 0x4d,
+	0xab, 0xc1, 0x27, 0x55, 0x66, 0x2d, 0x78, 0x52, 0x71, 0xfb, 0xfe, 0xaf, 0xaf, 0x6a, 0x99, 0x97,
+	0xaf, 0x6a, 0x99, 0xbf, 0x5e, 0xd5, 0x32, 0x3f, 0x1c, 0xd7, 0x66, 0x7e, 0x3a, 0xae, 0xcd, 0xbc,
+	0x3c, 0xae, 0xcd, 0xfc, 0x79, 0x5c, 0x9b, 0xf9, 0x6a, 0xb3, 0xe7, 0x47, 0x4f, 0x47, 0x5e, 0xb3,
+	0x13, 0x1c, 0xb4, 0x9e, 0xba, 0x51, 0x3f, 0x18, 0xe0, 0xfe, 0x51, 0xab, 0x17, 0x5c, 0x09, 0x87,
+	0x9d, 0x56, 0x38, 0xec, 0x5c, 0xe9, 0xf8, 0x9d, 0x2e, 0xfb, 0xc3, 0xb8, 0x87, 0x07, 0xad, 0x5e,
+	0x40, 0x3f, 0xbd, 0x3c, 0xfb, 0x6b, 0x78, 0xf3, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x80, 0x46,
+	0xfd, 0x62, 0x65, 0x16, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1954,22 +2371,22 @@ type CICDServiceClient interface {
 	GetTemplates(ctx context.Context, in *GetTemplatesReq, opts ...grpc.CallOption) (*ListTemplateRes, error)
 	GetVariables(ctx context.Context, in *GetVariablesReq, opts ...grpc.CallOption) (*ListVariableRes, error)
 	GetJob(ctx context.Context, in *GetJobReq, opts ...grpc.CallOption) (*Job, error)
-	DelJob(ctx context.Context, in *DelJobReq, opts ...grpc.CallOption) (*Empty, error)
+	DelJob(ctx context.Context, in *DelJobReq, opts ...grpc.CallOption) (*DelJobRes, error)
 	ListJob(ctx context.Context, in *ListJobReq, opts ...grpc.CallOption) (*ListJobRes, error)
 	GetTask(ctx context.Context, in *GetTaskReq, opts ...grpc.CallOption) (*Task, error)
-	DelTask(ctx context.Context, in *DelTaskReq, opts ...grpc.CallOption) (*Empty, error)
-	PutTask(ctx context.Context, in *PutTaskReq, opts ...grpc.CallOption) (*Empty, error)
-	UpdateTask(ctx context.Context, in *UpdateTaskReq, opts ...grpc.CallOption) (*Empty, error)
+	DelTask(ctx context.Context, in *DelTaskReq, opts ...grpc.CallOption) (*DelTaskRes, error)
+	PutTask(ctx context.Context, in *PutTaskReq, opts ...grpc.CallOption) (*PutTaskRes, error)
+	UpdateTask(ctx context.Context, in *UpdateTaskReq, opts ...grpc.CallOption) (*UpdateTaskRes, error)
 	ListTask(ctx context.Context, in *ListTaskReq, opts ...grpc.CallOption) (*ListTaskRes, error)
 	GetTemplate(ctx context.Context, in *GetTemplateReq, opts ...grpc.CallOption) (*Template, error)
-	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*Empty, error)
-	PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*Empty, error)
-	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*Empty, error)
+	DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*DelTemplateRes, error)
+	PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*PutTemplateRes, error)
+	UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*UpdateTemplateRes, error)
 	ListTemplate(ctx context.Context, in *ListTemplateReq, opts ...grpc.CallOption) (*ListTemplateRes, error)
 	GetVariable(ctx context.Context, in *GetVariableReq, opts ...grpc.CallOption) (*Variable, error)
-	DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*Empty, error)
-	PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*Empty, error)
-	UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*Empty, error)
+	DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*DelVariableRes, error)
+	PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*PutVariableRes, error)
+	UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*UpdateVariableRes, error)
 	ListVariable(ctx context.Context, in *ListVariableReq, opts ...grpc.CallOption) (*ListVariableRes, error)
 }
 
@@ -2017,8 +2434,8 @@ func (c *cICDServiceClient) GetJob(ctx context.Context, in *GetJobReq, opts ...g
 	return out, nil
 }
 
-func (c *cICDServiceClient) DelJob(ctx context.Context, in *DelJobReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) DelJob(ctx context.Context, in *DelJobReq, opts ...grpc.CallOption) (*DelJobRes, error) {
+	out := new(DelJobRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/DelJob", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2044,8 +2461,8 @@ func (c *cICDServiceClient) GetTask(ctx context.Context, in *GetTaskReq, opts ..
 	return out, nil
 }
 
-func (c *cICDServiceClient) DelTask(ctx context.Context, in *DelTaskReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) DelTask(ctx context.Context, in *DelTaskReq, opts ...grpc.CallOption) (*DelTaskRes, error) {
+	out := new(DelTaskRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/DelTask", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2053,8 +2470,8 @@ func (c *cICDServiceClient) DelTask(ctx context.Context, in *DelTaskReq, opts ..
 	return out, nil
 }
 
-func (c *cICDServiceClient) PutTask(ctx context.Context, in *PutTaskReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) PutTask(ctx context.Context, in *PutTaskReq, opts ...grpc.CallOption) (*PutTaskRes, error) {
+	out := new(PutTaskRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/PutTask", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2062,8 +2479,8 @@ func (c *cICDServiceClient) PutTask(ctx context.Context, in *PutTaskReq, opts ..
 	return out, nil
 }
 
-func (c *cICDServiceClient) UpdateTask(ctx context.Context, in *UpdateTaskReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) UpdateTask(ctx context.Context, in *UpdateTaskReq, opts ...grpc.CallOption) (*UpdateTaskRes, error) {
+	out := new(UpdateTaskRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/UpdateTask", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2089,8 +2506,8 @@ func (c *cICDServiceClient) GetTemplate(ctx context.Context, in *GetTemplateReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) DelTemplate(ctx context.Context, in *DelTemplateReq, opts ...grpc.CallOption) (*DelTemplateRes, error) {
+	out := new(DelTemplateRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/DelTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2098,8 +2515,8 @@ func (c *cICDServiceClient) DelTemplate(ctx context.Context, in *DelTemplateReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) PutTemplate(ctx context.Context, in *PutTemplateReq, opts ...grpc.CallOption) (*PutTemplateRes, error) {
+	out := new(PutTemplateRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/PutTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2107,8 +2524,8 @@ func (c *cICDServiceClient) PutTemplate(ctx context.Context, in *PutTemplateReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) UpdateTemplate(ctx context.Context, in *UpdateTemplateReq, opts ...grpc.CallOption) (*UpdateTemplateRes, error) {
+	out := new(UpdateTemplateRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/UpdateTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2134,8 +2551,8 @@ func (c *cICDServiceClient) GetVariable(ctx context.Context, in *GetVariableReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) DelVariable(ctx context.Context, in *DelVariableReq, opts ...grpc.CallOption) (*DelVariableRes, error) {
+	out := new(DelVariableRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/DelVariable", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2143,8 +2560,8 @@ func (c *cICDServiceClient) DelVariable(ctx context.Context, in *DelVariableReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) PutVariable(ctx context.Context, in *PutVariableReq, opts ...grpc.CallOption) (*PutVariableRes, error) {
+	out := new(PutVariableRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/PutVariable", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2152,8 +2569,8 @@ func (c *cICDServiceClient) PutVariable(ctx context.Context, in *PutVariableReq,
 	return out, nil
 }
 
-func (c *cICDServiceClient) UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *cICDServiceClient) UpdateVariable(ctx context.Context, in *UpdateVariableReq, opts ...grpc.CallOption) (*UpdateVariableRes, error) {
+	out := new(UpdateVariableRes)
 	err := c.cc.Invoke(ctx, "/api.CICDService/UpdateVariable", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2176,22 +2593,22 @@ type CICDServiceServer interface {
 	GetTemplates(context.Context, *GetTemplatesReq) (*ListTemplateRes, error)
 	GetVariables(context.Context, *GetVariablesReq) (*ListVariableRes, error)
 	GetJob(context.Context, *GetJobReq) (*Job, error)
-	DelJob(context.Context, *DelJobReq) (*Empty, error)
+	DelJob(context.Context, *DelJobReq) (*DelJobRes, error)
 	ListJob(context.Context, *ListJobReq) (*ListJobRes, error)
 	GetTask(context.Context, *GetTaskReq) (*Task, error)
-	DelTask(context.Context, *DelTaskReq) (*Empty, error)
-	PutTask(context.Context, *PutTaskReq) (*Empty, error)
-	UpdateTask(context.Context, *UpdateTaskReq) (*Empty, error)
+	DelTask(context.Context, *DelTaskReq) (*DelTaskRes, error)
+	PutTask(context.Context, *PutTaskReq) (*PutTaskRes, error)
+	UpdateTask(context.Context, *UpdateTaskReq) (*UpdateTaskRes, error)
 	ListTask(context.Context, *ListTaskReq) (*ListTaskRes, error)
 	GetTemplate(context.Context, *GetTemplateReq) (*Template, error)
-	DelTemplate(context.Context, *DelTemplateReq) (*Empty, error)
-	PutTemplate(context.Context, *PutTemplateReq) (*Empty, error)
-	UpdateTemplate(context.Context, *UpdateTemplateReq) (*Empty, error)
+	DelTemplate(context.Context, *DelTemplateReq) (*DelTemplateRes, error)
+	PutTemplate(context.Context, *PutTemplateReq) (*PutTemplateRes, error)
+	UpdateTemplate(context.Context, *UpdateTemplateReq) (*UpdateTemplateRes, error)
 	ListTemplate(context.Context, *ListTemplateReq) (*ListTemplateRes, error)
 	GetVariable(context.Context, *GetVariableReq) (*Variable, error)
-	DelVariable(context.Context, *DelVariableReq) (*Empty, error)
-	PutVariable(context.Context, *PutVariableReq) (*Empty, error)
-	UpdateVariable(context.Context, *UpdateVariableReq) (*Empty, error)
+	DelVariable(context.Context, *DelVariableReq) (*DelVariableRes, error)
+	PutVariable(context.Context, *PutVariableReq) (*PutVariableRes, error)
+	UpdateVariable(context.Context, *UpdateVariableReq) (*UpdateVariableRes, error)
 	ListVariable(context.Context, *ListVariableReq) (*ListVariableRes, error)
 }
 
@@ -2211,7 +2628,7 @@ func (*UnimplementedCICDServiceServer) GetVariables(ctx context.Context, req *Ge
 func (*UnimplementedCICDServiceServer) GetJob(ctx context.Context, req *GetJobReq) (*Job, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJob not implemented")
 }
-func (*UnimplementedCICDServiceServer) DelJob(ctx context.Context, req *DelJobReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) DelJob(ctx context.Context, req *DelJobReq) (*DelJobRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DelJob not implemented")
 }
 func (*UnimplementedCICDServiceServer) ListJob(ctx context.Context, req *ListJobReq) (*ListJobRes, error) {
@@ -2220,13 +2637,13 @@ func (*UnimplementedCICDServiceServer) ListJob(ctx context.Context, req *ListJob
 func (*UnimplementedCICDServiceServer) GetTask(ctx context.Context, req *GetTaskReq) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTask not implemented")
 }
-func (*UnimplementedCICDServiceServer) DelTask(ctx context.Context, req *DelTaskReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) DelTask(ctx context.Context, req *DelTaskReq) (*DelTaskRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DelTask not implemented")
 }
-func (*UnimplementedCICDServiceServer) PutTask(ctx context.Context, req *PutTaskReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) PutTask(ctx context.Context, req *PutTaskReq) (*PutTaskRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PutTask not implemented")
 }
-func (*UnimplementedCICDServiceServer) UpdateTask(ctx context.Context, req *UpdateTaskReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) UpdateTask(ctx context.Context, req *UpdateTaskReq) (*UpdateTaskRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
 }
 func (*UnimplementedCICDServiceServer) ListTask(ctx context.Context, req *ListTaskReq) (*ListTaskRes, error) {
@@ -2235,13 +2652,13 @@ func (*UnimplementedCICDServiceServer) ListTask(ctx context.Context, req *ListTa
 func (*UnimplementedCICDServiceServer) GetTemplate(ctx context.Context, req *GetTemplateReq) (*Template, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
 }
-func (*UnimplementedCICDServiceServer) DelTemplate(ctx context.Context, req *DelTemplateReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) DelTemplate(ctx context.Context, req *DelTemplateReq) (*DelTemplateRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DelTemplate not implemented")
 }
-func (*UnimplementedCICDServiceServer) PutTemplate(ctx context.Context, req *PutTemplateReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) PutTemplate(ctx context.Context, req *PutTemplateReq) (*PutTemplateRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PutTemplate not implemented")
 }
-func (*UnimplementedCICDServiceServer) UpdateTemplate(ctx context.Context, req *UpdateTemplateReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) UpdateTemplate(ctx context.Context, req *UpdateTemplateReq) (*UpdateTemplateRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
 }
 func (*UnimplementedCICDServiceServer) ListTemplate(ctx context.Context, req *ListTemplateReq) (*ListTemplateRes, error) {
@@ -2250,13 +2667,13 @@ func (*UnimplementedCICDServiceServer) ListTemplate(ctx context.Context, req *Li
 func (*UnimplementedCICDServiceServer) GetVariable(ctx context.Context, req *GetVariableReq) (*Variable, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVariable not implemented")
 }
-func (*UnimplementedCICDServiceServer) DelVariable(ctx context.Context, req *DelVariableReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) DelVariable(ctx context.Context, req *DelVariableReq) (*DelVariableRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DelVariable not implemented")
 }
-func (*UnimplementedCICDServiceServer) PutVariable(ctx context.Context, req *PutVariableReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) PutVariable(ctx context.Context, req *PutVariableReq) (*PutVariableRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PutVariable not implemented")
 }
-func (*UnimplementedCICDServiceServer) UpdateVariable(ctx context.Context, req *UpdateVariableReq) (*Empty, error) {
+func (*UnimplementedCICDServiceServer) UpdateVariable(ctx context.Context, req *UpdateVariableReq) (*UpdateVariableRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateVariable not implemented")
 }
 func (*UnimplementedCICDServiceServer) ListVariable(ctx context.Context, req *ListVariableReq) (*ListVariableRes, error) {
@@ -2738,29 +3155,6 @@ var _CICDService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "api/cicd.proto",
 }
 
-func (m *Empty) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Empty) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
 func (m *Template) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -2970,6 +3364,36 @@ func (m *DelTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DelTemplateRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelTemplateRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelTemplateRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *PutTemplateReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3005,6 +3429,36 @@ func (m *PutTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *PutTemplateRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PutTemplateRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutTemplateRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *UpdateTemplateReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3034,6 +3488,36 @@ func (m *UpdateTemplateReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i -= size
 			i = encodeVarintCicd(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateTemplateRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateTemplateRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateTemplateRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -3273,6 +3757,36 @@ func (m *DelVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DelVariableRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelVariableRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelVariableRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *PutVariableReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3308,6 +3822,36 @@ func (m *PutVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *PutVariableRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PutVariableRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutVariableRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *UpdateVariableReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3337,6 +3881,36 @@ func (m *UpdateVariableReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i -= size
 			i = encodeVarintCicd(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateVariableRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateVariableRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateVariableRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -3555,6 +4129,36 @@ func (m *DelTaskReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DelTaskRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelTaskRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelTaskRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *PutTaskReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3590,6 +4194,36 @@ func (m *PutTaskReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *PutTaskRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PutTaskRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutTaskRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *UpdateTaskReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3619,6 +4253,36 @@ func (m *UpdateTaskReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i -= size
 			i = encodeVarintCicd(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateTaskRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateTaskRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateTaskRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -3984,6 +4648,36 @@ func (m *DelJobReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DelJobRes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DelJobRes) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DelJobRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCicd(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ListJobReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -4072,15 +4766,6 @@ func encodeVarintCicd(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *Empty) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
 func (m *Template) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4178,6 +4863,19 @@ func (m *DelTemplateReq) Size() (n int) {
 	return n
 }
 
+func (m *DelTemplateRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *PutTemplateReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4191,6 +4889,19 @@ func (m *PutTemplateReq) Size() (n int) {
 	return n
 }
 
+func (m *PutTemplateRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *UpdateTemplateReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4199,6 +4910,19 @@ func (m *UpdateTemplateReq) Size() (n int) {
 	_ = l
 	if m.Template != nil {
 		l = m.Template.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdateTemplateRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
 	}
 	return n
@@ -4309,6 +5033,19 @@ func (m *DelVariableReq) Size() (n int) {
 	return n
 }
 
+func (m *DelVariableRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *PutVariableReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4322,6 +5059,19 @@ func (m *PutVariableReq) Size() (n int) {
 	return n
 }
 
+func (m *PutVariableRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *UpdateVariableReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4330,6 +5080,19 @@ func (m *UpdateVariableReq) Size() (n int) {
 	_ = l
 	if m.Variable != nil {
 		l = m.Variable.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdateVariableRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
 	}
 	return n
@@ -4433,6 +5196,19 @@ func (m *DelTaskReq) Size() (n int) {
 	return n
 }
 
+func (m *DelTaskRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *PutTaskReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4446,6 +5222,19 @@ func (m *PutTaskReq) Size() (n int) {
 	return n
 }
 
+func (m *PutTaskRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *UpdateTaskReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4454,6 +5243,19 @@ func (m *UpdateTaskReq) Size() (n int) {
 	_ = l
 	if m.Task != nil {
 		l = m.Task.Size()
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdateTaskRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
 		n += 1 + l + sovCicd(uint64(l))
 	}
 	return n
@@ -4625,6 +5427,19 @@ func (m *DelJobReq) Size() (n int) {
 	return n
 }
 
+func (m *DelJobRes) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCicd(uint64(l))
+	}
+	return n
+}
+
 func (m *ListJobReq) Size() (n int) {
 	if m == nil {
 		return 0
@@ -4664,59 +5479,6 @@ func sovCicd(x uint64) (n int) {
 }
 func sozCicd(x uint64) (n int) {
 	return sovCicd(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *Empty) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowCicd
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Empty: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Empty: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipCicd(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthCicd
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthCicd
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *Template) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -5377,6 +6139,91 @@ func (m *DelTemplateReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *DelTemplateRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelTemplateRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelTemplateRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *PutTemplateReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5466,6 +6313,91 @@ func (m *PutTemplateReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *PutTemplateRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PutTemplateRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PutTemplateRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *UpdateTemplateReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5530,6 +6462,91 @@ func (m *UpdateTemplateReq) Unmarshal(dAtA []byte) error {
 			if err := m.Template.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateTemplateRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateTemplateRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateTemplateRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -6227,6 +7244,91 @@ func (m *DelVariableReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *DelVariableRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelVariableRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelVariableRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *PutVariableReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -6316,6 +7418,91 @@ func (m *PutVariableReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *PutVariableRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PutVariableRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PutVariableRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *UpdateVariableReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -6380,6 +7567,91 @@ func (m *UpdateVariableReq) Unmarshal(dAtA []byte) error {
 			if err := m.Variable.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateVariableRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateVariableRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateVariableRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -7024,6 +8296,91 @@ func (m *DelTaskReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *DelTaskRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelTaskRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelTaskRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *PutTaskReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -7113,6 +8470,91 @@ func (m *PutTaskReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *PutTaskRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PutTaskRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PutTaskRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *UpdateTaskReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -7177,6 +8619,91 @@ func (m *UpdateTaskReq) Unmarshal(dAtA []byte) error {
 			if err := m.Task.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateTaskRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateTaskRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateTaskRes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -8263,6 +9790,91 @@ func (m *DelJobReq) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: DelJobReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCicd
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCicd
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCicd(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCicd
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DelJobRes) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCicd
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DelJobRes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DelJobRes: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

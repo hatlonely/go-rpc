@@ -45,17 +45,17 @@ func (s *CICDStorage) DelTask(ctx context.Context, id string) error {
 	return nil
 }
 
-func (s *CICDStorage) PutTask(ctx context.Context, task *api.Task) error {
+func (s *CICDStorage) PutTask(ctx context.Context, task *api.Task) (string, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TaskCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	task.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, task)
 	if err != nil {
-		return errors.Wrap(err, "mongo.Collection.InsertOne failed")
+		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return nil
+	return res.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (s *CICDStorage) UpdateTask(ctx context.Context, task *api.Task) error {

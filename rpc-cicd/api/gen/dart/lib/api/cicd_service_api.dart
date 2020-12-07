@@ -54,12 +54,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceDelJob(String id) async {
+  Future<ApiDelJobRes> cICDServiceDelJob(String id) async {
     Response response = await cICDServiceDelJobWithHttpInfo(id);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiDelJobRes') as ApiDelJobRes;
     } else {
       return null;
     }
@@ -112,12 +112,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceDelTask(String id) async {
+  Future<ApiDelTaskRes> cICDServiceDelTask(String id) async {
     Response response = await cICDServiceDelTaskWithHttpInfo(id);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiDelTaskRes') as ApiDelTaskRes;
     } else {
       return null;
     }
@@ -170,12 +170,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceDelTemplate(String id) async {
+  Future<ApiDelTemplateRes> cICDServiceDelTemplate(String id) async {
     Response response = await cICDServiceDelTemplateWithHttpInfo(id);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiDelTemplateRes') as ApiDelTemplateRes;
     } else {
       return null;
     }
@@ -228,12 +228,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceDelVariable(String id) async {
+  Future<ApiDelVariableRes> cICDServiceDelVariable(String id) async {
     Response response = await cICDServiceDelVariableWithHttpInfo(id);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiDelVariableRes') as ApiDelVariableRes;
     } else {
       return null;
     }
@@ -890,12 +890,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServicePutTask(ApiTask body) async {
+  Future<ApiPutTaskRes> cICDServicePutTask(ApiTask body) async {
     Response response = await cICDServicePutTaskWithHttpInfo(body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiPutTaskRes') as ApiPutTaskRes;
     } else {
       return null;
     }
@@ -948,12 +948,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServicePutTemplate(ApiTemplate body) async {
+  Future<ApiPutTemplateRes> cICDServicePutTemplate(ApiTemplate body) async {
     Response response = await cICDServicePutTemplateWithHttpInfo(body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiPutTemplateRes') as ApiPutTemplateRes;
     } else {
       return null;
     }
@@ -1006,12 +1006,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServicePutVariable(ApiVariable body) async {
+  Future<ApiPutVariableRes> cICDServicePutVariable(ApiVariable body) async {
     Response response = await cICDServicePutVariableWithHttpInfo(body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiPutVariableRes') as ApiPutVariableRes;
     } else {
       return null;
     }
@@ -1125,12 +1125,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceUpdateTask(String taskId, ApiTask body) async {
+  Future<ApiUpdateTaskRes> cICDServiceUpdateTask(String taskId, ApiTask body) async {
     Response response = await cICDServiceUpdateTaskWithHttpInfo(taskId, body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiUpdateTaskRes') as ApiUpdateTaskRes;
     } else {
       return null;
     }
@@ -1186,12 +1186,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceUpdateTemplate(String templateId, ApiTemplate body) async {
+  Future<ApiUpdateTemplateRes> cICDServiceUpdateTemplate(String templateId, ApiTemplate body) async {
     Response response = await cICDServiceUpdateTemplateWithHttpInfo(templateId, body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiUpdateTemplateRes') as ApiUpdateTemplateRes;
     } else {
       return null;
     }
@@ -1247,12 +1247,12 @@ class CICDServiceApi {
   /// 
   ///
   /// 
-  Future<Object> cICDServiceUpdateVariable(String variableId, ApiVariable body) async {
+  Future<ApiUpdateVariableRes> cICDServiceUpdateVariable(String variableId, ApiVariable body) async {
     Response response = await cICDServiceUpdateVariableWithHttpInfo(variableId, body);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Object') as Object;
+      return apiClient.deserialize(_decodeBodyBytes(response), 'ApiUpdateVariableRes') as ApiUpdateVariableRes;
     } else {
       return null;
     }

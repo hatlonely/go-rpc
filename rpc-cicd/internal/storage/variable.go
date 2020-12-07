@@ -45,17 +45,17 @@ func (s *CICDStorage) DelVariable(ctx context.Context, id string) error {
 	return nil
 }
 
-func (s *CICDStorage) PutVariable(ctx context.Context, variable *api.Variable) error {
+func (s *CICDStorage) PutVariable(ctx context.Context, variable *api.Variable) (string, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.VariableCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	variable.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, variable)
 	if err != nil {
-		return errors.Wrap(err, "mongo.Collection.InsertOne failed")
+		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return nil
+	return res.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (s *CICDStorage) UpdateVariable(ctx context.Context, variable *api.Variable) error {

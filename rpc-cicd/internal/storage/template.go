@@ -45,17 +45,17 @@ func (s *CICDStorage) DelTemplate(ctx context.Context, id string) error {
 	return nil
 }
 
-func (s *CICDStorage) PutTemplate(ctx context.Context, template *api.Template) error {
+func (s *CICDStorage) PutTemplate(ctx context.Context, template *api.Template) (string, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
 	template.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, template)
 	if err != nil {
-		return errors.Wrap(err, "mongo.Collection.InsertOne failed")
+		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
 	rpcx.CtxSet(ctx, "InsertOneRes", res)
-	return nil
+	return res.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (s *CICDStorage) UpdateTemplate(ctx context.Context, template *api.Template) error {
