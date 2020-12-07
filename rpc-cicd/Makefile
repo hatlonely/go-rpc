@@ -16,14 +16,16 @@ vendor: go.mod go.sum
 	go mod vendor
 
 codegen: api/cicd.proto third/openapi-generator-cli.jar
-	mkdir -p api/gen/go && mkdir -p api/gen/swagger && mkdir -p api/gen/dart
+	mkdir -p api/gen/go && mkdir -p api/gen/swagger && mkdir -p api/gen/dart && mkdir -p api/gen/openapi
 	protoc -I.. -I. --gofast_out=plugins=grpc,paths=source_relative:api/gen/go/ $<
 	protoc -I.. -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:api/gen/go $<
 	protoc -I.. -I. --swagger_out=logtostderr=true:api/gen/swagger $<
-	java -jar third/swagger-codegen-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -l dart -o api/gen/dart
+	# protoc -I.. -I. --openapiv2_out=logtostderr=true,repeated_path_param_separator=ssv:api/gen/openapi $<
+	# java -jar third/swagger-codegen-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -l dart -o api/gen/dart
+	# swagger-codegen-cli 依赖 browser_client，不能编译成 android
 	# openapi-generator-cli 4.3.1 不支持 empty
 	# openapi-generator-cli 5.0.0-beta3 数组为 const 无法修改
-	#java -jar third/openapi-generator-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -g dart -o api/gen/dart
+	java -jar third/openapi-generator-cli.jar generate -i api/gen/swagger/api/cicd.swagger.json -g dart -o api/gen/dart
 
 .PHONY: dockerenv
 dockerenv:

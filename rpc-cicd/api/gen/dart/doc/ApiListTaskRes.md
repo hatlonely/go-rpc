@@ -1,14 +1,14 @@
-# swagger.model.ApiListTemplateRes
+# openapi.model.ApiListTaskRes
 
 ## Load the model package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**templates** | [**List&lt;ApiTemplate&gt;**](ApiTemplate.md) |  | [optional] [default to []]
+**tasks** | [**List&lt;ApiTask&gt;**](ApiTask.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

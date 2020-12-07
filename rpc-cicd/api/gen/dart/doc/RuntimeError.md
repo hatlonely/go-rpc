@@ -1,8 +1,8 @@
-# swagger.model.RuntimeError
+# openapi.model.RuntimeError
 
 ## Load the model package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
 ## Properties

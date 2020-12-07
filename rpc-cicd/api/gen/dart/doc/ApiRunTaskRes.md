@@ -1,14 +1,14 @@
-# swagger.model.ApiListVariableRes
+# openapi.model.ApiRunTaskRes
 
 ## Load the model package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**variables** | [**List&lt;ApiVariable&gt;**](ApiVariable.md) |  | [optional] [default to []]
+**jobID** | **String** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

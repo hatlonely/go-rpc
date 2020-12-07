@@ -1,11 +1,11 @@
-# swagger.api.CICDServiceApi
+# openapi.api.CICDServiceApi
 
 ## Load the API package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -33,15 +33,15 @@ Method | HTTP request | Description
 
 
 # **cICDServiceDelJob**
-> ApiEmpty cICDServiceDelJob(id)
+> Object cICDServiceDelJob(id)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -56,11 +56,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -68,21 +68,21 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelTask**
-> ApiEmpty cICDServiceDelTask(id)
+> Object cICDServiceDelTask(id)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -97,11 +97,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -109,21 +109,21 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelTemplate**
-> ApiEmpty cICDServiceDelTemplate(id)
+> Object cICDServiceDelTemplate(id)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -138,11 +138,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -150,21 +150,21 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceDelVariable**
-> ApiEmpty cICDServiceDelVariable(id)
+> Object cICDServiceDelVariable(id)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -179,11 +179,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -191,7 +191,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -203,9 +203,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -220,7 +220,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
@@ -232,7 +232,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -244,9 +244,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -261,7 +261,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
@@ -273,7 +273,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -285,9 +285,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -302,7 +302,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
@@ -314,7 +314,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -326,10 +326,10 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiGetTemplatesReq(); // ApiGetTemplatesReq | 
+var api_instance = CICDServiceApi();
+var body = ApiGetTemplatesReq(); // ApiGetTemplatesReq | 
 
 try { 
     var result = api_instance.cICDServiceGetTemplates(body);
@@ -367,9 +367,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var id = id_example; // String | 
 
 try { 
@@ -384,7 +384,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
+ **id** | **String**|  | [default to null]
 
 ### Return type
 
@@ -396,7 +396,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -408,10 +408,10 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiGetVariablesReq(); // ApiGetVariablesReq | 
+var api_instance = CICDServiceApi();
+var body = ApiGetVariablesReq(); // ApiGetVariablesReq | 
 
 try { 
     var result = api_instance.cICDServiceGetVariables(body);
@@ -449,9 +449,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var offset = offset_example; // String | 
 var limit = limit_example; // String | 
 var taskID = taskID_example; // String | 
@@ -468,9 +468,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] 
- **limit** | **String**|  | [optional] 
- **taskID** | **String**|  | [optional] 
+ **offset** | **String**|  | [optional] [default to null]
+ **limit** | **String**|  | [optional] [default to null]
+ **taskID** | **String**|  | [optional] [default to null]
 
 ### Return type
 
@@ -482,7 +482,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -494,9 +494,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var offset = offset_example; // String | 
 var limit = limit_example; // String | 
 var brief = true; // bool | 
@@ -513,9 +513,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] 
- **limit** | **String**|  | [optional] 
- **brief** | **bool**|  | [optional] 
+ **offset** | **String**|  | [optional] [default to null]
+ **limit** | **String**|  | [optional] [default to null]
+ **brief** | **bool**|  | [optional] [default to null]
 
 ### Return type
 
@@ -527,7 +527,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -539,9 +539,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var offset = offset_example; // String | 
 var limit = limit_example; // String | 
 var brief = true; // bool | 
@@ -558,9 +558,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] 
- **limit** | **String**|  | [optional] 
- **brief** | **bool**|  | [optional] 
+ **offset** | **String**|  | [optional] [default to null]
+ **limit** | **String**|  | [optional] [default to null]
+ **brief** | **bool**|  | [optional] [default to null]
 
 ### Return type
 
@@ -572,7 +572,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -584,9 +584,9 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var offset = offset_example; // String | 
 var limit = limit_example; // String | 
 var brief = true; // bool | 
@@ -603,9 +603,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **String**|  | [optional] 
- **limit** | **String**|  | [optional] 
- **brief** | **bool**|  | [optional] 
+ **offset** | **String**|  | [optional] [default to null]
+ **limit** | **String**|  | [optional] [default to null]
+ **brief** | **bool**|  | [optional] [default to null]
 
 ### Return type
 
@@ -617,22 +617,22 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutTask**
-> ApiEmpty cICDServicePutTask(body)
+> Object cICDServicePutTask(body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiTask(); // ApiTask | 
+var api_instance = CICDServiceApi();
+var body = ApiTask(); // ApiTask | 
 
 try { 
     var result = api_instance.cICDServicePutTask(body);
@@ -650,7 +650,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -664,16 +664,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutTemplate**
-> ApiEmpty cICDServicePutTemplate(body)
+> Object cICDServicePutTemplate(body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiTemplate(); // ApiTemplate | 
+var api_instance = CICDServiceApi();
+var body = ApiTemplate(); // ApiTemplate | 
 
 try { 
     var result = api_instance.cICDServicePutTemplate(body);
@@ -691,7 +691,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -705,16 +705,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServicePutVariable**
-> ApiEmpty cICDServicePutVariable(body)
+> Object cICDServicePutVariable(body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiVariable(); // ApiVariable | 
+var api_instance = CICDServiceApi();
+var body = ApiVariable(); // ApiVariable | 
 
 try { 
     var result = api_instance.cICDServicePutVariable(body);
@@ -732,7 +732,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -752,10 +752,10 @@ No authorization required
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
-var body = new ApiRunTaskReq(); // ApiRunTaskReq | 
+var api_instance = CICDServiceApi();
+var body = ApiRunTaskReq(); // ApiRunTaskReq | 
 
 try { 
     var result = api_instance.cICDServiceRunTask(body);
@@ -787,17 +787,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateTask**
-> ApiEmpty cICDServiceUpdateTask(taskId, body)
+> Object cICDServiceUpdateTask(taskId, body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var taskId = taskId_example; // String | 
-var body = new ApiTask(); // ApiTask | 
+var body = ApiTask(); // ApiTask | 
 
 try { 
     var result = api_instance.cICDServiceUpdateTask(taskId, body);
@@ -811,12 +811,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **taskId** | **String**|  | 
+ **taskId** | **String**|  | [default to null]
  **body** | [**ApiTask**](ApiTask.md)|  | 
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -830,17 +830,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateTemplate**
-> ApiEmpty cICDServiceUpdateTemplate(templateId, body)
+> Object cICDServiceUpdateTemplate(templateId, body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var templateId = templateId_example; // String | 
-var body = new ApiTemplate(); // ApiTemplate | 
+var body = ApiTemplate(); // ApiTemplate | 
 
 try { 
     var result = api_instance.cICDServiceUpdateTemplate(templateId, body);
@@ -854,12 +854,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **String**|  | 
+ **templateId** | **String**|  | [default to null]
  **body** | [**ApiTemplate**](ApiTemplate.md)|  | 
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 
@@ -873,17 +873,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cICDServiceUpdateVariable**
-> ApiEmpty cICDServiceUpdateVariable(variableId, body)
+> Object cICDServiceUpdateVariable(variableId, body)
 
 
 
 ### Example 
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 
-var api_instance = new CICDServiceApi();
+var api_instance = CICDServiceApi();
 var variableId = variableId_example; // String | 
-var body = new ApiVariable(); // ApiVariable | 
+var body = ApiVariable(); // ApiVariable | 
 
 try { 
     var result = api_instance.cICDServiceUpdateVariable(variableId, body);
@@ -897,12 +897,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **variableId** | **String**|  | 
+ **variableId** | **String**|  | [default to null]
  **body** | [**ApiVariable**](ApiVariable.md)|  | 
 
 ### Return type
 
-[**ApiEmpty**](ApiEmpty.md)
+[**Object**](Object.md)
 
 ### Authorization
 

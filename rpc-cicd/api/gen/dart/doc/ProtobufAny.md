@@ -1,14 +1,15 @@
-# swagger.model.ApiGetTemplatesReq
+# openapi.model.ProtobufAny
 
 ## Load the model package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ids** | **List&lt;String&gt;** |  | [optional] [default to []]
+**typeUrl** | **String** |  | [optional] [default to null]
+**value** | **String** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

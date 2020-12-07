@@ -1,15 +1,14 @@
-# swagger.model.TemplateScriptTemplate
+# openapi.model.ApiGetVariablesReq
 
 ## Load the model package
 ```dart
-import 'package:swagger/api.dart';
+import 'package:openapi/api.dart';
 ```
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**language** | **String** |  | [optional] [default to null]
-**script** | **String** |  | [optional] [default to null]
+**ids** | **List&lt;String&gt;** |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
