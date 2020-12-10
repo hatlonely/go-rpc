@@ -117,6 +117,14 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 	if err != nil {
 		return errors.Wrap(err, "GetTemplates failed")
 	}
+	m := map[string]*api.Template{}
+	for _, t := range templates {
+		m[t.Id] = t
+	}
+	for i, tid := range task.TemplateIDs {
+		templates[i] = m[tid]
+	}
+
 	kvs, err := mergeVariables(variables)
 	if err != nil {
 		return errors.Wrap(err, "mergeVariables failed")
@@ -133,24 +141,44 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 			return errors.Wrapf(err, "tpl execute [%v] failed", i.Name)
 		}
 
-		exitCode, stdout, stderr, err := Exec(i.ScriptTemplate.Language, buf.String(), fmt.Sprintf("%v/%v", s.options.Data, job.Id))
-		if err != nil {
-			return errors.Wrapf(err, "Exec [%v] failed", i.Name)
-		}
-
 		job.Subs = append(job.Subs, &api.Job_Sub{
 			TemplateID:   i.Id,
 			TemplateName: i.Name,
-			ExitCode:     int32(exitCode),
 			Language:     i.ScriptTemplate.Language,
 			Script:       buf.String(),
-			Stdout:       stdout,
-			Stderr:       stderr,
-			Status:       "Success",
+			Status:       JobStatusWaiting,
 		})
+	}
+
+	if err := s.storage.UpdateJob(ctx, job); err != nil {
+		return err
+	}
+
+	for _, i := range job.Subs {
+		i.Status = JobStatusRunning
+		if err := s.storage.UpdateJob(ctx, job); err != nil {
+			return err
+		}
+
+		exitCode, stdout, stderr, err := Exec(i.Language, i.Script, fmt.Sprintf("%v/%v", s.options.Data, job.Id))
+		if err != nil {
+			return errors.Wrapf(err, "exec [%v] failed", i.TemplateName)
+		}
+
+		i.Status = JobStatusFailed
+		if exitCode == 0 {
+			i.Status = JobStatusFinish
+		}
+		i.Stdout = stdout
+		i.Stderr = stderr
+		i.ExitCode = int32(exitCode)
 
 		if err := s.storage.UpdateJob(ctx, job); err != nil {
 			return err
+		}
+
+		if exitCode != 0 {
+			return errors.Errorf("exit code %v", i.ExitCode)
 		}
 	}
 
