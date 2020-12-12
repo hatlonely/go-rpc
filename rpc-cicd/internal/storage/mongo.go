@@ -16,12 +16,13 @@ type CICDStorage struct {
 }
 
 type Options struct {
-	Database           string
-	TaskCollection     string        `dft:"task"`
-	JobCollection      string        `dft:"job"`
-	TemplateCollection string        `dft:"template"`
-	VariableCollection string        `dft:"variable"`
-	Timeout            time.Duration `dft:"1s"`
+	Database                string
+	TaskCollection          string        `dft:"task"`
+	JobCollection           string        `dft:"job"`
+	TemplateCollection      string        `dft:"template"`
+	VariableCollection      string        `dft:"variable"`
+	AutoIncrementCollection string        `dft:"autoIncrement"`
+	Timeout                 time.Duration `dft:"1s"`
 }
 
 func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDStorage, error) {
@@ -63,6 +64,16 @@ func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDS
 		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
 			{Keys: bson.M{"taskID": 1}, Options: mopt.Index().SetName("taskIDIdx")},
 			{Keys: bson.M{"createAt": 1}, Options: mopt.Index().SetExpireAfterSeconds(3600)},
+		}); err != nil {
+			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
+		}
+	}
+	{
+		collection := mongoCli.Database(options.Database).Collection(options.AutoIncrementCollection)
+		mongoCtx, cancel := context.WithTimeout(context.Background(), options.Timeout)
+		defer cancel()
+		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
+			{Keys: bson.M{"key": 1}, Options: mopt.Index().SetUnique(true).SetName("keyIdx")},
 		}); err != nil {
 			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
 		}

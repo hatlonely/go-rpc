@@ -825,6 +825,10 @@
         "id": {
           "type": "string"
         },
+        "seq": {
+          "type": "integer",
+          "format": "int32"
+        },
         "taskID": {
           "type": "string"
         },

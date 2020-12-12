@@ -47,6 +47,11 @@ func (s *CICDStorage) PutJob(ctx context.Context, job *api.Job) (string, error) 
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
+	seq, err := s.Inc(ctx, job.TaskID)
+	if err != nil {
+		return "", errors.Wrap(err, "CICDStorage.Inc failed")
+	}
+	job.Seq = seq
 	job.CreateAt = int32(time.Now().Unix())
 	res, err := collection.InsertOne(mongoCtx, job)
 	if err != nil {

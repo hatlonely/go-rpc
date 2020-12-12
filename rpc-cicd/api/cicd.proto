@@ -180,13 +180,14 @@ message Job {
   }
 
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
-  string taskID = 2 [(gogoproto.moretags) = "bson:\"taskID,omitempty\""];
-  string taskName = 3 [(gogoproto.moretags) = "bson:\"taskName,omitempty\""];
-  string status = 4 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
-  string error = 5 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
-  int32 createAt = 6 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
-  int32 updateAt = 7 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
-  repeated Sub subs = 8 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
+  int32 seq = 2 [(gogoproto.moretags) = "bson:\"seq,omitempty\""];
+  string taskID = 3 [(gogoproto.moretags) = "bson:\"taskID,omitempty\""];
+  string taskName = 4 [(gogoproto.moretags) = "bson:\"taskName,omitempty\""];
+  string status = 5 [(gogoproto.moretags) = "bson:\"status,omitempty\""];
+  string error = 6 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
+  int32 createAt = 7 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
+  int32 updateAt = 8 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
+  repeated Sub subs = 9 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
 }
 
 message RunTaskReq {
