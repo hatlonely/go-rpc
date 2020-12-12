@@ -8,9 +8,9 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
-	"text/template"
 	"time"
 
+	"github.com/cbroglie/mustache"
 	"github.com/hatlonely/go-kit/rpcx"
 	"github.com/pkg/errors"
 
@@ -131,21 +131,16 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 	}
 
 	for _, i := range templates {
-		tpl, err := template.New("").Parse(i.ScriptTemplate.Script)
+		str, err := mustache.Render(i.ScriptTemplate.Script, kvs)
 		if err != nil {
-			return errors.Wrapf(err, "create template [%v] failed", i.Name)
-		}
-
-		buf := &bytes.Buffer{}
-		if err := tpl.Execute(buf, kvs); err != nil {
-			return errors.Wrapf(err, "tpl execute [%v] failed", i.Name)
+			return errors.Wrapf(err, "mustache.Render failed. template: [%v]", i.Name)
 		}
 
 		job.Subs = append(job.Subs, &api.Job_Sub{
 			TemplateID:   i.Id,
 			TemplateName: i.Name,
 			Language:     i.ScriptTemplate.Language,
-			Script:       buf.String(),
+			Script:       str,
 			Status:       JobStatusWaiting,
 		})
 	}
