@@ -62,6 +62,7 @@ func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDS
 		defer cancel()
 		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
 			{Keys: bson.M{"taskID": 1}, Options: mopt.Index().SetName("taskIDIdx")},
+			{Keys: bson.M{"createAt": 1}, Options: mopt.Index().SetExpireAfterSeconds(3600)},
 		}); err != nil {
 			return nil, errors.Wrap(err, "mongo.Indexes.CreateMany failed")
 		}
