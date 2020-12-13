@@ -88,13 +88,13 @@ func (s *CICDService) runTask(ctx context.Context, jobID string) error {
 	if err != nil {
 		return err
 	}
-
 	job.TaskName = task.Name
+	defer executor.CtxSet(ctx, "task", task)
+
 	job.Status = JobStatusRunning
 	if err := s.storage.UpdateJob(ctx, job); err != nil {
 		return err
 	}
-	defer executor.CtxSet(ctx, "task", task)
 
 	if err := s.runSubTasks(ctx, job, task); err != nil {
 		job.Error = err.Error()
