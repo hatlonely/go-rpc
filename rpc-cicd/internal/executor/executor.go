@@ -40,6 +40,9 @@ type Executor struct {
 
 	ctx    context.Context
 	cancel context.CancelFunc
+
+	cancelTaskIDs       sync.Map
+	taskIDCancelFuncMap sync.Map
 }
 
 type Handler func(context.Context, interface{}) error
@@ -69,12 +72,31 @@ func (e *Executor) AddTask(id string, task interface{}) {
 	e.taskQueue <- &Task{id: id, task: task}
 }
 
+func (e *Executor) CancelTask(id string) {
+	if cancel, ok := e.taskIDCancelFuncMap.Load(id); ok {
+		cancel.(context.CancelFunc)()
+	} else {
+		e.cancelTaskIDs.Store(id, struct{}{})
+	}
+}
+
 func (e *Executor) work(ctx context.Context) {
 	for task := range e.taskQueue {
-		ctx = NewExecutorContext(ctx)
-
 		ts := time.Now()
-		err := e.handler(ctx, task.task)
+		var err error
+		var isCancel bool
+		if _, ok := e.cancelTaskIDs.Load(task.id); ok {
+			e.cancelTaskIDs.Delete(task.id)
+			isCancel = true
+		} else {
+			var cancel context.CancelFunc
+			ctx, cancel = context.WithCancel(NewExecutorContext(ctx))
+
+			e.taskIDCancelFuncMap.Store(task.id, cancel)
+			err = e.handler(ctx, task.task)
+			cancel()
+			e.taskIDCancelFuncMap.Delete(task.id)
+		}
 
 		e.logger.Info(map[string]interface{}{
 			"id":       task.id,
@@ -83,6 +105,7 @@ func (e *Executor) work(ctx context.Context) {
 			"errStack": fmt.Sprintf("%+v", err),
 			"timeMs":   time.Now().Sub(ts).Milliseconds(),
 			"ctx":      ctx.Value(executorKey{}),
+			"isCancel": isCancel,
 		})
 	}
 }
