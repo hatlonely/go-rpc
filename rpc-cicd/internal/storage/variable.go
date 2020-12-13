@@ -96,6 +96,10 @@ func (s *CICDStorage) ListVariable(ctx context.Context, offset int64, limit int6
 }
 
 func (s *CICDStorage) GetVariableByIDs(ctx context.Context, ids []string) ([]*api.Variable, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.VariableCollection)
 
 	var objectIDs []primitive.ObjectID

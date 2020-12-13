@@ -23,7 +23,7 @@ type Options struct {
 	VariableCollection string        `dft:"variable"`
 	SequenceCollection string        `dft:"sequence"`
 	Timeout            time.Duration `dft:"1s"`
-	JobExpiration      time.Duration `dft:"3d"`
+	JobExpiration      time.Duration `dft:"72h"`
 }
 
 func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDStorage, error) {

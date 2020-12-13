@@ -96,6 +96,10 @@ func (s *CICDStorage) ListTemplate(ctx context.Context, offset int64, limit int6
 }
 
 func (s *CICDStorage) GetTemplateByIDs(ctx context.Context, ids []string) ([]*api.Template, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.TemplateCollection)
 
 	var objectIDs []primitive.ObjectID

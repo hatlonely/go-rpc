@@ -23,7 +23,7 @@
     "variableCollection": "variable",
     "sequenceCollection": "sequence",
     "timeout": "3s",
-    "jobExpiration": "3d"
+    "jobExpiration": "72h"
   },
   "logger": {
     "grpc": {
