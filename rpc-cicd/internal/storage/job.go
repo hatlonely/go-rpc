@@ -51,9 +51,15 @@ func (s *CICDStorage) PutJob(ctx context.Context, job *api.Job) (string, error) 
 	if err != nil {
 		return "", errors.Wrap(err, "CICDStorage.IncSequence failed")
 	}
+	now := time.Now()
 	job.Seq = seq
-	job.CreateAt = int32(time.Now().Unix())
-	res, err := collection.InsertOne(mongoCtx, job)
+	job.CreateAt = int32(now.Unix())
+
+	var m bson.M
+	buf, _ := bson.Marshal(job)
+	_ = bson.Unmarshal(buf, &m)
+	m["_createAt"] = now
+	res, err := collection.InsertOne(mongoCtx, m)
 	if err != nil {
 		return "", errors.Wrap(err, "mongo.Collection.InsertOne failed")
 	}
