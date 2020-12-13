@@ -16,13 +16,13 @@ type CICDStorage struct {
 }
 
 type Options struct {
-	Database                string
-	TaskCollection          string        `dft:"task"`
-	JobCollection           string        `dft:"job"`
-	TemplateCollection      string        `dft:"template"`
-	VariableCollection      string        `dft:"variable"`
-	AutoIncrementCollection string        `dft:"autoIncrement"`
-	Timeout                 time.Duration `dft:"1s"`
+	Database           string
+	TaskCollection     string        `dft:"task"`
+	JobCollection      string        `dft:"job"`
+	TemplateCollection string        `dft:"template"`
+	VariableCollection string        `dft:"variable"`
+	SequenceCollection string        `dft:"sequence"`
+	Timeout            time.Duration `dft:"1s"`
 }
 
 func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDStorage, error) {
@@ -69,7 +69,7 @@ func NewCICDStorageWithOptions(mongoCli *mongo.Client, options *Options) (*CICDS
 		}
 	}
 	{
-		collection := mongoCli.Database(options.Database).Collection(options.AutoIncrementCollection)
+		collection := mongoCli.Database(options.Database).Collection(options.SequenceCollection)
 		mongoCtx, cancel := context.WithTimeout(context.Background(), options.Timeout)
 		defer cancel()
 		if _, err := collection.Indexes().CreateMany(mongoCtx, []mongo.IndexModel{
