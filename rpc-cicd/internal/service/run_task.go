@@ -155,7 +155,7 @@ func (s *CICDService) runSubTasks(ctx context.Context, job *api.Job, task *api.T
 			return err
 		}
 
-		exitCode, stdout, stderr, err := Exec(i.Language, i.Script, fmt.Sprintf("%v/%v", s.options.Data, job.Id))
+		exitCode, stdout, stderr, err := Exec(i.Language, i.Script, fmt.Sprintf("%v/%v/%v", s.options.Data, job.TaskName, job.Seq))
 		if err != nil {
 			return errors.Wrapf(err, "exec [%v] failed", i.TemplateName)
 		}
