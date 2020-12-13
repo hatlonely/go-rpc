@@ -12,6 +12,7 @@ import (
 
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/cli"
+	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
 
 var svc *CICDService
@@ -25,13 +26,19 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	svc, err = NewCICDServiceWithOptions(mongoCli, &Options{
+	store, err := storage.NewCICDStorageWithOptions(mongoCli, &storage.Options{
 		Database:           "hatlonely",
 		TaskCollection:     "task",
 		TemplateCollection: "template",
 		VariableCollection: "variable",
 		JobCollection:      "job",
 		Timeout:            3 * time.Second,
+	})
+	if err != nil {
+		panic(err)
+	}
+	svc, err = NewCICDServiceWithOptions(store, &Options{
+		Data: "data",
 	})
 	if err != nil {
 		panic(err)
