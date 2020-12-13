@@ -38,7 +38,7 @@ type Options struct {
 	}
 
 	Storage  storage.Options
-	Executor executor.Options
+	Executor executor.CICDOptions
 	Service  service.Options
 
 	Mongo cli.MongoOptions
@@ -94,10 +94,9 @@ func main() {
 	svc, err := service.NewCICDServiceWithOptions(storage, &options.Service)
 	Must(err)
 
-	executor := executor.NewExecutorWithOptions(svc.ExecutorHandler, &options.Executor)
+	executor := executor.NewCICDExecutorWithOptions(storage, &options.Executor)
 	executor.Run()
 	defer executor.Stop()
-	svc.SetExecutor(executor)
 	executor.SetLogger(execLog)
 
 	rpcServer := grpc.NewServer(rpcx.GRPCUnaryInterceptor(grpcLog, rpcx.WithDefaultValidator()))
