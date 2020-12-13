@@ -14,18 +14,16 @@
     "pingTimeout": "2s"
   },
   "service": {
-    "database": "hatlonely",
-    "taskCollection": "task",
-    "templateCollection": "template",
-    "variableCollection": "variable",
-    "timeout": "3s"
+    "data": "data"
   },
   "storage": {
     "database": "hatlonely",
     "taskCollection": "task",
     "templateCollection": "template",
     "variableCollection": "variable",
-    "timeout": "3s"
+    "sequenceCollection": "sequence",
+    "timeout": "3s",
+    "jobExpiration": "3d"
   },
   "logger": {
     "grpc": {
