@@ -15,7 +15,7 @@ func (s *CICDService) DelJob(ctx context.Context, req *api.DelJobReq) (*api.DelJ
 }
 
 func (s *CICDService) ListJob(ctx context.Context, req *api.ListJobReq) (*api.ListJobRes, error) {
-	res, err := s.storage.ListJob(ctx, req.TaskID, req.Offset, req.Limit)
+	res, err := s.storage.ListJobWithTaskID(ctx, req.TaskID, req.Offset, req.Limit)
 	if err != nil {
 		return nil, err
 	}

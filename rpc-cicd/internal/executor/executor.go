@@ -51,7 +51,7 @@ func (e *Executor) Run() {
 	for i := 0; i < e.options.WorkerNum; i++ {
 		e.wg.Add(1)
 		go func() {
-			e.work(e.ctx)
+			e.handleTask(e.ctx)
 			e.wg.Done()
 		}()
 	}
@@ -80,7 +80,7 @@ func (e *Executor) CancelTask(id string) {
 	}
 }
 
-func (e *Executor) work(ctx context.Context) {
+func (e *Executor) handleTask(ctx context.Context) {
 	for task := range e.taskQueue {
 		ts := time.Now()
 		var err error

@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+	"time"
 
 	"github.com/cbroglie/mustache"
 	"github.com/hatlonely/go-kit/logger"
@@ -52,7 +53,22 @@ func (e *CICDExecutor) Stop() {
 
 type CICDOptions struct {
 	Executor Options
-	Data     string `dft:"data"`
+	Data     string        `dft:"data"`
+	Interval time.Duration `dft:"5s"`
+}
+
+func (e *CICDExecutor) listWaitingTask(ctx context.Context) {
+	ticker := time.Tick(e.options.Interval)
+
+out:
+	for {
+		select {
+		case <-ctx.Done():
+			break out
+		case <-ticker:
+			//jobs, e.storage.ListJob(ctx, "", 0, 20)
+		}
+	}
 }
 
 func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {

@@ -86,7 +86,7 @@ func (s *CICDStorage) UpdateJob(ctx context.Context, job *api.Job) error {
 	return nil
 }
 
-func (s *CICDStorage) ListJob(ctx context.Context, taskID string, offset int64, limit int64) ([]*api.Job, error) {
+func (s *CICDStorage) ListJobWithTaskID(ctx context.Context, taskID string, offset int64, limit int64) ([]*api.Job, error) {
 	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
 	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
 	defer cancel()
@@ -94,6 +94,23 @@ func (s *CICDStorage) ListJob(ctx context.Context, taskID string, offset int64, 
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}
+	defer res.Close(ctx)
+	var jobs []*api.Job
+	if err := res.All(mongoCtx, &jobs); err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
+	}
+	return jobs, nil
+}
+
+func (s *CICDStorage) ListJob(ctx context.Context, offset int64, limit int64) ([]*api.Job, error) {
+	collection := s.mongoCli.Database(s.options.Database).Collection(s.options.JobCollection)
+	mongoCtx, cancel := context.WithTimeout(ctx, s.options.Timeout)
+	defer cancel()
+	res, err := collection.Find(mongoCtx, bson.D{{}}, mopt.Find().SetLimit(limit).SetSkip(offset).SetSort(bson.M{"createAt": -1}))
+	if err != nil {
+		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
+	}
+	defer res.Close(ctx)
 	var jobs []*api.Job
 	if err := res.All(mongoCtx, &jobs); err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")

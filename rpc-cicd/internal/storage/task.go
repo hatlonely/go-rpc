@@ -88,6 +88,7 @@ func (s *CICDStorage) ListTask(ctx context.Context, offset int64, limit int64) (
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}
+	defer res.Close(ctx)
 	var tasks []*api.Task
 	if err := res.All(mongoCtx, &tasks); err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")

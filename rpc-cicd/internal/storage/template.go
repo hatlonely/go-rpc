@@ -88,6 +88,7 @@ func (s *CICDStorage) ListTemplate(ctx context.Context, offset int64, limit int6
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}
+	defer res.Close(ctx)
 	var templates []*api.Template
 	if err := res.All(mongoCtx, &templates); err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")

@@ -88,6 +88,7 @@ func (s *CICDStorage) ListVariable(ctx context.Context, offset int64, limit int6
 	if err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find failed")
 	}
+	defer res.Close(ctx)
 	var variables []*api.Variable
 	if err := res.All(mongoCtx, &variables); err != nil {
 		return nil, errors.Wrap(err, "mongo.Collection.Find.All failed")
