@@ -178,7 +178,7 @@ message Job {
     string stdout = 7 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
     string stderr = 8 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
     int32 elapseSeconds = 9 [(gogoproto.moretags) = "bson:\"elapseSeconds,omitempty\""];
-    int32 updateAt = 10 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
+    int32 updateAt = 10 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
   }
 
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];

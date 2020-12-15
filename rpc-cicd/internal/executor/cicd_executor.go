@@ -88,7 +88,7 @@ func (e *CICDExecutor) runLoop(ctx context.Context) {
 out:
 	for {
 		go func() {
-			errs <- e.runOnce(ctx)
+			errs <- e.runOnce(NewExecutorContext(ctx))
 		}()
 		select {
 		case <-ctx.Done():
@@ -106,7 +106,7 @@ func (e *CICDExecutor) runOnce(ctx context.Context) error {
 	defer func() {
 		if acquire {
 			e.log.Info(map[string]interface{}{
-				"job":      job,
+				"id":       job.Id,
 				"err":      err,
 				"errStack": fmt.Sprintf("%+v", err),
 				"timeMs":   time.Now().Sub(now).Milliseconds(),
@@ -133,7 +133,8 @@ func (e *CICDExecutor) runOnce(ctx context.Context) error {
 	if !acquire {
 		return nil
 	}
-	return e.runTask(ctx, job.Id)
+	err = e.runTask(ctx, job.Id)
+	return err
 }
 
 func (e *CICDExecutor) runTask(ctx context.Context, jobID string) error {
