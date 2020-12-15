@@ -32,18 +32,74 @@ func TestCICDStorage(t *testing.T) {
 		})
 		So(err, ShouldBeNil)
 
+		Convey("Job", func() {
+			_, _ = mongoCli.Database("test").Collection("job").DeleteMany(context.Background(), bson.M{"taskName": "test-task"})
+			jobID, err := store.PutJob(context.Background(), &api.Job{
+				TaskName: "test-task",
+				Status:   JobStatusWaiting,
+			})
+			So(err, ShouldBeNil)
+			So(jobID, ShouldNotBeEmpty)
+
+			job, err := store.GetJob(context.Background(), jobID)
+			So(err, ShouldBeNil)
+			So(job.TaskName, ShouldEqual, "test-task")
+			So(job.Status, ShouldEqual, JobStatusWaiting)
+
+			job.Status = JobStatusRunning
+			So(store.UpdateJob(context.Background(), job), ShouldBeNil)
+			job1, err := store.GetJob(context.Background(), jobID)
+			So(err, ShouldBeNil)
+			So(job, ShouldResemble, job1)
+
+			So(store.DelJob(context.Background(), jobID), ShouldBeNil)
+		})
+
+		Convey("find Job", func() {
+			_, _ = mongoCli.Database("test").Collection("job").DeleteMany(context.Background(), bson.M{"taskName": "test-task"})
+			jobID, err := store.PutJob(context.Background(), &api.Job{
+				TaskName: "test-task",
+				Status:   JobStatusWaiting,
+			})
+			So(err, ShouldBeNil)
+			So(jobID, ShouldNotBeEmpty)
+
+			{
+				job, err := store.FindOneUnscheduleJob(context.Background())
+				So(err, ShouldBeNil)
+				So(job.Id, ShouldEqual, jobID)
+			}
+			{
+				ok, err := store.UpdateJobStatus(context.Background(), jobID, JobStatusWaiting, JobStatusRunning)
+				So(err, ShouldBeNil)
+				So(ok, ShouldBeTrue)
+			}
+			{
+				ok, err := store.UpdateJobStatus(context.Background(), jobID, JobStatusWaiting, JobStatusRunning)
+				So(err, ShouldBeNil)
+				So(ok, ShouldBeFalse)
+			}
+			{
+				job, err := store.FindOneUnscheduleJob(context.Background())
+				So(err, ShouldBeNil)
+				So(job, ShouldBeNil)
+			}
+
+			So(store.DelJob(context.Background(), jobID), ShouldBeNil)
+		})
+
 		Convey("Task", func() {
 			_, _ = mongoCli.Database("test").Collection("task").DeleteOne(context.Background(), bson.M{"name": "test-task"})
-			jobID, err := store.PutTask(context.Background(), &api.Task{
+			taskID, err := store.PutTask(context.Background(), &api.Task{
 				Name:        "test-task",
 				Description: "test-description",
 				TemplateIDs: []string{"tpl1", "tpl2"},
 				VariableIDs: []string{"var1", "var2"},
 			})
 			So(err, ShouldBeNil)
-			So(jobID, ShouldNotBeEmpty)
+			So(taskID, ShouldNotBeEmpty)
 
-			task, err := store.GetTask(context.Background(), jobID)
+			task, err := store.GetTask(context.Background(), taskID)
 			So(err, ShouldBeNil)
 			So(task.Name, ShouldEqual, "test-task")
 			So(task.Description, ShouldEqual, "test-description")
@@ -55,11 +111,11 @@ func TestCICDStorage(t *testing.T) {
 			task.TemplateIDs = []string{"tpl3", "tpl4", "tpl5"}
 			task.VariableIDs = []string{"var3"}
 			So(store.UpdateTask(context.Background(), task), ShouldBeNil)
-			task1, err := store.GetTask(context.Background(), jobID)
+			task1, err := store.GetTask(context.Background(), taskID)
 			So(err, ShouldBeNil)
 			So(task, ShouldResemble, task1)
 
-			So(store.DelTask(context.Background(), jobID), ShouldBeNil)
+			So(store.DelTask(context.Background(), taskID), ShouldBeNil)
 		})
 	})
 }

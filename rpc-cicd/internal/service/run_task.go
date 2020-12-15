@@ -5,17 +5,13 @@ import (
 	"time"
 
 	"github.com/hatlonely/go-rpc/rpc-cicd/api/gen/go/api"
+	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
-
-const JobStatusRunning = "Running"
-const JobStatusWaiting = "Waiting"
-const JobStatusFailed = "Failed"
-const JobStatusFinish = "Finish"
 
 func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.RunTaskRes, error) {
 	job := api.Job{
 		TaskID:   req.TaskID,
-		Status:   JobStatusWaiting,
+		Status:   storage.JobStatusWaiting,
 		CreateAt: int32(time.Now().Unix()),
 	}
 
