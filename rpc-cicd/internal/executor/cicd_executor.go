@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"sync"
 	"syscall"
 	"time"
 
@@ -19,51 +20,51 @@ import (
 )
 
 type CICDExecutor struct {
-	executor *Executor
-	storage  *storage.CICDStorage
-	options  *CICDOptions
+	storage *storage.CICDStorage
+	options *CICDOptions
+
+	ctx    context.Context
+	cancel context.CancelFunc
+	wg     sync.WaitGroup
+
+	log *logger.Logger
 }
 
 func NewCICDExecutorWithOptions(storage *storage.CICDStorage, options *CICDOptions) *CICDExecutor {
-	ce := &CICDExecutor{
+	ctx, cancel := context.WithCancel(context.Background())
+
+	return &CICDExecutor{
 		storage: storage,
 		options: options,
+		ctx:     ctx,
+		cancel:  cancel,
+		log:     logger.NewStdoutJsonLogger(),
 	}
-	ce.executor = NewExecutorWithOptions(ce.ExecutorHandler, &options.Executor)
-
-	return ce
 }
 
 func (e *CICDExecutor) SetLogger(log *logger.Logger) {
-	e.executor.logger = log
+	e.log = log
 }
 
 func (e *CICDExecutor) Run() {
-	e.executor.Run()
+	for i := 0; i < e.options.WorkerNum; i++ {
+		e.wg.Add(1)
+		go func() {
+			e.runLoop(e.ctx)
+			e.wg.Done()
+		}()
+	}
 }
 
 func (e *CICDExecutor) Stop() {
-	e.executor.Stop()
+	e.cancel()
+	e.wg.Wait()
 }
 
 type CICDOptions struct {
-	Executor Options
-	Data     string        `dft:"data"`
-	Interval time.Duration `dft:"5s"`
-}
-
-func (e *CICDExecutor) listWaitingTask(ctx context.Context) {
-	ticker := time.Tick(e.options.Interval)
-
-out:
-	for {
-		select {
-		case <-ctx.Done():
-			break out
-		case <-ticker:
-			//jobs, e.storage.ListJob(ctx, "", 0, 20)
-		}
-	}
+	WorkerNum int           `dft:"20"`
+	Data      string        `dft:"data"`
+	SleepTime time.Duration `dft:"5s"`
 }
 
 func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
@@ -81,8 +82,58 @@ func mergeVariables(variables []*api.Variable) (map[string]interface{}, error) {
 	return kvs, nil
 }
 
-func (e *CICDExecutor) ExecutorHandler(ctx context.Context, jobID interface{}) error {
-	return e.runTask(ctx, jobID.(string))
+func (e *CICDExecutor) runLoop(ctx context.Context) {
+	errs := make(chan error, 1)
+
+out:
+	for {
+		go func() {
+			errs <- e.runOnce(ctx)
+		}()
+		select {
+		case <-ctx.Done():
+			break out
+		case <-errs:
+		}
+	}
+}
+
+func (e *CICDExecutor) runOnce(ctx context.Context) error {
+	now := time.Now()
+	var err error
+	var job *api.Job
+	var acquire bool
+	defer func() {
+		if acquire {
+			e.log.Info(map[string]interface{}{
+				"job":      job,
+				"err":      err,
+				"errStack": fmt.Sprintf("%+v", err),
+				"timeMs":   time.Now().Sub(now).Milliseconds(),
+				"ctx":      ctx.Value(executorKey{}),
+			})
+		}
+	}()
+
+	job, err = e.storage.FindOneUnscheduleJob(ctx)
+	if err != nil {
+		return err
+	}
+	if job == nil {
+		select {
+		case <-ctx.Done():
+		case <-time.After(e.options.SleepTime):
+		}
+		return nil
+	}
+	acquire, err = e.storage.UpdateJobStatus(ctx, job.Id, storage.JobStatusWaiting, storage.JobStatusWaiting)
+	if err != nil {
+		return err
+	}
+	if !acquire {
+		return nil
+	}
+	return e.runTask(ctx, job.Id)
 }
 
 func (e *CICDExecutor) runTask(ctx context.Context, jobID string) error {
