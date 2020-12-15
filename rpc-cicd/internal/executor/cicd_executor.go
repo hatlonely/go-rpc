@@ -18,11 +18,6 @@ import (
 	"github.com/hatlonely/go-rpc/rpc-cicd/internal/storage"
 )
 
-const JobStatusRunning = "Running"
-const JobStatusWaiting = "Waiting"
-const JobStatusFailed = "Failed"
-const JobStatusFinish = "Finish"
-
 type CICDExecutor struct {
 	executor *Executor
 	storage  *storage.CICDStorage
@@ -104,7 +99,7 @@ func (e *CICDExecutor) runTask(ctx context.Context, jobID string) error {
 	job.TaskName = task.Name
 	defer CtxSet(ctx, "task", task)
 
-	job.Status = JobStatusRunning
+	job.Status = storage.JobStatusRunning
 	job.ScheduleAt = int32(time.Now().Unix())
 	if err := e.storage.UpdateJob(ctx, job); err != nil {
 		return err
@@ -113,9 +108,9 @@ func (e *CICDExecutor) runTask(ctx context.Context, jobID string) error {
 	now := time.Now()
 	if err := e.runSubTasks(ctx, job, task); err != nil {
 		job.Error = err.Error()
-		job.Status = JobStatusFailed
+		job.Status = storage.JobStatusFailed
 	} else {
-		job.Status = JobStatusFinish
+		job.Status = storage.JobStatusFinish
 	}
 	job.ElapseSeconds = int32(time.Now().Sub(now).Seconds())
 	if err := e.storage.UpdateJob(ctx, job); err != nil {
@@ -157,7 +152,7 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 			TemplateName: i.Name,
 			Language:     i.ScriptTemplate.Language,
 			Script:       str,
-			Status:       JobStatusWaiting,
+			Status:       storage.JobStatusWaiting,
 			UpdateAt:     int32(time.Now().Unix()),
 		})
 	}
@@ -167,7 +162,7 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 	}
 
 	for _, sub := range job.Subs {
-		sub.Status = JobStatusRunning
+		sub.Status = storage.JobStatusRunning
 		if err := e.storage.UpdateJob(ctx, job); err != nil {
 			return err
 		}
@@ -178,9 +173,9 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 			return errors.Wrapf(err, "exec [%v] failed", sub.TemplateName)
 		}
 
-		sub.Status = JobStatusFailed
+		sub.Status = storage.JobStatusFailed
 		if exitCode == 0 {
-			sub.Status = JobStatusFinish
+			sub.Status = storage.JobStatusFinish
 		}
 		sub.Stdout = stdout
 		sub.Stderr = stderr

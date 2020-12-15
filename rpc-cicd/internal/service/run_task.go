@@ -20,8 +20,6 @@ func (s *CICDService) RunTask(ctx context.Context, req *api.RunTaskReq) (*api.Ru
 		return nil, err
 	}
 
-	//s.executor.AddTask(rpcx.MetaDataGetRequestID(ctx), jobID)
-
 	return &api.RunTaskRes{JobID: jobID}, nil
 }
 
