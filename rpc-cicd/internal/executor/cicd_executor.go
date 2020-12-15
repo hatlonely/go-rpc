@@ -214,6 +214,10 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 	}
 
 	for _, sub := range job.Subs {
+		if sub.Status == storage.JobStatusFinish {
+			continue
+		}
+
 		sub.Status = storage.JobStatusRunning
 		if err := e.storage.UpdateJob(ctx, job); err != nil {
 			return err
