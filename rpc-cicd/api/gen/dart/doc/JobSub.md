@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **exitCode** | **int** |  | [optional] [default to null]
 **stdout** | **String** |  | [optional] [default to null]
 **stderr** | **String** |  | [optional] [default to null]
+**elapseSeconds** | **int** |  | [optional] [default to null]
+**updateAt** | **int** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

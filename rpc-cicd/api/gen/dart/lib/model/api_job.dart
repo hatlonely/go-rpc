@@ -18,12 +18,16 @@ class ApiJob {
   
   int updateAt = null;
   
+  int scheduleAt = null;
+  
+  int elapseSeconds = null;
+  
   List<JobSub> subs = [];
   ApiJob();
 
   @override
   String toString() {
-    return 'ApiJob[id=$id, seq=$seq, taskID=$taskID, taskName=$taskName, status=$status, error=$error, createAt=$createAt, updateAt=$updateAt, subs=$subs, ]';
+    return 'ApiJob[id=$id, seq=$seq, taskID=$taskID, taskName=$taskName, status=$status, error=$error, createAt=$createAt, updateAt=$updateAt, scheduleAt=$scheduleAt, elapseSeconds=$elapseSeconds, subs=$subs, ]';
   }
 
   ApiJob.fromJson(Map<String, dynamic> json) {
@@ -36,6 +40,8 @@ class ApiJob {
     error = json['error'];
     createAt = json['createAt'];
     updateAt = json['updateAt'];
+    scheduleAt = json['scheduleAt'];
+    elapseSeconds = json['elapseSeconds'];
     subs = (json['subs'] == null) ?
       null :
       JobSub.listFromJson(json['subs']);
@@ -59,6 +65,10 @@ class ApiJob {
       json['createAt'] = createAt;
     if (updateAt != null)
       json['updateAt'] = updateAt;
+    if (scheduleAt != null)
+      json['scheduleAt'] = scheduleAt;
+    if (elapseSeconds != null)
+      json['elapseSeconds'] = elapseSeconds;
     if (subs != null)
       json['subs'] = subs;
     return json;

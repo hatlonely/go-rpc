@@ -17,11 +17,15 @@ class JobSub {
   String stdout = null;
   
   String stderr = null;
+  
+  int elapseSeconds = null;
+  
+  int updateAt = null;
   JobSub();
 
   @override
   String toString() {
-    return 'JobSub[templateID=$templateID, templateName=$templateName, status=$status, language=$language, script=$script, exitCode=$exitCode, stdout=$stdout, stderr=$stderr, ]';
+    return 'JobSub[templateID=$templateID, templateName=$templateName, status=$status, language=$language, script=$script, exitCode=$exitCode, stdout=$stdout, stderr=$stderr, elapseSeconds=$elapseSeconds, updateAt=$updateAt, ]';
   }
 
   JobSub.fromJson(Map<String, dynamic> json) {
@@ -34,6 +38,8 @@ class JobSub {
     exitCode = json['exitCode'];
     stdout = json['stdout'];
     stderr = json['stderr'];
+    elapseSeconds = json['elapseSeconds'];
+    updateAt = json['updateAt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -54,6 +60,10 @@ class JobSub {
       json['stdout'] = stdout;
     if (stderr != null)
       json['stderr'] = stderr;
+    if (elapseSeconds != null)
+      json['elapseSeconds'] = elapseSeconds;
+    if (updateAt != null)
+      json['updateAt'] = updateAt;
     return json;
   }
 

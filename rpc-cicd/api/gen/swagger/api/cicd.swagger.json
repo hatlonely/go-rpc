@@ -751,6 +751,14 @@
         },
         "stderr": {
           "type": "string"
+        },
+        "elapseSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateAt": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -846,6 +854,14 @@
           "format": "int32"
         },
         "updateAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "scheduleAt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elapseSeconds": {
           "type": "integer",
           "format": "int32"
         },

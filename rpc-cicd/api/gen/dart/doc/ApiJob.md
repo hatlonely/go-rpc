@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **error** | **String** |  | [optional] [default to null]
 **createAt** | **int** |  | [optional] [default to null]
 **updateAt** | **int** |  | [optional] [default to null]
+**scheduleAt** | **int** |  | [optional] [default to null]
+**elapseSeconds** | **int** |  | [optional] [default to null]
 **subs** | [**List&lt;JobSub&gt;**](JobSub.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -177,6 +177,8 @@ message Job {
     int32 exitCode = 6 [(gogoproto.moretags) = "bson:\"exitCode,omitempty\""];
     string stdout = 7 [(gogoproto.moretags) = "bson:\"stdout,omitempty\""];
     string stderr = 8 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
+    int32 elapseSeconds = 9 [(gogoproto.moretags) = "bson:\"elapseSeconds,omitempty\""];
+    int32 updateAt = 10 [(gogoproto.moretags) = "bson:\"stderr,omitempty\""];
   }
 
   string id = 1 [(gogoproto.moretags) = "bson:\"_id,omitempty\""];
@@ -187,7 +189,9 @@ message Job {
   string error = 6 [(gogoproto.moretags) = "bson:\"error,omitempty\""];
   int32 createAt = 7 [(gogoproto.moretags) = "bson:\"createAt,omitempty\""];
   int32 updateAt = 8 [(gogoproto.moretags) = "bson:\"updateAt,omitempty\""];
-  repeated Sub subs = 9 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
+  int32 scheduleAt = 9 [(gogoproto.moretags) = "bson:\"scheduleAt,omitempty\""];
+  int32 elapseSeconds = 10 [(gogoproto.moretags) = "bson:\"elapseSeconds,omitempty\""];
+  repeated Sub subs = 11 [(gogoproto.moretags) = "bson:\"subs,omitempty\""];
 }
 
 message RunTaskReq {

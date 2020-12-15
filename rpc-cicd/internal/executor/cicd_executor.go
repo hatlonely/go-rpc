@@ -105,16 +105,19 @@ func (e *CICDExecutor) runTask(ctx context.Context, jobID string) error {
 	defer CtxSet(ctx, "task", task)
 
 	job.Status = JobStatusRunning
+	job.ScheduleAt = int32(time.Now().Unix())
 	if err := e.storage.UpdateJob(ctx, job); err != nil {
 		return err
 	}
 
+	now := time.Now()
 	if err := e.runSubTasks(ctx, job, task); err != nil {
 		job.Error = err.Error()
 		job.Status = JobStatusFailed
 	} else {
 		job.Status = JobStatusFinish
 	}
+	job.ElapseSeconds = int32(time.Now().Sub(now).Seconds())
 	if err := e.storage.UpdateJob(ctx, job); err != nil {
 		return err
 	}
@@ -155,6 +158,7 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 			Language:     i.ScriptTemplate.Language,
 			Script:       str,
 			Status:       JobStatusWaiting,
+			UpdateAt:     int32(time.Now().Unix()),
 		})
 	}
 
@@ -162,31 +166,34 @@ func (e *CICDExecutor) runSubTasks(ctx context.Context, job *api.Job, task *api.
 		return err
 	}
 
-	for _, i := range job.Subs {
-		i.Status = JobStatusRunning
+	for _, sub := range job.Subs {
+		sub.Status = JobStatusRunning
 		if err := e.storage.UpdateJob(ctx, job); err != nil {
 			return err
 		}
 
-		exitCode, stdout, stderr, err := Exec(i.Language, i.Script, fmt.Sprintf("%v/%v/%v", e.options.Data, job.TaskName, job.Seq))
+		now := time.Now()
+		exitCode, stdout, stderr, err := Exec(sub.Language, sub.Script, fmt.Sprintf("%v/%v/%v", e.options.Data, job.TaskName, job.Seq))
 		if err != nil {
-			return errors.Wrapf(err, "exec [%v] failed", i.TemplateName)
+			return errors.Wrapf(err, "exec [%v] failed", sub.TemplateName)
 		}
 
-		i.Status = JobStatusFailed
+		sub.Status = JobStatusFailed
 		if exitCode == 0 {
-			i.Status = JobStatusFinish
+			sub.Status = JobStatusFinish
 		}
-		i.Stdout = stdout
-		i.Stderr = stderr
-		i.ExitCode = int32(exitCode)
+		sub.Stdout = stdout
+		sub.Stderr = stderr
+		sub.ExitCode = int32(exitCode)
+		sub.UpdateAt = int32(time.Now().Unix())
+		sub.ElapseSeconds = int32(time.Now().Sub(now).Seconds())
 
 		if err := e.storage.UpdateJob(ctx, job); err != nil {
 			return err
 		}
 
 		if exitCode != 0 {
-			return errors.Errorf("exit code %v", i.ExitCode)
+			return errors.Errorf("exit code %v", sub.ExitCode)
 		}
 	}
 
