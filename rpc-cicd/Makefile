@@ -1,7 +1,7 @@
 binary=cicd
 dockeruser=hatlonely
 gituser=hatlonely
-repository=go-rpc-oauth
+repository=go-rpc-cicd
 version=1.0.0
 export GOPROXY=https://goproxy.cn
 
@@ -44,6 +44,17 @@ cleandockerenv:
 	if [ ! -z "$(shell docker network ls --filter name=testnet -q)" ]; then \
 		docker network rm testnet; \
 	fi
+
+.PHONY: kubeenv
+kubeenv:
+	kubectl run -n test dind --image=docker:dind --restart=Never --overrides='{"spec": {"containers": [{"name": "dind", "image": "docker:dind", "securityContext": {"privileged": true} }]}}'
+
+.PHONY: kubebuild
+kubebuild:
+	kubectl exec -n test dind -ti -- rm -rf /data/src/${gituser}/${repository}
+	kubectl exec -n test dind -ti -- mkdir -p /data/src/${gituser}/${repository}
+	kubectl cp . test/dind:/data/src/${gituser}/${repository}
+	kubectl exec -n test dind -ti -- /bin/sh -c "cd /data/src/${gituser}/${repository} && make image"
 
 .PHONY: image
 image: dockerenv

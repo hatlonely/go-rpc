@@ -1,10 +1,13 @@
-FROM centos:centos7
+FROM golang:1.14 AS build
 
+COPY . /go/src/
+WORKDIR /go/src/
+RUN make build
+
+FROM centos:centos7
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/Shanghai" >> /etc/timezone
 
-COPY docker/ /var/docker/go-rpc-ancient
-RUN mkdir -p /var/docker/go-rpc-ancient/log
-
-WORKDIR /var/docker/go-rpc-ancient
+COPY --from=build /go/src/build /data/go-rpc-ancient
+WORKDIR /data/go-rpc-ancient
 CMD [ "bin/ancient", "-c", "config/go-rpc-ancient.json" ]
