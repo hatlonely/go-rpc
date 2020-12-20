@@ -1,0 +1,3 @@
+[submodule "rpc-ancient"]
+	path = rpc-ancient
+	url = git@github.com:hatlonely/rpc-ancient.git
