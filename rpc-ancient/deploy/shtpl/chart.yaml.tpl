@@ -1,18 +1,18 @@
-namespace: ${Namespace}
-name: ${Name}
-replicaCount: ${ReplicaCount}
+namespace: "${NAMESPACE}"
+name: "${NAME}"
+replicaCount: "${REPLICA_COUNT}"
 
 image:
-  repository: ${RegistryServer}/${ImageRepository}
-  tag: ${ImageTag}
+  repository: "${REGISTRY_SERVER}/${IMAGE_REPOSITORY}"
+  tag: "${IMAGE_TAG}"
   pullPolicy: Always
 
-imagePullSecrets:
-  name: ${PullSecrets}
+imagePULL_SECRETS:
+  name: "${PULL_SECRETS}"
 
 ingress:
-  host: ${IngressHost}
-  secretName: ${IngressSecret}
+  host: "${INGRESS_HOST}"
+  secretNAME: "${INGRESS_SECRET}"
 
 config: |
   {
@@ -23,17 +23,17 @@ config: |
       "port": 6080
     },
     "mysql": {
-      "username": "${MysqlUsername}",
-      "password": "${MysqlPassword}",
-      "database": "${MysqlDatabase}",
-      "host": "${MysqlServer}",
+      "username": "${MYSQL_USERNAME}",
+      "password": "${MYSQL_PASSWORD}",
+      "database": "${MYSQL_DATABASE}",
+      "host": "${MYSQL_SERVER}",
       "port": 3306,
       "connMaxLifeTime": "60s",
       "maxIdleConns": 10,
       "maxOpenConns": 20
     },
     "elasticsearch": {
-      "uri": "http://${ElasticsearchServer}"
+      "uri": "http://${ELASTICSEARCH_SERVER}"
     },
     "service": {
       "elasticsearchIndex": "shici"
@@ -45,7 +45,7 @@ config: |
         "writers": [{
           "type": "RotateFile",
           "rotateFileWriter": {
-            "filename": "log/${Name}.rpc",
+            "filename": "log/${NAME}.rpc",
             "maxAge": "24h",
             "formatter": {
               "type": "Json"
@@ -60,7 +60,7 @@ config: |
             "msgChanLen": 200,
             "workerNum": 2,
             "elasticSearch": {
-              "uri": "http://${ElasticsearchServer}"
+              "uri": "http://${ELASTICSEARCH_SERVER}"
             }
           }
         }]
@@ -70,7 +70,7 @@ config: |
         "writers": [{
           "type": "RotateFile",
           "rotateFileWriter": {
-            "filename": "log/${Name}.rpc",
+            "filename": "log/${NAME}.rpc",
             "maxAge": "24h",
             "formatter": {
               "type": "Json"

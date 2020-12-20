@@ -15,33 +15,33 @@ function Warn() {
 
 function Build() {
     cd .. && make image && cd -
-    docker login --username="${RegistryUsername}" --password="${RegistryPassword}" "${RegistryServer}"
-    docker tag "${ImageRepository}:${ImageTag}" "${RegistryServer}/${ImageRepository}:${ImageTag}"
-    docker push "${RegistryServer}/${ImageRepository}:${ImageTag}"
+    docker login --username="${REGISTRY_USERNAME}" --password="${REGISTRY_PASSWORD}" "${REGISTRY_SERVER}"
+    docker tag "${IMAGE_REPOSITORY}:${IMAGE_TAG}" "${REGISTRY_SERVER}/${IMAGE_REPOSITORY}:${IMAGE_TAG}"
+    docker push "${REGISTRY_SERVER}/${IMAGE_REPOSITORY}:${IMAGE_TAG}"
 }
 
 function SQLTpl() {
     environment=$1
     kubectl run -n prod -it --rm sql --image=mysql:5.7.30 --restart=Never -- \
-      mysql -uroot -h${MysqlServer} -p${MysqlRootPassword} -e "$(cat "tmp/${environment}/create_table.sql")"
+      mysql -uroot -h"${MYSQL_SERVER}" -p"${MYSQL_ROOT_PASSWORD}" -e "$(cat "tmp/${environment}/create_table.sql")"
 }
 
-function CreateNamespaceIfNotExists() {
-    kubectl get namespaces "${Namespace}" 2>/dev/null 1>&2 && return 0
-    kubectl create namespace "${Namespace}" &&
-    Info "create namespace ${Namespace} success" ||
-    Warn "create namespace ${Namespace} failed"
+function CreateNAMESPACEIfNotExists() {
+    kubectl get namespaces "${NAMESPACE}" 2>/dev/null 1>&2 && return 0
+    kubectl create namespace "${NAMESPACE}" &&
+    Info "create namespace ${NAMESPACE} success" ||
+    Warn "create namespace ${NAMESPACE} failed"
 }
 
-function CreatePullSecretsIfNotExists() {
-    kubectl get secret "${PullSecrets}" -n "${Namespace}" 2>/dev/null 1>&2 && return 0
-    kubectl create secret docker-registry "${PullSecrets}" \
-        --docker-server="${RegistryServer}" \
-        --docker-username="${RegistryUsername}" \
-        --docker-password="${RegistryPassword}" \
+function CreatePULL_SECRETSIfNotExists() {
+    kubectl get secret "${PULL_SECRETS}" -n "${NAMESPACE}" 2>/dev/null 1>&2 && return 0
+    kubectl create secret docker-registry "${PULL_SECRETS}" \
+        --docker-server="${REGISTRY_SERVER}" \
+        --docker-username="${REGISTRY_USERNAME}" \
+        --docker-password="${REGISTRY_PASSWORD}" \
         --namespace="prod" &&
-    Info "[kubectl create secret docker-registry ${PullSecrets}] success" ||
-    Warn "[kubectl create secret docker-registry ${PullSecrets}] failed"
+    Info "[kubectl create secret docker-registry ${PULL_SECRETS}] success" ||
+    Warn "[kubectl create secret docker-registry ${PULL_SECRETS}] failed"
 }
 
 function Render() {
@@ -51,30 +51,30 @@ function Render() {
 }
 
 function Test() {
-    kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${ImageRepository}:${ImageTag}" --restart=Never -- /bin/bash
+    kubectl run -n "${NAMESPACE}" -it --rm "${NAME}" --image="${REGISTRY_SERVER}/${IMAGE_REPOSITORY}:${IMAGE_TAG}" --restart=Never -- /bin/bash
 }
 
 function Install() {
     environment=$1
-    helm install "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/${environment}/chart.yaml"
+    helm install "${NAME}" -n "${NAMESPACE}" "./chart/${NAME}" -f "tmp/${environment}/chart.yaml"
 }
 
 function Upgrade() {
     environment=$1
-    helm upgrade "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/${environment}/chart.yaml"
+    helm upgrade "${NAME}" -n "${NAMESPACE}" "./chart/${NAME}" -f "tmp/${environment}/chart.yaml"
 }
 
 function Diff() {
     environment=$1
-    helm diff upgrade "${Name}" -n "${Namespace}" "./chart/${Name}" -f "tmp/${environment}/chart.yaml"
+    helm diff upgrade "${NAME}" -n "${NAMESPACE}" "./chart/${NAME}" -f "tmp/${environment}/chart.yaml"
 }
 
 function Delete() {
-    helm delete "${Name}" -n "${Namespace}"
+    helm delete "${NAME}" -n "${NAMESPACE}"
 }
 
 function Restart() {
-    kubectl get pods -n "${Namespace}" | grep "${Name}" | awk '{print $1}' | xargs kubectl delete pods -n "${Namespace}"
+    kubectl get pods -n "${NAMESPACE}" | grep "${NAME}" | awk '{print $1}' | xargs kubectl delete pods -n "${NAMESPACE}"
 }
 
 function Help() {
@@ -104,15 +104,15 @@ function main() {
     # shellcheck source=tmp/$1/environment.sh
     source "tmp/$1/environment.sh"
 
-    if [ "${K8sContext}" != "$(kubectl config current-context)" ]; then
-        Warn "context [${WebOffice_K8S_Context}] not match [$(kubectl config current-context)]"
+    if [ "${K8S_CONTEXT}" != "$(kubectl config current-context)" ]; then
+        Warn "context [${K8S_CONTEXT}] not match [$(kubectl config current-context)]"
         return 1
     fi
 
     case "${action}" in
         "build") Build;;
         "sql") SQLTpl "${environment}";;
-        "secret") CreatePullSecretsIfNotExists;;
+        "secret") CreatePULL_SECRETSIfNotExists;;
         "render") Render "${environment}" "$3";;
         "install") Install "${environment}";;
         "upgrade") Upgrade "${environment}";;
