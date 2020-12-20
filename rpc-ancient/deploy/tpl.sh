@@ -8,7 +8,7 @@ function Render() {
     mkdir -p tmp
     tpl=$1
     cfg=$2
-    gomplate -f "tpl/environment.sh.${tpl}.tpl" -c .="${cfg}" > "tmp/environment.sh" && echo "render success"
+    gomplate -f "${tpl}/tpl/environment.sh.tpl" -c .="${cfg}" > "tmp/environment.sh" && echo "render success"
 }
 
 function Help() {
