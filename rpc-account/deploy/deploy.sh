@@ -29,7 +29,7 @@ CREATE USER IF NOT EXISTS '${MysqlUsername}'@'%' IDENTIFIED BY '${MysqlPassword}
 GRANT ALL PRIVILEGES ON ${MysqlDatabase}.* TO '${MysqlUsername}'@'%';
 
 USE ${MysqlDatabase};
-CREATE TABLE \`accounts\` IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS \`accounts\` (
   \`id\` bigint NOT NULL AUTO_INCREMENT,
   \`email\` varchar(64) DEFAULT NULL,
   \`phone\` varchar(64) DEFAULT NULL,
