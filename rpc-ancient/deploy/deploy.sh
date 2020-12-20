@@ -44,8 +44,14 @@ function CreatePullSecretsIfNotExists() {
     Warn "[kubectl create secret docker-registry ${PullSecrets}] failed"
 }
 
+function Render() {
+    environment=$1
+    variable=$2
+    sh tpl.sh render "${environment}" "${variable}"
+}
+
 function Test() {
-     kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${ImageRepository}:${ImageTag}" --restart=Never -- /bin/bash
+    kubectl run -n "${Namespace}" -it --rm "${Name}" --image="${RegistryServer}/${ImageRepository}:${ImageTag}" --restart=Never -- /bin/bash
 }
 
 function Install() {
@@ -107,7 +113,7 @@ function main() {
         "build") Build;;
         "sql") SQLTpl "${environment}";;
         "secret") CreatePullSecretsIfNotExists;;
-        "render") Render;;
+        "render") Render "${environment}" "$3";;
         "install") Install "${environment}";;
         "upgrade") Upgrade "${environment}";;
         "diff") Diff "${environment}";;

@@ -45,7 +45,7 @@ function Render() {
 }
 
 function Help() {
-    echo "sh tpl.sh <action> [env]"
+    echo "sh tpl.sh <action> [environment] [variable]"
     echo "example:"
     echo "  sh tpl.sh ls"
     echo "  sh tpl.sh render prod ~/.gomplate/prod.json"
